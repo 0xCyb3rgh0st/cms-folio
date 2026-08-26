@@ -1,62 +1,35 @@
 ---
-import Badge from './ui/Badge.astro';
+const phases = [
+  { icon: "01", title: "Reconnaissance", techniques: ["BloodHound Enumeration", "LDAP Recon", "SPN Discovery", "Group Policy Mapping"], tools: ["BloodHound", "ldapsearch", "PowerView"] },
+  { icon: "02", title: "Initial Access", techniques: ["AS-REP Roasting", "Kerberoasting", "Password Spraying", "NTLM Relay"], tools: ["Rubeus", "Impacket", "CrackMapExec"] },
+  { icon: "03", title: "Privilege Escalation", techniques: ["Token Impersonation", "Unconstrained Delegation", "DCSync", "GPO Abuse"], tools: ["Mimikatz", "Impacket", "Certify"] },
+  { icon: "04", title: "Lateral Movement", techniques: ["Pass-the-Hash", "Pass-the-Ticket", "Overpass-the-Hash", "WMI Execution"], tools: ["CrackMapExec", "Evil-WinRM", "PsExec"] },
+];
 ---
-
-<section id="active-directory" class="py-24 px-6">
-  <div class="mx-auto max-w-6xl">
-    <p class="section-heading">// active directory</p>
-    <h2 class="text-3xl md:text-4xl font-bold mb-12">
-      <span class="text-text-primary">Domain</span> <span class="gradient-text"> takeover</span>
+<section id="active-directory" style="padding:96px 24px;">
+  <div style="max-width:1200px;margin:0 auto;">
+    <p style="font-family:'JetBrains Mono',monospace;color:var(--green);font-size:0.875rem;text-transform:uppercase;letter-spacing:0.15em;margin-bottom:8px;">// active directory</p>
+    <h2 style="font-size:clamp(1.75rem,4vw,2.5rem);font-weight:700;margin-bottom:48px;">
+      <span style="color:var(--text);">Domain </span><span style="background:linear-gradient(135deg,var(--green),var(--cyan));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;">takeover</span>
     </h2>
-
-    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-      {[
-        {
-          phase: "Reconnaissance",
-          icon: "🔍",
-          techniques: ["BloodHound Enumeration", "LDAP Recon", "SPN Discovery", "Group Policy Mapping"],
-          tools: ["BloodHound", "ldapsearch", "PowerView"],
-        },
-        {
-          phase: "Initial Access",
-          icon: "🔑",
-          techniques: ["AS-REP Roasting", "Kerberoasting", "Password Spraying", "NTLM Relay"],
-          tools: ["Rubeus", "Impacket", "CrackMapExec"],
-        },
-        {
-          phase: "Privilege Escalation",
-          icon: "⬆️",
-          techniques: ["Token Impersonation", "Unconstrained Delegation", "DCSync", "GPO Abuse"],
-          tools: ["Mimikatz", "Impacket", "Certify"],
-        },
-        {
-          phase: "Lateral Movement",
-          icon: "🔄",
-          techniques: ["Pass-the-Hash", "Pass-the-Ticket", "Overpass-the-Hash", "WMI Execution"],
-          tools: ["CrackMapExec", "Evil-WinRM", "PsExec"],
-        },
-      ].map((phase, i) => (
-        <div class="glass-card p-6 relative overflow-hidden group">
-          <div class="absolute top-0 right-0 text-6xl opacity-5 font-mono font-bold select-none">
-            {String(i + 1).padStart(2, "0")}
+    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:24px;">
+      {phases.map((phase, i) => (
+        <div style="background:var(--bg-card);border:1px solid var(--border);border-radius:12px;padding:24px;position:relative;overflow:hidden;" onmouseover="this.style.borderColor='var(--purple)'" onmouseout="this.style.borderColor='var(--border)'">
+          <div style="position:absolute;top:8px;right:12px;font-size:4rem;font-family:'JetBrains Mono',monospace;font-weight:700;color:var(--text);opacity:0.05;user-select:none;">{phase.icon}</div>
+          <div style="display:flex;align-items:center;gap:12px;margin-bottom:16px;">
+            <div style={`width:40px;height:40px;border-radius:8px;background:rgba(139,92,246,0.15);border:1px solid rgba(139,92,246,0.3);display:flex;align-items:center;justify-content:center;font-family:'JetBrains Mono',monospace;font-weight:700;color:var(--purple);font-size:0.8rem;`}>{phase.icon}</div>
+            <h3 style="font-size:1.125rem;font-weight:700;color:var(--text);">{phase.title}</h3>
           </div>
-          <div class="flex items-center gap-3 mb-4">
-            <span class="text-2xl">{phase.icon}</span>
-            <h3 class="text-xl font-bold text-text-primary group-hover:text-accent-purple transition-colors">
-              {phase.phase}
-            </h3>
-          </div>
-          <ul class="space-y-2 mb-4">
+          <ul style="list-style:none;display:flex;flex-direction:column;gap:8px;margin-bottom:16px;">
             {phase.techniques.map((t) => (
-              <li class="flex items-center gap-2 text-text-secondary text-sm">
-                <span class="w-1.5 h-1.5 rounded-full bg-accent-purple"></span>
-                {t}
+              <li style="display:flex;align-items:center;gap:8px;color:var(--text-muted);font-size:0.875rem;">
+                <span style="width:5px;height:5px;border-radius:50%;background:var(--purple);flex-shrink:0;"></span> {t}
               </li>
             ))}
           </ul>
-          <div class="flex flex-wrap gap-2">
+          <div style="display:flex;flex-wrap:wrap;gap:6px;">
             {phase.tools.map((tool) => (
-              <Badge text={tool} color="purple" />
+              <span style="display:inline-flex;padding:2px 8px;font-size:0.7rem;font-family:'JetBrains Mono',monospace;border-radius:4px;background:rgba(139,92,246,0.1);color:var(--purple);border:1px solid rgba(139,92,246,0.2);">{tool}</span>
             ))}
           </div>
         </div>

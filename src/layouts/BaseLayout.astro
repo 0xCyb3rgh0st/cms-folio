@@ -3,10 +3,8 @@ interface Props {
   title?: string;
   description?: string;
 }
-
 const { title = "Jatin Singh | Cybersecurity Researcher", description = "Cybersecurity researcher specializing in binary exploitation, active directory attacks, and web application security." } = Astro.props;
 ---
-
 <!doctype html>
 <html lang="en">
   <head>
@@ -19,13 +17,15 @@ const { title = "Jatin Singh | Cybersecurity Researcher", description = "Cyberse
     <meta property="og:type" content="website" />
     <meta property="og:url" content="https://jatinsingh.com.np" />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet" />
     <title>{title}</title>
   </head>
   <body>
     <slot />
   </body>
 </html>
-
 <style is:global>
   @import "../styles/global.css";
 </style>

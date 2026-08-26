@@ -1,37 +1,29 @@
 ---
+const certs = [
+  { title: "eJPT", issuer: "INE Security", date: "2024", color: "var(--green)" },
+  { title: "Security+", issuer: "CompTIA", date: "2024", color: "var(--cyan)" },
+  { title: "CRTP", issuer: "Pentester Academy", date: "2024", color: "var(--purple)" },
+  { title: "BTL1", issuer: "Security Blue Team", date: "2023", color: "var(--green)" },
+  { title: "CTF Champ", issuer: "Local CTF", date: "2024", color: "var(--yellow)" },
+  { title: "AWS Cloud", issuer: "AWS", date: "2023", color: "var(--orange)" },
+];
 ---
-
-<section id="certifications" class="py-24 px-6">
-  <div class="mx-auto max-w-6xl">
-    <p class="section-heading">// certifications</p>
-    <h2 class="text-3xl md:text-4xl font-bold mb-12">
-      <span class="text-text-primary">Verified</span> <span class="gradient-text">Credentials</span>
+<section id="certifications" style="padding:96px 24px;">
+  <div style="max-width:1200px;margin:0 auto;">
+    <p style="font-family:'JetBrains Mono',monospace;color:var(--green);font-size:0.875rem;text-transform:uppercase;letter-spacing:0.15em;margin-bottom:8px;">// certifications</p>
+    <h2 style="font-size:clamp(1.75rem,4vw,2.5rem);font-weight:700;margin-bottom:48px;">
+      <span style="color:var(--text);">Verified </span><span style="background:linear-gradient(135deg,var(--green),var(--cyan));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;">Credentials</span>
     </h2>
-
-    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-      {[
-        { title: "eJPT", issuer: "INE Security", date: "2024", color: "green" },
-        { title: "CompTIA Security+", issuer: "CompTIA", date: "2024", color: "cyan" },
-        { title: "CRTP", issuer: "Pentester Academy", date: "2024", color: "purple" },
-        { title: "BTL1", issuer: "Security Blue Team", date: "2023", color: "green" },
-        { title: "CTF Champion", issuer: "Local CTF Event", date: "2024", color: "yellow" },
-        { title: "AWS Cloud Practitioner", issuer: "AWS", date: "2023", color: "orange" },
-      ].map((cert) => (
-        <div class="glass-card p-6 flex items-center gap-4 group">
-          <div class:list={[
-            "w-16 h-16 rounded-xl flex items-center justify-center font-mono font-bold text-lg border",
-            cert.color === "green" && "bg-accent-green/10 text-accent-green border-accent-green/20",
-            cert.color === "cyan" && "bg-accent-cyan/10 text-accent-cyan border-accent-cyan/20",
-            cert.color === "purple" && "bg-accent-purple/10 text-accent-purple border-accent-purple/20",
-            cert.color === "yellow" && "bg-accent-yellow/10 text-accent-yellow border-accent-yellow/20",
-            cert.color === "orange" && "bg-accent-orange/10 text-accent-orange border-accent-orange/20",
-          ]}>
-            {cert.title.substring(0, 3)}
+    <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:20px;">
+      {certs.map((c) => (
+        <div style="background:var(--bg-card);border:1px solid var(--border);border-radius:12px;padding:20px;display:flex;align-items:center;gap:16px;transition:all 0.3s;" onmouseover="this.style.borderColor='var(--green)'" onmouseout="this.style.borderColor='var(--border)'">
+          <div style={`width:56px;height:56px;border-radius:12px;display:flex;align-items:center;justify-content:center;font-family:'JetBrains Mono',monospace;font-weight:700;font-size:0.8rem;background:${c.color}15;color:${c.color};border:1px solid ${c.color}33;flex-shrink:0;`}>
+            {c.title.substring(0, 3)}
           </div>
           <div>
-            <h3 class="font-bold text-text-primary group-hover:text-accent-green transition-colors">{cert.title}</h3>
-            <p class="text-text-secondary text-sm">{cert.issuer}</p>
-            <p class="text-text-secondary text-xs font-mono mt-1">{cert.date}</p>
+            <h3 style="font-weight:700;color:var(--text);font-size:0.95rem;">{c.title}</h3>
+            <p style="color:var(--text-muted);font-size:0.8rem;">{c.issuer}</p>
+            <p style="color:var(--text-muted);font-size:0.7rem;font-family:'JetBrains Mono',monospace;margin-top:2px;">{c.date}</p>
           </div>
         </div>
       ))}

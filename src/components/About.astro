@@ -1,53 +1,41 @@
 ---
-import Terminal from './ui/Terminal.astro';
 ---
-
-<section id="about" class="py-24 px-6">
-  <div class="mx-auto max-w-6xl">
-    <p class="section-heading">// about</p>
-    <h2 class="text-3xl md:text-4xl font-bold mb-12">
-      <span class="gradient-text">Root</span> <span class="text-text-primary">Access</span>
+<section id="about" style="padding:96px 24px;">
+  <div style="max-width:1200px;margin:0 auto;">
+    <p style="font-family:'JetBrains Mono',monospace;color:var(--green);font-size:0.875rem;text-transform:uppercase;letter-spacing:0.15em;margin-bottom:8px;">// about</p>
+    <h2 style="font-size:clamp(1.75rem,4vw,2.5rem);font-weight:700;margin-bottom:48px;">
+      <span style="background:linear-gradient(135deg,var(--green),var(--cyan));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;">Root</span>
+      <span style="color:var(--text);"> Access</span>
     </h2>
-
-    <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
-      <Terminal title="jatin@kali:~" command="cat about.txt">
-        <div class="space-y-3 text-text-secondary">
-          <p>
-            <span class="text-accent-green">></span> Cybersecurity enthusiast with a passion for
-            understanding how things work under the hood.
-          </p>
-          <p>
-            <span class="text-accent-green">></span> Experienced in penetration testing, vulnerability
-            research, and exploit development.
-          </p>
-          <p>
-            <span class="text-accent-green">></span> Active CTF player and bug bounty hunter.
-          </p>
-          <p>
-            <span class="text-accent-green">></span> Always learning, always breaking, always improving.
-          </p>
-          <p class="text-accent-green mt-4">$ echo $STATUS</p>
-          <p class="text-accent-cyan">Available for opportunities</p>
+    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:32px;">
+      <div style="background:var(--bg-secondary);border:1px solid var(--border);border-radius:12px;overflow:hidden;">
+        <div style="background:var(--bg-tertiary);padding:10px 16px;display:flex;align-items:center;gap:6px;border-bottom:1px solid var(--border);">
+          <div style="width:10px;height:10px;border-radius:50%;background:var(--red);"></div>
+          <div style="width:10px;height:10px;border-radius:50%;background:var(--yellow);"></div>
+          <div style="width:10px;height:10px;border-radius:50%;background:var(--green);"></div>
+          <span style="margin-left:8px;color:var(--text-muted);font-size:0.75rem;font-family:'JetBrains Mono',monospace;">jatin@kali:~</span>
         </div>
-      </Terminal>
-
-      <div class="grid grid-cols-2 gap-4">
-        <div class="glass-card p-6 text-center">
-          <p class="text-3xl font-bold text-accent-green font-mono">10+</p>
-          <p class="text-text-secondary text-sm mt-1">Projects</p>
+        <div style="padding:24px;font-family:'JetBrains Mono',monospace;font-size:0.875rem;">
+          <p style="color:var(--text-muted);margin-bottom:12px;"><span style="color:var(--green);">&gt;</span> Cybersecurity enthusiast with a passion for understanding how things work under the hood.</p>
+          <p style="color:var(--text-muted);margin-bottom:12px;"><span style="color:var(--green);">&gt;</span> Experienced in penetration testing, vulnerability research, and exploit development.</p>
+          <p style="color:var(--text-muted);margin-bottom:12px;"><span style="color:var(--green);">&gt;</span> Active CTF player and bug bounty hunter.</p>
+          <p style="color:var(--text-muted);margin-bottom:16px;"><span style="color:var(--green);">&gt;</span> Always learning, always breaking, always improving.</p>
+          <p style="color:var(--green);">$ echo $STATUS</p>
+          <p style="color:var(--cyan);">Available for opportunities</p>
         </div>
-        <div class="glass-card p-6 text-center">
-          <p class="text-3xl font-bold text-accent-cyan font-mono">5+</p>
-          <p class="text-text-secondary text-sm mt-1">Certifications</p>
-        </div>
-        <div class="glass-card p-6 text-center">
-          <p class="text-3xl font-bold text-accent-purple font-mono">50+</p>
-          <p class="text-text-secondary text-sm mt-1">Writeups</p>
-        </div>
-        <div class="glass-card p-6 text-center">
-          <p class="text-3xl font-bold text-accent-yellow font-mono">1K+</p>
-          <p class="text-text-secondary text-sm mt-1">CTF Points</p>
-        </div>
+      </div>
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:16px;">
+        {[
+          { num: "10+", label: "Projects", color: "var(--green)" },
+          { num: "5+", label: "Certifications", color: "var(--cyan)" },
+          { num: "50+", label: "Writeups", color: "var(--purple)" },
+          { num: "1K+", label: "CTF Points", color: "var(--yellow)" },
+        ].map((stat) => (
+          <div style="background:var(--bg-card);border:1px solid var(--border);border-radius:12px;padding:24px;text-align:center;">
+            <p style={`font-size:1.75rem;font-weight:700;color:${stat.color};font-family:'JetBrains Mono',monospace;`}>{stat.num}</p>
+            <p style="color:var(--text-muted);font-size:0.875rem;margin-top:4px;">{stat.label}</p>
+          </div>
+        ))}
       </div>
     </div>
   </div>

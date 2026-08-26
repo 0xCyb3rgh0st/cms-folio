@@ -1,46 +1,27 @@
 ---
 ---
-
-<section class="relative min-h-screen flex items-center justify-center overflow-hidden">
-  <canvas id="matrix-rain" class="absolute inset-0 w-full h-full opacity-30"></canvas>
-  <div class="absolute inset-0 bg-gradient-to-b from-transparent via-bg-primary/50 to-bg-primary"></div>
-
-  <div class="relative z-10 text-center px-6 max-w-4xl mx-auto">
-    <div class="mb-6">
-      <span class="font-mono text-accent-green text-sm tracking-widest uppercase">whoami</span>
-    </div>
-    <h1 class="text-5xl md:text-7xl lg:text-8xl font-bold mb-6 tracking-tight">
-      <span class="gradient-text">Jatin</span>
-      <span class="text-text-primary"> Singh</span>
+<section style="position:relative;min-height:100vh;display:flex;align-items:center;justify-content:center;overflow:hidden;">
+  <canvas id="matrix-rain" style="position:absolute;inset:0;width:100%;height:100%;opacity:0.25;"></canvas>
+  <div style="position:absolute;inset:0;background:linear-gradient(to bottom,transparent,rgba(10,10,15,0.6),var(--bg-primary));"></div>
+  <div style="position:relative;z-index:10;text-align:center;padding:0 24px;max-width:800px;margin:0 auto;">
+    <p style="font-family:'JetBrains Mono',monospace;color:var(--green);font-size:0.875rem;letter-spacing:0.2em;text-transform:uppercase;margin-bottom:24px;">whoami</p>
+    <h1 style="font-size:clamp(2.5rem,8vw,5rem);font-weight:800;margin-bottom:24px;line-height:1.1;">
+      <span style="background:linear-gradient(135deg,var(--green),var(--cyan));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;">Jatin</span>
+      <span style="color:var(--text);"> Singh</span>
     </h1>
-    <p class="text-xl md:text-2xl text-text-secondary font-mono mb-4">
-      <span class="text-accent-green">&gt;</span> Cybersecurity Researcher
-      <span class="text-accent-green animate-pulse">_</span>
+    <p style="font-size:1.25rem;color:var(--text-muted);font-family:'JetBrains Mono',monospace;margin-bottom:16px;">
+      <span style="color:var(--green);">&gt;</span> Cybersecurity Researcher<span style="color:var(--green);animation:pulse-glow 2s infinite;">_</span>
     </p>
-    <p class="text-lg text-text-secondary max-w-2xl mx-auto mb-10 leading-relaxed">
-      Breaking systems to make them stronger. Specializing in binary exploitation,
-      active directory attacks, and web application security.
+    <p style="font-size:1.1rem;color:var(--text-muted);max-width:600px;margin:0 auto 40px;line-height:1.7;">
+      Breaking systems to make them stronger. Specializing in binary exploitation, active directory attacks, and web application security.
     </p>
-    <div class="flex flex-col sm:flex-row gap-4 justify-center">
-      <a
-        href="#projects"
-        class="px-8 py-3 bg-accent-green text-bg-primary font-mono font-bold rounded-lg hover:shadow-[0_0_20px_var(--color-accent-green)] transition-all duration-300 text-center"
-      >
-        View Projects
-      </a>
-      <a
-        href="#contact"
-        class="px-8 py-3 border border-accent-green text-accent-green font-mono rounded-lg hover:bg-accent-green hover:text-bg-primary transition-all duration-300 text-center"
-      >
-        Contact Me
-      </a>
+    <div style="display:flex;flex-direction:column;gap:16px;justify-content:center;align-items:center;flex-wrap:wrap;">
+      <a href="#projects" style="padding:14px 32px;background:var(--green);color:var(--bg-primary);font-family:'JetBrains Mono',monospace;font-weight:700;border-radius:8px;text-decoration:none;font-size:0.95rem;transition:all 0.3s;box-shadow:0 0 20px rgba(0,255,65,0.3);">View Projects</a>
+      <a href="#contact" style="padding:14px 32px;border:1px solid var(--green);color:var(--green);font-family:'JetBrains Mono',monospace;border-radius:8px;text-decoration:none;font-size:0.95rem;transition:all 0.3s;">Contact Me</a>
     </div>
   </div>
-
-  <div class="absolute bottom-8 left-1/2 -translate-x-1/2 animate-bounce">
-    <svg width="24" height="24" fill="none" stroke="var(--color-accent-green)" stroke-width="2">
-      <path d="M7 10l5 5 5-5" />
-    </svg>
+  <div style="position:absolute;bottom:32px;left:50%;transform:translateX(-50%);animation:float 2s ease-in-out infinite;">
+    <svg width="24" height="24" fill="none" stroke="var(--green)" stroke-width="2"><path d="M7 10l5 5 5-5" /></svg>
   </div>
 </section>
 
@@ -51,38 +32,27 @@
     if (ctx) {
       canvas.width = window.innerWidth;
       canvas.height = window.innerHeight;
-
       const chars = '01アイウエオカキクケコサシスセソタチツテトナニヌネノハヒフヘホマミムメモヤユヨラリルレロワヲン';
       const fontSize = 14;
-      const columns = canvas.width / fontSize;
-      const drops: number[] = Array(Math.floor(columns)).fill(1);
-
+      const columns = Math.floor(canvas.width / fontSize);
+      const drops: number[] = Array(columns).fill(1);
       function draw() {
         ctx.fillStyle = 'rgba(10, 10, 15, 0.05)';
         ctx.fillRect(0, 0, canvas.width, canvas.height);
         ctx.fillStyle = '#00ff41';
         ctx.font = `${fontSize}px "JetBrains Mono", monospace`;
-
         for (let i = 0; i < drops.length; i++) {
           const text = chars[Math.floor(Math.random() * chars.length)];
           ctx.globalAlpha = 0.3 + Math.random() * 0.4;
           ctx.fillText(text, i * fontSize, drops[i] * fontSize);
-
-          if (drops[i] * fontSize > canvas.height && Math.random() > 0.975) {
-            drops[i] = 0;
-          }
+          if (drops[i] * fontSize > canvas.height && Math.random() > 0.975) drops[i] = 0;
           drops[i]++;
         }
         ctx.globalAlpha = 1;
         requestAnimationFrame(draw);
       }
-
       draw();
-
-      window.addEventListener('resize', () => {
-        canvas.width = window.innerWidth;
-        canvas.height = window.innerHeight;
-      });
+      window.addEventListener('resize', () => { canvas.width = window.innerWidth; canvas.height = window.innerHeight; });
     }
   }
 </script>

@@ -1,105 +1,38 @@
 ---
-import Badge from './ui/Badge.astro';
-
 const writeups = [
-  {
-    title: "HackTheBox - UnderWriteUp",
-    description: "OSCP-style machine with web enumeration and privilege escalation via kernel exploit.",
-    category: "ctf",
-    difficulty: "medium",
-    date: "2024-08-15",
-    tags: ["HTB", "Linux", "PrivEsc"],
-  },
-  {
-    title: "CVE-2024-3094: XZ Utils Backdoor",
-    description: "Deep dive into the XZ Utils supply chain attack and its implications for Linux security.",
-    category: "vulnerability",
-    difficulty: "hard",
-    date: "2024-04-01",
-    tags: ["CVE", "Supply Chain", "Linux"],
-  },
-  {
-    title: "Kerberoasting from Scratch",
-    description: "Complete guide to Kerberoasting attacks in Active Directory environments.",
-    category: "technique",
-    difficulty: "medium",
-    date: "2024-03-20",
-    tags: ["AD", "Kerberos", "CrackMapExec"],
-  },
-  {
-    title: "Buffer Overflow Lab Walkthrough",
-    description: "Step-by-step stack buffer overflow exploitation from discovery to shell.",
-    category: "technique",
-    difficulty: "easy",
-    date: "2024-02-10",
-    tags: ["Binary", "Pwn", "GDB"],
-  },
-  {
-    title: "TryHackMe - Active Directory Basics",
-    description: "Foundational AD concepts and common attack paths for beginners.",
-    category: "lab",
-    difficulty: "easy",
-    date: "2024-01-15",
-    tags: ["THM", "AD", "Beginner"],
-  },
-  {
-    title: "Burp Suite Advanced Techniques",
-    description: "Mastering Burp Suite for complex web application penetration testing.",
-    category: "tool",
-    difficulty: "hard",
-    date: "2024-07-22",
-    tags: ["Burp", "Web", "Proxy"],
-  },
+  { title: "HackTheBox - UnderWriteUp", desc: "OSCP-style machine with web enumeration and privilege escalation via kernel exploit.", cat: "ctf", diff: "medium", date: "2024-08-15", tags: ["HTB", "Linux", "PrivEsc"] },
+  { title: "CVE-2024-3094: XZ Utils Backdoor", desc: "Deep dive into the XZ Utils supply chain attack and its implications for Linux security.", cat: "vulnerability", diff: "hard", date: "2024-04-01", tags: ["CVE", "Supply Chain", "Linux"] },
+  { title: "Kerberoasting from Scratch", desc: "Complete guide to Kerberoasting attacks in Active Directory environments.", cat: "technique", diff: "medium", date: "2024-03-20", tags: ["AD", "Kerberos", "CrackMapExec"] },
+  { title: "Buffer Overflow Lab Walkthrough", desc: "Step-by-step stack buffer overflow exploitation from discovery to shell.", cat: "technique", diff: "easy", date: "2024-02-10", tags: ["Binary", "Pwn", "GDB"] },
+  { title: "TryHackMe - AD Basics", desc: "Foundational AD concepts and common attack paths for beginners.", cat: "lab", diff: "easy", date: "2024-01-15", tags: ["THM", "AD", "Beginner"] },
+  { title: "Burp Suite Advanced", desc: "Mastering Burp Suite for complex web application penetration testing.", cat: "tool", diff: "hard", date: "2024-07-22", tags: ["Burp", "Web", "Proxy"] },
 ];
-
-const difficultyColors: Record<string, "green" | "yellow" | "red" | "purple"> = {
-  easy: "green",
-  medium: "yellow",
-  hard: "red",
-  insane: "purple",
-};
-
-const categoryColors: Record<string, "green" | "cyan" | "purple" | "yellow" | "orange"> = {
-  ctf: "cyan",
-  vulnerability: "red",
-  technique: "green",
-  tool: "purple",
-  lab: "yellow",
-};
+const diffColors: Record<string, string> = { easy: "var(--green)", medium: "var(--yellow)", hard: "var(--red)", insane: "var(--purple)" };
+const catColors: Record<string, string> = { ctf: "var(--cyan)", vulnerability: "var(--red)", technique: "var(--green)", tool: "var(--purple)", lab: "var(--yellow)" };
 ---
-
-<section id="writeups" class="py-24 px-6">
-  <div class="mx-auto max-w-6xl">
-    <p class="section-heading">// writeups</p>
-    <h2 class="text-3xl md:text-4xl font-bold mb-12">
-      <span class="text-text-primary">Security</span> <span class="gradient-text">Journal</span>
+<section id="writeups" style="padding:96px 24px;">
+  <div style="max-width:1200px;margin:0 auto;">
+    <p style="font-family:'JetBrains Mono',monospace;color:var(--green);font-size:0.875rem;text-transform:uppercase;letter-spacing:0.15em;margin-bottom:8px;">// writeups</p>
+    <h2 style="font-size:clamp(1.75rem,4vw,2.5rem);font-weight:700;margin-bottom:48px;">
+      <span style="color:var(--text);">Security </span><span style="background:linear-gradient(135deg,var(--green),var(--cyan));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;">Journal</span>
     </h2>
-
-    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-      {writeups.map((writeup) => (
-        <article class="glass-card p-6 flex flex-col group">
-          <div class="flex items-center gap-2 mb-3">
-            <Badge text={writeup.category} color={categoryColors[writeup.category] || "green"} />
-            <Badge text={writeup.difficulty} color={difficultyColors[writeup.difficulty] || "green"} />
+    <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(340px,1fr));gap:24px;">
+      {writeups.map((w) => (
+        <article style="background:var(--bg-card);border:1px solid var(--border);border-radius:12px;padding:24px;display:flex;flex-direction:column;transition:all 0.3s;cursor:pointer;" onmouseover="this.style.borderColor='var(--green)';this.style.transform='translateY(-4px)'" onmouseout="this.style.borderColor='var(--border)';this.style.transform='none'">
+          <div style="display:flex;gap:6px;margin-bottom:12px;">
+            <span style={`display:inline-flex;padding:2px 8px;font-size:0.7rem;font-family:'JetBrains Mono',monospace;border-radius:4px;background:${catColors[w.cat]}15;color:${catColors[w.cat]};border:1px solid ${catColors[w.cat]}33;text-transform:capitalize;`}>{w.cat}</span>
+            <span style={`display:inline-flex;padding:2px 8px;font-size:0.7rem;font-family:'JetBrains Mono',monospace;border-radius:4px;background:${diffColors[w.diff]}15;color:${diffColors[w.diff]};border:1px solid ${diffColors[w.diff]}33;text-transform:capitalize;`}>{w.diff}</span>
           </div>
-          <h3 class="text-lg font-bold text-text-primary mb-2 group-hover:text-accent-green transition-colors">
-            {writeup.title}
-          </h3>
-          <p class="text-text-secondary text-sm mb-4 flex-grow leading-relaxed">
-            {writeup.description}
-          </p>
-          <div class="flex flex-wrap gap-2 mb-4">
-            {writeup.tags.map((tag) => (
-              <span class="text-xs font-mono text-text-secondary bg-bg-tertiary px-2 py-1 rounded">
-                {tag}
-              </span>
+          <h3 style="font-size:1.1rem;font-weight:700;color:var(--text);margin-bottom:8px;">{w.title}</h3>
+          <p style="color:var(--text-muted);font-size:0.875rem;line-height:1.6;margin-bottom:16px;flex-grow:1;">{w.desc}</p>
+          <div style="display:flex;flex-wrap:wrap;gap:6px;margin-bottom:16px;">
+            {w.tags.map((t) => (
+              <span style="font-size:0.7rem;font-family:'JetBrains Mono',monospace;color:var(--text-muted);background:var(--bg-tertiary);padding:3px 8px;border-radius:4px;">{t}</span>
             ))}
           </div>
-          <div class="flex items-center justify-between">
-            <span class="text-text-secondary text-xs font-mono">{writeup.date}</span>
-            <span class="text-accent-green text-sm font-mono hover:underline cursor-pointer">
-              Read more &rarr;
-            </span>
+          <div style="display:flex;justify-content:space-between;align-items:center;">
+            <span style="color:var(--text-muted);font-size:0.75rem;font-family:'JetBrains Mono',monospace;">{w.date}</span>
+            <span style="color:var(--green);font-size:0.875rem;font-family:'JetBrains Mono',monospace;">Read more &rarr;</span>
           </div>
         </article>
       ))}

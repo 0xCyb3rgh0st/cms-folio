@@ -1,64 +1,49 @@
 ---
-import Badge from './ui/Badge.astro';
-import Terminal from './ui/Terminal.astro';
 ---
-
-<section id="linux" class="py-24 px-6">
-  <div class="mx-auto max-w-6xl">
-    <p class="section-heading">// linux</p>
-    <h2 class="text-3xl md:text-4xl font-bold mb-12">
-      <span class="gradient-text">Tux</span> <span class="text-text-primary">Mastery</span>
+<section id="linux" style="padding:96px 24px;">
+  <div style="max-width:1200px;margin:0 auto;">
+    <p style="font-family:'JetBrains Mono',monospace;color:var(--green);font-size:0.875rem;text-transform:uppercase;letter-spacing:0.15em;margin-bottom:8px;">// linux</p>
+    <h2 style="font-size:clamp(1.75rem,4vw,2.5rem);font-weight:700;margin-bottom:48px;">
+      <span style="background:linear-gradient(135deg,var(--green),var(--cyan));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;">Tux</span>
+      <span style="color:var(--text);"> Mastery</span>
     </h2>
-
-    <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
-      <div class="space-y-6">
-        <div class="glass-card p-6">
-          <h3 class="font-bold text-text-primary mb-3">System Administration</h3>
-          <p class="text-text-secondary text-sm mb-3">Linux server management, hardening, and automation.</p>
-          <div class="flex flex-wrap gap-2">
-            <Badge text="Bash" color="green" />
-            <Badge text="systemd" color="green" />
-            <Badge text="iptables" color="cyan" />
-            <Badge text="SELinux" color="purple" />
+    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:32px;">
+      <div style="display:flex;flex-direction:column;gap:20px;">
+        {[
+          { title: "System Administration", desc: "Linux server management, hardening, and automation.", tags: ["Bash", "systemd", "iptables", "SELinux"] },
+          { title: "Security Tools", desc: "Proficient in Linux-based security tooling.", tags: ["Kali", "Parrot", "Arch", "Nix"] },
+          { title: "Networking", desc: "TCP/IP stack, socket programming, and packet analysis.", tags: ["tcpdump", "netstat", "ss", "nftables"] },
+        ].map((s) => (
+          <div style="background:var(--bg-card);border:1px solid var(--border);border-radius:12px;padding:24px;" onmouseover="this.style.borderColor='var(--green)'" onmouseout="this.style.borderColor='var(--border)'">
+            <h3 style="font-weight:700;color:var(--text);margin-bottom:8px;">{s.title}</h3>
+            <p style="color:var(--text-muted);font-size:0.875rem;margin-bottom:12px;line-height:1.6;">{s.desc}</p>
+            <div style="display:flex;flex-wrap:wrap;gap:6px;">
+              {s.tags.map((t) => (
+                <span style="display:inline-flex;padding:2px 8px;font-size:0.7rem;font-family:'JetBrains Mono',monospace;border-radius:4px;background:rgba(0,255,65,0.1);color:var(--green);border:1px solid rgba(0,255,65,0.2);">{t}</span>
+              ))}
+            </div>
           </div>
+        ))}
+      </div>
+      <div style="background:var(--bg-secondary);border:1px solid var(--border);border-radius:12px;overflow:hidden;">
+        <div style="background:var(--bg-tertiary);padding:10px 16px;display:flex;align-items:center;gap:6px;border-bottom:1px solid var(--border);">
+          <div style="width:10px;height:10px;border-radius:50%;background:var(--red);"></div>
+          <div style="width:10px;height:10px;border-radius:50%;background:var(--yellow);"></div>
+          <div style="width:10px;height:10px;border-radius:50%;background:var(--green);"></div>
+          <span style="margin-left:8px;color:var(--text-muted);font-size:0.75rem;font-family:'JetBrains Mono',monospace;">linux-commands.sh</span>
         </div>
-        <div class="glass-card p-6">
-          <h3 class="font-bold text-text-primary mb-3">Security Tools</h3>
-          <p class="text-text-secondary text-sm mb-3">Proficient in Linux-based security tooling.</p>
-          <div class="flex flex-wrap gap-2">
-            <Badge text="Kali" color="green" />
-            <Badge text="Parrot" color="cyan" />
-            <Badge text="Arch" color="purple" />
-            <Badge text="Nix" color="yellow" />
-          </div>
-        </div>
-        <div class="glass-card p-6">
-          <h3 class="font-bold text-text-primary mb-3">Networking</h3>
-          <p class="text-text-secondary text-sm mb-3">TCP/IP stack, socket programming, and packet analysis.</p>
-          <div class="flex flex-wrap gap-2">
-            <Badge text="tcpdump" color="green" />
-            <Badge text="netstat" color="cyan" />
-            <Badge text="ss" color="purple" />
-            <Badge text="nftables" color="yellow" />
-          </div>
+        <div style="padding:20px;font-family:'JetBrains Mono',monospace;font-size:0.75rem;line-height:2;">
+          <p><span style="color:var(--green);">$</span> <span style="color:var(--cyan);">cat /etc/os-release</span></p>
+          <p style="padding-left:16px;color:var(--text-muted);">Kali GNU/Linux Rolling</p>
+          <p><span style="color:var(--green);">$</span> <span style="color:var(--cyan);">neofetch --off</span></p>
+          <p style="padding-left:16px;color:var(--text-muted);">OS: Kali Linux x86_64</p>
+          <p><span style="color:var(--green);">$</span> <span style="color:var(--cyan);">which nmap burpsuite gdb</span></p>
+          <p style="padding-left:16px;color:var(--text-muted);">/usr/bin/nmap</p>
+          <p style="padding-left:16px;color:var(--text-muted);">/usr/bin/burpsuite</p>
+          <p style="padding-left:16px;color:var(--text-muted);">/usr/bin/gdb</p>
+          <p><span style="color:var(--green);">$</span> <span style="animation:pulse-glow 2s infinite;">_</span></p>
         </div>
       </div>
-
-      <Terminal title="linux-commands.sh" command="uname -a">
-        <div class="space-y-2 text-text-secondary text-xs">
-          <p><span class="text-accent-green">$</span> <span class="text-accent-cyan">cat /etc/os-release</span></p>
-          <p class="pl-4">Kali GNU/Linux Rolling</p>
-          <p class="mt-2"><span class="text-accent-green">$</span> <span class="text-accent-cyan">neofetch --off</span></p>
-          <p class="pl-4">OS: Kali Linux x86_64</p>
-          <p class="pl-4">Kernel: 6.x.x-kali</p>
-          <p class="mt-2"><span class="text-accent-green">$</span> <span class="text-accent-cyan">which nmap burpsuite gdb python3</span></p>
-          <p class="pl-4">/usr/bin/nmap</p>
-          <p class="pl-4">/usr/bin/burpsuite</p>
-          <p class="pl-4">/usr/bin/gdb</p>
-          <p class="pl-4">/usr/bin/python3</p>
-          <p class="mt-2"><span class="text-accent-green">$</span> <span class="text-text-primary animate-pulse">_</span></p>
-        </div>
-      </Terminal>
     </div>
   </div>
 </section>

@@ -1,39 +1,33 @@
 ---
 ---
 
-<nav class="fixed top-0 left-0 right-0 z-50 border-b border-border bg-bg-primary/80 backdrop-blur-xl">
-  <div class="mx-auto max-w-6xl px-6 py-4 flex items-center justify-between">
-    <a href="/" class="font-mono text-accent-green font-bold text-lg glitch-hover">
+<nav style="position:fixed;top:0;left:0;right:0;z-index:50;background:rgba(10,10,15,0.85);backdrop-filter:blur(20px);border-bottom:1px solid var(--border);">
+  <div style="max-width:1200px;margin:0 auto;padding:16px 24px;display:flex;align-items:center;justify-content:space-between;">
+    <a href="/" style="font-family:'JetBrains Mono',monospace;color:var(--green);font-weight:700;font-size:1.1rem;text-decoration:none;">
       &lt;Jatin/&gt;
     </a>
-    <div class="hidden md:flex items-center gap-8">
-      <a href="#about" class="text-text-secondary hover:text-accent-green transition-colors text-sm font-mono">about</a>
-      <a href="#skills" class="text-text-secondary hover:text-accent-green transition-colors text-sm font-mono">skills</a>
-      <a href="#projects" class="text-text-secondary hover:text-accent-green transition-colors text-sm font-mono">projects</a>
-      <a href="#writeups" class="text-text-secondary hover:text-accent-green transition-colors text-sm font-mono">writeups</a>
-      <a href="#certifications" class="text-text-secondary hover:text-accent-green transition-colors text-sm font-mono">certs</a>
-      <a href="#contact" class="text-text-secondary hover:text-accent-green transition-colors text-sm font-mono">contact</a>
-      <a href="/admin/" class="px-4 py-1.5 border border-accent-green text-accent-green rounded font-mono text-sm hover:bg-accent-green hover:text-bg-primary transition-all">
-        CMS
-      </a>
+    <div class="nav-links" style="display:flex;align-items:center;gap:32px;">
+      <a href="#about" style="color:var(--text-muted);text-decoration:none;font-size:0.875rem;font-family:'JetBrains Mono',monospace;transition:color 0.2s;" onmouseover="this.style.color='var(--green)'" onmouseout="this.style.color='var(--text-muted)'">about</a>
+      <a href="#skills" style="color:var(--text-muted);text-decoration:none;font-size:0.875rem;font-family:'JetBrains Mono',monospace;transition:color 0.2s;" onmouseover="this.style.color='var(--green)'" onmouseout="this.style.color='var(--text-muted)'">skills</a>
+      <a href="#projects" style="color:var(--text-muted);text-decoration:none;font-size:0.875rem;font-family:'JetBrains Mono',monospace;transition:color 0.2s;" onmouseover="this.style.color='var(--green)'" onmouseout="this.style.color='var(--text-muted)'">projects</a>
+      <a href="#writeups" style="color:var(--text-muted);text-decoration:none;font-size:0.875rem;font-family:'JetBrains Mono',monospace;transition:color 0.2s;" onmouseover="this.style.color='var(--green)'" onmouseout="this.style.color='var(--text-muted)'">writeups</a>
+      <a href="#certifications" style="color:var(--text-muted);text-decoration:none;font-size:0.875rem;font-family:'JetBrains Mono',monospace;transition:color 0.2s;" onmouseover="this.style.color='var(--green)'" onmouseout="this.style.color='var(--text-muted)'">certs</a>
+      <a href="#contact" style="color:var(--text-muted);text-decoration:none;font-size:0.875rem;font-family:'JetBrains Mono',monospace;transition:color 0.2s;" onmouseover="this.style.color='var(--green)'" onmouseout="this.style.color='var(--text-muted)'">contact</a>
+      <a href="/admin/" style="padding:6px 16px;border:1px solid var(--green);color:var(--green);border-radius:6px;font-family:'JetBrains Mono',monospace;font-size:0.8rem;text-decoration:none;transition:all 0.2s;" onmouseover="this.style.background='var(--green)';this.style.color='var(--bg-primary)'" onmouseout="this.style.background='transparent';this.style.color='var(--green)'">CMS</a>
     </div>
-    <button id="mobile-menu-btn" class="md:hidden text-text-primary">
-      <svg width="24" height="24" fill="none" stroke="currentColor" stroke-width="2">
-        <path d="M4 6h16M4 12h16M4 18h16" />
-      </svg>
+    <button id="mobile-menu-btn" class="mobile-btn" style="display:none;background:none;border:none;color:var(--text);cursor:pointer;">
+      <svg width="24" height="24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 6h16M4 12h16M4 18h16" /></svg>
     </button>
   </div>
-  <div id="mobile-menu" class="hidden md:hidden border-t border-border bg-bg-primary/95 backdrop-blur-xl">
-    <div class="px-6 py-4 flex flex-col gap-4">
-      <a href="#about" class="text-text-secondary hover:text-accent-green transition-colors text-sm font-mono">about</a>
-      <a href="#skills" class="text-text-secondary hover:text-accent-green transition-colors text-sm font-mono">skills</a>
-      <a href="#projects" class="text-text-secondary hover:text-accent-green transition-colors text-sm font-mono">projects</a>
-      <a href="#writeups" class="text-text-secondary hover:text-accent-green transition-colors text-sm font-mono">writeups</a>
-      <a href="#certifications" class="text-text-secondary hover:text-accent-green transition-colors text-sm font-mono">certs</a>
-      <a href="#contact" class="text-text-secondary hover:text-accent-green transition-colors text-sm font-mono">contact</a>
-      <a href="/admin/" class="px-4 py-1.5 border border-accent-green text-accent-green rounded font-mono text-sm text-center hover:bg-accent-green hover:text-bg-primary transition-all">
-        CMS
-      </a>
+  <div id="mobile-menu" style="display:none;border-top:1px solid var(--border);background:rgba(10,10,15,0.95);backdrop-filter:blur(20px);padding:16px 24px;">
+    <div style="display:flex;flex-direction:column;gap:16px;">
+      <a href="#about" style="color:var(--text-muted);text-decoration:none;font-size:0.875rem;font-family:'JetBrains Mono',monospace;">about</a>
+      <a href="#skills" style="color:var(--text-muted);text-decoration:none;font-size:0.875rem;font-family:'JetBrains Mono',monospace;">skills</a>
+      <a href="#projects" style="color:var(--text-muted);text-decoration:none;font-size:0.875rem;font-family:'JetBrains Mono',monospace;">projects</a>
+      <a href="#writeups" style="color:var(--text-muted);text-decoration:none;font-size:0.875rem;font-family:'JetBrains Mono',monospace;">writeups</a>
+      <a href="#certifications" style="color:var(--text-muted);text-decoration:none;font-size:0.875rem;font-family:'JetBrains Mono',monospace;">certs</a>
+      <a href="#contact" style="color:var(--text-muted);text-decoration:none;font-size:0.875rem;font-family:'JetBrains Mono',monospace;">contact</a>
+      <a href="/admin/" style="padding:8px 16px;border:1px solid var(--green);color:var(--green);border-radius:6px;font-family:'JetBrains Mono',monospace;font-size:0.8rem;text-decoration:none;text-align:center;">CMS</a>
     </div>
   </div>
 </nav>
@@ -41,25 +35,19 @@
 <script>
   const btn = document.getElementById('mobile-menu-btn');
   const menu = document.getElementById('mobile-menu');
-  btn?.addEventListener('click', () => menu?.classList.toggle('hidden'));
-
-  document.querySelectorAll('#mobile-menu a').forEach(link => {
-    link.addEventListener('click', () => menu?.classList.add('hidden'));
+  btn?.addEventListener('click', () => {
+    if (menu) menu.style.display = menu.style.display === 'none' ? 'block' : 'none';
   });
-
-  const sections = document.querySelectorAll('section[id]');
-  const navLinks = document.querySelectorAll('nav a[href^="#"]');
-
-  const observer = new IntersectionObserver((entries) => {
-    entries.forEach(entry => {
-      if (entry.isIntersecting) {
-        navLinks.forEach(link => {
-          link.classList.toggle('text-accent-green', link.getAttribute('href') === `#${entry.target.id}`);
-          link.classList.toggle('text-text-secondary', link.getAttribute('href') !== `#${entry.target.id}`);
-        });
-      }
-    });
-  }, { threshold: 0.3 });
-
-  sections.forEach(section => observer.observe(section));
+  document.querySelectorAll('#mobile-menu a').forEach(link => {
+    link.addEventListener('click', () => { if (menu) menu.style.display = 'none'; });
+  });
 </script>
+
+<style>
+  .nav-links { display: flex; }
+  .mobile-btn { display: none !important; }
+  @media (max-width: 768px) {
+    .nav-links { display: none !important; }
+    .mobile-btn { display: block !important; }
+  }
+</style>

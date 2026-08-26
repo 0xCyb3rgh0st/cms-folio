@@ -1,38 +1,35 @@
 ---
 ---
-
-<footer class="border-t border-border bg-bg-secondary/50 mt-32">
-  <div class="mx-auto max-w-6xl px-6 py-12">
-    <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+<footer style="border-top:1px solid var(--border);background:rgba(18,18,26,0.5);margin-top:128px;">
+  <div style="max-width:1200px;margin:0 auto;padding:48px 24px;">
+    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:32px;">
       <div>
-        <p class="font-mono text-accent-green font-bold text-lg mb-3">&lt;Jatin/&gt;</p>
-        <p class="text-text-secondary text-sm leading-relaxed">
-          Cybersecurity researcher breaking things to make them stronger.
-        </p>
+        <p style="font-family:'JetBrains Mono',monospace;color:var(--green);font-weight:700;font-size:1.1rem;margin-bottom:12px;">&lt;Jatin/&gt;</p>
+        <p style="color:var(--text-muted);font-size:0.875rem;line-height:1.6;">Cybersecurity researcher breaking things to make them stronger.</p>
       </div>
       <div>
-        <p class="font-mono text-text-primary text-sm mb-3">Navigation</p>
-        <div class="flex flex-col gap-2">
-          <a href="#about" class="text-text-secondary hover:text-accent-green transition-colors text-sm">About</a>
-          <a href="#projects" class="text-text-secondary hover:text-accent-green transition-colors text-sm">Projects</a>
-          <a href="#writeups" class="text-text-secondary hover:text-accent-green transition-colors text-sm">Writeups</a>
-          <a href="#contact" class="text-text-secondary hover:text-accent-green transition-colors text-sm">Contact</a>
+        <p style="font-family:'JetBrains Mono',monospace;color:var(--text);font-size:0.875rem;margin-bottom:12px;">Navigation</p>
+        <div style="display:flex;flex-direction:column;gap:8px;">
+          <a href="#about" style="color:var(--text-muted);text-decoration:none;font-size:0.875rem;">About</a>
+          <a href="#projects" style="color:var(--text-muted);text-decoration:none;font-size:0.875rem;">Projects</a>
+          <a href="#writeups" style="color:var(--text-muted);text-decoration:none;font-size:0.875rem;">Writeups</a>
+          <a href="#contact" style="color:var(--text-muted);text-decoration:none;font-size:0.875rem;">Contact</a>
         </div>
       </div>
       <div>
-        <p class="font-mono text-text-primary text-sm mb-3">Connect</p>
-        <div class="flex flex-col gap-2">
-          <a href="https://github.com/0xCyb3rgh0st" target="_blank" rel="noopener" class="text-text-secondary hover:text-accent-green transition-colors text-sm">GitHub</a>
-          <a href="/admin/" class="text-text-secondary hover:text-accent-green transition-colors text-sm">Content Manager</a>
+        <p style="font-family:'JetBrains Mono',monospace;color:var(--text);font-size:0.875rem;margin-bottom:12px;">Connect</p>
+        <div style="display:flex;flex-direction:column;gap:8px;">
+          <a href="https://github.com/0xCyb3rgh0st" target="_blank" rel="noopener" style="color:var(--text-muted);text-decoration:none;font-size:0.875rem;">GitHub</a>
+          <a href="/admin/" style="color:var(--text-muted);text-decoration:none;font-size:0.875rem;">Content Manager</a>
         </div>
       </div>
     </div>
-    <div class="border-t border-border mt-8 pt-8 flex flex-col md:flex-row justify-between items-center gap-4">
-      <p class="text-text-secondary text-xs font-mono">
+    <div style="border-top:1px solid var(--border);margin-top:32px;padding-top:32px;display:flex;flex-wrap:wrap;justify-content:space-between;align-items:center;gap:16px;">
+      <p style="color:var(--text-muted);font-size:0.75rem;font-family:'JetBrains Mono',monospace;">
         &copy; {new Date().getFullYear()} Jatin Singh. All rights reserved.
       </p>
-      <p class="text-text-secondary text-xs font-mono">
-        Built with <span class="text-accent-green">Astro</span> + <span class="text-accent-cyan">TinaCMS</span>
+      <p style="color:var(--text-muted);font-size:0.75rem;font-family:'JetBrains Mono',monospace;">
+        Built with <span style="color:var(--green);">Astro</span> + <span style="color:var(--cyan);">TinaCMS</span>
       </p>
     </div>
   </div>

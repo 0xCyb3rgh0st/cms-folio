@@ -1,84 +1,39 @@
 ---
-import ProgressBar from './ui/ProgressBar.astro';
-import Badge from './ui/Badge.astro';
-
 const toolCategories = [
-  {
-    name: "Reconnaissance",
-    tools: [
-      { name: "Nmap", level: 5, color: "green" as const },
-      { name: "Masscan", level: 4, color: "green" as const },
-      { name: "Amass", level: 3, color: "green" as const },
-    ],
-    tags: ["nmap", "masscan", "amass", "subfinder"],
-  },
-  {
-    name: "Exploitation",
-    tools: [
-      { name: "Metasploit", level: 5, color: "cyan" as const },
-      { name: "Cobalt Strike", level: 3, color: "cyan" as const },
-      { name: "Sliver", level: 4, color: "cyan" as const },
-    ],
-    tags: ["msf", "cobalt", "sliver", "havoc"],
-  },
-  {
-    name: "Web Testing",
-    tools: [
-      { name: "Burp Suite", level: 5, color: "purple" as const },
-      { name: "OWASP ZAP", level: 4, color: "purple" as const },
-      { name: "Nuclei", level: 5, color: "purple" as const },
-    ],
-    tags: ["burp", "zap", "nuclei", "sqlmap"],
-  },
-  {
-    name: "Forensics",
-    tools: [
-      { name: "Wireshark", level: 5, color: "green" as const },
-      { name: "Volatility", level: 3, color: "green" as const },
-      { name: "Autopsy", level: 3, color: "green" as const },
-    ],
-    tags: ["wireshark", "volatility", "autopsy", "ftk"],
-  },
-  {
-    name: "Password Attacks",
-    tools: [
-      { name: "Hashcat", level: 5, color: "red" as const },
-      { name: "John", level: 4, color: "red" as const },
-      { name: "Hydra", level: 4, color: "red" as const },
-    ],
-    tags: ["hashcat", "john", "hydra", "ntlm"],
-  },
-  {
-    name: "Binary / Pwn",
-    tools: [
-      { name: "GDB/pwndbg", level: 5, color: "green" as const },
-      { name: "pwntools", level: 5, color: "green" as const },
-      { name: "ROPgadget", level: 4, color: "green" as const },
-    ],
-    tags: ["gdb", "pwndbg", "pwntools", "ropgadget"],
-  },
+  { name: "Reconnaissance", tools: [{ name: "Nmap", level: 5 }, { name: "Masscan", level: 4 }, { name: "Amass", level: 3 }], color: "var(--green)", tags: ["nmap", "masscan", "amass", "subfinder"] },
+  { name: "Exploitation", tools: [{ name: "Metasploit", level: 5 }, { name: "Cobalt Strike", level: 3 }, { name: "Sliver", level: 4 }], color: "var(--cyan)", tags: ["msf", "cobalt", "sliver", "havoc"] },
+  { name: "Web Testing", tools: [{ name: "Burp Suite", level: 5 }, { name: "OWASP ZAP", level: 4 }, { name: "Nuclei", level: 5 }], color: "var(--purple)", tags: ["burp", "zap", "nuclei", "sqlmap"] },
+  { name: "Forensics", tools: [{ name: "Wireshark", level: 5 }, { name: "Volatility", level: 3 }, { name: "Autopsy", level: 3 }], color: "var(--green)", tags: ["wireshark", "volatility", "autopsy"] },
+  { name: "Password Attacks", tools: [{ name: "Hashcat", level: 5 }, { name: "John", level: 4 }, { name: "Hydra", level: 4 }], color: "var(--red)", tags: ["hashcat", "john", "hydra"] },
+  { name: "Binary / Pwn", tools: [{ name: "GDB/pwndbg", level: 5 }, { name: "pwntools", level: 5 }, { name: "ROPgadget", level: 4 }], color: "var(--green)", tags: ["gdb", "pwndbg", "pwntools"] },
 ];
 ---
-
-<section id="tools" class="py-24 px-6">
-  <div class="mx-auto max-w-6xl">
-    <p class="section-heading">// tools</p>
-    <h2 class="text-3xl md:text-4xl font-bold mb-12">
-      <span class="gradient-text">Toolbox</span>
+<section id="tools" style="padding:96px 24px;">
+  <div style="max-width:1200px;margin:0 auto;">
+    <p style="font-family:'JetBrains Mono',monospace;color:var(--green);font-size:0.875rem;text-transform:uppercase;letter-spacing:0.15em;margin-bottom:8px;">// tools</p>
+    <h2 style="font-size:clamp(1.75rem,4vw,2.5rem);font-weight:700;margin-bottom:48px;">
+      <span style="background:linear-gradient(135deg,var(--green),var(--cyan));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;">Toolbox</span>
     </h2>
-
-    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:24px;">
       {toolCategories.map((cat) => (
-        <div class="glass-card p-6">
-          <h3 class="font-bold text-text-primary mb-4 font-mono">{cat.name}</h3>
-          <div class="space-y-3 mb-4">
+        <div style="background:var(--bg-card);border:1px solid var(--border);border-radius:12px;padding:24px;" onmouseover="this.style.borderColor=cat.color" onmouseout="this.style.borderColor='var(--border)'" data-color={cat.color}>
+          <h3 style="font-weight:700;color:var(--text);margin-bottom:16px;font-family:'JetBrains Mono',monospace;font-size:0.95rem;">{cat.name}</h3>
+          <div style="display:flex;flex-direction:column;gap:12px;margin-bottom:16px;">
             {cat.tools.map((tool) => (
-              <ProgressBar label={tool.name} value={tool.level} color={tool.color} />
+              <div>
+                <div style="display:flex;justify-content:space-between;margin-bottom:4px;">
+                  <span style="color:var(--text-muted);font-size:0.8rem;font-family:'JetBrains Mono',monospace;">{tool.name}</span>
+                  <span style="color:var(--text-muted);font-size:0.75rem;font-family:'JetBrains Mono',monospace;">{tool.level}/5</span>
+                </div>
+                <div style="height:6px;background:var(--bg-tertiary);border-radius:3px;overflow:hidden;">
+                  <div style={`height:100%;width:${(tool.level / 5) * 100}%;background:${cat.color};border-radius:3px;box-shadow:0 0 8px ${cat.color};`}></div>
+                </div>
+              </div>
             ))}
           </div>
-          <div class="flex flex-wrap gap-1.5">
+          <div style="display:flex;flex-wrap:wrap;gap:6px;">
             {cat.tags.map((tag) => (
-              <Badge text={tag} color={cat.tools[0].color} />
+              <span style={`display:inline-flex;padding:2px 8px;font-size:0.7rem;font-family:'JetBrains Mono',monospace;border-radius:4px;background:${cat.color}15;color:${cat.color};border:1px solid ${cat.color}33;`}>{tag}</span>
             ))}
           </div>
         </div>

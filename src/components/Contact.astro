@@ -1,84 +1,51 @@
 ---
 ---
-
-<section id="contact" class="py-24 px-6">
-  <div class="mx-auto max-w-6xl">
-    <p class="section-heading">// contact</p>
-    <h2 class="text-3xl md:text-4xl font-bold mb-12">
-      <span class="gradient-text">Get</span> <span class="text-text-primary">In Touch</span>
+<section id="contact" style="padding:96px 24px;">
+  <div style="max-width:1200px;margin:0 auto;">
+    <p style="font-family:'JetBrains Mono',monospace;color:var(--green);font-size:0.875rem;text-transform:uppercase;letter-spacing:0.15em;margin-bottom:8px;">// contact</p>
+    <h2 style="font-size:clamp(1.75rem,4vw,2.5rem);font-weight:700;margin-bottom:48px;">
+      <span style="background:linear-gradient(135deg,var(--green),var(--cyan));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;">Get</span>
+      <span style="color:var(--text);"> In Touch</span>
     </h2>
-
-    <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
-      <div class="glass-card p-8">
-        <h3 class="text-xl font-bold text-text-primary mb-6 font-mono">
-          <span class="text-accent-green">$</span> echo "Let's connect"
+    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:32px;">
+      <div style="background:var(--bg-card);border:1px solid var(--border);border-radius:12px;padding:32px;">
+        <h3 style="font-size:1.125rem;font-weight:700;color:var(--text);margin-bottom:24px;font-family:'JetBrains Mono',monospace;">
+          <span style="color:var(--green);">$</span> echo "Let's connect"
         </h3>
-        <div class="space-y-4">
-          <a
-            href="https://github.com/0xCyb3rgh0st"
-            target="_blank"
-            rel="noopener"
-            class="flex items-center gap-4 p-4 rounded-lg border border-border hover:border-accent-green hover:bg-accent-green/5 transition-all group"
-          >
-            <div class="w-10 h-10 rounded-lg bg-bg-tertiary border border-border flex items-center justify-center text-accent-green group-hover:border-accent-green/50">
-              <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
-                <path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/>
-              </svg>
-            </div>
-            <div>
-              <p class="font-bold text-text-primary group-hover:text-accent-green transition-colors">GitHub</p>
-              <p class="text-text-secondary text-sm">@0xCyb3rgh0st</p>
-            </div>
-          </a>
-
-          <a
-            href="mailto:jatin@jatinsingh.com.np"
-            class="flex items-center gap-4 p-4 rounded-lg border border-border hover:border-accent-cyan hover:bg-accent-cyan/5 transition-all group"
-          >
-            <div class="w-10 h-10 rounded-lg bg-bg-tertiary border border-border flex items-center justify-center text-accent-cyan group-hover:border-accent-cyan/50">
-              <svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
-                <path d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/>
-              </svg>
-            </div>
-            <div>
-              <p class="font-bold text-text-primary group-hover:text-accent-cyan transition-colors">Email</p>
-              <p class="text-text-secondary text-sm">jatin@jatinsingh.com.np</p>
-            </div>
-          </a>
-
-          <a
-            href="#"
-            class="flex items-center gap-4 p-4 rounded-lg border border-border hover:border-accent-purple hover:bg-accent-purple/5 transition-all group"
-          >
-            <div class="w-10 h-10 rounded-lg bg-bg-tertiary border border-border flex items-center justify-center text-accent-purple group-hover:border-accent-purple/50">
-              <svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
-                <path d="M16 8a6 6 0 01-6 6H4m4-6l4-4m0 0l4 4m-4-4v16"/>
-              </svg>
-            </div>
-            <div>
-              <p class="font-bold text-text-primary group-hover:text-accent-purple transition-colors">LinkedIn</p>
-              <p class="text-text-secondary text-sm">Connect with me</p>
-            </div>
-          </a>
+        <div style="display:flex;flex-direction:column;gap:16px;">
+          {[
+            { icon: "GH", label: "GitHub", sub: "@0xCyb3rgh0st", href: "https://github.com/0xCyb3rgh0st", color: "var(--green)" },
+            { icon: "EM", label: "Email", sub: "jatin@jatinsingh.com.np", href: "mailto:jatin@jatinsingh.com.np", color: "var(--cyan)" },
+            { icon: "LI", label: "LinkedIn", sub: "Connect with me", href: "#", color: "var(--purple)" },
+          ].map((link) => (
+            <a href={link.href} target="_blank" rel="noopener" style={`display:flex;align-items:center;gap:16px;padding:16px;border-radius:8px;border:1px solid var(--border);text-decoration:none;transition:all 0.3s;`}>
+              <div style={`width:40px;height:40px;border-radius:8px;background:var(--bg-tertiary);border:1px solid var(--border);display:flex;align-items:center;justify-content:center;color:${link.color};font-family:'JetBrains Mono',monospace;font-weight:700;font-size:0.7rem;flex-shrink:0;`}>
+                {link.icon}
+              </div>
+              <div>
+                <p style="font-weight:700;color:var(--text);font-size:0.95rem;">{link.label}</p>
+                <p style="color:var(--text-muted);font-size:0.8rem;">{link.sub}</p>
+              </div>
+            </a>
+          ))}
         </div>
       </div>
-
-      <div class="glass-card p-8 terminal-window">
-        <div class="terminal-header">
-          <div class="terminal-dot bg-accent-red"></div>
-          <div class="terminal-dot bg-accent-yellow"></div>
-          <div class="terminal-dot bg-accent-green"></div>
-          <span class="ml-2 text-text-secondary text-xs font-mono">message.sh</span>
+      <div style="background:var(--bg-secondary);border:1px solid var(--border);border-radius:12px;overflow:hidden;">
+        <div style="background:var(--bg-tertiary);padding:10px 16px;display:flex;align-items:center;gap:6px;border-bottom:1px solid var(--border);">
+          <div style="width:10px;height:10px;border-radius:50%;background:var(--red);"></div>
+          <div style="width:10px;height:10px;border-radius:50%;background:var(--yellow);"></div>
+          <div style="width:10px;height:10px;border-radius:50%;background:var(--green);"></div>
+          <span style="margin-left:8px;color:var(--text-muted);font-size:0.75rem;font-family:'JetBrains Mono',monospace;">message.sh</span>
         </div>
-        <div class="p-6 font-mono text-sm space-y-3">
-          <p class="text-accent-green">$ cat /etc/motd</p>
-          <p class="text-text-secondary pl-4">"The best way to predict the future is to invent it."</p>
-          <p class="text-text-secondary pl-4">- Alan Kay</p>
-          <p class="mt-4 text-accent-green">$ echo "Status: Open for opportunities"</p>
-          <p class="text-accent-cyan pl-4">Status: Open for opportunities</p>
-          <p class="mt-4 text-accent-green">$ echo "Response time: &lt; 24h"</p>
-          <p class="text-accent-cyan pl-4">Response time: &lt; 24h</p>
-          <p class="mt-4"><span class="text-accent-green">$</span> <span class="text-text-primary animate-pulse">_</span></p>
+        <div style="padding:24px;font-family:'JetBrains Mono',monospace;font-size:0.875rem;line-height:2;">
+          <p style="color:var(--green);">$ cat /etc/motd</p>
+          <p style="padding-left:16px;color:var(--text-muted);">"The best way to predict the future is to invent it."</p>
+          <p style="padding-left:16px;color:var(--text-muted);">- Alan Kay</p>
+          <p style="color:var(--green);">$ echo "Status: Open for opportunities"</p>
+          <p style="padding-left:16px;color:var(--cyan);">Status: Open for opportunities</p>
+          <p style="color:var(--green);">$ echo "Response time: &lt; 24h"</p>
+          <p style="padding-left:16px;color:var(--cyan);">Response time: &lt; 24h</p>
+          <p><span style="color:var(--green);">$</span> <span style="animation:pulse-glow 2s infinite;">_</span></p>
         </div>
       </div>
     </div>
