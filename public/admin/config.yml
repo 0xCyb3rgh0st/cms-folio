@@ -1,0 +1,94 @@
+backend:
+  name: github
+  repo: 0xCyb3rgh0st/cms-folio
+  branch: main
+  base_url: "https://cms-auth.jatinsingh.com.np"
+  auth_token: ""
+
+media_folder: "public/images"
+public_folder: "/images"
+
+collections:
+  - name: "projects"
+    label: "Projects"
+    folder: "src/content/projects"
+    create: true
+    slug: "{{slug}}"
+    fields:
+      - { label: "Title", name: "title", widget: "string" }
+      - { label: "Description", name: "description", widget: "text" }
+      - label: "Category"
+        name: "category"
+        widget: "select"
+        options:
+          - "binary-exploitation"
+          - "web"
+          - "network"
+          - "malware"
+          - "active-directory"
+          - "forensics"
+          - "crypto"
+          - "other"
+      - { label: "Tags", name: "tags", widget: "list" }
+      - { label: "GitHub URL", name: "githubUrl", widget: "string", required: false }
+      - { label: "Live URL", name: "liveUrl", widget: "string", required: false }
+      - { label: "Featured", name: "featured", widget: "boolean", default: false }
+      - { label: "Date", name: "date", widget: "datetime" }
+      - { label: "Body", name: "body", widget: "markdown" }
+
+  - name: "writeups"
+    label: "Writeups"
+    folder: "src/content/writeups"
+    create: true
+    slug: "{{slug}}"
+    fields:
+      - { label: "Title", name: "title", widget: "string" }
+      - { label: "Description", name: "description", widget: "text" }
+      - label: "Category"
+        name: "category"
+        widget: "select"
+        options:
+          - "ctf"
+          - "vulnerability"
+          - "technique"
+          - "tool"
+          - "lab"
+      - { label: "Tags", name: "tags", widget: "list" }
+      - label: "Difficulty"
+        name: "difficulty"
+        widget: "select"
+        options:
+          - { label: "Easy", value: "easy" }
+          - { label: "Medium", value: "medium" }
+          - { label: "Hard", value: "hard" }
+          - { label: "Insane", value: "insane" }
+      - { label: "Date", name: "date", widget: "datetime" }
+      - { label: "Body", name: "body", widget: "markdown" }
+
+  - name: "certifications"
+    label: "Certifications"
+    folder: "src/content/certifications"
+    create: true
+    slug: "{{slug}}"
+    fields:
+      - { label: "Title", name: "title", widget: "string" }
+      - { label: "Issuer", name: "issuer", widget: "string" }
+      - { label: "Badge Image", name: "image", widget: "image", required: false }
+      - { label: "Verification URL", name: "verifyUrl", widget: "string", required: false }
+      - { label: "Date", name: "date", widget: "datetime" }
+
+  - name: "siteConfig"
+    label: "Site Configuration"
+    files:
+      - name: "config"
+        label: "Site Config"
+        file: "src/content/config.json"
+        fields:
+          - { label: "Name", name: "name", widget: "string" }
+          - { label: "Title", name: "title", widget: "string" }
+          - { label: "Tagline", name: "tagline", widget: "string" }
+          - { label: "Bio", name: "bio", widget: "text" }
+          - { label: "Email", name: "email", widget: "string" }
+          - { label: "GitHub URL", name: "github", widget: "string" }
+          - { label: "LinkedIn URL", name: "linkedin", widget: "string" }
+          - { label: "Twitter URL", name: "twitter", widget: "string" }
