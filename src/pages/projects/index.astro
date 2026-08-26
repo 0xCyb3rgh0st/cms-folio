@@ -1,0 +1,127 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import Navigation from '../../components/Navigation.astro';
+import Footer from '../../components/Footer.astro';
+import Badge from '../../components/ui/Badge.astro';
+
+const projects = [
+  {
+    title: "VulnChain",
+    description: "Automated vulnerability scanner with chain detection for complex attack paths in enterprise networks. Features real-time scanning, reporting, and integration with popular security tools.",
+    category: "web",
+    tags: ["Python", "API", "Nmap", "Nuclei"],
+    github: "https://github.com/0xCyb3rgh0st",
+    featured: true,
+    date: "2024-08-01",
+  },
+  {
+    title: "ADExploit",
+    description: "Active Directory attack framework for red team operations with automated privilege escalation, lateral movement, and domain enumeration capabilities.",
+    category: "active-directory",
+    tags: ["C#", "Impacket", "BloodHound"],
+    github: "https://github.com/0xCyb3rgh0st",
+    featured: true,
+    date: "2024-07-15",
+  },
+  {
+    title: "HeapLab",
+    description: "Custom heap exploitation training environment with vulnerable binaries, automated exploit generation, and step-by-step debugging guides.",
+    category: "binary-exploitation",
+    tags: ["C", "GDB", "pwntools", "pwndbg"],
+    github: "https://github.com/0xCyb3rgh0st",
+    featured: false,
+    date: "2024-06-20",
+  },
+  {
+    title: "PhishGuard",
+    description: "ML-powered phishing detection system analyzing URLs, email headers, and page content in real-time with high accuracy.",
+    category: "web",
+    tags: ["Python", "TensorFlow", "Flask"],
+    github: "https://github.com/0xCyb3rgh0st",
+    featured: false,
+    date: "2024-05-10",
+  },
+  {
+    title: "PacketSnitch",
+    description: "Network forensics tool for deep packet inspection and anomaly detection with automated alerting and IOC extraction.",
+    category: "network",
+    tags: ["Rust", "libpcap", "Zeek"],
+    github: "https://github.com/0xCyb3rgh0st",
+    featured: false,
+    date: "2024-04-05",
+  },
+  {
+    title: "MalwareSandbox",
+    description: "Automated malware analysis sandbox with behavioral monitoring, IOC extraction, and YARA rule generation.",
+    category: "malware",
+    tags: ["Python", "Docker", "YARA"],
+    github: "https://github.com/0xCyb3rgh0st",
+    featured: true,
+    date: "2024-03-15",
+  },
+];
+
+const categoryColors: Record<string, "green" | "cyan" | "purple" | "red" | "yellow" | "orange"> = {
+  "web": "cyan",
+  "active-directory": "purple",
+  "binary-exploitation": "green",
+  "network": "yellow",
+  "malware": "red",
+};
+---
+
+<BaseLayout title="Projects | Jatin Singh">
+  <Navigation />
+  <main class="pt-24 pb-16 px-6">
+    <div class="mx-auto max-w-6xl">
+      <p class="section-heading">// projects</p>
+      <h1 class="text-4xl md:text-5xl font-bold mb-4">
+        <span class="gradient-text">All</span> <span class="text-text-primary">Projects</span>
+      </h1>
+      <p class="text-text-secondary mb-12 max-w-2xl">
+        A collection of my security research, tools, and exploit development projects.
+      </p>
+
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+        {projects.map((project) => (
+          <div class="glass-card p-6 flex flex-col group">
+            {project.featured && (
+              <div class="flex items-center gap-2 mb-3">
+                <div class="w-2 h-2 rounded-full bg-accent-green animate-pulse"></div>
+                <span class="text-accent-green text-xs font-mono">FEATURED</span>
+              </div>
+            )}
+            <div class="flex items-center gap-2 mb-3">
+              <Badge text={project.category.replace("-", " ")} color={categoryColors[project.category] || "green"} />
+            </div>
+            <h3 class="text-xl font-bold text-text-primary mb-2 group-hover:text-accent-green transition-colors">
+              {project.title}
+            </h3>
+            <p class="text-text-secondary text-sm mb-4 flex-grow leading-relaxed">
+              {project.description}
+            </p>
+            <div class="flex flex-wrap gap-2 mb-4">
+              {project.tags.map((tag) => (
+                <span class="text-xs font-mono text-text-secondary bg-bg-tertiary px-2 py-1 rounded">
+                  {tag}
+                </span>
+              ))}
+            </div>
+            <div class="flex items-center justify-between">
+              <span class="text-text-secondary text-xs font-mono">{project.date}</span>
+              <a
+                href={project.github}
+                target="_blank"
+                rel="noopener"
+                class="flex items-center gap-2 text-sm text-accent-green font-mono hover:underline"
+              >
+                GitHub &rarr;
+              </a>
+            </div>
+          </div>
+        ))}
+      </div>
+    </div>
+  </main>
+  <Footer />
+</BaseLayout>

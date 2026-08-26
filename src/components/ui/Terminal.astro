@@ -1,0 +1,27 @@
+---
+interface Props {
+  title: string;
+  command?: string;
+  class?: string;
+}
+
+const { title, command = "", class: className = "" } = Astro.props;
+---
+
+<div class:list={["terminal-window", className]}>
+  <div class="terminal-header">
+    <div class="terminal-dot bg-accent-red"></div>
+    <div class="terminal-dot bg-accent-yellow"></div>
+    <div class="terminal-dot bg-accent-green"></div>
+    <span class="ml-2 text-text-secondary text-xs font-mono">{title}</span>
+  </div>
+  <div class="p-4 font-mono text-sm">
+    {command && (
+      <div class="flex items-center gap-2 mb-2">
+        <span class="text-accent-green">$</span>
+        <span class="text-text-primary">{command}</span>
+      </div>
+    )}
+    <slot />
+  </div>
+</div>

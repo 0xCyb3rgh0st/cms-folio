@@ -1,0 +1,66 @@
+---
+import Badge from './ui/Badge.astro';
+---
+
+<section id="active-directory" class="py-24 px-6">
+  <div class="mx-auto max-w-6xl">
+    <p class="section-heading">// active directory</p>
+    <h2 class="text-3xl md:text-4xl font-bold mb-12">
+      <span class="text-text-primary">Domain</span> <span class="gradient-text"> takeover</span>
+    </h2>
+
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+      {[
+        {
+          phase: "Reconnaissance",
+          icon: "🔍",
+          techniques: ["BloodHound Enumeration", "LDAP Recon", "SPN Discovery", "Group Policy Mapping"],
+          tools: ["BloodHound", "ldapsearch", "PowerView"],
+        },
+        {
+          phase: "Initial Access",
+          icon: "🔑",
+          techniques: ["AS-REP Roasting", "Kerberoasting", "Password Spraying", "NTLM Relay"],
+          tools: ["Rubeus", "Impacket", "CrackMapExec"],
+        },
+        {
+          phase: "Privilege Escalation",
+          icon: "⬆️",
+          techniques: ["Token Impersonation", "Unconstrained Delegation", "DCSync", "GPO Abuse"],
+          tools: ["Mimikatz", "Impacket", "Certify"],
+        },
+        {
+          phase: "Lateral Movement",
+          icon: "🔄",
+          techniques: ["Pass-the-Hash", "Pass-the-Ticket", "Overpass-the-Hash", "WMI Execution"],
+          tools: ["CrackMapExec", "Evil-WinRM", "PsExec"],
+        },
+      ].map((phase, i) => (
+        <div class="glass-card p-6 relative overflow-hidden group">
+          <div class="absolute top-0 right-0 text-6xl opacity-5 font-mono font-bold select-none">
+            {String(i + 1).padStart(2, "0")}
+          </div>
+          <div class="flex items-center gap-3 mb-4">
+            <span class="text-2xl">{phase.icon}</span>
+            <h3 class="text-xl font-bold text-text-primary group-hover:text-accent-purple transition-colors">
+              {phase.phase}
+            </h3>
+          </div>
+          <ul class="space-y-2 mb-4">
+            {phase.techniques.map((t) => (
+              <li class="flex items-center gap-2 text-text-secondary text-sm">
+                <span class="w-1.5 h-1.5 rounded-full bg-accent-purple"></span>
+                {t}
+              </li>
+            ))}
+          </ul>
+          <div class="flex flex-wrap gap-2">
+            {phase.tools.map((tool) => (
+              <Badge text={tool} color="purple" />
+            ))}
+          </div>
+        </div>
+      ))}
+    </div>
+  </div>
+</section>

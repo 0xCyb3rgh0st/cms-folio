@@ -1,0 +1,42 @@
+---
+interface Props {
+  text: string;
+  class?: string;
+  tag?: "h1" | "h2" | "h3";
+}
+
+const { text, class: className = "", tag: Tag = "h2" } = Astro.props;
+---
+
+<div class:list={["relative inline-block", className]}>
+  <Tag class="glitch-hover" data-text={text}>{text}</Tag>
+</div>
+
+<style>
+  .glitch-hover {
+    position: relative;
+  }
+  .glitch-hover::before,
+  .glitch-hover::after {
+    content: attr(data-text);
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    opacity: 0;
+    pointer-events: none;
+  }
+  .glitch-hover:hover::before {
+    animation: glitch 0.3s ease-in-out;
+    color: var(--color-accent-cyan);
+    opacity: 0.8;
+    clip-path: polygon(0 0, 100% 0, 100% 35%, 0 35%);
+  }
+  .glitch-hover:hover::after {
+    animation: glitch 0.3s ease-in-out reverse;
+    color: var(--color-accent-red);
+    opacity: 0.8;
+    clip-path: polygon(0 65%, 100% 65%, 100% 100%, 0 100%);
+  }
+</style>

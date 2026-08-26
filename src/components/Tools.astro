@@ -1,0 +1,88 @@
+---
+import ProgressBar from './ui/ProgressBar.astro';
+import Badge from './ui/Badge.astro';
+
+const toolCategories = [
+  {
+    name: "Reconnaissance",
+    tools: [
+      { name: "Nmap", level: 5, color: "green" as const },
+      { name: "Masscan", level: 4, color: "green" as const },
+      { name: "Amass", level: 3, color: "green" as const },
+    ],
+    tags: ["nmap", "masscan", "amass", "subfinder"],
+  },
+  {
+    name: "Exploitation",
+    tools: [
+      { name: "Metasploit", level: 5, color: "cyan" as const },
+      { name: "Cobalt Strike", level: 3, color: "cyan" as const },
+      { name: "Sliver", level: 4, color: "cyan" as const },
+    ],
+    tags: ["msf", "cobalt", "sliver", "havoc"],
+  },
+  {
+    name: "Web Testing",
+    tools: [
+      { name: "Burp Suite", level: 5, color: "purple" as const },
+      { name: "OWASP ZAP", level: 4, color: "purple" as const },
+      { name: "Nuclei", level: 5, color: "purple" as const },
+    ],
+    tags: ["burp", "zap", "nuclei", "sqlmap"],
+  },
+  {
+    name: "Forensics",
+    tools: [
+      { name: "Wireshark", level: 5, color: "green" as const },
+      { name: "Volatility", level: 3, color: "green" as const },
+      { name: "Autopsy", level: 3, color: "green" as const },
+    ],
+    tags: ["wireshark", "volatility", "autopsy", "ftk"],
+  },
+  {
+    name: "Password Attacks",
+    tools: [
+      { name: "Hashcat", level: 5, color: "red" as const },
+      { name: "John", level: 4, color: "red" as const },
+      { name: "Hydra", level: 4, color: "red" as const },
+    ],
+    tags: ["hashcat", "john", "hydra", "ntlm"],
+  },
+  {
+    name: "Binary / Pwn",
+    tools: [
+      { name: "GDB/pwndbg", level: 5, color: "green" as const },
+      { name: "pwntools", level: 5, color: "green" as const },
+      { name: "ROPgadget", level: 4, color: "green" as const },
+    ],
+    tags: ["gdb", "pwndbg", "pwntools", "ropgadget"],
+  },
+];
+---
+
+<section id="tools" class="py-24 px-6">
+  <div class="mx-auto max-w-6xl">
+    <p class="section-heading">// tools</p>
+    <h2 class="text-3xl md:text-4xl font-bold mb-12">
+      <span class="gradient-text">Toolbox</span>
+    </h2>
+
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+      {toolCategories.map((cat) => (
+        <div class="glass-card p-6">
+          <h3 class="font-bold text-text-primary mb-4 font-mono">{cat.name}</h3>
+          <div class="space-y-3 mb-4">
+            {cat.tools.map((tool) => (
+              <ProgressBar label={tool.name} value={tool.level} color={tool.color} />
+            ))}
+          </div>
+          <div class="flex flex-wrap gap-1.5">
+            {cat.tags.map((tag) => (
+              <Badge text={tag} color={cat.tools[0].color} />
+            ))}
+          </div>
+        </div>
+      ))}
+    </div>
+  </div>
+</section>

@@ -1,0 +1,40 @@
+---
+---
+
+<section id="certifications" class="py-24 px-6">
+  <div class="mx-auto max-w-6xl">
+    <p class="section-heading">// certifications</p>
+    <h2 class="text-3xl md:text-4xl font-bold mb-12">
+      <span class="text-text-primary">Verified</span> <span class="gradient-text">Credentials</span>
+    </h2>
+
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+      {[
+        { title: "eJPT", issuer: "INE Security", date: "2024", color: "green" },
+        { title: "CompTIA Security+", issuer: "CompTIA", date: "2024", color: "cyan" },
+        { title: "CRTP", issuer: "Pentester Academy", date: "2024", color: "purple" },
+        { title: "BTL1", issuer: "Security Blue Team", date: "2023", color: "green" },
+        { title: "CTF Champion", issuer: "Local CTF Event", date: "2024", color: "yellow" },
+        { title: "AWS Cloud Practitioner", issuer: "AWS", date: "2023", color: "orange" },
+      ].map((cert) => (
+        <div class="glass-card p-6 flex items-center gap-4 group">
+          <div class:list={[
+            "w-16 h-16 rounded-xl flex items-center justify-center font-mono font-bold text-lg border",
+            cert.color === "green" && "bg-accent-green/10 text-accent-green border-accent-green/20",
+            cert.color === "cyan" && "bg-accent-cyan/10 text-accent-cyan border-accent-cyan/20",
+            cert.color === "purple" && "bg-accent-purple/10 text-accent-purple border-accent-purple/20",
+            cert.color === "yellow" && "bg-accent-yellow/10 text-accent-yellow border-accent-yellow/20",
+            cert.color === "orange" && "bg-accent-orange/10 text-accent-orange border-accent-orange/20",
+          ]}>
+            {cert.title.substring(0, 3)}
+          </div>
+          <div>
+            <h3 class="font-bold text-text-primary group-hover:text-accent-green transition-colors">{cert.title}</h3>
+            <p class="text-text-secondary text-sm">{cert.issuer}</p>
+            <p class="text-text-secondary text-xs font-mono mt-1">{cert.date}</p>
+          </div>
+        </div>
+      ))}
+    </div>
+  </div>
+</section>

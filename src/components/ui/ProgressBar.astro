@@ -1,0 +1,31 @@
+---
+interface Props {
+  label: string;
+  value: number;
+  max?: number;
+  color?: "green" | "cyan" | "purple";
+  class?: string;
+}
+
+const { label, value, max = 5, color = "green", class: className = "" } = Astro.props;
+
+const barColors = {
+  green: "bg-accent-green shadow-[0_0_10px_var(--color-accent-green)]",
+  cyan: "bg-accent-cyan shadow-[0_0_10px_var(--color-accent-cyan)]",
+  purple: "bg-accent-purple shadow-[0_0_10px_var(--color-accent-purple)]",
+};
+---
+
+<div class:list={["flex flex-col gap-1.5", className]}>
+  <div class="flex justify-between items-center">
+    <span class="text-text-secondary text-sm font-mono">{label}</span>
+    <span class="text-text-secondary text-xs font-mono">{value}/{max}</span>
+  </div>
+  <div class="h-2 bg-bg-tertiary rounded-full overflow-hidden">
+    <div
+      class:list={["h-full rounded-full transition-all duration-1000 ease-out", barColors[color]]}
+      style={`width: ${(value / max) * 100}%`}
+      data-progress={value}
+    />
+  </div>
+</div>

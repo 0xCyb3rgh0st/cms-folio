@@ -1,0 +1,97 @@
+---
+import Badge from './ui/Badge.astro';
+import ProgressBar from './ui/ProgressBar.astro';
+
+const skillCategories = [
+  {
+    title: "Binary Exploitation",
+    icon: "0x",
+    color: "green" as const,
+    skills: [
+      { name: "Buffer Overflows", level: 5 },
+      { name: "ROP Chains", level: 4 },
+      { name: "Heap Exploitation", level: 3 },
+      { name: "Format String", level: 4 },
+      { name: "Shellcode Writing", level: 4 },
+    ],
+    tags: ["GDB", "pwndbg", "pwntools", "ROPgadget", "checksec"],
+  },
+  {
+    title: "Web Security",
+    icon: "W/",
+    color: "cyan" as const,
+    skills: [
+      { name: "XSS", level: 5 },
+      { name: "SQL Injection", level: 5 },
+      { name: "SSRF", level: 4 },
+      { name: "XXE", level: 3 },
+      { name: "Authentication Bypass", level: 4 },
+    ],
+    tags: ["Burp Suite", "OWASP", "Nuclei", "SQLMap", "XSStrike"],
+  },
+  {
+    title: "Active Directory",
+    icon: "AD",
+    color: "purple" as const,
+    skills: [
+      { name: "Kerberoasting", level: 5 },
+      { name: "AS-REP Roasting", level: 4 },
+      { name: "Pass-the-Hash", level: 5 },
+      { name: "DCSync", level: 4 },
+      { name: "GPO Abuse", level: 3 },
+    ],
+    tags: ["BloodHound", "Impacket", "Rubeus", "Mimikatz", "Certify"],
+  },
+  {
+    title: "Forensics & RE",
+    icon: "F+",
+    color: "green" as const,
+    skills: [
+      { name: "Malware Analysis", level: 4 },
+      { name: "Memory Forensics", level: 3 },
+      { name: "Reverse Engineering", level: 4 },
+      { name: "Network Forensics", level: 3 },
+      { name: "Disk Forensics", level: 3 },
+    ],
+    tags: ["IDA Pro", "Ghidra", "Volatility", "Wireshark", "Strings"],
+  },
+];
+---
+
+<section id="skills" class="py-24 px-6">
+  <div class="mx-auto max-w-6xl">
+    <p class="section-heading">// skills</p>
+    <h2 class="text-3xl md:text-4xl font-bold mb-12">
+      <span class="text-text-primary">Technical</span> <span class="gradient-text">Arsenal</span>
+    </h2>
+
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+      {skillCategories.map((category) => (
+        <div class="glass-card p-6 group">
+          <div class="flex items-center gap-3 mb-6">
+            <div class="w-12 h-12 rounded-lg bg-bg-tertiary border border-border flex items-center justify-center font-mono font-bold text-accent-green text-lg group-hover:border-accent-green/50 transition-colors">
+              {category.icon}
+            </div>
+            <h3 class="text-xl font-bold text-text-primary">{category.title}</h3>
+          </div>
+
+          <div class="space-y-3 mb-6">
+            {category.skills.map((skill) => (
+              <ProgressBar
+                label={skill.name}
+                value={skill.level}
+                color={category.color}
+              />
+            ))}
+          </div>
+
+          <div class="flex flex-wrap gap-2">
+            {category.tags.map((tag) => (
+              <Badge text={tag} color={category.color} />
+            ))}
+          </div>
+        </div>
+      ))}
+    </div>
+  </div>
+</section>

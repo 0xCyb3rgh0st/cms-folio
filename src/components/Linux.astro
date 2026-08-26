@@ -1,0 +1,64 @@
+---
+import Badge from './ui/Badge.astro';
+import Terminal from './ui/Terminal.astro';
+---
+
+<section id="linux" class="py-24 px-6">
+  <div class="mx-auto max-w-6xl">
+    <p class="section-heading">// linux</p>
+    <h2 class="text-3xl md:text-4xl font-bold mb-12">
+      <span class="gradient-text">Tux</span> <span class="text-text-primary">Mastery</span>
+    </h2>
+
+    <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+      <div class="space-y-6">
+        <div class="glass-card p-6">
+          <h3 class="font-bold text-text-primary mb-3">System Administration</h3>
+          <p class="text-text-secondary text-sm mb-3">Linux server management, hardening, and automation.</p>
+          <div class="flex flex-wrap gap-2">
+            <Badge text="Bash" color="green" />
+            <Badge text="systemd" color="green" />
+            <Badge text="iptables" color="cyan" />
+            <Badge text="SELinux" color="purple" />
+          </div>
+        </div>
+        <div class="glass-card p-6">
+          <h3 class="font-bold text-text-primary mb-3">Security Tools</h3>
+          <p class="text-text-secondary text-sm mb-3">Proficient in Linux-based security tooling.</p>
+          <div class="flex flex-wrap gap-2">
+            <Badge text="Kali" color="green" />
+            <Badge text="Parrot" color="cyan" />
+            <Badge text="Arch" color="purple" />
+            <Badge text="Nix" color="yellow" />
+          </div>
+        </div>
+        <div class="glass-card p-6">
+          <h3 class="font-bold text-text-primary mb-3">Networking</h3>
+          <p class="text-text-secondary text-sm mb-3">TCP/IP stack, socket programming, and packet analysis.</p>
+          <div class="flex flex-wrap gap-2">
+            <Badge text="tcpdump" color="green" />
+            <Badge text="netstat" color="cyan" />
+            <Badge text="ss" color="purple" />
+            <Badge text="nftables" color="yellow" />
+          </div>
+        </div>
+      </div>
+
+      <Terminal title="linux-commands.sh" command="uname -a">
+        <div class="space-y-2 text-text-secondary text-xs">
+          <p><span class="text-accent-green">$</span> <span class="text-accent-cyan">cat /etc/os-release</span></p>
+          <p class="pl-4">Kali GNU/Linux Rolling</p>
+          <p class="mt-2"><span class="text-accent-green">$</span> <span class="text-accent-cyan">neofetch --off</span></p>
+          <p class="pl-4">OS: Kali Linux x86_64</p>
+          <p class="pl-4">Kernel: 6.x.x-kali</p>
+          <p class="mt-2"><span class="text-accent-green">$</span> <span class="text-accent-cyan">which nmap burpsuite gdb python3</span></p>
+          <p class="pl-4">/usr/bin/nmap</p>
+          <p class="pl-4">/usr/bin/burpsuite</p>
+          <p class="pl-4">/usr/bin/gdb</p>
+          <p class="pl-4">/usr/bin/python3</p>
+          <p class="mt-2"><span class="text-accent-green">$</span> <span class="text-text-primary animate-pulse">_</span></p>
+        </div>
+      </Terminal>
+    </div>
+  </div>
+</section>

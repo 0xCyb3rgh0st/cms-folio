@@ -1,0 +1,118 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import Navigation from '../../components/Navigation.astro';
+import Footer from '../../components/Footer.astro';
+import Badge from '../../components/ui/Badge.astro';
+
+const writeups = [
+  {
+    title: "HackTheBox - UnderWriteUp",
+    description: "OSCP-style machine with web enumeration and privilege escalation via kernel exploit. Full walkthrough covering enumeration, exploitation, and post-exploitation.",
+    category: "ctf",
+    difficulty: "medium",
+    date: "2024-08-15",
+    tags: ["HTB", "Linux", "PrivEsc"],
+  },
+  {
+    title: "CVE-2024-3094: XZ Utils Backdoor",
+    description: "Deep dive into the XZ Utils supply chain attack and its implications for Linux security. Analysis of the backdoor mechanism and detection methods.",
+    category: "vulnerability",
+    difficulty: "hard",
+    date: "2024-04-01",
+    tags: ["CVE", "Supply Chain", "Linux"],
+  },
+  {
+    title: "Kerberoasting from Scratch",
+    description: "Complete guide to Kerberoasting attacks in Active Directory environments. From theory to practical exploitation with real-world examples.",
+    category: "technique",
+    difficulty: "medium",
+    date: "2024-03-20",
+    tags: ["AD", "Kerberos", "CrackMapExec"],
+  },
+  {
+    title: "Buffer Overflow Lab Walkthrough",
+    description: "Step-by-step stack buffer overflow exploitation from discovery to shell. Covers bypassing ASLR, NX, and stack canaries.",
+    category: "technique",
+    difficulty: "easy",
+    date: "2024-02-10",
+    tags: ["Binary", "Pwn", "GDB"],
+  },
+  {
+    title: "TryHackMe - Active Directory Basics",
+    description: "Foundational AD concepts and common attack paths for beginners. Perfect starting point for AD security testing.",
+    category: "lab",
+    difficulty: "easy",
+    date: "2024-01-15",
+    tags: ["THM", "AD", "Beginner"],
+  },
+  {
+    title: "Burp Suite Advanced Techniques",
+    description: "Mastering Burp Suite for complex web application penetration testing. Advanced macros, extensions, and automation.",
+    category: "tool",
+    difficulty: "hard",
+    date: "2024-07-22",
+    tags: ["Burp", "Web", "Proxy"],
+  },
+];
+
+const difficultyColors: Record<string, "green" | "yellow" | "red" | "purple"> = {
+  easy: "green",
+  medium: "yellow",
+  hard: "red",
+  insane: "purple",
+};
+
+const categoryColors: Record<string, "green" | "cyan" | "purple" | "yellow" | "orange"> = {
+  ctf: "cyan",
+  vulnerability: "red",
+  technique: "green",
+  tool: "purple",
+  lab: "yellow",
+};
+---
+
+<BaseLayout title="Writeups | Jatin Singh">
+  <Navigation />
+  <main class="pt-24 pb-16 px-6">
+    <div class="mx-auto max-w-6xl">
+      <p class="section-heading">// writeups</p>
+      <h1 class="text-4xl md:text-5xl font-bold mb-4">
+        <span class="gradient-text">Security</span> <span class="text-text-primary">Writeups</span>
+      </h1>
+      <p class="text-text-secondary mb-12 max-w-2xl">
+        Detailed walkthroughs, vulnerability analyses, and technique guides from CTF challenges and security research.
+      </p>
+
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+        {writeups.map((writeup) => (
+          <article class="glass-card p-6 flex flex-col group cursor-pointer">
+            <div class="flex items-center gap-2 mb-3">
+              <Badge text={writeup.category} color={categoryColors[writeup.category] || "green"} />
+              <Badge text={writeup.difficulty} color={difficultyColors[writeup.difficulty] || "green"} />
+            </div>
+            <h3 class="text-lg font-bold text-text-primary mb-2 group-hover:text-accent-green transition-colors">
+              {writeup.title}
+            </h3>
+            <p class="text-text-secondary text-sm mb-4 flex-grow leading-relaxed">
+              {writeup.description}
+            </p>
+            <div class="flex flex-wrap gap-2 mb-4">
+              {writeup.tags.map((tag) => (
+                <span class="text-xs font-mono text-text-secondary bg-bg-tertiary px-2 py-1 rounded">
+                  {tag}
+                </span>
+              ))}
+            </div>
+            <div class="flex items-center justify-between">
+              <span class="text-text-secondary text-xs font-mono">{writeup.date}</span>
+              <span class="text-accent-green text-sm font-mono group-hover:underline">
+                Read more &rarr;
+              </span>
+            </div>
+          </article>
+        ))}
+      </div>
+    </div>
+  </main>
+  <Footer />
+</BaseLayout>

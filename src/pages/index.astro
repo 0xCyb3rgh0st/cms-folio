@@ -1,0 +1,67 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Navigation from '../components/Navigation.astro';
+import Hero from '../components/Hero.astro';
+import About from '../components/About.astro';
+import Skills from '../components/Skills.astro';
+import Projects from '../components/Projects.astro';
+import Certifications from '../components/Certifications.astro';
+import BinaryExploitation from '../components/BinaryExploitation.astro';
+import ActiveDirectory from '../components/ActiveDirectory.astro';
+import Tools from '../components/Tools.astro';
+import Writeups from '../components/Writeups.astro';
+import Linux from '../components/Linux.astro';
+import Windows from '../components/Windows.astro';
+import Contact from '../components/Contact.astro';
+import Footer from '../components/Footer.astro';
+---
+
+<BaseLayout>
+  <Navigation />
+  <Hero />
+  <About />
+  <Skills />
+  <Projects />
+  <BinaryExploitation />
+  <ActiveDirectory />
+  <Tools />
+  <Writeups />
+  <Certifications />
+  <Linux />
+  <Windows />
+  <Contact />
+  <Footer />
+</BaseLayout>
+
+<script>
+  const observerOptions = {
+    threshold: 0.1,
+    rootMargin: '0px 0px -50px 0px'
+  };
+
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('animate-in');
+        observer.unobserve(entry.target);
+      }
+    });
+  }, observerOptions);
+
+  document.querySelectorAll('section').forEach(section => {
+    section.classList.add('animate-ready');
+    observer.observe(section);
+  });
+</script>
+
+<style is:global>
+  .animate-ready {
+    opacity: 0;
+    transform: translateY(20px);
+    transition: opacity 0.6s ease, transform 0.6s ease;
+  }
+  .animate-in {
+    opacity: 1;
+    transform: translateY(0);
+  }
+</style>

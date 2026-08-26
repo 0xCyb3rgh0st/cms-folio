@@ -1,0 +1,62 @@
+---
+import Badge from './ui/Badge.astro';
+import Terminal from './ui/Terminal.astro';
+---
+
+<section id="windows" class="py-24 px-6">
+  <div class="mx-auto max-w-6xl">
+    <p class="section-heading">// windows</p>
+    <h2 class="text-3xl md:text-4xl font-bold mb-12">
+      <span class="text-text-primary">Windows</span> <span class="gradient-text">Offense</span>
+    </h2>
+
+    <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+      <div class="space-y-6">
+        <div class="glass-card p-6">
+          <h3 class="font-bold text-text-primary mb-3">AD Attack Surface</h3>
+          <p class="text-text-secondary text-sm mb-3">Deep understanding of Active Directory attack vectors.</p>
+          <div class="flex flex-wrap gap-2">
+            <Badge text="Kerberos" color="purple" />
+            <Badge text="NTLM" color="purple" />
+            <Badge text="GPO" color="cyan" />
+            <Badge text="ACLs" color="green" />
+          </div>
+        </div>
+        <div class="glass-card p-6">
+          <h3 class="font-bold text-text-primary mb-3">Post-Exploitation</h3>
+          <p class="text-text-secondary text-sm mb-3">Windows privilege escalation and persistence techniques.</p>
+          <div class="flex flex-wrap gap-2">
+            <Badge text="Mimikatz" color="red" />
+            <Badge text="Rubeus" color="yellow" />
+            <Badge text="SharpHound" color="cyan" />
+            <Badge text="Certify" color="green" />
+          </div>
+        </div>
+        <div class="glass-card p-6">
+          <h3 class="font-bold text-text-primary mb-3">Defense Evasion</h3>
+          <p class="text-text-secondary text-sm mb-3">Bypassing Windows security controls and EDR solutions.</p>
+          <div class="flex flex-wrap gap-2">
+            <Badge text="AMSI" color="red" />
+            <Badge text="ETW" color="yellow" />
+            <Badge text="AppLocker" color="orange" />
+            <Badge text="WDAC" color="purple" />
+          </div>
+        </div>
+      </div>
+
+      <Terminal title="powershell.exe" command="Get-ADDomain">
+        <div class="space-y-2 text-text-secondary text-xs font-mono">
+          <p><span class="text-accent-cyan">PS C:\&gt;</span> <span class="text-text-primary">Import-Module ActiveDirectory</span></p>
+          <p><span class="text-accent-cyan">PS C:\&gt;</span> <span class="text-accent-green">Get-ADDomain</span></p>
+          <p class="pl-4">DomainSID      : S-1-5-21-...</p>
+          <p class="pl-4">DomainMode     : Windows2016Domain</p>
+          <p class="pl-4">PDCEmulator    : DC01.corp.local</p>
+          <p class="mt-2"><span class="text-accent-cyan">PS C:\&gt;</span> <span class="text-accent-green">Get-DomainUser -SPN</span></p>
+          <p class="pl-4">samaccountname : svc_sql</p>
+          <p class="pl-4">serviceprincipalname : MSSQLSvc/sql01</p>
+          <p class="mt-2"><span class="text-accent-cyan">PS C:\&gt;</span> <span class="text-text-primary animate-pulse">_</span></p>
+        </div>
+      </Terminal>
+    </div>
+  </div>
+</section>

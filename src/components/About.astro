@@ -1,0 +1,54 @@
+---
+import Terminal from './ui/Terminal.astro';
+---
+
+<section id="about" class="py-24 px-6">
+  <div class="mx-auto max-w-6xl">
+    <p class="section-heading">// about</p>
+    <h2 class="text-3xl md:text-4xl font-bold mb-12">
+      <span class="gradient-text">Root</span> <span class="text-text-primary">Access</span>
+    </h2>
+
+    <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+      <Terminal title="jatin@kali:~" command="cat about.txt">
+        <div class="space-y-3 text-text-secondary">
+          <p>
+            <span class="text-accent-green">></span> Cybersecurity enthusiast with a passion for
+            understanding how things work under the hood.
+          </p>
+          <p>
+            <span class="text-accent-green">></span> Experienced in penetration testing, vulnerability
+            research, and exploit development.
+          </p>
+          <p>
+            <span class="text-accent-green">></span> Active CTF player and bug bounty hunter.
+          </p>
+          <p>
+            <span class="text-accent-green">></span> Always learning, always breaking, always improving.
+          </p>
+          <p class="text-accent-green mt-4">$ echo $STATUS</p>
+          <p class="text-accent-cyan">Available for opportunities</p>
+        </div>
+      </Terminal>
+
+      <div class="grid grid-cols-2 gap-4">
+        <div class="glass-card p-6 text-center">
+          <p class="text-3xl font-bold text-accent-green font-mono">10+</p>
+          <p class="text-text-secondary text-sm mt-1">Projects</p>
+        </div>
+        <div class="glass-card p-6 text-center">
+          <p class="text-3xl font-bold text-accent-cyan font-mono">5+</p>
+          <p class="text-text-secondary text-sm mt-1">Certifications</p>
+        </div>
+        <div class="glass-card p-6 text-center">
+          <p class="text-3xl font-bold text-accent-purple font-mono">50+</p>
+          <p class="text-text-secondary text-sm mt-1">Writeups</p>
+        </div>
+        <div class="glass-card p-6 text-center">
+          <p class="text-3xl font-bold text-accent-yellow font-mono">1K+</p>
+          <p class="text-text-secondary text-sm mt-1">CTF Points</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
