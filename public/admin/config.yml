@@ -3,7 +3,6 @@ backend:
   repo: 0xCyb3rgh0st/cms-folio
   branch: main
   base_url: "https://cms-auth.jatinsingh.com.np"
-  auth_token: ""
 
 media_folder: "public/images"
 public_folder: "/images"
