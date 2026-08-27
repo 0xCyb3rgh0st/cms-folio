@@ -1,12 +1,445 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Content Manager | Jatin Singh</title>
-  <style>body{margin:0;padding:0;background:#0a0a0f;}</style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>CMS Admin | Jatin Singh</title>
+  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body { font-family: 'Inter', sans-serif; background: #0a0a0f; color: #e0e0e0; min-height: 100vh; }
+    .container { max-width: 900px; margin: 0 auto; padding: 40px 24px; }
+    h1 { font-size: 2rem; font-weight: 800; margin-bottom: 8px; }
+    h1 span { background: linear-gradient(135deg, #00ff41, #00d4ff); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
+    .subtitle { color: #888; margin-bottom: 32px; font-size: 0.9rem; }
+    
+    .auth-box { background: #12121a; border: 1px solid #1e1e2e; border-radius: 12px; padding: 24px; margin-bottom: 32px; }
+    .auth-box label { display: block; font-size: 0.8rem; color: #00ff41; font-family: 'JetBrains Mono', monospace; text-transform: uppercase; letter-spacing: 0.1em; margin-bottom: 8px; }
+    .auth-box input { width: 100%; padding: 12px 16px; background: #0a0a0f; border: 1px solid #2a2a3a; border-radius: 8px; color: #e0e0e0; font-family: 'JetBrains Mono', monospace; font-size: 0.9rem; }
+    .auth-box input:focus { outline: none; border-color: #00ff41; }
+    .auth-box .hint { font-size: 0.75rem; color: #666; margin-top: 8px; }
+    
+    .tabs { display: flex; gap: 4px; margin-bottom: 24px; border-bottom: 1px solid #1e1e2e; padding-bottom: 4px; }
+    .tab { padding: 10px 20px; background: transparent; border: none; color: #888; font-family: 'JetBrains Mono', monospace; font-size: 0.85rem; cursor: pointer; border-radius: 8px 8px 0 0; transition: all 0.2s; }
+    .tab:hover { color: #e0e0e0; }
+    .tab.active { color: #00ff41; background: #1a1a2e; }
+    
+    .panel { display: none; }
+    .panel.active { display: block; }
+    
+    .card { background: #12121a; border: 1px solid #1e1e2e; border-radius: 12px; padding: 24px; margin-bottom: 16px; }
+    .card h3 { font-size: 1.1rem; margin-bottom: 16px; color: #fff; }
+    
+    .field { margin-bottom: 16px; }
+    .field label { display: block; font-size: 0.8rem; color: #00ff41; font-family: 'JetBrains Mono', monospace; text-transform: uppercase; letter-spacing: 0.1em; margin-bottom: 6px; }
+    .field input, .field textarea, .field select { width: 100%; padding: 10px 14px; background: #0a0a0f; border: 1px solid #2a2a3a; border-radius: 8px; color: #e0e0e0; font-size: 0.9rem; }
+    .field input:focus, .field textarea:focus { outline: none; border-color: #00ff41; }
+    .field textarea { font-family: 'JetBrains Mono', monospace; resize: vertical; min-height: 100px; }
+    
+    .row { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+    
+    .btn { padding: 12px 24px; border: none; border-radius: 8px; font-family: 'JetBrains Mono', monospace; font-size: 0.85rem; font-weight: 600; cursor: pointer; transition: all 0.2s; }
+    .btn-primary { background: #00ff41; color: #0a0a0f; }
+    .btn-primary:hover { background: #00cc33; transform: translateY(-1px); }
+    .btn-secondary { background: #1e1e2e; color: #e0e0e0; border: 1px solid #2a2a3a; }
+    .btn-secondary:hover { border-color: #00ff41; }
+    .btn-danger { background: #ff4444; color: #fff; }
+    .btn-danger:hover { background: #cc0000; }
+    
+    .actions { display: flex; gap: 12px; margin-top: 16px; }
+    
+    .item-list { display: flex; flex-direction: column; gap: 8px; }
+    .item { display: flex; justify-content: space-between; align-items: center; padding: 12px 16px; background: #0a0a0f; border: 1px solid #2a2a3a; border-radius: 8px; cursor: pointer; transition: all 0.2s; }
+    .item:hover { border-color: #00ff41; }
+    .item .title { font-weight: 600; }
+    .item .meta { font-size: 0.8rem; color: #888; font-family: 'JetBrains Mono', monospace; }
+    
+    .status { padding: 8px 16px; border-radius: 8px; font-family: 'JetBrains Mono', monospace; font-size: 0.8rem; margin-bottom: 16px; }
+    .status.success { background: #00ff4115; color: #00ff41; border: 1px solid #00ff4133; }
+    .status.error { background: #ff444415; color: #ff4444; border: 1px solid #ff444433; }
+    .status.info { background: #00d4ff15; color: #00d4ff; border: 1px solid #00d4ff33; }
+    
+    .empty { text-align: center; padding: 40px; color: #666; }
+    .tag { display: inline-block; padding: 2px 8px; background: #1e1e2e; border-radius: 4px; font-size: 0.75rem; font-family: 'JetBrains Mono', monospace; color: #888; margin-right: 4px; }
+  </style>
 </head>
 <body>
-  <script src="https://unpkg.com/decap-cms@^3.0.0/dist/decap-cms.js"></script>
+  <div class="container">
+    <h1><span>CMS</span> Admin</h1>
+    <p class="subtitle">Manage your portfolio content via GitHub API</p>
+    
+    <div class="auth-box">
+      <label>GitHub Personal Access Token</label>
+      <input type="password" id="token" placeholder="ghp_xxxxxxxxxxxx" />
+      <p class="hint">Required: repo scope. Token is stored in localStorage only.</p>
+    </div>
+    
+    <div id="status"></div>
+    
+    <div class="tabs">
+      <button class="tab active" onclick="showTab('projects')">Projects</button>
+      <button class="tab" onclick="showTab('certs')">Certifications</button>
+      <button class="tab" onclick="showTab('writeups')">Writeups</button>
+      <button class="tab" onclick="showTab('config')">Site Config</button>
+    </div>
+    
+    <div id="projects" class="panel active">
+      <div class="card">
+        <h3>Projects</h3>
+        <div id="projects-list" class="item-list"></div>
+        <div class="actions" style="margin-top:16px;">
+          <button class="btn btn-primary" onclick="showProjectForm()">+ Add Project</button>
+        </div>
+      </div>
+    </div>
+    
+    <div id="certs" class="panel">
+      <div class="card">
+        <h3>Certifications</h3>
+        <div id="certs-list" class="item-list"></div>
+        <div class="actions" style="margin-top:16px;">
+          <button class="btn btn-primary" onclick="showCertForm()">+ Add Certification</button>
+        </div>
+      </div>
+    </div>
+    
+    <div id="writeups" class="panel">
+      <div class="card">
+        <h3>Writeups</h3>
+        <div id="writeups-list" class="item-list"></div>
+        <div class="actions" style="margin-top:16px;">
+          <button class="btn btn-primary" onclick="showWriteupForm()">+ Add Writeup</button>
+        </div>
+      </div>
+    </div>
+    
+    <div id="config" class="panel">
+      <div class="card">
+        <h3>Site Configuration</h3>
+        <div id="config-form"></div>
+        <div class="actions" style="margin-top:16px;">
+          <button class="btn btn-primary" onclick="saveConfig()">Save Config</button>
+        </div>
+      </div>
+    </div>
+    
+    <div id="edit-form" style="display:none;"></div>
+  </div>
+
+  <script>
+    const REPO = '0xCyb3rgh0st/cms-folio';
+    const BRANCH = 'main';
+    
+    function getToken() { return document.getElementById('token').value || localStorage.getItem('gh_token'); }
+    function setToken(t) { localStorage.setItem('gh_token', t); document.getElementById('token').value = t; }
+    
+    async function ghFetch(path, method = 'GET', body = null) {
+      const token = getToken();
+      if (!token) { showStatus('error', 'Enter your GitHub token first.'); return null; }
+      const opts = { method, headers: { 'Authorization': `token ${token}`, 'Accept': 'application/vnd.github.v3+json', 'Content-Type': 'application/json' } };
+      if (body) opts.body = JSON.stringify(body);
+      const res = await fetch(`https://api.github.com/repos/${REPO}/contents/${path}?ref=${BRANCH}`, opts);
+      if (!res.ok) { const e = await res.json(); showStatus('error', `GitHub API error: ${e.message}`); return null; }
+      return await res.json();
+    }
+    
+    async function getFile(path) {
+      const data = await ghFetch(path);
+      if (!data) return null;
+      return { content: atob(data.content), sha: data.sha };
+    }
+    
+    async function saveFile(path, content, sha, msg) {
+      const body = { message: msg, content: btoa(unescape(encodeURIComponent(content))), branch: BRANCH };
+      if (sha) body.sha = sha;
+      const data = await ghFetch(path, 'PUT', body);
+      if (data) showStatus('success', 'Saved successfully!');
+      return data;
+    }
+    
+    function showStatus(type, msg) {
+      const el = document.getElementById('status');
+      el.innerHTML = `<div class="status ${type}">${msg}</div>`;
+      setTimeout(() => el.innerHTML = '', 5000);
+    }
+    
+    function showTab(id) {
+      document.querySelectorAll('.panel').forEach(p => p.classList.remove('active'));
+      document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+      document.getElementById(id).classList.add('active');
+      event.target.classList.add('active');
+      document.getElementById('edit-form').style.display = 'none';
+      if (id === 'projects') loadProjects();
+      if (id === 'certs') loadCerts();
+      if (id === 'writeups') loadWriteups();
+      if (id === 'config') loadConfig();
+    }
+    
+    // Projects
+    async function loadProjects() {
+      const el = document.getElementById('projects-list');
+      el.innerHTML = '<div class="empty">Loading...</div>';
+      const file = await getFile('src/components/Projects.astro');
+      if (!file) return;
+      const matches = [...file.content.matchAll(/\{ title: "([^"]+)", desc: "([^"]*)"[^}]*slug: "([^"]+)"[^}]*github: "([^"]*)"/g)];
+      el.innerHTML = matches.length ? matches.map((m, i) => `
+        <div class="item" onclick="editProject(${i})">
+          <div><div class="title">${m[1]}</div><div class="meta">${m[3]} | ${m[4].replace('https://github.com/0xCyb3rgh0st/', '')}</div></div>
+          <span style="color:#00ff41;font-size:0.8rem;">Edit</span>
+        </div>
+      `).join('') : '<div class="empty">No projects found</div>';
+      window._projectsFile = file;
+      window._projectsMatches = matches;
+    }
+    
+    function showProjectForm(data = null) {
+      const el = document.getElementById('edit-form');
+      el.style.display = 'block';
+      el.innerHTML = `
+        <div class="card">
+          <h3>${data ? 'Edit' : 'Add'} Project</h3>
+          <div class="row">
+            <div class="field"><label>Title</label><input id="p-title" value="${data?.title || ''}" /></div>
+            <div class="field"><label>Slug</label><input id="p-slug" value="${data?.slug || ''}" /></div>
+          </div>
+          <div class="field"><label>Description</label><textarea id="p-desc">${data?.desc || ''}</textarea></div>
+          <div class="row">
+            <div class="field"><label>Category</label>
+              <select id="p-cat">
+                <option value="binary-exploitation" ${data?.cat === 'binary-exploitation' ? 'selected' : ''}>Binary Exploitation</option>
+                <option value="reverse-engineering" ${data?.cat === 'reverse-engineering' ? 'selected' : ''}>Reverse Engineering</option>
+                <option value="vulnerability-research" ${data?.cat === 'vulnerability-research' ? 'selected' : ''}>Vulnerability Research</option>
+                <option value="web" ${data?.cat === 'web' ? 'selected' : ''}>Web</option>
+              </select>
+            </div>
+            <div class="field"><label>GitHub URL</label><input id="p-github" value="${data?.github || ''}" /></div>
+          </div>
+          <div class="field"><label>Tags (comma separated)</label><input id="p-tags" value="${data?.tags || ''}" /></div>
+          <div class="field"><label><input type="checkbox" id="p-featured" ${data?.featured ? 'checked' : ''} /> Featured</label></div>
+          <div class="actions">
+            <button class="btn btn-primary" onclick="saveProject()">Save</button>
+            <button class="btn btn-secondary" onclick="document.getElementById('edit-form').style.display='none'">Cancel</button>
+          </div>
+        </div>
+      `;
+      window._editProjectIdx = data?.idx ?? -1;
+    }
+    
+    function editProject(idx) {
+      const m = window._projectsMatches[idx];
+      showProjectForm({
+        title: m[1], desc: m[2], slug: m[3], github: m[4],
+        cat: m[0].match(/cat: "([^"]+)"/)?.[1] || 'binary-exploitation',
+        tags: m[0].match(/tags: \[([^\]]+)\]/)?.[1]?.replace(/"/g, '') || '',
+        featured: m[0].includes('featured: true'),
+        idx
+      });
+    }
+    
+    async function saveProject() {
+      const data = {
+        title: document.getElementById('p-title').value,
+        slug: document.getElementById('p-slug').value,
+        desc: document.getElementById('p-desc').value,
+        cat: document.getElementById('p-cat').value,
+        github: document.getElementById('p-github').value,
+        tags: document.getElementById('p-tags').value,
+        featured: document.getElementById('p-featured').checked
+      };
+      let content = window._projectsFile.content;
+      const tagArr = data.tags.split(',').map(t => `"${t.trim()}"`).join(', ');
+      const newEntry = `{ title: "${data.title}", desc: "${data.desc}", cat: "${data.cat}", tags: [${tagArr}], featured: ${data.featured}, slug: "${data.slug}", github: "${data.github}" }`;
+      
+      if (window._editProjectIdx >= 0) {
+        content = content.replace(window._projectsMatches[window._editProjectIdx][0], newEntry);
+      } else {
+        const insertAfter = 'const projects = [';
+        content = content.replace(insertAfter, insertAfter + '\n  ' + newEntry + ',');
+      }
+      
+      await saveFile('src/components/Projects.astro', content, window._projectsFile.sha, `CMS: update project ${data.title}`);
+      document.getElementById('edit-form').style.display = 'none';
+      loadProjects();
+    }
+    
+    // Certifications
+    async function loadCerts() {
+      const el = document.getElementById('certs-list');
+      el.innerHTML = '<div class="empty">Loading...</div>';
+      const file = await getFile('src/components/Certifications.astro');
+      if (!file) return;
+      const matches = [...file.content.matchAll(/\{ title: "([^"]+)", issuer: "([^"]+)", color: "([^"]+)", verify: "([^"]*)"/g)];
+      el.innerHTML = matches.length ? matches.map((m, i) => `
+        <div class="item" onclick="editCert(${i})">
+          <div><div class="title">${m[1]}</div><div class="meta">${m[2]}</div></div>
+          <span style="color:#00ff41;font-size:0.8rem;">Edit</span>
+        </div>
+      `).join('') : '<div class="empty">No certifications found</div>';
+      window._certsFile = file;
+      window._certsMatches = matches;
+    }
+    
+    function showCertForm(data = null) {
+      const el = document.getElementById('edit-form');
+      el.style.display = 'block';
+      el.innerHTML = `
+        <div class="card">
+          <h3>${data ? 'Edit' : 'Add'} Certification</h3>
+          <div class="row">
+            <div class="field"><label>Title</label><input id="c-title" value="${data?.title || ''}" /></div>
+            <div class="field"><label>Issuer</label><input id="c-issuer" value="${data?.issuer || ''}" /></div>
+          </div>
+          <div class="field"><label>Verification URL</label><input id="c-verify" value="${data?.verify || ''}" /></div>
+          <div class="field"><label>Color</label>
+            <select id="c-color">
+              <option value="var(--green)" ${data?.color === 'var(--green)' ? 'selected' : ''}>Green</option>
+              <option value="var(--cyan)" ${data?.color === 'var(--cyan)' ? 'selected' : ''}>Cyan</option>
+              <option value="var(--purple)" ${data?.color === 'var(--purple)' ? 'selected' : ''}>Purple</option>
+              <option value="var(--yellow)" ${data?.color === 'var(--yellow)' ? 'selected' : ''}>Yellow</option>
+              <option value="var(--red)" ${data?.color === 'var(--red)' ? 'selected' : ''}>Red</option>
+            </select>
+          </div>
+          <div class="actions">
+            <button class="btn btn-primary" onclick="saveCert()">Save</button>
+            <button class="btn btn-secondary" onclick="document.getElementById('edit-form').style.display='none'">Cancel</button>
+          </div>
+        </div>
+      `;
+      window._editCertIdx = data?.idx ?? -1;
+    }
+    
+    function editCert(idx) {
+      const m = window._certsMatches[idx];
+      showCertForm({ title: m[1], issuer: m[2], color: m[3], verify: m[4], idx });
+    }
+    
+    async function saveCert() {
+      const data = {
+        title: document.getElementById('c-title').value,
+        issuer: document.getElementById('c-issuer').value,
+        color: document.getElementById('c-color').value,
+        verify: document.getElementById('c-verify').value
+      };
+      const newEntry = `{ title: "${data.title}", issuer: "${data.issuer}", color: "${data.color}", verify: "${data.verify}" }`;
+      let content = window._certsFile.content;
+      
+      if (window._editCertIdx >= 0) {
+        content = content.replace(window._certsMatches[window._editCertIdx][0], newEntry);
+      } else {
+        const insertAfter = 'const certs = [';
+        content = content.replace(insertAfter, insertAfter + '\n  ' + newEntry + ',');
+      }
+      
+      await saveFile('src/components/Certifications.astro', content, window._certsFile.sha, `CMS: update cert ${data.title}`);
+      document.getElementById('edit-form').style.display = 'none';
+      loadCerts();
+    }
+    
+    // Writeups
+    async function loadWriteups() {
+      const el = document.getElementById('writeups-list');
+      el.innerHTML = '<div class="empty">Loading...</div>';
+      const file = await getFile('src/components/Writeups.astro');
+      if (!file) return;
+      const matches = [...file.content.matchAll(/\{ title: "([^"]+)", date: "([^"]+)", tag: "([^"]+)", slug: "([^"]+)"/g)];
+      el.innerHTML = matches.length ? matches.map((m, i) => `
+        <div class="item" onclick="editWriteup(${i})">
+          <div><div class="title">${m[1]}</div><div class="meta">${m[2]} | ${m[3]}</div></div>
+          <span style="color:#00ff41;font-size:0.8rem;">Edit</span>
+        </div>
+      `).join('') : '<div class="empty">No writeups found</div>';
+      window._writeupsFile = file;
+      window._writeupsMatches = matches;
+    }
+    
+    function showWriteupForm(data = null) {
+      const el = document.getElementById('edit-form');
+      el.style.display = 'block';
+      el.innerHTML = `
+        <div class="card">
+          <h3>${data ? 'Edit' : 'Add'} Writeup</h3>
+          <div class="row">
+            <div class="field"><label>Title</label><input id="w-title" value="${data?.title || ''}" /></div>
+            <div class="field"><label>Slug</label><input id="w-slug" value="${data?.slug || ''}" /></div>
+          </div>
+          <div class="row">
+            <div class="field"><label>Date</label><input type="date" id="w-date" value="${data?.date || ''}" /></div>
+            <div class="field"><label>Tag</label><input id="w-tag" value="${data?.tag || ''}" /></div>
+          </div>
+          <div class="actions">
+            <button class="btn btn-primary" onclick="saveWriteup()">Save</button>
+            <button class="btn btn-secondary" onclick="document.getElementById('edit-form').style.display='none'">Cancel</button>
+          </div>
+        </div>
+      `;
+      window._editWriteupIdx = data?.idx ?? -1;
+    }
+    
+    function editWriteup(idx) {
+      const m = window._writeupsMatches[idx];
+      showWriteupForm({ title: m[1], date: m[2], tag: m[3], slug: m[4], idx });
+    }
+    
+    async function saveWriteup() {
+      const data = {
+        title: document.getElementById('w-title').value,
+        date: document.getElementById('w-date').value,
+        tag: document.getElementById('w-tag').value,
+        slug: document.getElementById('w-slug').value
+      };
+      const newEntry = `{ title: "${data.title}", date: "${data.date}", tag: "${data.tag}", slug: "${data.slug}" }`;
+      let content = window._writeupsFile.content;
+      
+      if (window._editWriteupIdx >= 0) {
+        content = content.replace(window._writeupsMatches[window._editWriteupIdx][0], newEntry);
+      } else {
+        const insertAfter = 'const writeups = [';
+        content = content.replace(insertAfter, insertAfter + '\n  ' + newEntry + ',');
+      }
+      
+      await saveFile('src/components/Writeups.astro', content, window._writeupsFile.sha, `CMS: update writeup ${data.title}`);
+      document.getElementById('edit-form').style.display = 'none';
+      loadWriteups();
+    }
+    
+    // Config
+    async function loadConfig() {
+      const el = document.getElementById('config-form');
+      el.innerHTML = '<div class="empty">Loading...</div>';
+      const file = await getFile('src/content/config.json');
+      if (!file) return;
+      const cfg = JSON.parse(file.content);
+      el.innerHTML = `
+        <div class="field"><label>Site Name</label><input id="cfg-name" value="${cfg.site?.name || ''}" /></div>
+        <div class="field"><label>Description</label><textarea id="cfg-desc">${cfg.site?.description || ''}</textarea></div>
+        <div class="field"><label>Author Name</label><input id="cfg-author" value="${cfg.author?.name || ''}" /></div>
+        <div class="field"><label>Author Bio</label><textarea id="cfg-bio">${cfg.author?.bio || ''}</textarea></div>
+      `;
+      window._configFile = file;
+    }
+    
+    async function saveConfig() {
+      const cfg = {
+        site: {
+          name: document.getElementById('cfg-name').value,
+          description: document.getElementById('cfg-desc').value
+        },
+        author: {
+          name: document.getElementById('cfg-author').value,
+          bio: document.getElementById('cfg-bio').value
+        }
+      };
+      await saveFile('src/content/config.json', JSON.stringify(cfg, null, 2), window._configFile.sha, 'CMS: update site config');
+    }
+    
+    // Init
+    const saved = localStorage.getItem('gh_token');
+    if (saved) document.getElementById('token').value = saved;
+    document.getElementById('token').addEventListener('change', (e) => {
+      localStorage.setItem('gh_token', e.target.value);
+    });
+    
+    if (saved) loadProjects();
+  </script>
 </body>
 </html>
