@@ -1,10 +1,10 @@
 ---
 const certs = [
-  { title: "CRTO", issuer: "Zero-Point Security", color: "var(--red)", verify: "https://certs.zeropointsecurity.co.uk/47b1d1bc-721c-4648-8674-78059cb6b67a#acc.ZC8uI47n" },
-  { title: "CPTS", issuer: "Hack The Box", color: "var(--cyan)", verify: "https://www.hackthebox.com/certificates/validate", validateHint: "Go to hackthebox.com/certificates/validate — Name: Jatin Singh Tomar — Code: HTBCERT-FB4BFC0460" },
-  { title: "eWPTXv3", issuer: "INE Security", color: "var(--green)", verify: "https://certs.ine.com/865223f9-11cc-433c-87f3-b62458b4fa65#acc.7bNOikDT" },
-  { title: "CRTA", issuer: "Zero-Point Security", color: "var(--yellow)", verify: "http://credential.net/7e3ffd1f-07f5-411d-af1e-42ef68c5c3df#acc.3xWTP9nd" },
-  { title: "ACP", issuer: "APIsec", color: "var(--purple)", verify: "https://www.credly.com/badges/f34cf451-ab6d-40a7-bec6-bc17630d523d/" },
+  { title: "CRTO", issuer: "Zero-Point Security", color: "var(--red)", verify: "https://certs.zeropointsecurity.co.uk/47b1d1bc-721c-4648-8674-78059cb6b67a#acc.ZC8uI47n", icon: "ZER" },
+  { title: "CPTS", issuer: "Hack The Box", color: "var(--cyan)", verify: "https://www.hackthebox.com/certificates/validate", validateHint: "Go to hackthebox.com/certificates/validate — Name: Jatin Singh Tomar — Code: HTBCERT-FB4BFC0460", icon: "HTB" },
+  { title: "eWPTXv3", issuer: "INE Security", color: "var(--green)", verify: "https://certs.ine.com/865223f9-11cc-433c-87f3-b62458b4fa65#acc.7bNOikDT", icon: "INE" },
+  { title: "CRTA", issuer: "Zero-Point Security", color: "var(--yellow)", verify: "http://credential.net/7e3ffd1f-07f5-411d-af1e-42ef68c5c3df#acc.3xWTP9nd", icon: "ZER" },
+  { title: "ACP", issuer: "APIsec", color: "var(--purple)", verify: "https://www.credly.com/badges/f34cf451-ab6d-40a7-bec6-bc17630d523d/", icon: "API" },
 ];
 ---
 <section id="certifications" style="padding:96px 24px;">
@@ -13,26 +13,28 @@ const certs = [
     <h2 style="font-size:clamp(1.75rem,4vw,2.5rem);font-weight:700;margin-bottom:48px;">
       <span style="color:var(--text);">Verified </span><span style="background:linear-gradient(135deg,var(--green),var(--cyan));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;">Credentials</span>
     </h2>
-    <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:20px;">
+    <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:16px;">
       {certs.map((c) => (
-        <a href={c.verify} target="_blank" rel="noopener" style="text-decoration:none;display:block;background:var(--bg-card);border:1px solid var(--border);border-radius:12px;padding:20px;transition:all 0.3s;" onmouseover="this.style.borderColor='var(--green)'" onmouseout="this.style.borderColor='var(--border)'">
-          <div style="display:flex;align-items:center;gap:16px;">
-            <div style={`width:56px;height:56px;border-radius:12px;display:flex;align-items:center;justify-content:center;font-family:'JetBrains Mono',monospace;font-weight:700;font-size:0.8rem;background:${c.color}15;color:${c.color};border:1px solid ${c.color}33;flex-shrink:0;`}>
-              {c.title.substring(0, 3)}
-            </div>
-            <div>
-              <h3 style="font-weight:700;color:var(--text);font-size:0.95rem;">{c.title}</h3>
-              <p style="color:var(--text-muted);font-size:0.8rem;">{c.issuer}</p>
-              <p style="color:var(--green);font-size:0.7rem;font-family:'JetBrains Mono',monospace;margin-top:4px;">{c.validateHint ? 'Validate' : 'Verify'} &rarr;</p>
-            </div>
+        <a href={c.verify} target="_blank" rel="noopener" style="text-decoration:none;display:block;background:var(--bg-card);border:1px solid var(--border);border-radius:16px;padding:24px 20px;text-align:center;transition:all 0.3s;position:relative;overflow:hidden;" onmouseover="this.style.borderColor='var(--green)';this.style.transform='translateY(-4px)'" onmouseout="this.style.borderColor='var(--border)';this.style.transform='none'">
+          <div style={`width:64px;height:64px;border-radius:16px;display:flex;align-items:center;justify-content:center;font-family:'JetBrains Mono',monospace;font-weight:700;font-size:0.9rem;background:${c.color}15;color:${c.color};border:2px solid ${c.color}33;margin:0 auto 16px;`}>
+            {c.icon}
           </div>
+          <h3 style="font-weight:700;color:var(--text);font-size:1rem;margin-bottom:4px;">{c.title}</h3>
+          <p style="color:var(--text-muted);font-size:0.8rem;margin-bottom:12px;">{c.issuer}</p>
+          {c.validateHint ? (
+            <div style="font-size:0.7rem;font-family:'JetBrains Mono',monospace;color:var(--green);background:var(--bg-tertiary);padding:6px 12px;border-radius:6px;display:inline-block;">
+              Validate &rarr;
+            </div>
+          ) : (
+            <div style="font-size:0.7rem;font-family:'JetBrains Mono',monospace;color:var(--green);background:var(--bg-tertiary);padding:6px 12px;border-radius:6px;display:inline-block;">
+              Verify &rarr;
+            </div>
+          )}
           {c.validateHint && (
-            <div style="margin-top:12px;padding:12px;background:var(--bg-tertiary);border-radius:8px;border:1px solid var(--border);">
-              <p style="font-size:0.75rem;font-family:'JetBrains Mono',monospace;color:var(--text-muted);line-height:1.6;">
-                {c.validateHint.split(' — ').map((part, i) => (
-                  <span>{i > 0 && <br />}{part}</span>
-                ))}
-              </p>
+            <div style="position:absolute;bottom:0;left:0;right:0;background:var(--bg-card);border-top:1px solid var(--border);padding:12px;font-size:0.7rem;font-family:'JetBrains Mono',monospace;color:var(--text-muted);line-height:1.6;text-align:left;transform:translateY(100%);transition:transform 0.3s;z-index:10;" class="cert-details">
+              {c.validateHint.split(' — ').map((part, i) => (
+                <span>{i > 0 && <br />}{part}</span>
+              ))}
             </div>
           )}
         </a>
@@ -40,3 +42,9 @@ const certs = [
     </div>
   </div>
 </section>
+
+<style>
+  a:hover .cert-details {
+    transform: translateY(0) !important;
+  }
+</style>
