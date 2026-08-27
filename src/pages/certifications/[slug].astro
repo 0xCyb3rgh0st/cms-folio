@@ -8,8 +8,8 @@ export function getStaticPaths() {
     { params: { slug: 'crto' }, props: { title: 'CRTO', issuer: 'Zero-Point Security', color: 'var(--red)', icon: 'ZER', verifyUrl: 'https://certs.zeropointsecurity.co.uk/47b1d1bc-721c-4648-8674-78059cb6b67a#acc.ZC8uI47n', embedUrl: 'https://certs.zeropointsecurity.co.uk/47b1d1bc-721c-4648-8674-78059cb6b67a#acc.ZC8uI47n' } },
     { params: { slug: 'cpts' }, props: { title: 'CPTS', issuer: 'Hack The Box', color: 'var(--cyan)', icon: 'HTB', verifyUrl: 'https://www.hackthebox.com/certificates', embedUrl: null, validateHint: 'Go to hackthebox.com/certificates — Name: Jatin Singh Tomar — Code: HTBCERT-FB4BFC0460' } },
     { params: { slug: 'ewptxv3' }, props: { title: 'eWPTXv3', issuer: 'INE Security', color: 'var(--green)', icon: 'INE', verifyUrl: 'https://certs.ine.com/865223f9-11cc-433c-87f3-b62458b4fa65#acc.7bNOikDT', embedUrl: 'https://certs.ine.com/865223f9-11cc-433c-87f3-b62458b4fa65#acc.7bNOikDT' } },
-    { params: { slug: 'crta' }, props: { title: 'CRTA', issuer: 'Zero-Point Security', color: 'var(--yellow)', icon: 'ZER', verifyUrl: 'http://credential.net/7e3ffd1f-07f5-411d-af1e-42ef68c5c3df#acc.3xWTP9nd', embedUrl: 'http://credential.net/7e3ffd1f-07f5-411d-af1e-42ef68c5c3df#acc.3xWTP9nd' } },
-    { params: { slug: 'acp' }, props: { title: 'ACP', issuer: 'APIsec', color: 'var(--purple)', icon: 'API', verifyUrl: 'https://www.credly.com/badges/f34cf451-ab6d-40a7-bec6-bc17630d523d/', embedUrl: 'https://www.credly.com/badges/f34cf451-ab6d-40a7-bec6-bc17630d523d/embed' } },
+    { params: { slug: 'crta' }, props: { title: 'CRTA', issuer: 'Zero-Point Security', color: 'var(--yellow)', icon: 'ZER', verifyUrl: 'http://credential.net/7e3ffd1f-07f5-411d-af1e-42ef68c5c3df#acc.3xWTP9nd', embedUrl: null } },
+    { params: { slug: 'acp' }, props: { title: 'ACP', issuer: 'APIsec', color: 'var(--purple)', icon: 'API', verifyUrl: 'https://www.credly.com/badges/f34cf451-ab6d-40a7-bec6-bc17630d523d/', embedUrl: null } },
   ];
 }
 
@@ -34,22 +34,43 @@ const { title, issuer, color, icon, verifyUrl, embedUrl, validateHint } = Astro.
       </div>
 
       {embedUrl ? (
-        <div id="cert-embed" style="background:var(--bg-card);border:1px solid var(--border);border-radius:16px;overflow:hidden;margin-bottom:32px;">
-          <div style="padding:16px 20px;border-bottom:1px solid var(--border);display:flex;justify-content:space-between;align-items:center;">
+        <div style="background:var(--bg-card);border:1px solid var(--border);border-radius:16px;overflow:hidden;margin-bottom:32px;">
+          <div id="cert-header" style="padding:16px 20px;border-bottom:1px solid var(--border);display:flex;justify-content:space-between;align-items:center;">
             <span style="font-family:'JetBrains Mono',monospace;font-size:0.8rem;color:var(--text-muted);">Certificate Preview</span>
             <a href={verifyUrl} target="_blank" rel="noopener" style="display:inline-flex;align-items:center;gap:6px;padding:8px 16px;background:var(--green);color:#0a0a0f;border-radius:8px;font-family:'JetBrains Mono',monospace;font-size:0.8rem;font-weight:600;text-decoration:none;transition:all 0.2s;" onmouseover="this.style.opacity='0.8'" onmouseout="this.style.opacity='1'">
               <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
               Open Fullscreen
             </a>
           </div>
-          <iframe src={embedUrl} id="cert-iframe" style="width:100%;height:600px;border:none;background:#fff;" title={`${title} Certificate`} onload="this.style.display='block'" onerror="document.getElementById('cert-fallback').style.display='block';this.style.display='none';document.querySelector('#cert-embed .cert-header').style.display='none'"></iframe>
-          <div id="cert-fallback" style="display:none;padding:60px 20px;text-align:center;">
+          <div id="cert-iframe-wrap" style="position:relative;display:none;">
+            <iframe src={embedUrl} id="cert-iframe" style="width:100%;height:600px;border:none;background:#fff;" title={`${title} Certificate`}></iframe>
+          </div>
+          <div id="cert-fallback" style="padding:60px 20px;text-align:center;">
             <p style="color:var(--text-muted);margin-bottom:20px;">Certificate preview unavailable in iframe.</p>
             <a href={verifyUrl} target="_blank" rel="noopener" style="display:inline-flex;align-items:center;gap:8px;padding:14px 28px;background:var(--green);color:#0a0a0f;border-radius:10px;font-family:'JetBrains Mono',monospace;font-size:0.9rem;font-weight:700;text-decoration:none;">
               <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
               View Certificate
             </a>
           </div>
+          <script>
+            (function() {
+              var iframe = document.getElementById('cert-iframe');
+              var wrap = document.getElementById('cert-iframe-wrap');
+              var fallback = document.getElementById('cert-fallback');
+              var loaded = false;
+              iframe.onload = function() {
+                loaded = true;
+                wrap.style.display = 'block';
+                fallback.style.display = 'none';
+              };
+              setTimeout(function() {
+                if (!loaded) {
+                  wrap.style.display = 'none';
+                  fallback.style.display = 'block';
+                }
+              }, 5000);
+            })();
+          </script>
         </div>
       ) : validateHint ? (
         <div style="background:var(--bg-card);border:1px solid var(--border);border-radius:16px;padding:40px;margin-bottom:32px;text-align:center;">
