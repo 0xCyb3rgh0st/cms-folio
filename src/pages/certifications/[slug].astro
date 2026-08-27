@@ -34,7 +34,7 @@ const { title, issuer, color, icon, verifyUrl, embedUrl, validateHint } = Astro.
       </div>
 
       {embedUrl ? (
-        <div style="background:var(--bg-card);border:1px solid var(--border);border-radius:16px;overflow:hidden;margin-bottom:32px;">
+        <div id="cert-embed" style="background:var(--bg-card);border:1px solid var(--border);border-radius:16px;overflow:hidden;margin-bottom:32px;">
           <div style="padding:16px 20px;border-bottom:1px solid var(--border);display:flex;justify-content:space-between;align-items:center;">
             <span style="font-family:'JetBrains Mono',monospace;font-size:0.8rem;color:var(--text-muted);">Certificate Preview</span>
             <a href={verifyUrl} target="_blank" rel="noopener" style="display:inline-flex;align-items:center;gap:6px;padding:8px 16px;background:var(--green);color:#0a0a0f;border-radius:8px;font-family:'JetBrains Mono',monospace;font-size:0.8rem;font-weight:600;text-decoration:none;transition:all 0.2s;" onmouseover="this.style.opacity='0.8'" onmouseout="this.style.opacity='1'">
@@ -42,7 +42,14 @@ const { title, issuer, color, icon, verifyUrl, embedUrl, validateHint } = Astro.
               Open Fullscreen
             </a>
           </div>
-          <iframe src={embedUrl} style="width:100%;height:600px;border:none;background:#fff;" title={`${title} Certificate`}></iframe>
+          <iframe src={embedUrl} id="cert-iframe" style="width:100%;height:600px;border:none;background:#fff;" title={`${title} Certificate`} onload="this.style.display='block'" onerror="document.getElementById('cert-fallback').style.display='block';this.style.display='none';document.querySelector('#cert-embed .cert-header').style.display='none'"></iframe>
+          <div id="cert-fallback" style="display:none;padding:60px 20px;text-align:center;">
+            <p style="color:var(--text-muted);margin-bottom:20px;">Certificate preview unavailable in iframe.</p>
+            <a href={verifyUrl} target="_blank" rel="noopener" style="display:inline-flex;align-items:center;gap:8px;padding:14px 28px;background:var(--green);color:#0a0a0f;border-radius:10px;font-family:'JetBrains Mono',monospace;font-size:0.9rem;font-weight:700;text-decoration:none;">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+              View Certificate
+            </a>
+          </div>
         </div>
       ) : validateHint ? (
         <div style="background:var(--bg-card);border:1px solid var(--border);border-radius:16px;padding:40px;margin-bottom:32px;text-align:center;">
