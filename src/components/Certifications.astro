@@ -1,10 +1,10 @@
 ---
 const certs = [
-  { title: "CRTO", issuer: "Zero-Point Security", color: "var(--red)" },
-  { title: "CPTS", issuer: "Hack The Box", color: "var(--cyan)" },
-  { title: "eWPTXv3", issuer: "INE Security", color: "var(--green)" },
-  { title: "CRTA", issuer: "Zero-Point Security", color: "var(--yellow)" },
-  { title: "ACP", issuer: "Pentester Academy", color: "var(--purple)" },
+  { title: "CRTO", issuer: "Zero-Point Security", color: "var(--red)", verify: "https://certs.zeropointsecurity.co.uk/47b1d1bc-721c-4648-8674-78059cb6b67a#acc.ZC8uI47n" },
+  { title: "CPTS", issuer: "Hack The Box", color: "var(--cyan)", verify: "https://www.hackthebox.com/certificates/HTBCERT-FB4BFC0460" },
+  { title: "eWPTXv3", issuer: "INE Security", color: "var(--green)", verify: "https://certs.ine.com/865223f9-11cc-433c-87f3-b62458b4fa65#acc.7bNOikDT" },
+  { title: "CRTA", issuer: "Zero-Point Security", color: "var(--yellow)", verify: "http://credential.net/7e3ffd1f-07f5-411d-af1e-42ef68c5c3df#acc.3xWTP9nd" },
+  { title: "ACP", issuer: "APIsec", color: "var(--purple)", verify: "https://www.credly.com/badges/f34cf451-ab6d-40a7-bec6-bc17630d523d/" },
 ];
 ---
 <section id="certifications" style="padding:96px 24px;">
@@ -15,15 +15,16 @@ const certs = [
     </h2>
     <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:20px;">
       {certs.map((c) => (
-        <div style="background:var(--bg-card);border:1px solid var(--border);border-radius:12px;padding:20px;display:flex;align-items:center;gap:16px;transition:all 0.3s;" onmouseover="this.style.borderColor='var(--green)'" onmouseout="this.style.borderColor='var(--border)'">
+        <a href={c.verify} target="_blank" rel="noopener" style="text-decoration:none;display:block;background:var(--bg-card);border:1px solid var(--border);border-radius:12px;padding:20px;display:flex;align-items:center;gap:16px;transition:all 0.3s;" onmouseover="this.style.borderColor='var(--green)'" onmouseout="this.style.borderColor='var(--border)'">
           <div style={`width:56px;height:56px;border-radius:12px;display:flex;align-items:center;justify-content:center;font-family:'JetBrains Mono',monospace;font-weight:700;font-size:0.8rem;background:${c.color}15;color:${c.color};border:1px solid ${c.color}33;flex-shrink:0;`}>
             {c.title.substring(0, 3)}
           </div>
           <div>
             <h3 style="font-weight:700;color:var(--text);font-size:0.95rem;">{c.title}</h3>
             <p style="color:var(--text-muted);font-size:0.8rem;">{c.issuer}</p>
+            <p style="color:var(--green);font-size:0.7rem;font-family:'JetBrains Mono',monospace;margin-top:4px;">Verify &rarr;</p>
           </div>
-        </div>
+        </a>
       ))}
     </div>
   </div>
