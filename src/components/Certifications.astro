@@ -1,11 +1,10 @@
 ---
 const certs = [
-  { title: "eJPT", issuer: "INE Security", date: "2024", color: "var(--green)" },
-  { title: "Security+", issuer: "CompTIA", date: "2024", color: "var(--cyan)" },
-  { title: "CRTP", issuer: "Pentester Academy", date: "2024", color: "var(--purple)" },
-  { title: "BTL1", issuer: "Security Blue Team", date: "2023", color: "var(--green)" },
-  { title: "CTF Champ", issuer: "Local CTF", date: "2024", color: "var(--yellow)" },
-  { title: "AWS Cloud", issuer: "AWS", date: "2023", color: "var(--orange)" },
+  { title: "CRTO", issuer: "Zero-Point Security", color: "var(--red)" },
+  { title: "CPTS", issuer: "Hack The Box", color: "var(--cyan)" },
+  { title: "eWPTXv3", issuer: "INE Security", color: "var(--green)" },
+  { title: "CRTA", issuer: "Zero-Point Security", color: "var(--yellow)" },
+  { title: "ACP", issuer: "Pentester Academy", color: "var(--purple)" },
 ];
 ---
 <section id="certifications" style="padding:96px 24px;">
@@ -23,7 +22,6 @@ const certs = [
           <div>
             <h3 style="font-weight:700;color:var(--text);font-size:0.95rem;">{c.title}</h3>
             <p style="color:var(--text-muted);font-size:0.8rem;">{c.issuer}</p>
-            <p style="color:var(--text-muted);font-size:0.7rem;font-family:'JetBrains Mono',monospace;margin-top:2px;">{c.date}</p>
           </div>
         </div>
       ))}

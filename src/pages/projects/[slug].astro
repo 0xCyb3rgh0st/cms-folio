@@ -1,0 +1,134 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import Navigation from '../../components/Navigation.astro';
+import Footer from '../../components/Footer.astro';
+
+const projects = {
+  pwnlibc: {
+    title: "pwnlibc",
+    description: "Advanced libc identification toolkit for exploit development.",
+    cat: "binary-exploitation",
+    tags: ["Python", "Exploit Dev", "CLI", "libc"],
+    features: ["Fast libc identification from leaked addresses", "Automatic libc download from remote databases", "Symbol lookup and offset calculation", "Python API for integration", "CLI interface for quick usage"],
+    tech: ["Python 3.10+", "requests", "argparse", "rich"],
+    install: "pip install pwnlibc",
+    usage: "pwnlibc identify 0x7f123456\npwnlibc lookup system\npwnlibc download libc6_2.31",
+  },
+  "ghidra-open": {
+    title: "ghidra-open",
+    description: "One-command launcher for Ghidra. Binary → Automatic Project → Headless Analysis → Launch GUI.",
+    cat: "reverse-engineering",
+    tags: ["Ghidra", "Automation", "Java", "Binary"],
+    features: ["One-command Ghidra project creation", "Automatic headless analysis on import", "GUI launches after analysis completes", "Script integration support", "Cross-platform compatibility"],
+    tech: ["Bash", "Java", "Ghidra Scripts", "Python"],
+    install: "git clone https://github.com/0xCyb3rgh0st/ghidra-open",
+    usage: "ghidra-open ./target_binary\nghidra-open --headless-only ./binary\nghidra-open --script my_script.py ./binary",
+  },
+  vulnos: {
+    title: "VulnOS",
+    description: "An open-source workspace for vulnerability research. In Development.",
+    cat: "vulnerability-research",
+    tags: ["Python", "AI", "Workspace", "Vuln Research"],
+    features: ["Workspace management with targets and findings", "Evidence and notes organization", "Reverse engineering integration", "AI-assisted vulnerability analysis", "Report generation", "Plugin system"],
+    tech: ["Python", "PostgreSQL", "Docker", "OpenAI API"],
+    install: "Coming soon...",
+    usage: "vulnos init my-research\nvulnos target add --name target1 --ip 10.10.10.1\nvulnos finding add --title 'SQL Injection' --severity high",
+  },
+};
+
+export function getStaticPaths() {
+  return [
+    { params: { slug: 'pwnlibc' } },
+    { params: { slug: 'ghidra-open' } },
+    { params: { slug: 'vulnos' } },
+  ];
+}
+
+const { slug } = Astro.params;
+const project = projects[slug as keyof typeof projects];
+
+if (!project) {
+  return Astro.redirect('/projects');
+}
+
+const catColors: Record<string, string> = { "binary-exploitation": "var(--green)", "reverse-engineering": "var(--cyan)", "vulnerability-research": "var(--purple)" };
+---
+<BaseLayout title={`${project.title} | Jatin Singh`}>
+  <Navigation />
+  <main style="padding-top:120px;padding-bottom:64px;">
+    <div style="max-width:800px;margin:0 auto;padding:0 24px;">
+      <a href="/projects" style="color:var(--green);font-family:'JetBrains Mono',monospace;font-size:0.875rem;text-decoration:none;margin-bottom:24px;display:inline-block;">
+        &larr; Back to Projects
+      </a>
+
+      <div style="margin-bottom:32px;">
+        <span style={`display:inline-flex;padding:4px 12px;font-size:0.75rem;font-family:'JetBrains Mono',monospace;border-radius:4px;background:${catColors[project.cat]}15;color:${catColors[project.cat]};border:1px solid ${catColors[project.cat]}33;text-transform:capitalize;margin-bottom:16px;`}>
+          {project.cat.replace("-", " ")}
+        </span>
+        <h1 style="font-size:2.5rem;font-weight:800;color:var(--text);margin-bottom:8px;">{project.title}</h1>
+        <p style="font-size:1.125rem;color:var(--text-muted);line-height:1.6;">{project.description}</p>
+      </div>
+
+      <div style="display:flex;flex-wrap:wrap;gap:8px;margin-bottom:40px;">
+        {project.tags.map((t) => (
+          <span style="display:inline-flex;padding:4px 12px;font-size:0.75rem;font-family:'JetBrains Mono',monospace;border-radius:6px;background:var(--bg-tertiary);color:var(--text-muted);border:1px solid var(--border);">{t}</span>
+        ))}
+      </div>
+
+      <section style="margin-bottom:40px;">
+        <h2 style="font-size:1.5rem;font-weight:700;color:var(--text);margin-bottom:16px;font-family:'JetBrains Mono',monospace;">
+          <span style="color:var(--green);">//</span> Features
+        </h2>
+        <ul style="list-style:none;display:flex;flex-direction:column;gap:12px;">
+          {project.features.map((f) => (
+            <li style="display:flex;align-items:flex-start;gap:12px;color:var(--text-muted);line-height:1.6;">
+              <span style="color:var(--green);margin-top:4px;flex-shrink:0;">&#10003;</span>
+              {f}
+            </li>
+          ))}
+        </ul>
+      </section>
+
+      <section style="margin-bottom:40px;">
+        <h2 style="font-size:1.5rem;font-weight:700;color:var(--text);margin-bottom:16px;font-family:'JetBrains Mono',monospace;">
+          <span style="color:var(--green);">//</span> Tech Stack
+        </h2>
+        <div style="display:flex;flex-wrap:wrap;gap:8px;">
+          {project.tech.map((t) => (
+            <span style="display:inline-flex;padding:6px 14px;font-size:0.8rem;font-family:'JetBrains Mono',monospace;border-radius:6px;background:var(--bg-card);color:var(--text);border:1px solid var(--border);">{t}</span>
+          ))}
+        </div>
+      </section>
+
+      <section style="margin-bottom:40px;">
+        <h2 style="font-size:1.5rem;font-weight:700;color:var(--text);margin-bottom:16px;font-family:'JetBrains Mono',monospace;">
+          <span style="color:var(--green);">//</span> Install
+        </h2>
+        <div style="background:var(--bg-secondary);border:1px solid var(--border);border-radius:12px;padding:20px;font-family:'JetBrains Mono',monospace;font-size:0.875rem;">
+          <p style="color:var(--green);">$ {project.install}</p>
+        </div>
+      </section>
+
+      <section style="margin-bottom:40px;">
+        <h2 style="font-size:1.5rem;font-weight:700;color:var(--text);margin-bottom:16px;font-family:'JetBrains Mono',monospace;">
+          <span style="color:var(--green);">//</span> Usage
+        </h2>
+        <div style="background:var(--bg-secondary);border:1px solid var(--border);border-radius:12px;padding:20px;font-family:'JetBrains Mono',monospace;font-size:0.875rem;line-height:2;">
+          {project.usage.split('\n').map((line) => (
+            <p><span style="color:var(--green);">$</span> <span style="color:var(--cyan);">{line}</span></p>
+          ))}
+        </div>
+      </section>
+
+      <div style="display:flex;gap:16px;flex-wrap:wrap;">
+        <a href="https://github.com/0xCyb3rgh0st" target="_blank" style="display:inline-flex;align-items:center;gap:8px;padding:12px 24px;background:var(--green);color:var(--bg-primary);font-family:'JetBrains Mono',monospace;font-weight:700;border-radius:8px;text-decoration:none;font-size:0.9rem;">
+          View on GitHub
+        </a>
+        <a href="/projects" style="display:inline-flex;align-items:center;gap:8px;padding:12px 24px;border:1px solid var(--border);color:var(--text-muted);font-family:'JetBrains Mono',monospace;border-radius:8px;text-decoration:none;font-size:0.9rem;">
+          All Projects
+        </a>
+      </div>
+    </div>
+  </main>
+  <Footer />
+</BaseLayout>

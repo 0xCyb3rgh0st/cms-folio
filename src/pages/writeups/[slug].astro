@@ -1,0 +1,228 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import Navigation from '../../components/Navigation.astro';
+import Footer from '../../components/Footer.astro';
+
+const writeups = {
+  "pwnlibc-deep-dive": {
+    title: "pwnlibc: Building a libc identification tool",
+    description: "Deep dive into how pwnlibc identifies libc versions from leaked addresses.",
+    cat: "technique",
+    diff: "hard",
+    date: "2024-08-01",
+    tags: ["Python", "Exploit Dev", "libc"],
+    content: `
+## Why pwnlibc?
+
+When exploiting buffer overflows on modern Linux systems, you need to know the exact libc version to calculate offsets. Traditionally, this involved manually searching database websites. pwnlibc automates this entire process.
+
+## How It Works
+
+1. Extract leaked address from target
+2. Hash the lower 12 bits against known libc databases
+3. Match and identify the exact libc version
+4. Automatically download the matching libc
+5. Calculate all needed offsets
+
+## Architecture
+
+\`\`\`
+pwnlibc/
+├── core/
+│   ├── identifier.py    # Main identification logic
+│   ├── database.py      # Remote database queries
+│   └── downloader.py    # Automatic libc download
+├── api/
+│   └── client.py        # Python API
+└── cli/
+    └── main.py          # CLI interface
+\`\`\`
+
+## Key Challenges
+
+- Handling partial leaks (only lower bits)
+- Supporting multiple libc databases
+- Race conditions in database queries
+- Cross-platform compatibility
+    `,
+  },
+  "ghidra-open-automation": {
+    title: "Ghidra Automation with ghidra-open",
+    description: "How ghidra-open eliminates repetitive Ghidra setup.",
+    cat: "tool",
+    diff: "medium",
+    date: "2024-07-15",
+    tags: ["Ghidra", "Automation", "Java"],
+    content: `
+## The Problem
+
+Every time you open a binary in Ghidra, you:
+1. Create a new project
+2. Import the binary
+3. Wait for auto-analysis
+4. Open the GUI
+
+This gets tedious when analyzing many binaries.
+
+## The Solution
+
+ghidra-open does it all in one command:
+
+\`\`\`bash
+ghidra-open ./target_binary
+\`\`\`
+
+This automatically:
+- Creates a Ghidra project
+- Imports the binary
+- Runs headless analysis
+- Launches the GUI when ready
+
+## Implementation
+
+Uses Ghidra's headless analyzer API:
+- \`analyzeHeadless\` for background processing
+- Ghidra scripts for custom analysis
+- Shell wrapper for CLI integration
+    `,
+  },
+  "ad-attack-automation": {
+    title: "AD Attack Path Automation",
+    description: "Automating Active Directory attack paths from enumeration to domain compromise.",
+    cat: "technique",
+    diff: "hard",
+    date: "2024-06-20",
+    tags: ["AD", "BloodHound", "Impacket"],
+    content: `
+## Overview
+
+Active Directory environments contain complex attack paths that can be difficult to identify manually. This writeup covers automating the entire attack lifecycle.
+
+## Enumeration Phase
+
+\`\`\`bash
+# BloodHound collection
+bloodhound-python -u user -p pass -d corp.local -ns 10.10.10.1 -c all
+
+# Certificate enumeration
+certipy find -u user@corp.local -p Pass123 -dc-ip 10.10.10.1
+\`\`\`
+
+## Attack Techniques
+
+1. **Kerberoasting** - Request TGS tickets for offline cracking
+2. **AS-REP Roasting** - Target accounts with pre-auth disabled
+3. **Certificate Abuse** - Exploit misconfigured ADCS templates
+4. **Delegation Attacks** - Abuse unconstrained/constrained delegation
+
+## Automation
+
+Using Impacket for scripted attacks:
+\`\`\`python
+from impacket.krb5.kerberosv5 import getTGT
+from impacket.smbconnection import SMBConnection
+\`\`\`
+    `,
+  },
+  "heap-exploitation-guide": {
+    title: "Heap Exploitation Techniques",
+    description: "Comprehensive guide to modern heap exploitation.",
+    cat: "technique",
+    diff: "insane",
+    date: "2024-05-10",
+    tags: ["Pwn", "Heap", "Linux"],
+    content: `
+## Modern Heap Internals
+
+Understanding glibc malloc internals is essential for heap exploitation.
+
+## Key Techniques
+
+### Tcache Poisoning
+- Corrupt tcache chunk fd pointer
+- Allocate chunk at arbitrary address
+- Overwrite __free_hook or similar
+
+### House of techniques
+- House of Force
+- House of Spirit
+- House of Orange
+- House of Lore
+
+## Practical Example
+
+\`\`\`python
+from pwn import *
+
+# Corrupt tcache fd
+payload = b'A' * 0x20
+payload += p64(0)      # prev_size
+payload += p64(0x91)   # size
+payload += p64(target)  # fd pointer
+\`\`\`
+    `,
+  },
+};
+
+export function getStaticPaths() {
+  return [
+    { params: { slug: 'pwnlibc-deep-dive' } },
+    { params: { slug: 'ghidra-open-automation' } },
+    { params: { slug: 'ad-attack-automation' } },
+    { params: { slug: 'heap-exploitation-guide' } },
+  ];
+}
+
+const { slug } = Astro.params;
+const writeup = writeups[slug as keyof typeof writeups];
+
+if (!writeup) {
+  return Astro.redirect('/writeups');
+}
+
+const diffColors: Record<string, string> = { easy: "var(--green)", medium: "var(--yellow)", hard: "var(--red)", insane: "var(--purple)" };
+const catColors: Record<string, string> = { ctf: "var(--cyan)", vulnerability: "var(--red)", technique: "var(--green)", tool: "var(--purple)", lab: "var(--yellow)" };
+---
+<BaseLayout title={`${writeup.title} | Jatin Singh`}>
+  <Navigation />
+  <main style="padding-top:120px;padding-bottom:64px;">
+    <div style="max-width:800px;margin:0 auto;padding:0 24px;">
+      <a href="/writeups" style="color:var(--green);font-family:'JetBrains Mono',monospace;font-size:0.875rem;text-decoration:none;margin-bottom:24px;display:inline-block;">
+        &larr; Back to Writeups
+      </a>
+
+      <div style="margin-bottom:32px;">
+        <div style="display:flex;gap:8px;margin-bottom:16px;">
+          <span style={`display:inline-flex;padding:4px 12px;font-size:0.75rem;font-family:'JetBrains Mono',monospace;border-radius:4px;background:${catColors[writeup.cat]}15;color:${catColors[writeup.cat]};border:1px solid ${catColors[writeup.cat]}33;text-transform:capitalize;`}>
+            {writeup.cat}
+          </span>
+          <span style={`display:inline-flex;padding:4px 12px;font-size:0.75rem;font-family:'JetBrains Mono',monospace;border-radius:4px;background:${diffColors[writeup.diff]}15;color:${diffColors[writeup.diff]};border:1px solid ${diffColors[writeup.diff]}33;text-transform:capitalize;`}>
+            {writeup.diff}
+          </span>
+        </div>
+        <h1 style="font-size:2rem;font-weight:800;color:var(--text);margin-bottom:8px;">{writeup.title}</h1>
+        <p style="color:var(--text-muted);font-size:0.875rem;font-family:'JetBrains Mono',monospace;">{writeup.date}</p>
+      </div>
+
+      <div style="display:flex;flex-wrap:wrap;gap:8px;margin-bottom:40px;">
+        {writeup.tags.map((t) => (
+          <span style="display:inline-flex;padding:4px 12px;font-size:0.75rem;font-family:'JetBrains Mono',monospace;border-radius:6px;background:var(--bg-tertiary);color:var(--text-muted);border:1px solid var(--border);">{t}</span>
+        ))}
+      </div>
+
+      <div style="background:var(--bg-card);border:1px solid var(--border);border-radius:12px;padding:32px;line-height:1.8;color:var(--text-muted);">
+        <Fragment set:html={writeup.content.replace(/\n/g, '<br/>').replace(/## (.*)/g, '<h2 style="font-size:1.5rem;font-weight:700;color:var(--text);margin:24px 0 12px;font-family:JetBrains Mono,monospace;">$1</h2>').replace(/### (.*)/g, '<h3 style="font-size:1.25rem;font-weight:700;color:var(--text);margin:20px 0 8px;font-family:JetBrains Mono,monospace;">$1</h3>').replace(/`([^`]+)`/g, '<code style="background:var(--bg-tertiary);padding:2px 6px;border-radius:4px;font-family:JetBrains Mono,monospace;color:var(--green);">$1</code>').replace(/```(\w+)?\n([\s\S]*?)```/g, '<pre style="background:var(--bg-secondary);border:1px solid var(--border);border-radius:8px;padding:16px;margin:16px 0;overflow-x:auto;font-family:JetBrains Mono,monospace;font-size:0.8rem;color:var(--text-muted);"><code>$2</code></pre>')} />
+      </div>
+
+      <div style="display:flex;gap:16px;flex-wrap:wrap;margin-top:32px;">
+        <a href="https://github.com/0xCyb3rgh0st" target="_blank" style="display:inline-flex;align-items:center;gap:8px;padding:12px 24px;background:var(--green);color:var(--bg-primary);font-family:'JetBrains Mono',monospace;font-weight:700;border-radius:8px;text-decoration:none;font-size:0.9rem;">
+          View on GitHub
+        </a>
+        <a href="/writeups" style="display:inline-flex;align-items:center;gap:8px;padding:12px 24px;border:1px solid var(--border);color:var(--text-muted);font-family:'JetBrains Mono',monospace;border-radius:8px;text-decoration:none;font-size:0.9rem;">
+          All Writeups
+        </a>
+      </div>
+    </div>
+  </main>
+  <Footer />
+</BaseLayout>

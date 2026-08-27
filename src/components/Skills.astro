@@ -1,24 +1,24 @@
 ---
 const categories = [
   {
-    title: "Binary Exploitation", icon: "0x", color: "var(--green)",
-    skills: [{ name: "Buffer Overflows", level: 5 }, { name: "ROP Chains", level: 4 }, { name: "Heap Exploitation", level: 3 }, { name: "Format String", level: 4 }, { name: "Shellcode Writing", level: 4 }],
-    tags: ["GDB", "pwndbg", "pwntools", "ROPgadget"],
+    title: "Exploit Development", icon: "PWN", color: "var(--green)",
+    skills: [{ name: "Stack Exploitation", level: 5 }, { name: "ROP Chains", level: 5 }, { name: "Heap Exploitation", level: 4 }, { name: "Format String", level: 5 }, { name: "Shellcode Writing", level: 4 }],
+    tags: ["pwntools", "pwndbg", "ROPgadget", "GDB", "Frida"],
   },
   {
-    title: "Web Security", icon: "W/", color: "var(--cyan)",
-    skills: [{ name: "XSS", level: 5 }, { name: "SQL Injection", level: 5 }, { name: "SSRF", level: 4 }, { name: "XXE", level: 3 }, { name: "Auth Bypass", level: 4 }],
-    tags: ["Burp Suite", "Nuclei", "SQLMap", "XSStrike"],
+    title: "Reverse Engineering", icon: "RE", color: "var(--cyan)",
+    skills: [{ name: "Ghidra", level: 5 }, { name: "IDA Pro", level: 4 }, { name: "Frida", level: 5 }, { name: "Binary Analysis", level: 5 }, { name: "Automation", level: 4 }],
+    tags: ["Ghidra", "IDA", "Frida", "WinDbg", "pwndbg"],
   },
   {
-    title: "Active Directory", icon: "AD", color: "var(--purple)",
-    skills: [{ name: "Kerberoasting", level: 5 }, { name: "AS-REP Roasting", level: 4 }, { name: "Pass-the-Hash", level: 5 }, { name: "DCSync", level: 4 }, { name: "GPO Abuse", level: 3 }],
-    tags: ["BloodHound", "Impacket", "Rubeus", "Mimikatz"],
+    title: "Offensive Security", icon: "OPS", color: "var(--purple)",
+    skills: [{ name: "AD Attacks", level: 5 }, { name: "Web Exploitation", level: 5 }, { name: "Privilege Escalation", level: 5 }, { name: "Lateral Movement", level: 4 }, { name: "C2 Frameworks", level: 4 }],
+    tags: ["Burp Suite", "Impacket", "BloodHound", "Certipy", "Sliver", "Nuclei"],
   },
   {
-    title: "Forensics & RE", icon: "F+", color: "var(--green)",
-    skills: [{ name: "Malware Analysis", level: 4 }, { name: "Memory Forensics", level: 3 }, { name: "Reverse Engineering", level: 4 }, { name: "Network Forensics", level: 3 }, { name: "Disk Forensics", level: 3 }],
-    tags: ["Ghidra", "Volatility", "Wireshark", "Strings"],
+    title: "Languages & Infra", icon: "DEV", color: "var(--yellow)",
+    skills: [{ name: "Python", level: 5 }, { name: "Go", level: 4 }, { name: "Rust", level: 3 }, { name: "C", level: 4 }, { name: "JavaScript", level: 4 }],
+    tags: ["Python", "Go", "Rust", "C", "Docker", "Linux"],
   },
 ];
 ---
@@ -30,9 +30,9 @@ const categories = [
     </h2>
     <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:24px;">
       {categories.map((cat) => (
-        <div style="background:var(--bg-card);border:1px solid var(--border);border-radius:12px;padding:24px;transition:border-color 0.3s;" onmouseover="this.style.borderColor=cat_color" onmouseout="this.style.borderColor='var(--border)'" data-color={cat.color}>
+        <div style="background:var(--bg-card);border:1px solid var(--border);border-radius:12px;padding:24px;transition:border-color 0.3s;" onmouseover="this.style.borderColor='var(--green)'" onmouseout="this.style.borderColor='var(--border)'">
           <div style="display:flex;align-items:center;gap:12px;margin-bottom:24px;">
-            <div style={`width:48px;height:48px;border-radius:8px;background:var(--bg-tertiary);border:1px solid var(--border);display:flex;align-items:center;justify-content:center;font-family:'JetBrains Mono',monospace;font-weight:700;color:${cat.color};font-size:1rem;`}>
+            <div style={`width:48px;height:48px;border-radius:8px;background:var(--bg-tertiary);border:1px solid var(--border);display:flex;align-items:center;justify-content:center;font-family:'JetBrains Mono',monospace;font-weight:700;color:${cat.color};font-size:0.8rem;`}>
               {cat.icon}
             </div>
             <h3 style="font-size:1.125rem;font-weight:700;color:var(--text);">{cat.title}</h3>

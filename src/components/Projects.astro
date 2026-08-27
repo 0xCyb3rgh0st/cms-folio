@@ -1,28 +1,25 @@
 ---
 const projects = [
-  { title: "VulnChain", desc: "Automated vulnerability scanner with chain detection for complex attack paths in enterprise networks.", cat: "web", tags: ["Python", "API", "Nmap", "Nuclei"], featured: true },
-  { title: "ADExploit", desc: "Active Directory attack framework for red team operations with automated privilege escalation.", cat: "active-directory", tags: ["C#", "Impacket", "BloodHound"], featured: true },
-  { title: "HeapLab", desc: "Custom heap exploitation training environment with vulnerable binaries and exploit generation.", cat: "binary-exploitation", tags: ["C", "GDB", "pwntools"], featured: false },
-  { title: "PhishGuard", desc: "ML-powered phishing detection system analyzing URLs, email headers, and page content in real-time.", cat: "web", tags: ["Python", "TensorFlow", "Flask"], featured: false },
-  { title: "PacketSnitch", desc: "Network forensics tool for deep packet inspection and anomaly detection with automated alerting.", cat: "network", tags: ["Rust", "libpcap", "Zeek"], featured: false },
-  { title: "MalwareSandbox", desc: "Automated malware analysis sandbox with behavioral monitoring and IOC extraction.", cat: "malware", tags: ["Python", "Docker", "YARA"], featured: true },
+  { title: "pwnlibc", desc: "Advanced libc identification toolkit for exploit development. Fast libc identification, automatic download, symbol lookup, Python API, and CLI.", cat: "binary-exploitation", tags: ["Python", "Exploit Dev", "CLI"], featured: true, slug: "pwnlibc" },
+  { title: "ghidra-open", desc: "One-command launcher for Ghidra. Binary → Automatic Project → Headless Analysis → Launch GUI. Eliminates repetitive setup tasks.", cat: "reverse-engineering", tags: ["Ghidra", "Automation", "Java"], featured: true, slug: "ghidra-open" },
+  { title: "VulnOS", desc: "An open-source workspace for vulnerability research. Workspace management, findings tracking, AI assistant, and plugin system. In development.", cat: "vulnerability-research", tags: ["Python", "AI", "Workspace"], featured: true, slug: "vulnos" },
 ];
-const catColors: Record<string, string> = { web: "var(--cyan)", "active-directory": "var(--purple)", "binary-exploitation": "var(--green)", network: "var(--yellow)", malware: "var(--red)" };
+const catColors: Record<string, string> = { "binary-exploitation": "var(--green)", "reverse-engineering": "var(--cyan)", "vulnerability-research": "var(--purple)", "web": "var(--cyan)", "active-directory": "var(--purple)" };
 ---
 <section id="projects" style="padding:96px 24px;">
   <div style="max-width:1200px;margin:0 auto;">
     <p style="font-family:'JetBrains Mono',monospace;color:var(--green);font-size:0.875rem;text-transform:uppercase;letter-spacing:0.15em;margin-bottom:8px;">// projects</p>
     <h2 style="font-size:clamp(1.75rem,4vw,2.5rem);font-weight:700;margin-bottom:48px;">
-      <span style="background:linear-gradient(135deg,var(--green),var(--cyan));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;">Featured</span>
-      <span style="color:var(--text);"> Work</span>
+      <span style="background:linear-gradient(135deg,var(--green),var(--cyan));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;">Flagship</span>
+      <span style="color:var(--text);"> Projects</span>
     </h2>
     <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(340px,1fr));gap:24px;">
       {projects.map((p) => (
-        <div style="background:var(--bg-card);border:1px solid var(--border);border-radius:12px;padding:24px;display:flex;flex-direction:column;transition:all 0.3s;" onmouseover="this.style.borderColor='var(--green)';this.style.transform='translateY(-4px)'" onmouseout="this.style.borderColor='var(--border)';this.style.transform='none'">
+        <a href={`/projects/${p.slug}`} style="text-decoration:none;display:block;background:var(--bg-card);border:1px solid var(--border);border-radius:12px;padding:24px;transition:all 0.3s;" onmouseover="this.style.borderColor='var(--green)';this.style.transform='translateY(-4px)'" onmouseout="this.style.borderColor='var(--border)';this.style.transform='none'">
           {p.featured && (
             <div style="display:flex;align-items:center;gap:8px;margin-bottom:12px;">
               <div style="width:6px;height:6px;border-radius:50%;background:var(--green);box-shadow:0 0 8px var(--green);"></div>
-              <span style="color:var(--green);font-size:0.7rem;font-family:'JetBrains Mono',monospace;">FEATURED</span>
+              <span style="color:var(--green);font-size:0.7rem;font-family:'JetBrains Mono',monospace;">FLAGSHIP</span>
             </div>
           )}
           <span style={`display:inline-flex;padding:2px 8px;font-size:0.7rem;font-family:'JetBrains Mono',monospace;border-radius:4px;background:${catColors[p.cat]}15;color:${catColors[p.cat]};border:1px solid ${catColors[p.cat]}33;width:fit-content;margin-bottom:12px;text-transform:capitalize;`}>
@@ -35,11 +32,8 @@ const catColors: Record<string, string> = { web: "var(--cyan)", "active-director
               <span style="font-size:0.7rem;font-family:'JetBrains Mono',monospace;color:var(--text-muted);background:var(--bg-tertiary);padding:3px 8px;border-radius:4px;">{t}</span>
             ))}
           </div>
-          <a href="https://github.com/0xCyb3rgh0st" target="_blank" rel="noopener" style="display:flex;align-items:center;gap:6px;font-size:0.875rem;color:var(--green);font-family:'JetBrains Mono',monospace;text-decoration:none;">
-            <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/></svg>
-            View on GitHub
-          </a>
-        </div>
+          <span style="color:var(--green);font-size:0.875rem;font-family:'JetBrains Mono',monospace;">View Details &rarr;</span>
+        </a>
       ))}
     </div>
   </div>

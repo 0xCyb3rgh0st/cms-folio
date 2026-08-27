@@ -1,11 +1,9 @@
 ---
 const writeups = [
-  { title: "HackTheBox - UnderWriteUp", desc: "OSCP-style machine with web enumeration and privilege escalation via kernel exploit.", cat: "ctf", diff: "medium", date: "2024-08-15", tags: ["HTB", "Linux", "PrivEsc"] },
-  { title: "CVE-2024-3094: XZ Utils Backdoor", desc: "Deep dive into the XZ Utils supply chain attack and its implications for Linux security.", cat: "vulnerability", diff: "hard", date: "2024-04-01", tags: ["CVE", "Supply Chain", "Linux"] },
-  { title: "Kerberoasting from Scratch", desc: "Complete guide to Kerberoasting attacks in Active Directory environments.", cat: "technique", diff: "medium", date: "2024-03-20", tags: ["AD", "Kerberos", "CrackMapExec"] },
-  { title: "Buffer Overflow Lab Walkthrough", desc: "Step-by-step stack buffer overflow exploitation from discovery to shell.", cat: "technique", diff: "easy", date: "2024-02-10", tags: ["Binary", "Pwn", "GDB"] },
-  { title: "TryHackMe - AD Basics", desc: "Foundational AD concepts and common attack paths for beginners.", cat: "lab", diff: "easy", date: "2024-01-15", tags: ["THM", "AD", "Beginner"] },
-  { title: "Burp Suite Advanced", desc: "Mastering Burp Suite for complex web application penetration testing.", cat: "tool", diff: "hard", date: "2024-07-22", tags: ["Burp", "Web", "Proxy"] },
+  { title: "pwnlibc: Building a libc identification tool", desc: "Deep dive into how pwnlibc identifies libc versions from leaked addresses and automates exploit development workflow.", cat: "technique", diff: "hard", date: "2024-08-01", tags: ["Python", "Exploit Dev", "libc"], slug: "pwnlibc-deep-dive" },
+  { title: "Ghidra Automation with ghidra-open", desc: "How ghidra-open eliminates repetitive Ghidra setup with one-command project creation and headless analysis.", cat: "tool", diff: "medium", date: "2024-07-15", tags: ["Ghidra", "Automation", "Java"], slug: "ghidra-open-automation" },
+  { title: "AD Attack Path Automation", desc: "Automating Active Directory attack paths from enumeration to domain compromise using BloodHound and Impacket.", cat: "technique", diff: "hard", date: "2024-06-20", tags: ["AD", "BloodHound", "Impacket"], slug: "ad-attack-automation" },
+  { title: "Heap Exploitation Techniques", desc: "Comprehensive guide to modern heap exploitation including tcache poisoning, house of techniques.", cat: "technique", diff: "insane", date: "2024-05-10", tags: ["Pwn", "Heap", "Linux"], slug: "heap-exploitation-guide" },
 ];
 const diffColors: Record<string, string> = { easy: "var(--green)", medium: "var(--yellow)", hard: "var(--red)", insane: "var(--purple)" };
 const catColors: Record<string, string> = { ctf: "var(--cyan)", vulnerability: "var(--red)", technique: "var(--green)", tool: "var(--purple)", lab: "var(--yellow)" };
@@ -14,11 +12,11 @@ const catColors: Record<string, string> = { ctf: "var(--cyan)", vulnerability: "
   <div style="max-width:1200px;margin:0 auto;">
     <p style="font-family:'JetBrains Mono',monospace;color:var(--green);font-size:0.875rem;text-transform:uppercase;letter-spacing:0.15em;margin-bottom:8px;">// writeups</p>
     <h2 style="font-size:clamp(1.75rem,4vw,2.5rem);font-weight:700;margin-bottom:48px;">
-      <span style="color:var(--text);">Security </span><span style="background:linear-gradient(135deg,var(--green),var(--cyan));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;">Journal</span>
+      <span style="color:var(--text);">Research </span><span style="background:linear-gradient(135deg,var(--green),var(--cyan));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;">Journal</span>
     </h2>
     <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(340px,1fr));gap:24px;">
       {writeups.map((w) => (
-        <article style="background:var(--bg-card);border:1px solid var(--border);border-radius:12px;padding:24px;display:flex;flex-direction:column;transition:all 0.3s;cursor:pointer;" onmouseover="this.style.borderColor='var(--green)';this.style.transform='translateY(-4px)'" onmouseout="this.style.borderColor='var(--border)';this.style.transform='none'">
+        <a href={`/writeups/${w.slug}`} style="text-decoration:none;display:block;background:var(--bg-card);border:1px solid var(--border);border-radius:12px;padding:24px;transition:all 0.3s;" onmouseover="this.style.borderColor='var(--green)';this.style.transform='translateY(-4px)'" onmouseout="this.style.borderColor='var(--border)';this.style.transform='none'">
           <div style="display:flex;gap:6px;margin-bottom:12px;">
             <span style={`display:inline-flex;padding:2px 8px;font-size:0.7rem;font-family:'JetBrains Mono',monospace;border-radius:4px;background:${catColors[w.cat]}15;color:${catColors[w.cat]};border:1px solid ${catColors[w.cat]}33;text-transform:capitalize;`}>{w.cat}</span>
             <span style={`display:inline-flex;padding:2px 8px;font-size:0.7rem;font-family:'JetBrains Mono',monospace;border-radius:4px;background:${diffColors[w.diff]}15;color:${diffColors[w.diff]};border:1px solid ${diffColors[w.diff]}33;text-transform:capitalize;`}>{w.diff}</span>
@@ -34,7 +32,7 @@ const catColors: Record<string, string> = { ctf: "var(--cyan)", vulnerability: "
             <span style="color:var(--text-muted);font-size:0.75rem;font-family:'JetBrains Mono',monospace;">{w.date}</span>
             <span style="color:var(--green);font-size:0.875rem;font-family:'JetBrains Mono',monospace;">Read more &rarr;</span>
           </div>
-        </article>
+        </a>
       ))}
     </div>
   </div>

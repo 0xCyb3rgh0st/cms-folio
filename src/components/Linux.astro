@@ -10,9 +10,9 @@
     <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:32px;">
       <div style="display:flex;flex-direction:column;gap:20px;">
         {[
-          { title: "System Administration", desc: "Linux server management, hardening, and automation.", tags: ["Bash", "systemd", "iptables", "SELinux"] },
-          { title: "Security Tools", desc: "Proficient in Linux-based security tooling.", tags: ["Kali", "Parrot", "Arch", "Nix"] },
-          { title: "Networking", desc: "TCP/IP stack, socket programming, and packet analysis.", tags: ["tcpdump", "netstat", "ss", "nftables"] },
+          { title: "Exploit Development", desc: "Linux binary exploitation, kernel modules, and advanced exploitation techniques.", tags: ["GDB", "pwndbg", "pwntools", "ROPgadget"] },
+          { title: "Security Tools", desc: "Building and using Linux-based security tooling and automation frameworks.", tags: ["Python", "Bash", "Docker", "GitHub Actions"] },
+          { title: "Infrastructure", desc: "Server management, containerization, and CI/CD for security research.", tags: ["Linux", "Docker", "PostgreSQL", "Redis"] },
         ].map((s) => (
           <div style="background:var(--bg-card);border:1px solid var(--border);border-radius:12px;padding:24px;" onmouseover="this.style.borderColor='var(--green)'" onmouseout="this.style.borderColor='var(--border)'">
             <h3 style="font-weight:700;color:var(--text);margin-bottom:8px;">{s.title}</h3>
@@ -30,17 +30,15 @@
           <div style="width:10px;height:10px;border-radius:50%;background:var(--red);"></div>
           <div style="width:10px;height:10px;border-radius:50%;background:var(--yellow);"></div>
           <div style="width:10px;height:10px;border-radius:50%;background:var(--green);"></div>
-          <span style="margin-left:8px;color:var(--text-muted);font-size:0.75rem;font-family:'JetBrains Mono',monospace;">linux-commands.sh</span>
+          <span style="margin-left:8px;color:var(--text-muted);font-size:0.75rem;font-family:'JetBrains Mono',monospace;">tools.sh</span>
         </div>
         <div style="padding:20px;font-family:'JetBrains Mono',monospace;font-size:0.75rem;line-height:2;">
-          <p><span style="color:var(--green);">$</span> <span style="color:var(--cyan);">cat /etc/os-release</span></p>
-          <p style="padding-left:16px;color:var(--text-muted);">Kali GNU/Linux Rolling</p>
-          <p><span style="color:var(--green);">$</span> <span style="color:var(--cyan);">neofetch --off</span></p>
-          <p style="padding-left:16px;color:var(--text-muted);">OS: Kali Linux x86_64</p>
-          <p><span style="color:var(--green);">$</span> <span style="color:var(--cyan);">which nmap burpsuite gdb</span></p>
-          <p style="padding-left:16px;color:var(--text-muted);">/usr/bin/nmap</p>
-          <p style="padding-left:16px;color:var(--text-muted);">/usr/bin/burpsuite</p>
-          <p style="padding-left:16px;color:var(--text-muted);">/usr/bin/gdb</p>
+          <p><span style="color:var(--green);">$</span> <span style="color:var(--cyan);">pwnlibc --help</span></p>
+          <p style="padding-left:16px;color:var(--text-muted);">Advanced libc identification toolkit</p>
+          <p><span style="color:var(--green);">$</span> <span style="color:var(--cyan);">ghidra-open ./binary</span></p>
+          <p style="padding-left:16px;color:var(--text-muted);">Launching Ghidra with project...</p>
+          <p><span style="color:var(--green);">$</span> <span style="color:var(--cyan);">nuclei -u target.com</span></p>
+          <p style="padding-left:16px;color:var(--text-muted);">Scanning for vulnerabilities...</p>
           <p><span style="color:var(--green);">$</span> <span style="animation:pulse-glow 2s infinite;">_</span></p>
         </div>
       </div>

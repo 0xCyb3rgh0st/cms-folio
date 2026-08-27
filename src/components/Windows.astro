@@ -9,9 +9,9 @@
     <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:32px;">
       <div style="display:flex;flex-direction:column;gap:20px;">
         {[
-          { title: "AD Attack Surface", desc: "Deep understanding of Active Directory attack vectors.", tags: ["Kerberos", "NTLM", "GPO", "ACLs"] },
-          { title: "Post-Exploitation", desc: "Windows privilege escalation and persistence techniques.", tags: ["Mimikatz", "Rubeus", "SharpHound", "Certify"] },
-          { title: "Defense Evasion", desc: "Bypassing Windows security controls and EDR solutions.", tags: ["AMSI", "ETW", "AppLocker", "WDAC"] },
+          { title: "AD Attack Surface", desc: "Deep understanding of Active Directory attack vectors and exploitation techniques.", tags: ["Kerberos", "NTLM", "GPO", "ACLs", "Certipy"] },
+          { title: "Post-Exploitation", desc: "Windows privilege escalation, persistence, and credential harvesting.", tags: ["Mimikatz", "Rubeus", "Sliver", "Certify"] },
+          { title: "Defense Evasion", desc: "Bypassing Windows security controls, EDR, and application whitelisting.", tags: ["AMSI", "ETW", "AppLocker", "WDAC"] },
         ].map((s) => (
           <div style="background:var(--bg-card);border:1px solid var(--border);border-radius:12px;padding:24px;" onmouseover="this.style.borderColor='var(--purple)'" onmouseout="this.style.borderColor='var(--border)'">
             <h3 style="font-weight:700;color:var(--text);margin-bottom:8px;">{s.title}</h3>
@@ -29,16 +29,13 @@
           <div style="width:10px;height:10px;border-radius:50%;background:var(--red);"></div>
           <div style="width:10px;height:10px;border-radius:50%;background:var(--yellow);"></div>
           <div style="width:10px;height:10px;border-radius:50%;background:var(--green);"></div>
-          <span style="margin-left:8px;color:var(--text-muted);font-size:0.75rem;font-family:'JetBrains Mono',monospace;">powershell.exe</span>
+          <span style="margin-left:8px;color:var(--text-muted);font-size:0.75rem;font-family:'JetBrains Mono',monospace;">certipy.exe</span>
         </div>
         <div style="padding:20px;font-family:'JetBrains Mono',monospace;font-size:0.75rem;line-height:2;">
-          <p><span style="color:var(--cyan);">PS C:\&gt;</span> <span style="color:var(--green);">Import-Module ActiveDirectory</span></p>
-          <p><span style="color:var(--cyan);">PS C:\&gt;</span> <span style="color:var(--green);">Get-ADDomain</span></p>
-          <p style="padding-left:16px;color:var(--text-muted);">DomainSID : S-1-5-21-...</p>
-          <p style="padding-left:16px;color:var(--text-muted);">DomainMode : Windows2016Domain</p>
-          <p><span style="color:var(--cyan);">PS C:\&gt;</span> <span style="color:var(--green);">Get-DomainUser -SPN</span></p>
-          <p style="padding-left:16px;color:var(--text-muted);">samaccountname : svc_sql</p>
-          <p style="padding-left:16px;color:var(--text-muted);">SPN : MSSQLSvc/sql01</p>
+          <p><span style="color:var(--cyan);">PS C:\&gt;</span> <span style="color:var(--green);">certipy find -u user@corp.local -p Pass123</span></p>
+          <p style="padding-left:16px;color:var(--text-muted);">Found vulnerable ADCS templates...</p>
+          <p><span style="color:var(--cyan);">PS C:\&gt;</span> <span style="color:var(--green);">certipy forge -ca-pfx ca.pfx</span></p>
+          <p style="padding-left:16px;color:var(--text-muted);">Forged certificate ready.</p>
           <p><span style="color:var(--cyan);">PS C:\&gt;</span> <span style="animation:pulse-glow 2s infinite;">_</span></p>
         </div>
       </div>

@@ -2,123 +2,52 @@
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import Navigation from '../../components/Navigation.astro';
 import Footer from '../../components/Footer.astro';
-import Badge from '../../components/ui/Badge.astro';
 
 const projects = [
-  {
-    title: "VulnChain",
-    description: "Automated vulnerability scanner with chain detection for complex attack paths in enterprise networks. Features real-time scanning, reporting, and integration with popular security tools.",
-    category: "web",
-    tags: ["Python", "API", "Nmap", "Nuclei"],
-    github: "https://github.com/0xCyb3rgh0st",
-    featured: true,
-    date: "2024-08-01",
-  },
-  {
-    title: "ADExploit",
-    description: "Active Directory attack framework for red team operations with automated privilege escalation, lateral movement, and domain enumeration capabilities.",
-    category: "active-directory",
-    tags: ["C#", "Impacket", "BloodHound"],
-    github: "https://github.com/0xCyb3rgh0st",
-    featured: true,
-    date: "2024-07-15",
-  },
-  {
-    title: "HeapLab",
-    description: "Custom heap exploitation training environment with vulnerable binaries, automated exploit generation, and step-by-step debugging guides.",
-    category: "binary-exploitation",
-    tags: ["C", "GDB", "pwntools", "pwndbg"],
-    github: "https://github.com/0xCyb3rgh0st",
-    featured: false,
-    date: "2024-06-20",
-  },
-  {
-    title: "PhishGuard",
-    description: "ML-powered phishing detection system analyzing URLs, email headers, and page content in real-time with high accuracy.",
-    category: "web",
-    tags: ["Python", "TensorFlow", "Flask"],
-    github: "https://github.com/0xCyb3rgh0st",
-    featured: false,
-    date: "2024-05-10",
-  },
-  {
-    title: "PacketSnitch",
-    description: "Network forensics tool for deep packet inspection and anomaly detection with automated alerting and IOC extraction.",
-    category: "network",
-    tags: ["Rust", "libpcap", "Zeek"],
-    github: "https://github.com/0xCyb3rgh0st",
-    featured: false,
-    date: "2024-04-05",
-  },
-  {
-    title: "MalwareSandbox",
-    description: "Automated malware analysis sandbox with behavioral monitoring, IOC extraction, and YARA rule generation.",
-    category: "malware",
-    tags: ["Python", "Docker", "YARA"],
-    github: "https://github.com/0xCyb3rgh0st",
-    featured: true,
-    date: "2024-03-15",
-  },
+  { title: "pwnlibc", desc: "Advanced libc identification toolkit for exploit development. Fast libc identification, automatic download, symbol lookup, Python API, and CLI.", cat: "binary-exploitation", tags: ["Python", "Exploit Dev", "CLI"], featured: true, slug: "pwnlibc", date: "2024-08-01" },
+  { title: "ghidra-open", desc: "One-command launcher for Ghidra. Binary → Automatic Project → Headless Analysis → Launch GUI.", cat: "reverse-engineering", tags: ["Ghidra", "Automation", "Java"], featured: true, slug: "ghidra-open", date: "2024-07-15" },
+  { title: "VulnOS", desc: "An open-source workspace for vulnerability research. Workspace management, findings tracking, AI assistant, and plugin system.", cat: "vulnerability-research", tags: ["Python", "AI", "Workspace"], featured: true, slug: "vulnos", date: "2024-06-20" },
 ];
 
-const categoryColors: Record<string, "green" | "cyan" | "purple" | "red" | "yellow" | "orange"> = {
-  "web": "cyan",
-  "active-directory": "purple",
-  "binary-exploitation": "green",
-  "network": "yellow",
-  "malware": "red",
-};
+const catColors: Record<string, string> = { "binary-exploitation": "var(--green)", "reverse-engineering": "var(--cyan)", "vulnerability-research": "var(--purple)" };
 ---
-
 <BaseLayout title="Projects | Jatin Singh">
   <Navigation />
-  <main class="pt-24 pb-16 px-6">
-    <div class="mx-auto max-w-6xl">
-      <p class="section-heading">// projects</p>
-      <h1 class="text-4xl md:text-5xl font-bold mb-4">
-        <span class="gradient-text">All</span> <span class="text-text-primary">Projects</span>
+  <main style="padding-top:120px;padding-bottom:64px;">
+    <div style="max-width:1200px;margin:0 auto;padding:0 24px;">
+      <p style="font-family:'JetBrains Mono',monospace;color:var(--green);font-size:0.875rem;text-transform:uppercase;letter-spacing:0.15em;margin-bottom:8px;">// projects</p>
+      <h1 style="font-size:clamp(2rem,5vw,3rem);font-weight:800;margin-bottom:4px;">
+        <span style="background:linear-gradient(135deg,var(--green),var(--cyan));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;">All</span>
+        <span style="color:var(--text);"> Projects</span>
       </h1>
-      <p class="text-text-secondary mb-12 max-w-2xl">
-        A collection of my security research, tools, and exploit development projects.
+      <p style="color:var(--text-muted);margin-bottom:48px;max-width:600px;">
+        Building world-class open-source tools that make vulnerability research easier.
       </p>
 
-      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-        {projects.map((project) => (
-          <div class="glass-card p-6 flex flex-col group">
-            {project.featured && (
-              <div class="flex items-center gap-2 mb-3">
-                <div class="w-2 h-2 rounded-full bg-accent-green animate-pulse"></div>
-                <span class="text-accent-green text-xs font-mono">FEATURED</span>
+      <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(340px,1fr));gap:24px;">
+        {projects.map((p) => (
+          <a href={`/projects/${p.slug}`} style="text-decoration:none;display:block;background:var(--bg-card);border:1px solid var(--border);border-radius:12px;padding:24px;transition:all 0.3s;" onmouseover="this.style.borderColor='var(--green)';this.style.transform='translateY(-4px)'" onmouseout="this.style.borderColor='var(--border)';this.style.transform='none'">
+            {p.featured && (
+              <div style="display:flex;align-items:center;gap:8px;margin-bottom:12px;">
+                <div style="width:6px;height:6px;border-radius:50%;background:var(--green);box-shadow:0 0 8px var(--green);"></div>
+                <span style="color:var(--green);font-size:0.7rem;font-family:'JetBrains Mono',monospace;">FLAGSHIP</span>
               </div>
             )}
-            <div class="flex items-center gap-2 mb-3">
-              <Badge text={project.category.replace("-", " ")} color={categoryColors[project.category] || "green"} />
-            </div>
-            <h3 class="text-xl font-bold text-text-primary mb-2 group-hover:text-accent-green transition-colors">
-              {project.title}
-            </h3>
-            <p class="text-text-secondary text-sm mb-4 flex-grow leading-relaxed">
-              {project.description}
-            </p>
-            <div class="flex flex-wrap gap-2 mb-4">
-              {project.tags.map((tag) => (
-                <span class="text-xs font-mono text-text-secondary bg-bg-tertiary px-2 py-1 rounded">
-                  {tag}
-                </span>
+            <span style={`display:inline-flex;padding:2px 8px;font-size:0.7rem;font-family:'JetBrains Mono',monospace;border-radius:4px;background:${catColors[p.cat]}15;color:${catColors[p.cat]};border:1px solid ${catColors[p.cat]}33;width:fit-content;margin-bottom:12px;text-transform:capitalize;`}>
+              {p.cat.replace("-", " ")}
+            </span>
+            <h3 style="font-size:1.25rem;font-weight:700;color:var(--text);margin-bottom:8px;">{p.title}</h3>
+            <p style="color:var(--text-muted);font-size:0.875rem;line-height:1.6;margin-bottom:16px;">{p.desc}</p>
+            <div style="display:flex;flex-wrap:wrap;gap:6px;margin-bottom:16px;">
+              {p.tags.map((t) => (
+                <span style="font-size:0.7rem;font-family:'JetBrains Mono',monospace;color:var(--text-muted);background:var(--bg-tertiary);padding:3px 8px;border-radius:4px;">{t}</span>
               ))}
             </div>
-            <div class="flex items-center justify-between">
-              <span class="text-text-secondary text-xs font-mono">{project.date}</span>
-              <a
-                href={project.github}
-                target="_blank"
-                rel="noopener"
-                class="flex items-center gap-2 text-sm text-accent-green font-mono hover:underline"
-              >
-                GitHub &rarr;
-              </a>
+            <div style="display:flex;justify-content:space-between;align-items:center;">
+              <span style="color:var(--text-muted);font-size:0.75rem;font-family:'JetBrains Mono',monospace;">{p.date}</span>
+              <span style="color:var(--green);font-size:0.875rem;font-family:'JetBrains Mono',monospace;">View Details &rarr;</span>
             </div>
-          </div>
+          </a>
         ))}
       </div>
     </div>
