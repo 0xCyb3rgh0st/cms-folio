@@ -2,23 +2,19 @@
 const categories = [
   {
     title: "Exploit Development", icon: "PWN", color: "var(--green)",
-    skills: [{ name: "Stack Exploitation", level: 5 }, { name: "ROP Chains", level: 5 }, { name: "Heap Exploitation", level: 4 }, { name: "Format String", level: 5 }, { name: "Shellcode Writing", level: 4 }],
-    tags: ["pwntools", "pwndbg", "ROPgadget", "GDB", "Frida"],
+    tags: ["pwntools", "pwndbg", "ROPgadget", "GDB", "Frida", "Fuzzing"],
   },
   {
     title: "Reverse Engineering", icon: "RE", color: "var(--cyan)",
-    skills: [{ name: "Ghidra", level: 5 }, { name: "IDA Pro", level: 4 }, { name: "Frida", level: 5 }, { name: "Binary Analysis", level: 5 }, { name: "Automation", level: 4 }],
-    tags: ["Ghidra", "IDA", "Frida", "WinDbg", "pwndbg"],
+    tags: ["Ghidra", "IDA Pro", "Frida", "WinDbg", "Binary Analysis"],
   },
   {
     title: "Offensive Security", icon: "OPS", color: "var(--purple)",
-    skills: [{ name: "AD Attacks", level: 5 }, { name: "Web Exploitation", level: 5 }, { name: "Privilege Escalation", level: 5 }, { name: "Lateral Movement", level: 4 }, { name: "C2 Frameworks", level: 4 }],
     tags: ["Burp Suite", "Impacket", "BloodHound", "Certipy", "Sliver", "Nuclei"],
   },
   {
     title: "Languages & Infra", icon: "DEV", color: "var(--yellow)",
-    skills: [{ name: "Python", level: 5 }, { name: "Go", level: 4 }, { name: "Rust", level: 3 }, { name: "C", level: 4 }, { name: "JavaScript", level: 4 }],
-    tags: ["Python", "Go", "Rust", "C", "Docker", "Linux"],
+    tags: ["Python", "Go", "Rust", "C", "Docker", "Linux", "Bash"],
   },
 ];
 ---
@@ -31,28 +27,15 @@ const categories = [
     <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:24px;">
       {categories.map((cat) => (
         <div style="background:var(--bg-card);border:1px solid var(--border);border-radius:12px;padding:24px;transition:border-color 0.3s;" onmouseover="this.style.borderColor='var(--green)'" onmouseout="this.style.borderColor='var(--border)'">
-          <div style="display:flex;align-items:center;gap:12px;margin-bottom:24px;">
+          <div style="display:flex;align-items:center;gap:12px;margin-bottom:20px;">
             <div style={`width:48px;height:48px;border-radius:8px;background:var(--bg-tertiary);border:1px solid var(--border);display:flex;align-items:center;justify-content:center;font-family:'JetBrains Mono',monospace;font-weight:700;color:${cat.color};font-size:0.8rem;`}>
               {cat.icon}
             </div>
             <h3 style="font-size:1.125rem;font-weight:700;color:var(--text);">{cat.title}</h3>
           </div>
-          <div style="display:flex;flex-direction:column;gap:12px;margin-bottom:24px;">
-            {cat.skills.map((skill) => (
-              <div>
-                <div style="display:flex;justify-content:space-between;margin-bottom:4px;">
-                  <span style="color:var(--text-muted);font-size:0.8rem;font-family:'JetBrains Mono',monospace;">{skill.name}</span>
-                  <span style="color:var(--text-muted);font-size:0.75rem;font-family:'JetBrains Mono',monospace;">{skill.level}/5</span>
-                </div>
-                <div style="height:6px;background:var(--bg-tertiary);border-radius:3px;overflow:hidden;">
-                  <div style={`height:100%;width:${(skill.level / 5) * 100}%;background:${cat.color};border-radius:3px;box-shadow:0 0 8px ${cat.color};transition:width 1s ease;`}></div>
-                </div>
-              </div>
-            ))}
-          </div>
           <div style="display:flex;flex-wrap:wrap;gap:6px;">
             {cat.tags.map((tag) => (
-              <span style={`display:inline-flex;padding:2px 8px;font-size:0.7rem;font-family:'JetBrains Mono',monospace;border-radius:4px;background:${cat.color}15;color:${cat.color};border:1px solid ${cat.color}33;`}>
+              <span style={`display:inline-flex;padding:4px 10px;font-size:0.75rem;font-family:'JetBrains Mono',monospace;border-radius:4px;background:${cat.color}15;color:${cat.color};border:1px solid ${cat.color}33;`}>
                 {tag}
               </span>
             ))}
