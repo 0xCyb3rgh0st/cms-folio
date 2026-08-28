@@ -24,23 +24,12 @@ const projects = {
     install: "git clone https://github.com/0xCyb3rgh0st/ghidra-open",
     usage: "ghidra-open ./target_binary\nghidra-open --headless-only ./binary\nghidra-open --script my_script.py ./binary",
   },
-  vulnos: {
-    title: "VulnOS",
-    description: "An open-source workspace for vulnerability research. In Development.",
-    cat: "vulnerability-research",
-    tags: ["Python", "AI", "Workspace", "Vuln Research"],
-    features: ["Workspace management with targets and findings", "Evidence and notes organization", "Reverse engineering integration", "AI-assisted vulnerability analysis", "Report generation", "Plugin system"],
-    tech: ["Python", "PostgreSQL", "Docker", "OpenAI API"],
-    install: "Coming soon...",
-    usage: "vulnos init my-research\nvulnos target add --name target1 --ip 10.10.10.1\nvulnos finding add --title 'SQL Injection' --severity high",
-  },
 };
 
 export function getStaticPaths() {
   return [
     { params: { slug: 'pwnlibc' } },
     { params: { slug: 'ghidra-open' } },
-    { params: { slug: 'vulnos' } },
   ];
 }
 
