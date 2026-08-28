@@ -8,21 +8,13 @@
       <span style="color:var(--text);"> Access</span>
     </h2>
     <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:32px;">
-      <div style="background:var(--bg-secondary);border:1px solid var(--border);border-radius:12px;overflow:hidden;">
-        <div style="background:var(--bg-tertiary);padding:10px 16px;display:flex;align-items:center;gap:6px;border-bottom:1px solid var(--border);">
-          <div style="width:10px;height:10px;border-radius:50%;background:var(--red);"></div>
-          <div style="width:10px;height:10px;border-radius:50%;background:var(--yellow);"></div>
-          <div style="width:10px;height:10px;border-radius:50%;background:var(--green);"></div>
-          <span style="margin-left:8px;color:var(--text-muted);font-size:0.75rem;font-family:'JetBrains Mono',monospace;">jatin@research:~</span>
-        </div>
-        <div style="padding:24px;font-family:'JetBrains Mono',monospace;font-size:0.875rem;">
-          <p style="color:var(--text-muted);margin-bottom:12px;"><span style="color:var(--green);">&gt;</span> Security Researcher focused on building open-source tooling.</p>
-          <p style="color:var(--text-muted);margin-bottom:12px;"><span style="color:var(--green);">&gt;</span> Exploit development, reverse engineering, and AD security.</p>
-          <p style="color:var(--text-muted);margin-bottom:12px;"><span style="color:var(--green);">&gt;</span> Building tools that eliminate repetitive tasks.</p>
-          <p style="color:var(--text-muted);margin-bottom:16px;"><span style="color:var(--green);">&gt;</span> BSc (Hons) Ethical Hacking & Cyber Security.</p>
-          <p style="color:var(--green);">$ echo $MISSION</p>
-          <p style="color:var(--cyan);">Build world-class open-source tools for Vulnerability Research.</p>
-        </div>
+      <div style="background:var(--bg-card);border:1px solid var(--border);border-radius:12px;padding:32px;">
+        <p style="color:var(--text);font-size:1.1rem;line-height:1.8;margin-bottom:16px;">
+          Security researcher focused on exploit development, reverse engineering, and offensive security. I build open-source tools that eliminate repetitive tasks so researchers can focus on what matters.
+        </p>
+        <p style="color:var(--text-muted);font-size:1rem;line-height:1.8;">
+          BSc (Hons) Ethical Hacking & Cyber Security. Currently hunting bugs through VDP programs and contributing to the offensive security community.
+        </p>
       </div>
       <div style="display:grid;grid-template-columns:1fr 1fr;gap:16px;">
         {[
@@ -45,15 +37,17 @@
       </h3>
       <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(250px,1fr));gap:12px;">
         {[
-          { area: "Exploit Development", focus: "Linux & Windows", icon: "💥" },
-          { area: "Reverse Engineering", focus: "Binary Analysis & Automation", icon: "🔍" },
-          { area: "Active Directory", focus: "Offensive Security", icon: "🏢" },
-          { area: "Web Security", focus: "Modern Web Exploitation", icon: "🌐" },
-          { area: "AI Security", focus: "AI-assisted Vulnerability Research", icon: "🤖" },
-          { area: "Cloud Security", focus: "Attack Surface Research", icon: "☁️" },
+          { area: "Exploit Development", focus: "Linux & Windows", icon: "Exploit Dev" },
+          { area: "Reverse Engineering", focus: "Binary Analysis & Automation", icon: "Reverse Eng" },
+          { area: "Active Directory", focus: "Offensive Security", icon: "AD Attack" },
+          { area: "Web Security", focus: "Modern Web Exploitation", icon: "Web Sec" },
+          { area: "AI Security", focus: "AI-assisted Vulnerability Research", icon: "AI Sec" },
+          { area: "Cloud Security", focus: "Attack Surface Research", icon: "Cloud Sec" },
         ].map((item) => (
           <div style="background:var(--bg-card);border:1px solid var(--border);border-radius:8px;padding:16px;display:flex;align-items:center;gap:12px;">
-            <span style="font-size:1.25rem;">{item.icon}</span>
+            <div style="width:48px;height:48px;border-radius:8px;background:var(--bg-tertiary);border:1px solid var(--border);display:flex;align-items:center;justify-content:center;font-family:'JetBrains Mono',monospace;font-weight:700;color:var(--green);font-size:0.6rem;flex-shrink:0;">
+              {item.icon}
+            </div>
             <div>
               <p style="color:var(--text);font-weight:600;font-size:0.9rem;">{item.area}</p>
               <p style="color:var(--text-muted);font-size:0.75rem;">{item.focus}</p>
