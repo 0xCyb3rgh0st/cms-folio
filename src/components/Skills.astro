@@ -20,22 +20,22 @@ const categories = [
 ---
 <section id="skills" style="padding:96px 24px;">
   <div style="max-width:1200px;margin:0 auto;">
-    <p style="font-family:'JetBrains Mono',monospace;color:var(--green);font-size:0.875rem;text-transform:uppercase;letter-spacing:0.15em;margin-bottom:8px;">// skills</p>
+    <p style="font-family:'JetBrains Mono',monospace;color:var(--green);font-size:0.8rem;text-transform:uppercase;letter-spacing:0.15em;margin-bottom:8px;">// skills</p>
     <h2 style="font-size:clamp(1.75rem,4vw,2.5rem);font-weight:700;margin-bottom:48px;">
       <span style="color:var(--text);">Technical </span><span style="background:linear-gradient(135deg,var(--green),var(--cyan));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;">Arsenal</span>
     </h2>
-    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:24px;">
+    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:20px;">
       {categories.map((cat) => (
-        <div style="background:var(--bg-card);border:1px solid var(--border);border-radius:12px;padding:24px;transition:border-color 0.3s;" onmouseover="this.style.borderColor='var(--green)'" onmouseout="this.style.borderColor='var(--border)'">
+        <div style="background:var(--bg-card);border:1px solid var(--border);border-radius:var(--radius);padding:24px;" class="card-hover">
           <div style="display:flex;align-items:center;gap:12px;margin-bottom:20px;">
-            <div style={`width:48px;height:48px;border-radius:8px;background:var(--bg-tertiary);border:1px solid var(--border);display:flex;align-items:center;justify-content:center;font-family:'JetBrains Mono',monospace;font-weight:700;color:${cat.color};font-size:0.8rem;`}>
+            <div style={`width:40px;height:40px;border-radius:6px;background:var(--bg-tertiary);border:1px solid var(--border);display:flex;align-items:center;justify-content:center;font-family:'JetBrains Mono',monospace;font-weight:700;color:${cat.color};font-size:0.75rem;`}>
               {cat.icon}
             </div>
-            <h3 style="font-size:1.125rem;font-weight:700;color:var(--text);">{cat.title}</h3>
+            <h3 style="font-size:1rem;font-weight:600;color:var(--text);">{cat.title}</h3>
           </div>
           <div style="display:flex;flex-wrap:wrap;gap:6px;">
             {cat.tags.map((tag) => (
-              <span style={`display:inline-flex;padding:4px 10px;font-size:0.75rem;font-family:'JetBrains Mono',monospace;border-radius:4px;background:${cat.color}15;color:${cat.color};border:1px solid ${cat.color}33;`}>
+              <span style={`display:inline-flex;padding:4px 10px;font-size:0.75rem;font-family:'JetBrains Mono',monospace;border-radius:6px;background:${cat.color}15;color:${cat.color};border:1px solid ${cat.color}22;`}>
                 {tag}
               </span>
             ))}

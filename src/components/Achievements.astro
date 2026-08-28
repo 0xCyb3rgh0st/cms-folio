@@ -5,28 +5,28 @@ const achievements = [
 ---
 <section id="achievements" style="padding:96px 24px;">
   <div style="max-width:1200px;margin:0 auto;">
-    <p style="font-family:'JetBrains Mono',monospace;color:var(--green);font-size:0.875rem;text-transform:uppercase;letter-spacing:0.15em;margin-bottom:8px;">// achievements</p>
+    <p style="font-family:'JetBrains Mono',monospace;color:var(--green);font-size:0.8rem;text-transform:uppercase;letter-spacing:0.15em;margin-bottom:8px;">// achievements</p>
     <h2 style="font-size:clamp(1.75rem,4vw,2.5rem);font-weight:700;margin-bottom:48px;">
       <span style="background:linear-gradient(135deg,var(--green),var(--cyan));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;">Recognition</span>
       <span style="color:var(--text);"> & Awards</span>
     </h2>
     <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(340px,1fr));gap:20px;">
       {achievements.map((a) => (
-        <a href={`/achievements/${a.slug}`} style="text-decoration:none;display:block;background:var(--bg-card);border:1px solid var(--border);border-radius:16px;padding:28px;transition:all 0.3s;position:relative;overflow:hidden;" onmouseover="this.style.borderColor='var(--green)';this.style.transform='translateY(-4px)'" onmouseout="this.style.borderColor='var(--border)';this.style.transform='none'">
-          <div style="position:absolute;top:0;right:0;width:120px;height:120px;background:radial-gradient(circle,${a.color}08 0%,transparent 70%);"></div>
-          <div style="display:flex;align-items:center;gap:16px;margin-bottom:16px;">
-            <div style={`width:56px;height:56px;border-radius:14px;display:flex;align-items:center;justify-content:center;font-family:'JetBrains Mono',monospace;font-weight:700;font-size:0.75rem;background:${a.color}15;color:${a.color};border:2px solid ${a.color}33;flex-shrink:0;`}>
+        <a href={`/achievements/${a.slug}`} style="text-decoration:none;display:block;background:var(--bg-card);border:1px solid var(--border);border-radius:var(--radius);padding:28px;transition:all 0.2s ease-in-out;position:relative;overflow:hidden;" onmouseover="this.style.borderColor='var(--border-hover)';this.style.transform='translateY(-2px)';this.style.boxShadow='0 8px 24px rgba(0,0,0,0.2)'" onmouseout="this.style.borderColor='var(--border)';this.style.transform='none';this.style.boxShadow='none'">
+          <div style="position:absolute;top:0;right:0;width:120px;height:120px;background:radial-gradient(circle,${a.color}08 0%,transparent 70%);pointer-events:none;"></div>
+          <div style="display:flex;align-items:center;gap:14px;margin-bottom:14px;">
+            <div style={`width:48px;height:48px;border-radius:10px;display:flex;align-items:center;justify-content:center;font-family:'JetBrains Mono',monospace;font-weight:700;font-size:0.7rem;background:${a.color}15;color:${a.color};border:1px solid ${a.color}22;flex-shrink:0;`}>
               {a.icon}
             </div>
             <div>
-              <h3 style="font-weight:700;color:var(--text);font-size:1.1rem;margin-bottom:2px;">{a.title}</h3>
+              <h3 style="font-weight:600;color:var(--text);font-size:1.05rem;margin-bottom:2px;">{a.title}</h3>
               <p style="color:var(--text-muted);font-size:0.8rem;">{a.issuer}</p>
             </div>
           </div>
           <p style="color:var(--text-muted);font-size:0.875rem;line-height:1.6;margin-bottom:16px;">{a.desc}</p>
           <div style="display:flex;justify-content:space-between;align-items:center;">
             <span style="font-family:'JetBrains Mono',monospace;font-size:0.75rem;color:var(--text-muted);">{a.date}</span>
-            <span style="font-size:0.8rem;font-family:'JetBrains Mono',monospace;color:var(--green);background:var(--bg-tertiary);padding:6px 14px;border-radius:6px;">View Details &rarr;</span>
+            <span style="font-size:0.75rem;font-family:'JetBrains Mono',monospace;color:var(--green);background:var(--bg-tertiary);padding:5px 12px;border-radius:6px;" class="arrow-hover">View Details &rarr;</span>
           </div>
         </a>
       ))}

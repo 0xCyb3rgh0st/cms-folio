@@ -9,19 +9,19 @@ const certs = [
 ---
 <section id="certifications" style="padding:96px 24px;">
   <div style="max-width:1200px;margin:0 auto;">
-    <p style="font-family:'JetBrains Mono',monospace;color:var(--green);font-size:0.875rem;text-transform:uppercase;letter-spacing:0.15em;margin-bottom:8px;">// certifications</p>
+    <p style="font-family:'JetBrains Mono',monospace;color:var(--green);font-size:0.8rem;text-transform:uppercase;letter-spacing:0.15em;margin-bottom:8px;">// certifications</p>
     <h2 style="font-size:clamp(1.75rem,4vw,2.5rem);font-weight:700;margin-bottom:48px;">
       <span style="color:var(--text);">Verified </span><span style="background:linear-gradient(135deg,var(--green),var(--cyan));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;">Credentials</span>
     </h2>
-    <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:16px;">
+    <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:16px;">
       {certs.map((c) => (
-        <a href={`/certifications/${c.slug}`} style="text-decoration:none;display:block;background:var(--bg-card);border:1px solid var(--border);border-radius:16px;padding:24px 20px;text-align:center;transition:all 0.3s;" onmouseover="this.style.borderColor='var(--green)';this.style.transform='translateY(-4px)'" onmouseout="this.style.borderColor='var(--border)';this.style.transform='none'">
-          <div style={`width:64px;height:64px;border-radius:16px;display:flex;align-items:center;justify-content:center;font-family:'JetBrains Mono',monospace;font-weight:700;font-size:0.9rem;background:${c.color}15;color:${c.color};border:2px solid ${c.color}33;margin:0 auto 16px;`}>
+        <a href={`/certifications/${c.slug}`} style="text-decoration:none;display:block;background:var(--bg-card);border:1px solid var(--border);border-radius:var(--radius);padding:24px 20px;text-align:center;transition:all 0.2s ease-in-out;" onmouseover="this.style.borderColor='var(--border-hover)';this.style.transform='translateY(-2px)';this.style.boxShadow='0 4px 16px rgba(0,0,0,0.2)'" onmouseout="this.style.borderColor='var(--border)';this.style.transform='none';this.style.boxShadow='none'">
+          <div style={`width:56px;height:56px;border-radius:12px;display:flex;align-items:center;justify-content:center;font-family:'JetBrains Mono',monospace;font-weight:700;font-size:0.8rem;background:${c.color}15;color:${c.color};border:1px solid ${c.color}22;margin:0 auto 14px;`}>
             {c.icon}
           </div>
-          <h3 style="font-weight:700;color:var(--text);font-size:1rem;margin-bottom:4px;">{c.title}</h3>
+          <h3 style="font-weight:600;color:var(--text);font-size:0.95rem;margin-bottom:4px;">{c.title}</h3>
           <p style="color:var(--text-muted);font-size:0.8rem;margin-bottom:12px;">{c.issuer}</p>
-          <div style="font-size:0.7rem;font-family:'JetBrains Mono',monospace;color:var(--green);background:var(--bg-tertiary);padding:6px 12px;border-radius:6px;display:inline-block;">
+          <div style="font-size:0.7rem;font-family:'JetBrains Mono',monospace;color:var(--green);background:var(--bg-tertiary);padding:5px 10px;border-radius:6px;display:inline-block;">
             View Details &rarr;
           </div>
         </a>
