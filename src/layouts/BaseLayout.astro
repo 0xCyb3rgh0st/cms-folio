@@ -82,6 +82,10 @@ const { title = "Jatin Singh | Cybersecurity Researcher", description = "Cyberse
           entries.forEach(entry => {
             if (entry.isIntersecting) {
               entry.target.classList.add('scroll-visible');
+              // Also reveal any scroll-stagger children inside
+              entry.target.querySelectorAll('.scroll-stagger').forEach(stagger => {
+                stagger.classList.add('scroll-visible');
+              });
               observer.unobserve(entry.target);
             }
           });
@@ -142,7 +146,7 @@ const { title = "Jatin Singh | Cybersecurity Researcher", description = "Cyberse
         }, { passive: true });
       } else {
         // Reduced motion: show all elements immediately
-        document.querySelectorAll('.scroll-fade-up, .scroll-fade-left, .scroll-fade-right, .scroll-scale').forEach(el => {
+        document.querySelectorAll('.scroll-fade-up, .scroll-fade-left, .scroll-fade-right, .scroll-scale, .scroll-stagger').forEach(el => {
           el.classList.add('scroll-visible');
         });
       }

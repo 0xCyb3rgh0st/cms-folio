@@ -12,6 +12,10 @@
       <a href="#writeups" style="color:var(--text-muted);text-decoration:none;font-size:0.85rem;font-family:'Source Code Pro',monospace;transition:color 0.2s;" onmouseover="this.style.color='var(--text)'" onmouseout="this.style.color='var(--text-muted)'">writeups</a>
       <a href="#certifications" style="color:var(--text-muted);text-decoration:none;font-size:0.85rem;font-family:'Source Code Pro',monospace;transition:color 0.2s;" onmouseover="this.style.color='var(--text)'" onmouseout="this.style.color='var(--text-muted)'">certs</a>
       <a href="#contact" style="color:var(--text-muted);text-decoration:none;font-size:0.85rem;font-family:'Source Code Pro',monospace;transition:color 0.2s;" onmouseover="this.style.color='var(--text)'" onmouseout="this.style.color='var(--text-muted)'">contact</a>
+      <button id="terminal-trigger" onclick="document.dispatchEvent(new CustomEvent('open-terminal'))" style="display:flex;align-items:center;gap:6px;background:var(--bg-tertiary);border:1px solid var(--border);color:var(--text-muted);cursor:pointer;padding:6px 12px;border-radius:6px;font-family:'Source Code Pro',monospace;font-size:0.75rem;transition:all 0.2s ease-in-out;" onmouseover="this.style.borderColor='var(--red)';this.style.color='var(--red)'" onmouseout="this.style.borderColor='var(--border)';this.style.color='var(--text-muted)'" aria-label="Open terminal">
+        <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><polyline points="4 17 10 11 4 5"/><line x1="12" y1="19" x2="20" y2="19"/></svg>
+        <span>`</span>
+      </button>
     </div>
     <button id="mobile-menu-btn" class="mobile-btn" style="display:none;background:none;border:none;color:var(--text);cursor:pointer;padding:8px;" aria-label="Toggle navigation menu" aria-expanded="false" aria-controls="mobile-menu">
       <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M3 6h14M3 10h14M3 14h14" /></svg>
@@ -25,6 +29,9 @@
       <a href="#writeups" style="color:var(--text-muted);text-decoration:none;font-size:0.875rem;font-family:'Source Code Pro',monospace;padding:8px 0;">writeups</a>
       <a href="#certifications" style="color:var(--text-muted);text-decoration:none;font-size:0.875rem;font-family:'Source Code Pro',monospace;padding:8px 0;">certs</a>
       <a href="#contact" style="color:var(--text-muted);text-decoration:none;font-size:0.875rem;font-family:'Source Code Pro',monospace;padding:8px 0;">contact</a>
+      <button onclick="document.dispatchEvent(new CustomEvent('open-terminal'))" style="display:flex;align-items:center;gap:8px;color:var(--red);background:none;border:none;cursor:pointer;padding:8px 0;font-family:'Source Code Pro',monospace;font-size:0.875rem;text-align:left;">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><polyline points="4 17 10 11 4 5"/><line x1="12" y1="19" x2="20" y2="19"/></svg>
+        open terminal (`)</button>
     </div>
   </div>
 </nav>
@@ -48,7 +55,7 @@
 </script>
 
 <style>
-  .nav-links { display: flex; }
+  .nav-links { display: flex; align-items: center; }
   .mobile-btn { display: none !important; }
   @media (max-width: 768px) {
     .nav-links { display: none !important; }

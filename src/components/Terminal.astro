@@ -208,6 +208,9 @@ Currently finishing my degree at Coventry University (Class of 2026).`,
 
   closeBtn.addEventListener('click', closeTerminal);
   overlay.addEventListener('click', function(e) { if (e.target === overlay) closeTerminal(); });
+
+  // Listen for custom event from nav button
+  document.addEventListener('open-terminal', function() { openTerminal(); });
 })();
 </script>
 
