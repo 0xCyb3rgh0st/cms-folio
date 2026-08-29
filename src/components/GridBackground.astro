@@ -19,6 +19,7 @@
   const glowRadius = 350;
   let glowIntensity = 0;
   let ripples = [];
+  let time = 0;
 
   function resize() {
     w = canvas.width = window.innerWidth;
@@ -40,70 +41,48 @@
 
   function draw() {
     ctx.clearRect(0, 0, w, h);
+    time += 0.015;
 
-    // Smooth follow
     mouseX += (targetX - mouseX) * 0.06;
     mouseY += (targetY - mouseY) * 0.06;
 
-    // Glow intensity fade
     if (isHovering) {
       glowIntensity += (1 - glowIntensity) * 0.04;
     } else {
       glowIntensity += (0 - glowIntensity) * 0.03;
     }
 
-    // Draw grid lines — brighter near cursor
-    const lineStep = gridSize;
-    for (let x = 0; x <= w; x += lineStep) {
-      const dx = x - mouseX;
-      const distX = Math.abs(dx);
+    // Grid lines — brighter near cursor
+    for (let x = 0; x <= w; x += gridSize) {
+      const distX = Math.abs(x - mouseX);
       const brightX = distX < glowRadius ? (1 - distX / glowRadius) * glowIntensity : 0;
-      const alpha = 0.03 + brightX * 0.12;
-      ctx.strokeStyle = `rgba(239, 68, 68, ${alpha})`;
+      ctx.strokeStyle = `rgba(239, 68, 68, ${0.03 + brightX * 0.12})`;
       ctx.lineWidth = 1;
-      ctx.beginPath();
-      ctx.moveTo(x, 0);
-      ctx.lineTo(x, h);
-      ctx.stroke();
+      ctx.beginPath(); ctx.moveTo(x, 0); ctx.lineTo(x, h); ctx.stroke();
     }
-    for (let y = 0; y <= h; y += lineStep) {
-      const dy = y - mouseY;
-      const distY = Math.abs(dy);
+    for (let y = 0; y <= h; y += gridSize) {
+      const distY = Math.abs(y - mouseY);
       const brightY = distY < glowRadius ? (1 - distY / glowRadius) * glowIntensity : 0;
-      const alpha = 0.03 + brightY * 0.12;
-      ctx.strokeStyle = `rgba(239, 68, 68, ${alpha})`;
+      ctx.strokeStyle = `rgba(239, 68, 68, ${0.03 + brightY * 0.12})`;
       ctx.lineWidth = 1;
-      ctx.beginPath();
-      ctx.moveTo(0, y);
-      ctx.lineTo(w, y);
-      ctx.stroke();
+      ctx.beginPath(); ctx.moveTo(0, y); ctx.lineTo(w, y); ctx.stroke();
     }
 
-    // Major grid lines (every 5 cells)
+    // Major grid lines
     for (let x = 0; x <= w; x += gridSize * 5) {
-      const dx = x - mouseX;
-      const distX = Math.abs(dx);
+      const distX = Math.abs(x - mouseX);
       const brightX = distX < glowRadius ? (1 - distX / glowRadius) * glowIntensity : 0;
       ctx.strokeStyle = `rgba(239, 68, 68, ${0.05 + brightX * 0.15})`;
-      ctx.lineWidth = 1;
-      ctx.beginPath();
-      ctx.moveTo(x, 0);
-      ctx.lineTo(x, h);
-      ctx.stroke();
+      ctx.beginPath(); ctx.moveTo(x, 0); ctx.lineTo(x, h); ctx.stroke();
     }
     for (let y = 0; y <= h; y += gridSize * 5) {
-      const dy = y - mouseY;
-      const distY = Math.abs(dy);
+      const distY = Math.abs(y - mouseY);
       const brightY = distY < glowRadius ? (1 - distY / glowRadius) * glowIntensity : 0;
       ctx.strokeStyle = `rgba(239, 68, 68, ${0.05 + brightY * 0.15})`;
-      ctx.lineWidth = 1;
-      ctx.beginPath();
-      ctx.moveTo(0, y);
-      ctx.lineTo(w, y);
-      ctx.stroke();
+      ctx.beginPath(); ctx.moveTo(0, y); ctx.lineTo(w, y); ctx.stroke();
     }
 
-    // Hover glow — big radial spread
+    // Hover glow
     if (glowIntensity > 0.01) {
       const g1 = ctx.createRadialGradient(mouseX, mouseY, 0, mouseX, mouseY, glowRadius);
       g1.addColorStop(0, `rgba(239, 68, 68, ${0.18 * glowIntensity})`);
@@ -113,7 +92,6 @@
       ctx.fillStyle = g1;
       ctx.fillRect(mouseX - glowRadius, mouseY - glowRadius, glowRadius * 2, glowRadius * 2);
 
-      // Extra inner bright spot
       const g2 = ctx.createRadialGradient(mouseX, mouseY, 0, mouseX, mouseY, 80);
       g2.addColorStop(0, `rgba(239, 68, 68, ${0.15 * glowIntensity})`);
       g2.addColorStop(1, 'rgba(239, 68, 68, 0)');
@@ -121,13 +99,15 @@
       ctx.fillRect(mouseX - 80, mouseY - 80, 160, 160);
     }
 
-    // Intersection dots — bigger and brighter near cursor
+    // DNA-style connections between dots
     if (glowIntensity > 0.01) {
       const startCol = Math.floor((mouseX - glowRadius) / gridSize);
       const endCol = Math.ceil((mouseX + glowRadius) / gridSize);
       const startRow = Math.floor((mouseY - glowRadius) / gridSize);
       const endRow = Math.ceil((mouseY + glowRadius) / gridSize);
 
+      // Collect visible dots
+      const dots = [];
       for (let col = startCol; col <= endCol; col++) {
         for (let row = startRow; row <= endRow; row++) {
           const ix = col * gridSize;
@@ -137,18 +117,114 @@
           const dist = Math.sqrt(dx * dx + dy * dy);
           if (dist < glowRadius) {
             const t = 1 - dist / glowRadius;
-            const alpha = t * 0.7 * glowIntensity;
-            const size = t * 4 + 0.8;
-            ctx.beginPath();
-            ctx.arc(ix, iy, size, 0, Math.PI * 2);
-            ctx.fillStyle = `rgba(239, 68, 68, ${alpha})`;
-            ctx.fill();
+            dots.push({ x: ix, y: iy, t, col, row });
           }
         }
       }
+
+      // Draw DNA helix connections along rows
+      for (let row = startRow; row <= endRow; row++) {
+        const rowDots = dots.filter(d => d.row === row).sort((a, b) => a.col - b.col);
+        if (rowDots.length < 2) continue;
+
+        for (let i = 0; i < rowDots.length - 1; i++) {
+          const a = rowDots[i];
+          const b = rowDots[i + 1];
+          const avgT = (a.t + b.t) / 2;
+          if (avgT < 0.05) continue;
+
+          const alpha = avgT * 0.4 * glowIntensity;
+
+          // Top strand
+          const wave1 = Math.sin(time + a.x * 0.02 + a.y * 0.01) * 8 * avgT;
+          const wave2 = Math.sin(time + b.x * 0.02 + b.y * 0.01) * 8 * avgT;
+
+          ctx.beginPath();
+          ctx.moveTo(a.x, a.y + wave1);
+          ctx.quadraticCurveTo((a.x + b.x) / 2, (a.y + b.y) / 2 - 12 * avgT, b.x, b.y + wave2);
+          ctx.strokeStyle = `rgba(239, 68, 68, ${alpha})`;
+          ctx.lineWidth = 1.5;
+          ctx.stroke();
+
+          // Bottom strand (offset)
+          ctx.beginPath();
+          ctx.moveTo(a.x, a.y - wave1);
+          ctx.quadraticCurveTo((a.x + b.x) / 2, (a.y + b.y) / 2 + 12 * avgT, b.x, b.y - wave2);
+          ctx.strokeStyle = `rgba(239, 68, 68, ${alpha * 0.7})`;
+          ctx.lineWidth = 1;
+          ctx.stroke();
+
+          // Cross rungs (base pairs)
+          const midX = (a.x + b.x) / 2;
+          const midY = (a.y + b.y) / 2;
+          const midWave = Math.sin(time * 1.5 + midX * 0.03) * 6 * avgT;
+          ctx.beginPath();
+          ctx.moveTo(midX, midY - 10 * avgT + midWave);
+          ctx.lineTo(midX, midY + 10 * avgT - midWave);
+          ctx.strokeStyle = `rgba(239, 68, 68, ${alpha * 0.5})`;
+          ctx.lineWidth = 0.8;
+          ctx.stroke();
+        }
+      }
+
+      // Draw DNA helix connections along columns
+      for (let col = startCol; col <= endCol; col++) {
+        const colDots = dots.filter(d => d.col === col).sort((a, b) => a.row - b.row);
+        if (colDots.length < 2) continue;
+
+        for (let i = 0; i < colDots.length - 1; i++) {
+          const a = colDots[i];
+          const b = colDots[i + 1];
+          const avgT = (a.t + b.t) / 2;
+          if (avgT < 0.05) continue;
+
+          const alpha = avgT * 0.3 * glowIntensity;
+
+          const wave1 = Math.sin(time * 0.8 + a.y * 0.02 + a.x * 0.01) * 6 * avgT;
+          const wave2 = Math.sin(time * 0.8 + b.y * 0.02 + b.x * 0.01) * 6 * avgT;
+
+          ctx.beginPath();
+          ctx.moveTo(a.x + wave1, a.y);
+          ctx.quadraticCurveTo((a.x + b.x) / 2 - 10 * avgT, (a.y + b.y) / 2, b.x + wave2, b.y);
+          ctx.strokeStyle = `rgba(239, 68, 68, ${alpha * 0.5})`;
+          ctx.lineWidth = 1;
+          ctx.stroke();
+
+          ctx.beginPath();
+          ctx.moveTo(a.x - wave1, a.y);
+          ctx.quadraticCurveTo((a.x + b.x) / 2 + 10 * avgT, (a.y + b.y) / 2, b.x - wave2, b.y);
+          ctx.strokeStyle = `rgba(239, 68, 68, ${alpha * 0.35})`;
+          ctx.lineWidth = 0.8;
+          ctx.stroke();
+        }
+      }
+
+      // Draw the dots on top
+      for (const d of dots) {
+        const alpha = d.t * 0.8 * glowIntensity;
+        const size = d.t * 3.5 + 1;
+
+        // Outer glow
+        ctx.beginPath();
+        ctx.arc(d.x, d.y, size + 3, 0, Math.PI * 2);
+        ctx.fillStyle = `rgba(239, 68, 68, ${alpha * 0.2})`;
+        ctx.fill();
+
+        // Core dot
+        ctx.beginPath();
+        ctx.arc(d.x, d.y, size, 0, Math.PI * 2);
+        ctx.fillStyle = `rgba(239, 68, 68, ${alpha})`;
+        ctx.fill();
+
+        // Bright center
+        ctx.beginPath();
+        ctx.arc(d.x, d.y, size * 0.4, 0, Math.PI * 2);
+        ctx.fillStyle = `rgba(255, 150, 150, ${alpha * 0.6})`;
+        ctx.fill();
+      }
     }
 
-    // Ripple rings that spread from cursor
+    // Ripple rings
     if (isHovering && Math.random() > 0.96) {
       ripples.push({ x: mouseX, y: mouseY, r: 5, alpha: 0.25 });
     }
