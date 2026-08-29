@@ -4,6 +4,16 @@ import Navigation from '../../components/Navigation.astro';
 import Footer from '../../components/Footer.astro';
 
 const projects = {
+  h1cli: {
+    title: "h1cli",
+    description: "All-in-one HackerOne CLI for bug bounty hunters. Browse programs, filter by asset type, export recon-ready scopes, track reports and earnings — all from your terminal.",
+    cat: "web",
+    tags: ["Python", "Bug Bounty", "HackerOne", "CLI"],
+    features: ["Browse all HackerOne programs from terminal", "Filter by asset type (Domain, CIDR, URL, iOS, Android)", "Export scope to subfinder/httpx/nuclei-ready format", "Track reports, bounties, and earnings", "Diff mode for new programs since last run", "Filter presets and per-program notes", "Secure token storage via OS keyring", "Multiple output formats: Table, CSV, JSON"],
+    tech: ["Python 3.7+", "requests", "keyring", "HackerOne API v1"],
+    install: "git clone https://github.com/0xCyb3rgh0st/h1cli && pip install requests keyring",
+    usage: "python h1cli.py                          # interactive mode\npython h1cli.py list --bounty --asset DOMAIN  # CLI mode\npython h1cli.py export --bounty --combine targets.txt",
+  },
   pwnlibc: {
     title: "pwnlibc",
     description: "Advanced libc identification toolkit for exploit development.",
@@ -28,6 +38,7 @@ const projects = {
 
 export function getStaticPaths() {
   return [
+    { params: { slug: 'h1cli' } },
     { params: { slug: 'pwnlibc' } },
     { params: { slug: 'ghidra-open' } },
   ];
