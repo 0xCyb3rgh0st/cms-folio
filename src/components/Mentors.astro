@@ -1,0 +1,47 @@
+---
+const channels = [
+  { handle: "ippsec", name: "IppSec", note: "the legend", url: "https://www.youtube.com/@ippsec" },
+  { handle: "_JohnHammond", name: "John Hammond", url: "https://www.youtube.com/@_JohnHammond" },
+  { handle: "0xdf", name: "0xdf", url: "https://www.youtube.com/@0xdf" },
+  { handle: "RazviOverflow", name: "RazviOverflow", url: "https://www.youtube.com/@RazviOverflow" },
+  { handle: "xct_de", name: "xct", url: "https://www.youtube.com/@xct_de" },
+  { handle: "theurbanpenguin", name: "The Urban Penguin", url: "https://www.youtube.com/@theurbanpenguin" },
+  { handle: "hexdump1337", name: "hexdump1337", url: "https://www.youtube.com/@hexdump1337" },
+  { handle: "PwnFunction", name: "PwnFunction", url: "https://www.youtube.com/@PwnFunction" },
+  { handle: "InsiderPhD", name: "InsiderPhD", url: "https://www.youtube.com/@InsiderPhD" },
+  { handle: "_CryptoCat", name: "CryptoCat", url: "https://www.youtube.com/@_CryptoCat" },
+  { handle: "chrisalupului", name: "Chris Alupului", url: "https://www.youtube.com/@chrisalupului" },
+  { handle: "cyberryan", name: "CyberRyan", url: "https://www.youtube.com/@cyberryan" },
+];
+---
+<section id="learned-from" style="padding:96px 24px;" aria-labelledby="learned-heading">
+  <div style="max-width:1200px;margin:0 auto;">
+    <p style="font-family:'JetBrains Mono',monospace;color:var(--green);font-size:0.8rem;text-transform:uppercase;letter-spacing:0.15em;margin-bottom:8px;">// learned from</p>
+    <h2 id="learned-heading" style="font-size:clamp(1.75rem,4vw,2.5rem);font-weight:700;margin-bottom:8px;">
+      <span style="color:var(--text);">People Who </span><span style="background:linear-gradient(135deg,var(--green),var(--cyan));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;">Taught Me</span>
+    </h2>
+    <p style="color:var(--text-muted);margin-bottom:40px;max-width:600px;">The YouTube channels that shaped how I think about security. Every one of these people made me better.</p>
+
+    <div style="background:var(--bg-secondary);border:1px solid var(--border);border-radius:var(--radius);overflow:hidden;">
+      <div style="background:var(--bg-tertiary);padding:10px 16px;display:flex;align-items:center;gap:6px;border-bottom:1px solid var(--border);">
+        <div style="width:10px;height:10px;border-radius:50%;background:var(--red);"></div>
+        <div style="width:10px;height:10px;border-radius:50%;background:var(--yellow);"></div>
+        <div style="width:10px;height:10px;border-radius:50%;background:var(--green);"></div>
+        <span style="margin-left:8px;color:var(--text-muted);font-size:0.75rem;font-family:'JetBrains Mono',monospace;">mentors.sh</span>
+      </div>
+      <div style="padding:24px;font-family:'JetBrains Mono',monospace;font-size:0.85rem;line-height:1.8;">
+        <p style="color:var(--green);">$ cat ~/.mentors</p>
+        {channels.map((ch) => (
+          <p style="padding-left:16px;">
+            {ch.handle === "ippsec" ? (
+              <span><span style="color:var(--yellow);">★</span> <a href={ch.url} target="_blank" rel="noopener" style="color:var(--cyan);text-decoration:none;transition:opacity 0.2s;" onmouseover="this.style.opacity='0.7'" onmouseout="this.style.opacity='1'"><span style="color:var(--green);">learn</span> {ch.handle}</a> <span style="color:var(--text-muted);">#{ch.note}</span></span>
+            ) : (
+              <span><span style="color:var(--green);">learn</span> <a href={ch.url} target="_blank" rel="noopener" style="color:var(--cyan);text-decoration:none;transition:opacity 0.2s;" onmouseover="this.style.opacity='0.7'" onmouseout="this.style.opacity='1'">{ch.handle}</a></span>
+            )}
+          </p>
+        ))}
+        <p style="margin-top:16px;color:var(--green);">$ echo "Thank you all."</p>
+      </div>
+    </div>
+  </div>
+</section>
