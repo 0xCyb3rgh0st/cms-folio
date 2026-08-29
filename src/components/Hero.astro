@@ -1,27 +1,35 @@
 ---
 ---
 <section style="position:relative;min-height:100vh;display:flex;align-items:center;overflow:hidden;">
-  <canvas id="matrix-rain" class="hero-parallax" style="position:absolute;inset:0;width:100%;height:100%;opacity:0.06;" aria-hidden="true"></canvas>
-  <div class="hero-parallax" style="position:absolute;inset:0;background:linear-gradient(135deg,rgba(10,10,10,0.95) 40%,rgba(10,10,10,0.7) 100%);"></div>
+  <!-- Particle constellation background -->
+  <canvas id="constellation" style="position:absolute;inset:0;width:100%;height:100%;z-index:1;" aria-hidden="true"></canvas>
+  
+  <!-- Radial vignette -->
+  <div style="position:absolute;inset:0;background:radial-gradient(ellipse at center,transparent 30%,var(--bg-primary) 80%);z-index:2;pointer-events:none;" aria-hidden="true"></div>
+  
+  <!-- Scanlines -->
   <div class="crt-overlay" aria-hidden="true"></div>
 
   <div class="hero-content-parallax" style="position:relative;z-index:10;width:100%;max-width:1200px;margin:0 auto;padding:120px 48px 80px;display:grid;grid-template-columns:1fr 1fr;gap:60px;align-items:center;">
     
     <!-- Left: Text -->
     <div>
-      <p style="font-family:'Source Code Pro',monospace;color:var(--red);font-size:0.8rem;letter-spacing:0.2em;text-transform:uppercase;margin-bottom:16px;opacity:0;animation:fadeSlideUp 0.6s ease forwards 0.2s;">whoami</p>
-      <h1 style="font-size:clamp(2.5rem,6vw,4rem);font-weight:800;margin-bottom:20px;line-height:1.1;opacity:0;animation:fadeSlideUp 0.6s ease forwards 0.4s;">
-        <span style="color:#ffffff;">Jatin</span>
-        <span style="color:#ffffff;"> Singh</span>
+      <div style="display:inline-flex;align-items:center;gap:8px;padding:6px 14px;border:1px solid rgba(239,68,68,0.2);border-radius:999px;margin-bottom:24px;opacity:0;animation:fadeSlideUp 0.6s ease forwards 0.2s;">
+        <span style="width:6px;height:6px;border-radius:50%;background:var(--red);box-shadow:0 0 8px var(--red);animation:pulse-glow 2s ease-in-out infinite;"></span>
+        <span style="font-family:'Source Code Pro',monospace;color:var(--red);font-size:0.75rem;letter-spacing:0.15em;text-transform:uppercase;">available for hire</span>
+      </div>
+      <h1 style="font-size:clamp(2.8rem,7vw,4.5rem);font-weight:800;margin-bottom:16px;line-height:1.05;opacity:0;animation:fadeSlideUp 0.6s ease forwards 0.4s;">
+        <span style="color:#ffffff;">Jatin</span><br/>
+        <span style="color:#ffffff;">Singh</span>
       </h1>
-      <p style="font-size:1.05rem;color:var(--text-muted);font-family:'Source Code Pro',monospace;margin-bottom:12px;opacity:0;animation:fadeSlideUp 0.6s ease forwards 0.6s;">
-        <span style="color:var(--red);">&gt;</span> <span id="hero-typing"></span><span style="color:var(--red);animation:pulse-glow 1.5s ease-in-out infinite;">_</span>
+      <p style="font-size:1.1rem;color:var(--text-muted);font-family:'Source Code Pro',monospace;margin-bottom:8px;opacity:0;animation:fadeSlideUp 0.6s ease forwards 0.6s;">
+        <span style="color:var(--red);">$</span> <span id="hero-typing"></span><span style="color:var(--red);animation:pulse-glow 1.5s ease-in-out infinite;">_</span>
       </p>
-      <p style="font-size:0.95rem;color:var(--text-muted);max-width:500px;line-height:1.8;margin-bottom:36px;opacity:0;animation:fadeSlideUp 0.6s ease forwards 0.8s;">
+      <p style="font-size:0.95rem;color:var(--text-muted);max-width:480px;line-height:1.8;margin-bottom:36px;opacity:0;animation:fadeSlideUp 0.6s ease forwards 0.8s;">
         Security researcher. I like finding bugs, writing exploits, and automating things I'm too lazy to do twice.
       </p>
       <div style="display:flex;gap:12px;align-items:center;flex-wrap:wrap;opacity:0;animation:fadeSlideUp 0.6s ease forwards 1s;">
-        <a href="#projects" style="padding:14px 32px;background:var(--red);color:#fff;font-family:'Source Code Pro',monospace;font-weight:600;border-radius:var(--radius);font-size:0.875rem;transition:all 0.2s ease-in-out;display:inline-flex;align-items:center;gap:8px;" onmouseover="this.style.boxShadow='0 0 24px rgba(239,68,68,0.35)';this.style.transform='translateY(-1px)'" onmouseout="this.style.boxShadow='none';this.style.transform='none'">
+        <a href="#projects" style="padding:14px 32px;background:var(--red);color:#fff;font-family:'Source Code Pro',monospace;font-weight:600;border-radius:var(--radius);font-size:0.875rem;transition:all 0.2s ease-in-out;display:inline-flex;align-items:center;gap:8px;" onmouseover="this.style.boxShadow='0 0 30px rgba(239,68,68,0.4)';this.style.transform='translateY(-2px)'" onmouseout="this.style.boxShadow='none';this.style.transform='none'">
           View Projects
           <span class="arrow-hover" style="transition:transform 0.2s ease-in-out;">&rarr;</span>
         </a>
@@ -29,14 +37,47 @@
           Contact Me
         </a>
       </div>
-      <p style="margin-top:24px;font-size:0.8rem;color:var(--text-muted);font-family:'Source Code Pro',monospace;opacity:0;animation:fadeSlideUp 0.6s ease forwards 1.2s;">
-        <span style="color:var(--red);">Open to relocation within EU</span> &middot; Eligible for UK/EU work visas
-      </p>
+      <div style="margin-top:28px;display:flex;gap:24px;opacity:0;animation:fadeSlideUp 0.6s ease forwards 1.2s;">
+        <div style="text-align:center;">
+          <p style="font-size:1.5rem;font-weight:700;color:var(--text);">6+</p>
+          <p style="font-size:0.7rem;color:var(--text-muted);font-family:'Source Code Pro',monospace;text-transform:uppercase;letter-spacing:0.1em;">Projects</p>
+        </div>
+        <div style="width:1px;background:var(--border);"></div>
+        <div style="text-align:center;">
+          <p style="font-size:1.5rem;font-weight:700;color:var(--text);">5</p>
+          <p style="font-size:0.7rem;color:var(--text-muted);font-family:'Source Code Pro',monospace;text-transform:uppercase;letter-spacing:0.1em;">Certs</p>
+        </div>
+        <div style="width:1px;background:var(--border);"></div>
+        <div style="text-align:center;">
+          <p style="font-size:1.5rem;font-weight:700;color:var(--text);">NASA</p>
+          <p style="font-size:0.7rem;color:var(--text-muted);font-family:'Source Code Pro',monospace;text-transform:uppercase;letter-spacing:0.1em;">Recognized</p>
+        </div>
+      </div>
     </div>
 
-    <!-- Right: Frame -->
-    <div class="hero-frame-wrap" aria-hidden="true">
-      <img src="/hero-combined.svg" alt="" width="520" height="520" style="width:100%;max-width:520px;height:auto;" />
+    <!-- Right: Terminal card -->
+    <div class="hero-terminal-card" style="opacity:0;animation:fadeSlideUp 0.8s ease forwards 0.6s;">
+      <div style="background:var(--bg-secondary);border:1px solid var(--border);border-radius:16px;overflow:hidden;box-shadow:0 20px 60px rgba(0,0,0,0.5),0 0 40px rgba(239,68,68,0.05);">
+        <!-- Terminal header -->
+        <div style="display:flex;align-items:center;gap:8px;padding:14px 18px;border-bottom:1px solid var(--border);background:var(--bg-tertiary);">
+          <div style="width:12px;height:12px;border-radius:50%;background:#ef4444;"></div>
+          <div style="width:12px;height:12px;border-radius:50%;background:#f59e0b;"></div>
+          <div style="width:12px;height:12px;border-radius:50%;background:#22c55e;"></div>
+          <span style="margin-left:12px;font-family:'Source Code Pro',monospace;font-size:0.75rem;color:var(--text-muted);">jatin@kathmandu</span>
+        </div>
+        <!-- Terminal body -->
+        <div style="padding:20px;font-family:'Source Code Pro',monospace;font-size:0.8rem;line-height:2;">
+          <p style="color:var(--text-muted);"><span style="color:var(--red);">~</span> $ cat whoami.txt</p>
+          <p style="color:var(--text);padding-left:12px;">Jatin Singh Tomar</p>
+          <p style="color:var(--text-muted);"><span style="color:var(--red);">~</span> $ cat role.txt</p>
+          <p style="color:var(--text);padding-left:12px;">Security Researcher & Exploit Dev</p>
+          <p style="color:var(--text-muted);"><span style="color:var(--red);">~</span> $ cat location.txt</p>
+          <p style="color:var(--text);padding-left:12px;">Kathmandu, Nepal</p>
+          <p style="color:var(--text-muted);"><span style="color:var(--red);">~</span> $ cat certs.txt</p>
+          <p style="color:var(--text);padding-left:12px;">CRTO | CPTS | eWPTXv3 | CRTA | ACP</p>
+          <p style="color:var(--text-muted);"><span style="color:var(--red);">~</span> $ <span style="color:var(--red);animation:pulse-glow 1.5s ease-in-out infinite;">_</span></p>
+        </div>
+      </div>
     </div>
   </div>
 
@@ -45,48 +86,127 @@
   </div>
 </section>
 
-<script>
+<script is:inline>
+(function() {
   const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const canvas = document.getElementById('constellation');
+  if (!canvas) return;
+  const ctx = canvas.getContext('2d');
+  if (!ctx) return;
+
+  let w, h, particles = [], mouse = { x: -1000, y: -1000 };
+
+  function resize() {
+    w = canvas.width = window.innerWidth;
+    h = canvas.height = window.innerHeight;
+  }
+  resize();
+  window.addEventListener('resize', resize);
 
   if (!prefersReducedMotion) {
-    const canvas = document.getElementById('matrix-rain') as HTMLCanvasElement;
-    if (canvas) {
-      const ctx = canvas.getContext('2d');
-      if (ctx) {
-        canvas.width = window.innerWidth;
-        canvas.height = window.innerHeight;
-        const chars = '01アイウエオカキクケコサシスセソタチツテトナニヌネノハヒフヘホマミムメモヤユヨラリルレロワヲン';
-        const fontSize = 14;
-        const columns = Math.floor(canvas.width / fontSize);
-        const drops: number[] = Array(columns).fill(1);
-        function draw() {
-          ctx.fillStyle = 'rgba(10, 10, 10, 0.06)';
-          ctx.fillRect(0, 0, canvas.width, canvas.height);
-          ctx.fillStyle = '#ef4444';
-          ctx.font = `${fontSize}px "Source Code Pro", monospace`;
-          for (let i = 0; i < drops.length; i++) {
-            const text = chars[Math.floor(Math.random() * chars.length)];
-            ctx.globalAlpha = 0.12 + Math.random() * 0.2;
-            ctx.fillText(text, i * fontSize, drops[i] * fontSize);
-            if (drops[i] * fontSize > canvas.height && Math.random() > 0.975) drops[i] = 0;
-            drops[i]++;
-          }
-          ctx.globalAlpha = 1;
-          requestAnimationFrame(draw);
-        }
-        draw();
-        window.addEventListener('resize', () => { canvas.width = window.innerWidth; canvas.height = window.innerHeight; });
+    document.addEventListener('mousemove', function(e) {
+      mouse.x = e.clientX;
+      mouse.y = e.clientY;
+    });
+  }
+
+  class Particle {
+    constructor() {
+      this.reset();
+    }
+    reset() {
+      this.x = Math.random() * w;
+      this.y = Math.random() * h;
+      this.vx = (Math.random() - 0.5) * 0.4;
+      this.vy = (Math.random() - 0.5) * 0.4;
+      this.size = Math.random() * 2 + 0.5;
+      this.baseAlpha = Math.random() * 0.5 + 0.1;
+      this.alpha = this.baseAlpha;
+    }
+    update() {
+      this.x += this.vx;
+      this.y += this.vy;
+      if (this.x < 0 || this.x > w) this.vx *= -1;
+      if (this.y < 0 || this.y > h) this.vy *= -1;
+
+      // Glow near mouse
+      const dx = this.x - mouse.x;
+      const dy = this.y - mouse.y;
+      const dist = Math.sqrt(dx * dx + dy * dy);
+      if (dist < 200) {
+        this.alpha = this.baseAlpha + (1 - dist / 200) * 0.6;
+        this.size = Math.min(this.size + 0.02, 3.5);
+      } else {
+        this.alpha += (this.baseAlpha - this.alpha) * 0.05;
+        this.size += (Math.random() * 2 + 0.5 - this.size) * 0.01;
       }
+    }
+    draw() {
+      ctx.beginPath();
+      ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
+      ctx.fillStyle = `rgba(239, 68, 68, ${this.alpha})`;
+      ctx.fill();
     }
   }
 
+  // Create particles
+  const count = Math.min(Math.floor((w * h) / 12000), 120);
+  for (let i = 0; i < count; i++) particles.push(new Particle());
+
+  function drawConnections() {
+    for (let i = 0; i < particles.length; i++) {
+      for (let j = i + 1; j < particles.length; j++) {
+        const dx = particles[i].x - particles[j].x;
+        const dy = particles[i].y - particles[j].y;
+        const dist = Math.sqrt(dx * dx + dy * dy);
+        if (dist < 150) {
+          const alpha = (1 - dist / 150) * 0.15;
+          ctx.beginPath();
+          ctx.moveTo(particles[i].x, particles[i].y);
+          ctx.lineTo(particles[j].x, particles[j].y);
+          ctx.strokeStyle = `rgba(239, 68, 68, ${alpha})`;
+          ctx.lineWidth = 0.5;
+          ctx.stroke();
+        }
+      }
+    }
+
+    // Mouse connections
+    particles.forEach(p => {
+      const dx = p.x - mouse.x;
+      const dy = p.y - mouse.y;
+      const dist = Math.sqrt(dx * dx + dy * dy);
+      if (dist < 250) {
+        const alpha = (1 - dist / 250) * 0.3;
+        ctx.beginPath();
+        ctx.moveTo(p.x, p.y);
+        ctx.lineTo(mouse.x, mouse.y);
+        ctx.strokeStyle = `rgba(239, 68, 68, ${alpha})`;
+        ctx.lineWidth = 0.8;
+        ctx.stroke();
+      }
+    });
+  }
+
+  function animate() {
+    ctx.clearRect(0, 0, w, h);
+    particles.forEach(p => { p.update(); p.draw(); });
+    drawConnections();
+    requestAnimationFrame(animate);
+  }
+
+  if (!prefersReducedMotion) {
+    animate();
+  } else {
+    // Static particles
+    particles.forEach(p => p.draw());
+  }
+
+  // Typing effect
   const typeEl = document.getElementById('hero-typing');
   if (typeEl && !prefersReducedMotion) {
-    const phrases = ['Security Researcher & Exploit Developer', 'Binary Exploitation', 'Reverse Engineering', 'Building Open Source Tools', 'Bug Bounty Hunter'];
-    let phraseIdx = 0;
-    let charIdx = 0;
-    let deleting = false;
-    let delay = 100;
+    const phrases = ['security researcher & exploit developer', 'binary exploitation', 'reverse engineering', 'building open source tools', 'bug bounty hunter'];
+    let phraseIdx = 0, charIdx = 0, deleting = false, delay = 100;
     function type() {
       const current = phrases[phraseIdx];
       if (!deleting) {
@@ -102,18 +222,12 @@
     }
     type();
   } else if (typeEl) {
-    typeEl.textContent = 'Security Researcher & Exploit Developer';
+    typeEl.textContent = 'security researcher & exploit developer';
   }
+})();
 </script>
 
 <style>
-  .hero-frame-wrap {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    opacity: 0.6;
-    animation: fadeSlideUp 0.8s ease forwards 0.4s;
-  }
   .crt-overlay {
     position: absolute;
     inset: 0;
@@ -127,13 +241,16 @@
     pointer-events: none;
     z-index: 5;
   }
+  .hero-terminal-card {
+    filter: drop-shadow(0 20px 40px rgba(0,0,0,0.4));
+  }
   @media (max-width: 768px) {
     .hero-content-parallax {
       grid-template-columns: 1fr !important;
       padding: 100px 24px 60px !important;
       text-align: center;
     }
-    .hero-frame-wrap {
+    .hero-terminal-card {
       display: none !important;
     }
   }
