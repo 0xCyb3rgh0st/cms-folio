@@ -9,6 +9,8 @@ const projects = {
     description: "All-in-one HackerOne CLI for bug bounty hunters. Browse programs, filter by asset type, export recon-ready scopes, track reports and earnings.",
     cat: "web",
     tags: ["Python", "Bug Bounty", "HackerOne", "CLI"],
+    whyItMatters: "Bug bounty hunters waste hours manually copying program scopes into recon tools. h1cli eliminates this friction entirely.",
+    impact: "Used by bounty hunters to automate HackerOne program discovery and scope management.",
     features: ["Browse all HackerOne programs from terminal", "Filter by asset type (Domain, CIDR, URL, iOS, Android)", "Export scope to subfinder/httpx/nuclei-ready format", "Track reports, bounties, and earnings", "Diff mode for new programs since last run", "Filter presets and per-program notes", "Secure token storage via OS keyring", "Multiple output formats: Table, CSV, JSON"],
     tech: ["Python 3.7+", "requests", "keyring", "HackerOne API v1"],
     install: "git clone https://github.com/0xCyb3rgh0st/h1cli && pip install requests keyring",
@@ -19,6 +21,8 @@ const projects = {
     description: "Advanced libc identification toolkit for exploit development.",
     cat: "binary-exploitation",
     tags: ["Python", "Exploit Dev", "CLI", "libc"],
+    whyItMatters: "When exploiting buffer overflows on modern Linux, knowing the exact libc version is critical. Wrong offsets = crash. pwnlibc eliminates the guesswork.",
+    impact: "Automates libc identification from leaked addresses, saving exploit developers hours of manual database lookups.",
     features: ["Fast libc identification from leaked addresses", "Automatic libc download from remote databases", "Symbol lookup and offset calculation", "Python API for integration", "CLI interface for quick usage"],
     tech: ["Python 3.10+", "requests", "argparse", "rich"],
     install: "pip install pwnlibc",
@@ -29,6 +33,8 @@ const projects = {
     description: "One-command launcher for Ghidra. Binary → Automatic Project → Headless Analysis → Launch GUI.",
     cat: "reverse-engineering",
     tags: ["Ghidra", "Automation", "Java", "Binary"],
+    whyItMatters: "Setting up Ghidra projects manually is tedious. ghidra-open turns a 5-step process into one command.",
+    impact: "Used by reverse engineers to automate Ghidra project setup and headless analysis pipelines.",
     features: ["One-command Ghidra project creation", "Automatic headless analysis on import", "GUI launches after analysis completes", "Script integration support", "Cross-platform compatibility"],
     tech: ["Bash", "Java", "Ghidra Scripts", "Python"],
     install: "git clone https://github.com/0xCyb3rgh0st/ghidra_autorun",
@@ -74,6 +80,20 @@ const catColors: Record<string, string> = { "binary-exploitation": "var(--green)
           <span style="display:inline-flex;padding:3px 10px;font-size:0.7rem;font-family:'JetBrains Mono',monospace;border-radius:6px;background:var(--bg-tertiary);color:var(--text-muted);">{t}</span>
         ))}
       </div>
+
+      {project.whyItMatters && (
+        <section style="margin-bottom:40px;padding:20px;background:var(--bg-secondary);border:1px solid var(--border);border-radius:var(--radius);border-left:3px solid var(--green);">
+          <h2 style="font-size:0.9rem;font-weight:600;color:var(--green);margin-bottom:8px;font-family:'JetBrains Mono',monospace;text-transform:uppercase;letter-spacing:0.1em;">Why It Matters</h2>
+          <p style="color:var(--text-muted);line-height:1.7;font-size:0.95rem;">{project.whyItMatters}</p>
+        </section>
+      )}
+
+      {project.impact && (
+        <section style="margin-bottom:40px;padding:20px;background:var(--bg-secondary);border:1px solid var(--border);border-radius:var(--radius);border-left:3px solid var(--cyan);">
+          <h2 style="font-size:0.9rem;font-weight:600;color:var(--cyan);margin-bottom:8px;font-family:'JetBrains Mono',monospace;text-transform:uppercase;letter-spacing:0.1em;">Impact</h2>
+          <p style="color:var(--text-muted);line-height:1.7;font-size:0.95rem;">{project.impact}</p>
+        </section>
+      )}
 
       <section style="margin-bottom:40px;">
         <h2 style="font-size:1.25rem;font-weight:600;color:var(--text);margin-bottom:16px;font-family:'JetBrains Mono',monospace;">
