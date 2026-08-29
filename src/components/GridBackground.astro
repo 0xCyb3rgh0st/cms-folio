@@ -56,14 +56,14 @@
     for (let x = 0; x <= w; x += gridSize) {
       const distX = Math.abs(x - mouseX);
       const brightX = distX < glowRadius ? (1 - distX / glowRadius) * glowIntensity : 0;
-      ctx.strokeStyle = `rgba(239, 68, 68, ${0.02 + brightX * 0.05})`;
+      ctx.strokeStyle = `rgba(239, 68, 68, ${0.015 + brightX * 0.04})`;
       ctx.lineWidth = 1;
       ctx.beginPath(); ctx.moveTo(x, 0); ctx.lineTo(x, h); ctx.stroke();
     }
     for (let y = 0; y <= h; y += gridSize) {
       const distY = Math.abs(y - mouseY);
       const brightY = distY < glowRadius ? (1 - distY / glowRadius) * glowIntensity : 0;
-      ctx.strokeStyle = `rgba(239, 68, 68, ${0.02 + brightY * 0.05})`;
+      ctx.strokeStyle = `rgba(239, 68, 68, ${0.015 + brightY * 0.04})`;
       ctx.lineWidth = 1;
       ctx.beginPath(); ctx.moveTo(0, y); ctx.lineTo(w, y); ctx.stroke();
     }
@@ -72,13 +72,13 @@
     for (let x = 0; x <= w; x += gridSize * 5) {
       const distX = Math.abs(x - mouseX);
       const brightX = distX < glowRadius ? (1 - distX / glowRadius) * glowIntensity : 0;
-      ctx.strokeStyle = `rgba(239, 68, 68, ${0.03 + brightX * 0.07})`;
+      ctx.strokeStyle = `rgba(239, 68, 68, ${0.02 + brightX * 0.05})`;
       ctx.beginPath(); ctx.moveTo(x, 0); ctx.lineTo(x, h); ctx.stroke();
     }
     for (let y = 0; y <= h; y += gridSize * 5) {
       const distY = Math.abs(y - mouseY);
       const brightY = distY < glowRadius ? (1 - distY / glowRadius) * glowIntensity : 0;
-      ctx.strokeStyle = `rgba(239, 68, 68, ${0.03 + brightY * 0.07})`;
+      ctx.strokeStyle = `rgba(239, 68, 68, ${0.02 + brightY * 0.05})`;
       ctx.beginPath(); ctx.moveTo(0, y); ctx.lineTo(w, y); ctx.stroke();
     }
 
