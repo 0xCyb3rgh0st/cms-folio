@@ -1,4 +1,6 @@
 ---
+import Terminal from '../components/Terminal.astro';
+
 interface Props {
   title?: string;
   description?: string;
@@ -43,6 +45,7 @@ const { title = "Jatin Singh | Cybersecurity Researcher", description = "Cyberse
       Skip to content
     </a>
     <slot />
+    <Terminal />
   </body>
 </html>
 <style is:global>
