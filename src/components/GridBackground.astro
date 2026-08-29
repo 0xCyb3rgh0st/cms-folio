@@ -14,8 +14,11 @@
   let w, h;
   let mouseX = -1000, mouseY = -1000;
   let targetX = -1000, targetY = -1000;
+  let isHovering = false;
   const gridSize = 40;
-  const glowRadius = 180;
+  const glowRadius = 350;
+  let glowIntensity = 0;
+  let ripples = [];
 
   function resize() {
     w = canvas.width = window.innerWidth;
@@ -28,6 +31,10 @@
     document.addEventListener('mousemove', function(e) {
       targetX = e.clientX;
       targetY = e.clientY;
+      isHovering = true;
+    });
+    document.addEventListener('mouseleave', function() {
+      isHovering = false;
     });
   }
 
@@ -35,55 +42,87 @@
     ctx.clearRect(0, 0, w, h);
 
     // Smooth follow
-    mouseX += (targetX - mouseX) * 0.08;
-    mouseY += (targetY - mouseY) * 0.08;
+    mouseX += (targetX - mouseX) * 0.06;
+    mouseY += (targetY - mouseY) * 0.06;
 
-    // Draw grid lines
-    ctx.strokeStyle = 'rgba(239, 68, 68, 0.04)';
-    ctx.lineWidth = 1;
+    // Glow intensity fade
+    if (isHovering) {
+      glowIntensity += (1 - glowIntensity) * 0.04;
+    } else {
+      glowIntensity += (0 - glowIntensity) * 0.03;
+    }
 
-    // Vertical lines
-    for (let x = 0; x <= w; x += gridSize) {
+    // Draw grid lines — brighter near cursor
+    const lineStep = gridSize;
+    for (let x = 0; x <= w; x += lineStep) {
+      const dx = x - mouseX;
+      const distX = Math.abs(dx);
+      const brightX = distX < glowRadius ? (1 - distX / glowRadius) * glowIntensity : 0;
+      const alpha = 0.03 + brightX * 0.12;
+      ctx.strokeStyle = `rgba(239, 68, 68, ${alpha})`;
+      ctx.lineWidth = 1;
       ctx.beginPath();
       ctx.moveTo(x, 0);
       ctx.lineTo(x, h);
       ctx.stroke();
     }
-
-    // Horizontal lines
-    for (let y = 0; y <= h; y += gridSize) {
+    for (let y = 0; y <= h; y += lineStep) {
+      const dy = y - mouseY;
+      const distY = Math.abs(dy);
+      const brightY = distY < glowRadius ? (1 - distY / glowRadius) * glowIntensity : 0;
+      const alpha = 0.03 + brightY * 0.12;
+      ctx.strokeStyle = `rgba(239, 68, 68, ${alpha})`;
+      ctx.lineWidth = 1;
       ctx.beginPath();
       ctx.moveTo(0, y);
       ctx.lineTo(w, y);
       ctx.stroke();
     }
 
-    // Brighter lines every 5 cells
-    ctx.strokeStyle = 'rgba(239, 68, 68, 0.07)';
-    ctx.lineWidth = 1;
+    // Major grid lines (every 5 cells)
     for (let x = 0; x <= w; x += gridSize * 5) {
+      const dx = x - mouseX;
+      const distX = Math.abs(dx);
+      const brightX = distX < glowRadius ? (1 - distX / glowRadius) * glowIntensity : 0;
+      ctx.strokeStyle = `rgba(239, 68, 68, ${0.05 + brightX * 0.15})`;
+      ctx.lineWidth = 1;
       ctx.beginPath();
       ctx.moveTo(x, 0);
       ctx.lineTo(x, h);
       ctx.stroke();
     }
     for (let y = 0; y <= h; y += gridSize * 5) {
+      const dy = y - mouseY;
+      const distY = Math.abs(dy);
+      const brightY = distY < glowRadius ? (1 - distY / glowRadius) * glowIntensity : 0;
+      ctx.strokeStyle = `rgba(239, 68, 68, ${0.05 + brightY * 0.15})`;
+      ctx.lineWidth = 1;
       ctx.beginPath();
       ctx.moveTo(0, y);
       ctx.lineTo(w, y);
       ctx.stroke();
     }
 
-    // Hover glow
-    if (mouseX > 0 && mouseY > 0) {
-      const gradient = ctx.createRadialGradient(mouseX, mouseY, 0, mouseX, mouseY, glowRadius);
-      gradient.addColorStop(0, 'rgba(239, 68, 68, 0.12)');
-      gradient.addColorStop(0.4, 'rgba(239, 68, 68, 0.06)');
-      gradient.addColorStop(1, 'rgba(239, 68, 68, 0)');
-      ctx.fillStyle = gradient;
+    // Hover glow — big radial spread
+    if (glowIntensity > 0.01) {
+      const g1 = ctx.createRadialGradient(mouseX, mouseY, 0, mouseX, mouseY, glowRadius);
+      g1.addColorStop(0, `rgba(239, 68, 68, ${0.18 * glowIntensity})`);
+      g1.addColorStop(0.2, `rgba(239, 68, 68, ${0.10 * glowIntensity})`);
+      g1.addColorStop(0.5, `rgba(239, 68, 68, ${0.04 * glowIntensity})`);
+      g1.addColorStop(1, 'rgba(239, 68, 68, 0)');
+      ctx.fillStyle = g1;
       ctx.fillRect(mouseX - glowRadius, mouseY - glowRadius, glowRadius * 2, glowRadius * 2);
 
-      // Intersection highlight — glow at grid intersections near cursor
+      // Extra inner bright spot
+      const g2 = ctx.createRadialGradient(mouseX, mouseY, 0, mouseX, mouseY, 80);
+      g2.addColorStop(0, `rgba(239, 68, 68, ${0.15 * glowIntensity})`);
+      g2.addColorStop(1, 'rgba(239, 68, 68, 0)');
+      ctx.fillStyle = g2;
+      ctx.fillRect(mouseX - 80, mouseY - 80, 160, 160);
+    }
+
+    // Intersection dots — bigger and brighter near cursor
+    if (glowIntensity > 0.01) {
       const startCol = Math.floor((mouseX - glowRadius) / gridSize);
       const endCol = Math.ceil((mouseX + glowRadius) / gridSize);
       const startRow = Math.floor((mouseY - glowRadius) / gridSize);
@@ -97,8 +136,9 @@
           const dy = iy - mouseY;
           const dist = Math.sqrt(dx * dx + dy * dy);
           if (dist < glowRadius) {
-            const alpha = (1 - dist / glowRadius) * 0.5;
-            const size = (1 - dist / glowRadius) * 3 + 1;
+            const t = 1 - dist / glowRadius;
+            const alpha = t * 0.7 * glowIntensity;
+            const size = t * 4 + 0.8;
             ctx.beginPath();
             ctx.arc(ix, iy, size, 0, Math.PI * 2);
             ctx.fillStyle = `rgba(239, 68, 68, ${alpha})`;
@@ -108,13 +148,31 @@
       }
     }
 
+    // Ripple rings that spread from cursor
+    if (isHovering && Math.random() > 0.96) {
+      ripples.push({ x: mouseX, y: mouseY, r: 5, alpha: 0.25 });
+    }
+    for (let i = ripples.length - 1; i >= 0; i--) {
+      const rip = ripples[i];
+      rip.r += 2.5;
+      rip.alpha -= 0.003;
+      if (rip.alpha <= 0 || rip.r > glowRadius) {
+        ripples.splice(i, 1);
+        continue;
+      }
+      ctx.beginPath();
+      ctx.arc(rip.x, rip.y, rip.r, 0, Math.PI * 2);
+      ctx.strokeStyle = `rgba(239, 68, 68, ${rip.alpha})`;
+      ctx.lineWidth = 1;
+      ctx.stroke();
+    }
+
     requestAnimationFrame(draw);
   }
 
   if (!prefersReducedMotion) {
     draw();
   } else {
-    // Static grid only for reduced motion
     ctx.strokeStyle = 'rgba(239, 68, 68, 0.04)';
     ctx.lineWidth = 1;
     for (let x = 0; x <= w; x += gridSize) {
