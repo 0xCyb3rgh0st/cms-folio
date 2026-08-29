@@ -1,15 +1,6 @@
 ---
 ---
 <section style="position:relative;min-height:100vh;display:flex;align-items:center;overflow:hidden;">
-  <!-- Particle constellation background -->
-  <canvas id="constellation" style="position:absolute;inset:0;width:100%;height:100%;z-index:1;" aria-hidden="true"></canvas>
-  
-  <!-- Radial vignette -->
-  <div style="position:absolute;inset:0;background:radial-gradient(ellipse at center,transparent 30%,var(--bg-primary) 80%);z-index:2;pointer-events:none;" aria-hidden="true"></div>
-  
-  <!-- Scanlines -->
-  <div class="crt-overlay" aria-hidden="true"></div>
-
   <div class="hero-content-parallax" style="position:relative;z-index:10;width:100%;max-width:1200px;margin:0 auto;padding:120px 48px 80px;display:grid;grid-template-columns:1fr 1fr;gap:60px;align-items:center;">
     
     <!-- Left: Text -->
@@ -55,29 +46,14 @@
       </div>
     </div>
 
-    <!-- Right: Terminal card -->
-    <div class="hero-terminal-card" style="opacity:0;animation:fadeSlideUp 0.8s ease forwards 0.6s;">
-      <div style="background:var(--bg-secondary);border:1px solid var(--border);border-radius:16px;overflow:hidden;box-shadow:0 20px 60px rgba(0,0,0,0.5),0 0 40px rgba(239,68,68,0.05);">
-        <!-- Terminal header -->
-        <div style="display:flex;align-items:center;gap:8px;padding:14px 18px;border-bottom:1px solid var(--border);background:var(--bg-tertiary);">
-          <div style="width:12px;height:12px;border-radius:50%;background:#ef4444;"></div>
-          <div style="width:12px;height:12px;border-radius:50%;background:#f59e0b;"></div>
-          <div style="width:12px;height:12px;border-radius:50%;background:#22c55e;"></div>
-          <span style="margin-left:12px;font-family:'Source Code Pro',monospace;font-size:0.75rem;color:var(--text-muted);">jatin@kathmandu</span>
-        </div>
-        <!-- Terminal body -->
-        <div style="padding:20px;font-family:'Source Code Pro',monospace;font-size:0.8rem;line-height:2;">
-          <p style="color:var(--text-muted);"><span style="color:var(--red);">~</span> $ cat whoami.txt</p>
-          <p style="color:var(--text);padding-left:12px;">Jatin Singh Tomar</p>
-          <p style="color:var(--text-muted);"><span style="color:var(--red);">~</span> $ cat role.txt</p>
-          <p style="color:var(--text);padding-left:12px;">Security Researcher & Exploit Dev</p>
-          <p style="color:var(--text-muted);"><span style="color:var(--red);">~</span> $ cat location.txt</p>
-          <p style="color:var(--text);padding-left:12px;">Kathmandu, Nepal</p>
-          <p style="color:var(--text-muted);"><span style="color:var(--red);">~</span> $ cat certs.txt</p>
-          <p style="color:var(--text);padding-left:12px;">CRTO | CPTS | eWPTXv3 | CRTA | ACP</p>
-          <p style="color:var(--text-muted);"><span style="color:var(--red);">~</span> $ <span style="color:var(--red);animation:pulse-glow 1.5s ease-in-out infinite;">_</span></p>
-        </div>
-      </div>
+    <!-- Right: Image with floating dots -->
+    <div class="hero-image-area" style="position:relative;display:flex;align-items:center;justify-content:center;opacity:0;animation:fadeSlideUp 0.8s ease forwards 0.5s;">
+      <!-- Floating dots -->
+      <canvas id="hero-dots" style="position:absolute;inset:-60px;width:calc(100% + 120px);height:calc(100% + 120px);pointer-events:none;" aria-hidden="true"></canvas>
+      <!-- Soft glow behind image -->
+      <div style="position:absolute;width:380px;height:380px;border-radius:50%;background:radial-gradient(circle,rgba(239,68,68,0.08) 0%,transparent 70%);filter:blur(40px);pointer-events:none;" aria-hidden="true"></div>
+      <!-- The image -->
+      <img src="/hero-combined.svg" alt="Jatin Singh" width="420" height="420" style="width:100%;max-width:420px;height:auto;position:relative;z-index:2;filter:drop-shadow(0 0 40px rgba(239,68,68,0.15));" />
     </div>
   </div>
 
@@ -89,118 +65,6 @@
 <script is:inline>
 (function() {
   const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-  const canvas = document.getElementById('constellation');
-  if (!canvas) return;
-  const ctx = canvas.getContext('2d');
-  if (!ctx) return;
-
-  let w, h, particles = [], mouse = { x: -1000, y: -1000 };
-
-  function resize() {
-    w = canvas.width = window.innerWidth;
-    h = canvas.height = window.innerHeight;
-  }
-  resize();
-  window.addEventListener('resize', resize);
-
-  if (!prefersReducedMotion) {
-    document.addEventListener('mousemove', function(e) {
-      mouse.x = e.clientX;
-      mouse.y = e.clientY;
-    });
-  }
-
-  class Particle {
-    constructor() {
-      this.reset();
-    }
-    reset() {
-      this.x = Math.random() * w;
-      this.y = Math.random() * h;
-      this.vx = (Math.random() - 0.5) * 0.4;
-      this.vy = (Math.random() - 0.5) * 0.4;
-      this.size = Math.random() * 2 + 0.5;
-      this.baseAlpha = Math.random() * 0.5 + 0.1;
-      this.alpha = this.baseAlpha;
-    }
-    update() {
-      this.x += this.vx;
-      this.y += this.vy;
-      if (this.x < 0 || this.x > w) this.vx *= -1;
-      if (this.y < 0 || this.y > h) this.vy *= -1;
-
-      // Glow near mouse
-      const dx = this.x - mouse.x;
-      const dy = this.y - mouse.y;
-      const dist = Math.sqrt(dx * dx + dy * dy);
-      if (dist < 200) {
-        this.alpha = this.baseAlpha + (1 - dist / 200) * 0.6;
-        this.size = Math.min(this.size + 0.02, 3.5);
-      } else {
-        this.alpha += (this.baseAlpha - this.alpha) * 0.05;
-        this.size += (Math.random() * 2 + 0.5 - this.size) * 0.01;
-      }
-    }
-    draw() {
-      ctx.beginPath();
-      ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
-      ctx.fillStyle = `rgba(239, 68, 68, ${this.alpha})`;
-      ctx.fill();
-    }
-  }
-
-  // Create particles
-  const count = Math.min(Math.floor((w * h) / 12000), 120);
-  for (let i = 0; i < count; i++) particles.push(new Particle());
-
-  function drawConnections() {
-    for (let i = 0; i < particles.length; i++) {
-      for (let j = i + 1; j < particles.length; j++) {
-        const dx = particles[i].x - particles[j].x;
-        const dy = particles[i].y - particles[j].y;
-        const dist = Math.sqrt(dx * dx + dy * dy);
-        if (dist < 150) {
-          const alpha = (1 - dist / 150) * 0.15;
-          ctx.beginPath();
-          ctx.moveTo(particles[i].x, particles[i].y);
-          ctx.lineTo(particles[j].x, particles[j].y);
-          ctx.strokeStyle = `rgba(239, 68, 68, ${alpha})`;
-          ctx.lineWidth = 0.5;
-          ctx.stroke();
-        }
-      }
-    }
-
-    // Mouse connections
-    particles.forEach(p => {
-      const dx = p.x - mouse.x;
-      const dy = p.y - mouse.y;
-      const dist = Math.sqrt(dx * dx + dy * dy);
-      if (dist < 250) {
-        const alpha = (1 - dist / 250) * 0.3;
-        ctx.beginPath();
-        ctx.moveTo(p.x, p.y);
-        ctx.lineTo(mouse.x, mouse.y);
-        ctx.strokeStyle = `rgba(239, 68, 68, ${alpha})`;
-        ctx.lineWidth = 0.8;
-        ctx.stroke();
-      }
-    });
-  }
-
-  function animate() {
-    ctx.clearRect(0, 0, w, h);
-    particles.forEach(p => { p.update(); p.draw(); });
-    drawConnections();
-    requestAnimationFrame(animate);
-  }
-
-  if (!prefersReducedMotion) {
-    animate();
-  } else {
-    // Static particles
-    particles.forEach(p => p.draw());
-  }
 
   // Typing effect
   const typeEl = document.getElementById('hero-typing');
@@ -224,6 +88,58 @@
   } else if (typeEl) {
     typeEl.textContent = 'security researcher & exploit developer';
   }
+
+  // Floating dots around image
+  if (prefersReducedMotion) return;
+  const canvas = document.getElementById('hero-dots');
+  if (!canvas) return;
+  const ctx = canvas.getContext('2d');
+  if (!ctx) return;
+
+  let w, h;
+  function resize() {
+    const rect = canvas.parentElement.getBoundingClientRect();
+    w = canvas.width = rect.width + 120;
+    h = canvas.height = rect.height + 120;
+  }
+  resize();
+  window.addEventListener('resize', resize);
+
+  const dots = [];
+  const count = 30;
+  for (let i = 0; i < count; i++) {
+    const angle = Math.random() * Math.PI * 2;
+    const radius = 160 + Math.random() * 80;
+    dots.push({
+      angle: angle,
+      radius: radius,
+      speed: (0.002 + Math.random() * 0.004) * (Math.random() > 0.5 ? 1 : -1),
+      size: 1 + Math.random() * 2,
+      alpha: 0.15 + Math.random() * 0.3,
+      drift: Math.random() * 0.3,
+    });
+  }
+
+  function draw() {
+    ctx.clearRect(0, 0, w, h);
+    const cx = w / 2;
+    const cy = h / 2;
+
+    dots.forEach(d => {
+      d.angle += d.speed;
+      const r = d.radius + Math.sin(d.angle * 3) * d.drift * 10;
+      const x = cx + Math.cos(d.angle) * r;
+      const y = cy + Math.sin(d.angle) * r;
+
+      ctx.beginPath();
+      ctx.arc(x, y, d.size, 0, Math.PI * 2);
+      ctx.fillStyle = `rgba(239, 68, 68, ${d.alpha})`;
+      ctx.fill();
+    });
+
+    requestAnimationFrame(draw);
+  }
+  draw();
 })();
 </script>
 
@@ -241,16 +157,13 @@
     pointer-events: none;
     z-index: 5;
   }
-  .hero-terminal-card {
-    filter: drop-shadow(0 20px 40px rgba(0,0,0,0.4));
-  }
   @media (max-width: 768px) {
     .hero-content-parallax {
       grid-template-columns: 1fr !important;
       padding: 100px 24px 60px !important;
       text-align: center;
     }
-    .hero-terminal-card {
+    .hero-image-area {
       display: none !important;
     }
   }
