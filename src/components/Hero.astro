@@ -1,41 +1,46 @@
 ---
 ---
-<section style="position:relative;min-height:100vh;display:flex;align-items:center;justify-content:center;overflow:hidden;">
-  <canvas id="matrix-rain" class="hero-parallax" style="position:absolute;inset:0;width:100%;height:100%;opacity:0.08;" aria-hidden="true"></canvas>
-  <div class="hero-parallax" style="position:absolute;inset:0;background:linear-gradient(to bottom,transparent 0%,var(--bg-primary) 100%);"></div>
+<section style="position:relative;min-height:100vh;display:flex;align-items:center;overflow:hidden;">
+  <canvas id="matrix-rain" class="hero-parallax" style="position:absolute;inset:0;width:100%;height:100%;opacity:0.06;" aria-hidden="true"></canvas>
+  <div class="hero-parallax" style="position:absolute;inset:0;background:linear-gradient(135deg,rgba(10,10,10,0.95) 40%,rgba(10,10,10,0.7) 100%);"></div>
   <div class="crt-overlay" aria-hidden="true"></div>
-  
-  <!-- Hero frame with anonymous figure -->
-  <div class="hero-frame hero-parallax" aria-hidden="true">
-    <img src="/hero-combined.svg" alt="" width="520" height="520" style="width:100%;height:100%;object-fit:contain;" />
+
+  <div class="hero-content-parallax" style="position:relative;z-index:10;width:100%;max-width:1200px;margin:0 auto;padding:120px 48px 80px;display:grid;grid-template-columns:1fr 1fr;gap:60px;align-items:center;">
+    
+    <!-- Left: Text -->
+    <div>
+      <p style="font-family:'Source Code Pro',monospace;color:var(--red);font-size:0.8rem;letter-spacing:0.2em;text-transform:uppercase;margin-bottom:16px;opacity:0;animation:fadeSlideUp 0.6s ease forwards 0.2s;">whoami</p>
+      <h1 style="font-size:clamp(2.5rem,6vw,4rem);font-weight:800;margin-bottom:20px;line-height:1.1;opacity:0;animation:fadeSlideUp 0.6s ease forwards 0.4s;">
+        <span style="color:#ffffff;">Jatin</span>
+        <span style="color:#ffffff;"> Singh</span>
+      </h1>
+      <p style="font-size:1.05rem;color:var(--text-muted);font-family:'Source Code Pro',monospace;margin-bottom:12px;opacity:0;animation:fadeSlideUp 0.6s ease forwards 0.6s;">
+        <span style="color:var(--red);">&gt;</span> <span id="hero-typing"></span><span style="color:var(--red);animation:pulse-glow 1.5s ease-in-out infinite;">_</span>
+      </p>
+      <p style="font-size:0.95rem;color:var(--text-muted);max-width:500px;line-height:1.8;margin-bottom:36px;opacity:0;animation:fadeSlideUp 0.6s ease forwards 0.8s;">
+        Security researcher. I like finding bugs, writing exploits, and automating things I'm too lazy to do twice.
+      </p>
+      <div style="display:flex;gap:12px;align-items:center;flex-wrap:wrap;opacity:0;animation:fadeSlideUp 0.6s ease forwards 1s;">
+        <a href="#projects" style="padding:14px 32px;background:var(--red);color:#fff;font-family:'Source Code Pro',monospace;font-weight:600;border-radius:var(--radius);font-size:0.875rem;transition:all 0.2s ease-in-out;display:inline-flex;align-items:center;gap:8px;" onmouseover="this.style.boxShadow='0 0 24px rgba(239,68,68,0.35)';this.style.transform='translateY(-1px)'" onmouseout="this.style.boxShadow='none';this.style.transform='none'">
+          View Projects
+          <span class="arrow-hover" style="transition:transform 0.2s ease-in-out;">&rarr;</span>
+        </a>
+        <a href="#contact" style="padding:14px 32px;border:1px solid var(--border);color:var(--text);font-family:'Source Code Pro',monospace;border-radius:var(--radius);font-size:0.875rem;transition:all 0.2s ease-in-out;" onmouseover="this.style.borderColor='var(--red)';this.style.color='var(--red)'" onmouseout="this.style.borderColor='var(--border)';this.style.color='var(--text)'">
+          Contact Me
+        </a>
+      </div>
+      <p style="margin-top:24px;font-size:0.8rem;color:var(--text-muted);font-family:'Source Code Pro',monospace;opacity:0;animation:fadeSlideUp 0.6s ease forwards 1.2s;">
+        <span style="color:var(--red);">Open to relocation within EU</span> &middot; Eligible for UK/EU work visas
+      </p>
+    </div>
+
+    <!-- Right: Frame -->
+    <div class="hero-frame-wrap" aria-hidden="true">
+      <img src="/hero-combined.svg" alt="" width="520" height="520" style="width:100%;max-width:520px;height:auto;" />
+    </div>
   </div>
 
-  <div class="hero-content-parallax" style="position:relative;z-index:10;text-align:center;padding:0 24px;max-width:800px;margin:0 auto;">
-    <p style="font-family:'Source Code Pro',monospace;color:var(--red);font-size:0.8rem;letter-spacing:0.2em;text-transform:uppercase;margin-bottom:24px;opacity:0;animation:fadeSlideUp 0.6s ease forwards 0.2s;">whoami</p>
-    <h1 class="glitch-text" style="font-size:clamp(2.5rem,8vw,4.5rem);font-weight:800;margin-bottom:20px;line-height:1.1;opacity:0;animation:fadeSlideUp 0.6s ease forwards 0.4s;">
-      <span style="background:linear-gradient(135deg,var(--red),var(--orange));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;">Jatin</span>
-      <span style="color:var(--text);"> Singh</span>
-    </h1>
-    <p style="font-size:1.1rem;color:var(--text-muted);font-family:'Source Code Pro',monospace;margin-bottom:12px;opacity:0;animation:fadeSlideUp 0.6s ease forwards 0.6s;">
-      <span style="color:var(--red);">&gt;</span> <span id="hero-typing"></span><span style="color:var(--red);animation:pulse-glow 1.5s ease-in-out infinite;">_</span>
-    </p>
-    <p style="font-size:1rem;color:var(--text-muted);max-width:600px;margin:0 auto 40px;line-height:1.7;opacity:0;animation:fadeSlideUp 0.6s ease forwards 0.8s;">
-      Security researcher. I like finding bugs, writing exploits, and automating things I'm too lazy to do twice.
-    </p>
-    <div style="display:flex;gap:12px;justify-content:center;align-items:center;flex-wrap:wrap;opacity:0;animation:fadeSlideUp 0.6s ease forwards 1s;">
-      <a href="#projects" style="padding:12px 28px;background:var(--red);color:#fff;font-family:'Source Code Pro',monospace;font-weight:600;border-radius:var(--radius);font-size:0.875rem;transition:all 0.2s ease-in-out;display:inline-flex;align-items:center;gap:8px;" onmouseover="this.style.boxShadow='0 0 20px rgba(239,68,68,0.3)';this.style.transform='translateY(-1px)'" onmouseout="this.style.boxShadow='none';this.style.transform='none'">
-        View Projects
-        <span class="arrow-hover" style="transition:transform 0.2s ease-in-out;">&rarr;</span>
-      </a>
-      <a href="#contact" style="padding:12px 28px;border:1px solid var(--border);color:var(--text);font-family:'Source Code Pro',monospace;border-radius:var(--radius);font-size:0.875rem;transition:all 0.2s ease-in-out;" onmouseover="this.style.borderColor='var(--red)';this.style.color='var(--red)'" onmouseout="this.style.borderColor='var(--border)';this.style.color='var(--text)'">
-        Contact Me
-      </a>
-    </div>
-    <p style="margin-top:20px;font-size:0.8rem;color:var(--text-muted);font-family:'Source Code Pro',monospace;opacity:0;animation:fadeSlideUp 0.6s ease forwards 1.2s;">
-      <span style="color:var(--red);">Open to relocation within EU</span> &middot; Eligible for UK/EU work visas
-    </p>
-  </div>
-  <div style="position:absolute;bottom:32px;left:50%;transform:translateX(-50%);animation:float 2.5s ease-in-out infinite;" aria-hidden="true">
+  <div style="position:absolute;bottom:32px;left:50%;transform:translateX(-50%);animation:float 2.5s ease-in-out infinite;z-index:10;" aria-hidden="true">
     <svg width="20" height="20" fill="none" stroke="var(--text-muted)" stroke-width="2" aria-hidden="true"><path d="M4 7l6 6 6-6" /></svg>
   </div>
 </section>
@@ -61,7 +66,7 @@
           ctx.font = `${fontSize}px "Source Code Pro", monospace`;
           for (let i = 0; i < drops.length; i++) {
             const text = chars[Math.floor(Math.random() * chars.length)];
-            ctx.globalAlpha = 0.15 + Math.random() * 0.25;
+            ctx.globalAlpha = 0.12 + Math.random() * 0.2;
             ctx.fillText(text, i * fontSize, drops[i] * fontSize);
             if (drops[i] * fontSize > canvas.height && Math.random() > 0.975) drops[i] = 0;
             drops[i]++;
@@ -87,22 +92,11 @@
       if (!deleting) {
         typeEl.textContent = current.substring(0, charIdx + 1);
         charIdx++;
-        if (charIdx === current.length) {
-          deleting = true;
-          delay = 2000;
-        } else {
-          delay = 80;
-        }
+        if (charIdx === current.length) { deleting = true; delay = 2000; } else { delay = 80; }
       } else {
         typeEl.textContent = current.substring(0, charIdx - 1);
         charIdx--;
-        if (charIdx === 0) {
-          deleting = false;
-          phraseIdx = (phraseIdx + 1) % phrases.length;
-          delay = 400;
-        } else {
-          delay = 40;
-        }
+        if (charIdx === 0) { deleting = false; phraseIdx = (phraseIdx + 1) % phrases.length; delay = 400; } else { delay = 40; }
       }
       setTimeout(type, delay);
     }
@@ -113,16 +107,12 @@
 </script>
 
 <style>
-  .hero-frame {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    width: min(520px, 85vw);
-    height: min(520px, 85vw);
-    z-index: 1;
-    opacity: 0.5;
-    pointer-events: none;
+  .hero-frame-wrap {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    opacity: 0.6;
+    animation: fadeSlideUp 0.8s ease forwards 0.4s;
   }
   .crt-overlay {
     position: absolute;
@@ -137,44 +127,14 @@
     pointer-events: none;
     z-index: 5;
   }
-  .glitch-text {
-    position: relative;
-  }
-  .glitch-text::before,
-  .glitch-text::after {
-    content: attr(data-text);
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    overflow: hidden;
-    background: linear-gradient(135deg, var(--red), var(--orange));
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    background-clip: text;
-  }
-  .glitch-text::before {
-    animation: glitch-1 3s infinite linear alternate-reverse;
-    clip-path: polygon(0 0, 100% 0, 100% 35%, 0 35%);
-  }
-  .glitch-text::after {
-    animation: glitch-2 3s infinite linear alternate-reverse;
-    clip-path: polygon(0 65%, 100% 65%, 100% 100%, 0 100%);
-  }
-  @keyframes glitch-1 {
-    0%, 95% { transform: translate(0); }
-    96% { transform: translate(-3px, 1px); }
-    97% { transform: translate(3px, -1px); }
-    98% { transform: translate(-1px, 2px); }
-    99% { transform: translate(2px, -2px); }
-    100% { transform: translate(0); }
-  }
-  @keyframes glitch-2 {
-    0%, 95% { transform: translate(0); }
-    96% { transform: translate(2px, -1px); }
-    97% { transform: translate(-2px, 1px); }
-    98% { transform: translate(1px, -2px); }
-    99% { transform: translate(-3px, 2px); }
-    100% { transform: translate(0); }
+  @media (max-width: 768px) {
+    .hero-content-parallax {
+      grid-template-columns: 1fr !important;
+      padding: 100px 24px 60px !important;
+      text-align: center;
+    }
+    .hero-frame-wrap {
+      display: none !important;
+    }
   }
 </style>
