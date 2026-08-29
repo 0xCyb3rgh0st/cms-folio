@@ -10,17 +10,17 @@ const platforms = [
 ---
 <section id="platforms" style="padding:96px 24px;background:var(--bg-secondary);" aria-labelledby="platforms-heading">
   <div style="max-width:1200px;margin:0 auto;">
-    <p style="font-family:'JetBrains Mono',monospace;color:var(--green);font-size:0.8rem;text-transform:uppercase;letter-spacing:0.15em;margin-bottom:8px;">// platforms</p>
+    <p style="font-family:'Source Code Pro',monospace;color:var(--red);font-size:0.8rem;text-transform:uppercase;letter-spacing:0.15em;margin-bottom:8px;">// platforms</p>
     <h2 id="platforms-heading" style="font-size:clamp(1.75rem,4vw,2.5rem);font-weight:700;margin-bottom:48px;">
-      <span style="color:var(--text);">Where I </span><span style="background:linear-gradient(135deg,var(--green),var(--cyan));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;">Grind</span>
+      <span style="color:var(--text);">Where I </span><span style="background:linear-gradient(135deg,var(--red),var(--orange));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;">Grind</span>
     </h2>
     <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:16px;">
       {platforms.map((p) => (
         <a href={p.url} target="_blank" rel="noopener" style="text-decoration:none;display:flex;align-items:center;gap:14px;padding:18px 20px;background:var(--bg-card);border:1px solid var(--border);border-radius:var(--radius);transition:all 0.2s ease-in-out;" onmouseover="this.style.borderColor='var(--border-hover)';this.style.transform='translateY(-2px)';this.style.boxShadow='0 4px 16px rgba(0,0,0,0.2)'" onmouseout="this.style.borderColor='var(--border)';this.style.transform='none';this.style.boxShadow='none'">
-          <div style="width:8px;height:8px;border-radius:50%;background:var(--green);flex-shrink:0;"></div>
+          <div style="width:8px;height:8px;border-radius:50%;background:var(--red);flex-shrink:0;"></div>
           <div>
             <p style="font-weight:600;color:var(--text);font-size:0.95rem;">{p.name}</p>
-            {p.note && <p style="color:var(--text-muted);font-size:0.75rem;font-family:'JetBrains Mono',monospace;">{p.note}</p>}
+            {p.note && <p style="color:var(--text-muted);font-size:0.75rem;font-family:'Source Code Pro',monospace;">{p.note}</p>}
           </div>
         </a>
       ))}

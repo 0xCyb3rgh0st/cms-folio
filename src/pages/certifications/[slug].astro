@@ -7,7 +7,7 @@ export function getStaticPaths() {
   return [
     { params: { slug: 'crto' }, props: { title: 'CRTO', issuer: 'Zero-Point Security', color: 'var(--red)', icon: 'ZER', verifyUrl: 'https://certs.zeropointsecurity.co.uk/47b1d1bc-721c-4648-8674-78059cb6b67a#acc.ZC8uI47n', embedUrl: 'https://certs.zeropointsecurity.co.uk/47b1d1bc-721c-4648-8674-78059cb6b67a#acc.ZC8uI47n' } },
     { params: { slug: 'cpts' }, props: { title: 'CPTS', issuer: 'Hack The Box', color: 'var(--cyan)', icon: 'HTB', verifyUrl: 'https://www.hackthebox.com/certificates', embedUrl: null, validateHint: 'Go to hackthebox.com/certificates — Name: Jatin Singh Tomar — Code: HTBCERT-FB4BFC0460' } },
-    { params: { slug: 'ewptxv3' }, props: { title: 'eWPTXv3', issuer: 'INE Security', color: 'var(--green)', icon: 'INE', verifyUrl: 'https://certs.ine.com/865223f9-11cc-433c-87f3-b62458b4fa65#acc.7bNOikDT', embedUrl: 'https://certs.ine.com/865223f9-11cc-433c-87f3-b62458b4fa65#acc.7bNOikDT' } },
+    { params: { slug: 'ewptxv3' }, props: { title: 'eWPTXv3', issuer: 'INE Security', color: 'var(--red)', icon: 'INE', verifyUrl: 'https://certs.ine.com/865223f9-11cc-433c-87f3-b62458b4fa65#acc.7bNOikDT', embedUrl: 'https://certs.ine.com/865223f9-11cc-433c-87f3-b62458b4fa65#acc.7bNOikDT' } },
     { params: { slug: 'crta' }, props: { title: 'CRTA', issuer: 'Cyber Warfare Labs', color: 'var(--yellow)', icon: 'CWL', verifyUrl: 'http://credential.net/7e3ffd1f-07f5-411d-af1e-42ef68c5c3df#acc.3xWTP9nd', embedUrl: null } },
     { params: { slug: 'acp' }, props: { title: 'ACP', issuer: 'APIsec', color: 'var(--purple)', icon: 'API', verifyUrl: 'https://www.credly.com/badges/f34cf451-ab6d-40a7-bec6-bc17630d523d/', embedUrl: null } },
   ];
@@ -19,12 +19,12 @@ const { title, issuer, color, icon, verifyUrl, embedUrl, validateHint } = Astro.
   <Navigation />
   <main id="main-content" style="padding-top:120px;padding-bottom:64px;min-height:100vh;">
     <div style="max-width:1000px;margin:0 auto;padding:0 24px;">
-      <a href="/" style="display:inline-flex;align-items:center;gap:8px;color:var(--green);font-family:'JetBrains Mono',monospace;font-size:0.85rem;text-decoration:none;margin-bottom:32px;transition:opacity 0.2s;" onmouseover="this.style.opacity='0.7'" onmouseout="this.style.opacity='1'">
+      <a href="/" style="display:inline-flex;align-items:center;gap:8px;color:var(--red);font-family:'Source Code Pro',monospace;font-size:0.85rem;text-decoration:none;margin-bottom:32px;transition:opacity 0.2s;" onmouseover="this.style.opacity='0.7'" onmouseout="this.style.opacity='1'">
         &larr; Back to Portfolio
       </a>
 
       <div style="display:flex;align-items:center;gap:16px;margin-bottom:40px;">
-        <div style={`width:64px;height:64px;border-radius:14px;display:flex;align-items:center;justify-content:center;font-family:'JetBrains Mono',monospace;font-weight:700;font-size:0.9rem;background:${color}15;color:${color};border:1px solid ${color}22;flex-shrink:0;`}>
+        <div style={`width:64px;height:64px;border-radius:14px;display:flex;align-items:center;justify-content:center;font-family:'Source Code Pro',monospace;font-weight:700;font-size:0.9rem;background:${color}15;color:${color};border:1px solid ${color}22;flex-shrink:0;`}>
           {icon}
         </div>
         <div>
@@ -36,8 +36,8 @@ const { title, issuer, color, icon, verifyUrl, embedUrl, validateHint } = Astro.
       {embedUrl ? (
         <div style="background:var(--bg-card);border:1px solid var(--border);border-radius:var(--radius);overflow:hidden;margin-bottom:32px;">
           <div id="cert-header" style="padding:12px 16px;border-bottom:1px solid var(--border);display:flex;justify-content:space-between;align-items:center;">
-            <span style="font-family:'JetBrains Mono',monospace;font-size:0.75rem;color:var(--text-muted);">Certificate Preview</span>
-            <a href={verifyUrl} target="_blank" rel="noopener" style="display:inline-flex;align-items:center;gap:6px;padding:6px 14px;background:var(--green);color:var(--bg-primary);border-radius:6px;font-family:'JetBrains Mono',monospace;font-size:0.75rem;font-weight:600;text-decoration:none;transition:all 0.2s ease-in-out;" onmouseover="this.style.opacity='0.8'" onmouseout="this.style.opacity='1'">
+            <span style="font-family:'Source Code Pro',monospace;font-size:0.75rem;color:var(--text-muted);">Certificate Preview</span>
+            <a href={verifyUrl} target="_blank" rel="noopener" style="display:inline-flex;align-items:center;gap:6px;padding:6px 14px;background:var(--red);color:var(--bg-primary);border-radius:6px;font-family:'Source Code Pro',monospace;font-size:0.75rem;font-weight:600;text-decoration:none;transition:all 0.2s ease-in-out;" onmouseover="this.style.opacity='0.8'" onmouseout="this.style.opacity='1'">
               <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
               Open Fullscreen
             </a>
@@ -47,7 +47,7 @@ const { title, issuer, color, icon, verifyUrl, embedUrl, validateHint } = Astro.
           </div>
           <div id="cert-fallback" style="padding:60px 20px;text-align:center;">
             <p style="color:var(--text-muted);margin-bottom:20px;font-size:0.9rem;">Certificate preview unavailable in iframe.</p>
-            <a href={verifyUrl} target="_blank" rel="noopener" style="display:inline-flex;align-items:center;gap:8px;padding:12px 24px;background:var(--green);color:var(--bg-primary);border-radius:var(--radius);font-family:'JetBrains Mono',monospace;font-size:0.85rem;font-weight:600;text-decoration:none;transition:all 0.2s ease-in-out;" onmouseover="this.style.opacity='0.85'" onmouseout="this.style.opacity='1'">
+            <a href={verifyUrl} target="_blank" rel="noopener" style="display:inline-flex;align-items:center;gap:8px;padding:12px 24px;background:var(--red);color:var(--bg-primary);border-radius:var(--radius);font-family:'Source Code Pro',monospace;font-size:0.85rem;font-weight:600;text-decoration:none;transition:all 0.2s ease-in-out;" onmouseover="this.style.opacity='0.85'" onmouseout="this.style.opacity='1'">
               <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
               View Certificate
             </a>
@@ -83,15 +83,15 @@ const { title, issuer, color, icon, verifyUrl, embedUrl, validateHint } = Astro.
           <div style="background:var(--bg-tertiary);border:1px solid var(--border);border-radius:var(--radius);padding:20px;max-width:500px;margin:0 auto 28px;text-align:left;">
             {validateHint.split(' — ').map((part, i) => (
               <div style="display:flex;gap:12px;margin-bottom:14px;align-items:flex-start;">
-                <span style={`font-family:'JetBrains Mono',monospace;font-size:0.75rem;font-weight:700;color:${i === 0 ? 'var(--cyan)' : i === 1 ? 'var(--green)' : 'var(--yellow)'};min-width:50px;`}>
+                <span style={`font-family:'Source Code Pro',monospace;font-size:0.75rem;font-weight:700;color:${i === 0 ? 'var(--cyan)' : i === 1 ? 'var(--red)' : 'var(--yellow)'};min-width:50px;`}>
                   {i === 0 ? 'STEP' : i === 1 ? 'NAME' : 'CODE'}
                 </span>
-                <span style="font-family:'JetBrains Mono',monospace;font-size:0.8rem;color:var(--text);word-break:break-all;">{part}</span>
+                <span style="font-family:'Source Code Pro',monospace;font-size:0.8rem;color:var(--text);word-break:break-all;">{part}</span>
               </div>
             ))}
           </div>
 
-          <a href={verifyUrl} target="_blank" rel="noopener" style="display:inline-flex;align-items:center;gap:8px;padding:12px 24px;background:var(--cyan);color:var(--bg-primary);border-radius:var(--radius);font-family:'JetBrains Mono',monospace;font-size:0.85rem;font-weight:600;text-decoration:none;transition:all 0.2s ease-in-out;" onmouseover="this.style.opacity='0.8'" onmouseout="this.style.opacity='1'">
+          <a href={verifyUrl} target="_blank" rel="noopener" style="display:inline-flex;align-items:center;gap:8px;padding:12px 24px;background:var(--cyan);color:var(--bg-primary);border-radius:var(--radius);font-family:'Source Code Pro',monospace;font-size:0.85rem;font-weight:600;text-decoration:none;transition:all 0.2s ease-in-out;" onmouseover="this.style.opacity='0.8'" onmouseout="this.style.opacity='1'">
             <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
             Open Validator
           </a>
@@ -103,7 +103,7 @@ const { title, issuer, color, icon, verifyUrl, embedUrl, validateHint } = Astro.
           </div>
           <h2 style="font-size:1.25rem;font-weight:600;color:var(--text);margin-bottom:10px;">Certificate Verified</h2>
           <p style="color:var(--text-muted);margin-bottom:28px;font-size:0.9rem;">Click below to view the official verification page.</p>
-          <a href={verifyUrl} target="_blank" rel="noopener" style="display:inline-flex;align-items:center;gap:8px;padding:12px 24px;background:var(--green);color:var(--bg-primary);border-radius:var(--radius);font-family:'JetBrains Mono',monospace;font-size:0.85rem;font-weight:600;text-decoration:none;transition:all 0.2s ease-in-out;" onmouseover="this.style.opacity='0.85'" onmouseout="this.style.opacity='1'">
+          <a href={verifyUrl} target="_blank" rel="noopener" style="display:inline-flex;align-items:center;gap:8px;padding:12px 24px;background:var(--red);color:var(--bg-primary);border-radius:var(--radius);font-family:'Source Code Pro',monospace;font-size:0.85rem;font-weight:600;text-decoration:none;transition:all 0.2s ease-in-out;" onmouseover="this.style.opacity='0.85'" onmouseout="this.style.opacity='1'">
             <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
             View Certificate
           </a>

@@ -4,25 +4,25 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>CMS Admin | Jatin Singh</title>
-  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Source+Code+Pro:wght@400;500;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
   <style>
     * { margin: 0; padding: 0; box-sizing: border-box; }
     body { font-family: 'Inter', sans-serif; background: #0d1117; color: #e6edf3; min-height: 100vh; }
     .container { max-width: 900px; margin: 0 auto; padding: 40px 24px; }
     h1 { font-size: 2rem; font-weight: 700; margin-bottom: 8px; }
-    h1 span { background: linear-gradient(135deg, #7ee787, #79c0ff); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
+    h1 span { background: linear-gradient(135deg, #ef4444, #79c0ff); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
     .subtitle { color: #8b949e; margin-bottom: 32px; font-size: 0.9rem; }
     
     .auth-box { background: #161b22; border: 1px solid #30363d; border-radius: var(--radius, 8px); padding: 24px; margin-bottom: 32px; }
-    .auth-box label { display: block; font-size: 0.8rem; color: #7ee787; font-family: 'JetBrains Mono', monospace; text-transform: uppercase; letter-spacing: 0.1em; margin-bottom: 8px; }
-    .auth-box input { width: 100%; padding: 10px 14px; background: #0d1117; border: 1px solid #30363d; border-radius: 6px; color: #e6edf3; font-family: 'JetBrains Mono', monospace; font-size: 0.85rem; }
-    .auth-box input:focus { outline: none; border-color: #7ee787; box-shadow: 0 0 0 2px #7ee78733; }
+    .auth-box label { display: block; font-size: 0.8rem; color: #ef4444; font-family: 'Source Code Pro', monospace; text-transform: uppercase; letter-spacing: 0.1em; margin-bottom: 8px; }
+    .auth-box input { width: 100%; padding: 10px 14px; background: #0d1117; border: 1px solid #30363d; border-radius: 6px; color: #e6edf3; font-family: 'Source Code Pro', monospace; font-size: 0.85rem; }
+    .auth-box input:focus { outline: none; border-color: #ef4444; box-shadow: 0 0 0 2px #ef444433; }
     .auth-box .hint { font-size: 0.75rem; color: #8b949e; margin-top: 8px; }
     
     .tabs { display: flex; gap: 4px; margin-bottom: 24px; border-bottom: 1px solid #30363d; padding-bottom: 4px; }
-    .tab { padding: 10px 20px; background: transparent; border: none; color: #8b949e; font-family: 'JetBrains Mono', monospace; font-size: 0.85rem; cursor: pointer; border-radius: 6px 6px 0 0; transition: all 0.2s ease-in-out; }
+    .tab { padding: 10px 20px; background: transparent; border: none; color: #8b949e; font-family: 'Source Code Pro', monospace; font-size: 0.85rem; cursor: pointer; border-radius: 6px 6px 0 0; transition: all 0.2s ease-in-out; }
     .tab:hover { color: #e6edf3; }
-    .tab.active { color: #7ee787; background: #161b22; }
+    .tab.active { color: #ef4444; background: #161b22; }
     
     .panel { display: none; }
     .panel.active { display: block; }
@@ -31,20 +31,20 @@
     .card h3 { font-size: 1.1rem; margin-bottom: 16px; color: #e6edf3; }
     
     .field { margin-bottom: 16px; }
-    .field label { display: block; font-size: 0.8rem; color: #7ee787; font-family: 'JetBrains Mono', monospace; text-transform: uppercase; letter-spacing: 0.1em; margin-bottom: 6px; }
+    .field label { display: block; font-size: 0.8rem; color: #ef4444; font-family: 'Source Code Pro', monospace; text-transform: uppercase; letter-spacing: 0.1em; margin-bottom: 6px; }
     .field input, .field textarea, .field select { width: 100%; padding: 10px 14px; background: #0d1117; border: 1px solid #30363d; border-radius: 6px; color: #e6edf3; font-size: 0.85rem; }
-    .field input:focus, .field textarea:focus { outline: none; border-color: #7ee787; box-shadow: 0 0 0 2px #7ee78733; }
-    .field textarea { font-family: 'JetBrains Mono', monospace; resize: vertical; min-height: 100px; }
+    .field input:focus, .field textarea:focus { outline: none; border-color: #ef4444; box-shadow: 0 0 0 2px #ef444433; }
+    .field textarea { font-family: 'Source Code Pro', monospace; resize: vertical; min-height: 100px; }
     .field select { cursor: pointer; }
     .field select option { background: #161b22; }
     
     .row { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
     
-    .btn { padding: 10px 20px; border: none; border-radius: 6px; font-family: 'JetBrains Mono', monospace; font-size: 0.85rem; font-weight: 600; cursor: pointer; transition: all 0.2s ease-in-out; }
-    .btn-primary { background: #7ee787; color: #0d1117; }
+    .btn { padding: 10px 20px; border: none; border-radius: 6px; font-family: 'Source Code Pro', monospace; font-size: 0.85rem; font-weight: 600; cursor: pointer; transition: all 0.2s ease-in-out; }
+    .btn-primary { background: #ef4444; color: #0d1117; }
     .btn-primary:hover { opacity: 0.85; transform: translateY(-1px); }
     .btn-secondary { background: #21262d; color: #e6edf3; border: 1px solid #30363d; }
-    .btn-secondary:hover { border-color: #7ee787; }
+    .btn-secondary:hover { border-color: #ef4444; }
     .btn-danger { background: #f85149; color: #fff; }
     .btn-danger:hover { opacity: 0.85; }
     
@@ -52,17 +52,17 @@
     
     .item-list { display: flex; flex-direction: column; gap: 8px; }
     .item { display: flex; justify-content: space-between; align-items: center; padding: 12px 16px; background: #0d1117; border: 1px solid #30363d; border-radius: 6px; cursor: pointer; transition: all 0.2s ease-in-out; }
-    .item:hover { border-color: #7ee787; }
+    .item:hover { border-color: #ef4444; }
     .item .title { font-weight: 600; }
-    .item .meta { font-size: 0.8rem; color: #8b949e; font-family: 'JetBrains Mono', monospace; }
+    .item .meta { font-size: 0.8rem; color: #8b949e; font-family: 'Source Code Pro', monospace; }
     
-    .status { padding: 8px 16px; border-radius: 6px; font-family: 'JetBrains Mono', monospace; font-size: 0.8rem; margin-bottom: 16px; }
-    .status.success { background: #7ee78715; color: #7ee787; border: 1px solid #7ee78722; }
+    .status { padding: 8px 16px; border-radius: 6px; font-family: 'Source Code Pro', monospace; font-size: 0.8rem; margin-bottom: 16px; }
+    .status.success { background: #ef444415; color: #ef4444; border: 1px solid #ef444422; }
     .status.error { background: #f8514915; color: #f85149; border: 1px solid #f8514922; }
     .status.info { background: #79c0ff15; color: #79c0ff; border: 1px solid #79c0ff22; }
     
     .empty { text-align: center; padding: 40px; color: #8b949e; }
-    .tag { display: inline-block; padding: 2px 8px; background: #21262d; border-radius: 4px; font-size: 0.75rem; font-family: 'JetBrains Mono', monospace; color: #8b949e; margin-right: 4px; }
+    .tag { display: inline-block; padding: 2px 8px; background: #21262d; border-radius: 4px; font-size: 0.75rem; font-family: 'Source Code Pro', monospace; color: #8b949e; margin-right: 4px; }
 
     @media (max-width: 600px) {
       .row { grid-template-columns: 1fr; }
@@ -192,7 +192,7 @@
       el.innerHTML = matches.length ? matches.map((m, i) => `
         <div class="item" onclick="editProject(${i})">
           <div><div class="title">${m[1]}</div><div class="meta">${m[3]} | ${m[4].replace('https://github.com/0xCyb3rgh0st/', '')}</div></div>
-          <span style="color:#7ee787;font-size:0.8rem;">Edit</span>
+          <span style="color:#ef4444;font-size:0.8rem;">Edit</span>
         </div>
       `).join('') : '<div class="empty">No projects found</div>';
       window._projectsFile = file;
@@ -279,7 +279,7 @@
       el.innerHTML = matches.length ? matches.map((m, i) => `
         <div class="item" onclick="editCert(${i})">
           <div><div class="title">${m[1]}</div><div class="meta">${m[2]}</div></div>
-          <span style="color:#7ee787;font-size:0.8rem;">Edit</span>
+          <span style="color:#ef4444;font-size:0.8rem;">Edit</span>
         </div>
       `).join('') : '<div class="empty">No certifications found</div>';
       window._certsFile = file;
@@ -299,7 +299,7 @@
           <div class="field"><label>Slug</label><input id="c-slug" value="${data?.slug || ''}" /></div>
           <div class="field"><label>Color</label>
             <select id="c-color">
-              <option value="var(--green)" ${data?.color === 'var(--green)' ? 'selected' : ''}>Green</option>
+              <option value="var(--red)" ${data?.color === 'var(--red)' ? 'selected' : ''}>Green</option>
               <option value="var(--cyan)" ${data?.color === 'var(--cyan)' ? 'selected' : ''}>Cyan</option>
               <option value="var(--purple)" ${data?.color === 'var(--purple)' ? 'selected' : ''}>Purple</option>
               <option value="var(--yellow)" ${data?.color === 'var(--yellow)' ? 'selected' : ''}>Yellow</option>
@@ -352,7 +352,7 @@
       el.innerHTML = matches.length ? matches.map((m, i) => `
         <div class="item" onclick="editWriteup(${i})">
           <div><div class="title">${m[1]}</div><div class="meta">${m[5]} | ${m[3]}</div></div>
-          <span style="color:#7ee787;font-size:0.8rem;">Edit</span>
+          <span style="color:#ef4444;font-size:0.8rem;">Edit</span>
         </div>
       `).join('') : '<div class="empty">No writeups found</div>';
       window._writeupsFile = file;

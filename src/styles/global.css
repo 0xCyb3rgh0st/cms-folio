@@ -1,23 +1,22 @@
 @import "tailwindcss";
 
 :root {
-  --bg-primary: #0d1117;
-  --bg-secondary: #161b22;
-  --bg-tertiary: #21262d;
-  --bg-card: #161b22;
-  --green: #7ee787;
-  --green-dim: #3fb950;
+  --bg-primary: #0a0a0a;
+  --bg-secondary: #111111;
+  --bg-tertiary: #1a1a1a;
+  --bg-card: #111111;
+  --red: #ef4444;
+  --red-dim: #dc2626;
+  --red-glow: rgba(239, 68, 68, 0.15);
   --cyan: #79c0ff;
   --purple: #d2a8ff;
-  --red: #ff7b72;
-  --yellow: #e3b341;
-  --orange: #f0883e;
-  --text: #e6edf3;
-  --text-muted: #8b949e;
-  --border: #30363d;
-  --border-hover: #484f58;
-  --shadow: rgba(0, 0, 0, 0.3);
-  --radius: 8px;
+  --orange: #f97316;
+  --text: #e5e7eb;
+  --text-muted: #9ca3af;
+  --border: #1f2937;
+  --border-hover: #374151;
+  --shadow: rgba(0, 0, 0, 0.4);
+  --radius: 12px;
 }
 
 * { margin: 0; padding: 0; box-sizing: border-box; }
@@ -26,7 +25,7 @@ html {
   scroll-behavior: smooth;
   background: var(--bg-primary);
   color: var(--text);
-  font-family: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif;
+  font-family: "Poppins", -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif;
   font-size: 16px;
   line-height: 1.6;
   letter-spacing: 0.01em;
@@ -40,12 +39,12 @@ body {
 }
 
 h1, h2, h3, h4, h5, h6 {
-  font-family: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif;
+  font-family: "Poppins", -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif;
   line-height: 1.2;
 }
 
 code, pre, kbd, .mono {
-  font-family: "JetBrains Mono", "Fira Code", "Cascadia Code", monospace;
+  font-family: "Source Code Pro", "JetBrains Mono", "Fira Code", monospace;
 }
 
 a {
@@ -60,7 +59,7 @@ img, svg {
 }
 
 ::selection {
-  background: rgba(126, 231, 135, 0.25);
+  background: rgba(239, 68, 68, 0.25);
   color: var(--text);
 }
 
@@ -71,7 +70,7 @@ img, svg {
 
 /* Focus rings for accessibility */
 :focus-visible {
-  outline: 2px solid var(--green);
+  outline: 2px solid var(--red);
   outline-offset: 2px;
 }
 
@@ -80,7 +79,7 @@ a:focus-visible,
 input:focus-visible,
 textarea:focus-visible,
 select:focus-visible {
-  outline: 2px solid var(--green);
+  outline: 2px solid var(--red);
   outline-offset: 2px;
 }
 
@@ -95,7 +94,7 @@ a, button, input, textarea, select {
 }
 .card-hover:hover {
   border-color: var(--border-hover);
-  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.2);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.3);
 }
 
 /* Arrow translate on hover */
@@ -127,6 +126,29 @@ a, button, input, textarea, select {
 .animate-in {
   opacity: 1;
   transform: translateY(0);
+}
+
+/* Card glow effect */
+.card-glow {
+  position: relative;
+  overflow: hidden;
+}
+.card-glow::before {
+  content: '';
+  position: absolute;
+  top: var(--mouse-y, 50%);
+  left: var(--mouse-x, 50%);
+  width: 300px;
+  height: 300px;
+  background: radial-gradient(circle, var(--red-glow) 0%, transparent 70%);
+  transform: translate(-50%, -50%);
+  opacity: 0;
+  transition: opacity 0.3s ease;
+  pointer-events: none;
+  z-index: 0;
+}
+.card-glow:hover::before {
+  opacity: 1;
 }
 
 /* Mobile touch targets - minimum 44x44px */

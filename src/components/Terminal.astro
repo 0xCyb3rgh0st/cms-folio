@@ -1,20 +1,20 @@
 ---
 ---
-<div id="terminal-overlay" role="dialog" aria-label="Interactive terminal" aria-hidden="true" style="display:none;position:fixed;inset:0;z-index:9999;background:rgba(13,17,23,0.97);backdrop-filter:blur(8px);padding:20px;font-family:'JetBrains Mono',monospace;">
+<div id="terminal-overlay" role="dialog" aria-label="Interactive terminal" aria-hidden="true" style="display:none;position:fixed;inset:0;z-index:9999;background:rgba(10,10,10,0.97);backdrop-filter:blur(8px);padding:20px;font-family:'Source Code Pro',monospace;">
   <div style="max-width:800px;margin:0 auto;height:100%;display:flex;flex-direction:column;">
-    <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:12px;padding-bottom:12px;border-bottom:1px solid #21262d;">
+    <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:12px;padding-bottom:12px;border-bottom:1px solid #1f2937;">
       <div style="display:flex;align-items:center;gap:8px;">
-        <span style="width:12px;height:12px;border-radius:50%;background:#f85149;"></span>
-        <span style="width:12px;height:12px;border-radius:50%;background:#d29922;"></span>
-        <span style="width:12px;height:12px;border-radius:50%;background:#7ee787;"></span>
-        <span style="color:#8b949e;font-size:0.8rem;margin-left:12px;">jatin@portfolio:~</span>
+        <span style="width:12px;height:12px;border-radius:50%;background:#ef4444;"></span>
+        <span style="width:12px;height:12px;border-radius:50%;background:#eab308;"></span>
+        <span style="width:12px;height:12px;border-radius:50%;background:#22c55e;"></span>
+        <span style="color:#9ca3af;font-size:0.8rem;margin-left:12px;">jatin@portfolio:~</span>
       </div>
-      <button id="terminal-close" aria-label="Close terminal" style="background:none;border:1px solid #30363d;color:#8b949e;padding:4px 12px;border-radius:6px;cursor:pointer;font-family:inherit;font-size:0.8rem;">ESC</button>
+      <button id="terminal-close" aria-label="Close terminal" style="background:none;border:1px solid #1f2937;color:#9ca3af;padding:4px 12px;border-radius:6px;cursor:pointer;font-family:inherit;font-size:0.8rem;">ESC</button>
     </div>
-    <div id="terminal-output" style="flex:1;overflow-y:auto;color:#c9d1d9;font-size:0.9rem;line-height:1.8;padding-bottom:8px;" tabindex="0" role="log" aria-live="polite"></div>
-    <div style="display:flex;align-items:center;gap:8px;margin-top:8px;padding-top:12px;border-top:1px solid #21262d;">
-      <span style="color:#7ee787;white-space:nowrap;">$</span>
-      <input id="terminal-input" type="text" aria-label="Terminal command input" autocomplete="off" spellcheck="false" style="flex:1;background:transparent;border:none;color:#c9d1d9;font-family:'JetBrains Mono',monospace;font-size:0.9rem;outline:none;caret-color:#7ee787;" onfocus="this.style.outline='2px solid #7ee787';this.style.outlineOffset='2px';this.style.borderRadius='4px'" onblur="this.style.outline='none'" />
+    <div id="terminal-output" style="flex:1;overflow-y:auto;color:#e5e7eb;font-size:0.9rem;line-height:1.8;padding-bottom:8px;" tabindex="0" role="log" aria-live="polite"></div>
+    <div style="display:flex;align-items:center;gap:8px;margin-top:8px;padding-top:12px;border-top:1px solid #1f2937;">
+      <span style="color:#ef4444;white-space:nowrap;">$</span>
+      <input id="terminal-input" type="text" aria-label="Terminal command input" autocomplete="off" spellcheck="false" style="flex:1;background:transparent;border:none;color:#e5e7eb;font-family:'Source Code Pro',monospace;font-size:0.9rem;outline:none;caret-color:#ef4444;" onfocus="this.style.outline='2px solid #ef4444';this.style.outlineOffset='2px';this.style.borderRadius='4px'" onblur="this.style.outline='none'" />
     </div>
   </div>
 </div>
@@ -28,7 +28,7 @@
   const history = [];
   let historyIdx = -1;
 
-  const ascii = `<span style="color:#7ee787;">
+  const ascii = `<span style="color:#ef4444;">
  ██╗ █████╗ ██████╗ ██╗   ██╗██╗███████╗
  ██║██╔══██╗██╔══██╗██║   ██║██║██╔════╝
  ██║███████║██████╔╝██║   ██║██║███████╗
@@ -37,27 +37,27 @@
 ╚═╝ ╚═╝  ╚═╝╚═╝  ╚═╝  ╚═══╝  ╚═╝╚══════╝</span>`;
 
   const welcome = `${ascii}
-<span style="color:#8b949e;">Welcome to Jatin's interactive terminal.</span>
-<span style="color:#8b949e;">Type </span><span style="color:#7ee787;">help</span><span style="color:#8b949e;"> to see available commands.</span>
+<span style="color:#9ca3af;">Welcome to Jatin's interactive terminal.</span>
+<span style="color:#9ca3af;">Type </span><span style="color:#ef4444;">help</span><span style="color:#9ca3af;"> to see available commands.</span>
 `;
 
   const commands = {
-    help: () => `<span style="color:#7ee787;">Available commands:</span>
+    help: () => `<span style="color:#ef4444;">Available commands:</span>
 
-  <span style="color:#7ee787;">help</span>        Show this help message
-  <span style="color:#7ee787;">about</span>       Who am I
-  <span style="color:#7ee787;">skills</span>      What I work with
-  <span style="color:#7ee787;">projects</span>    View my projects
-  <span style="color:#7ee787;">writeups</span>    Security writeups
-  <span style="color:#7ee787;">certs</span>       Certifications
-  <span style="color:#7ee787;">contact</span>     How to reach me
-  <span style="color:#7ee787;">whoami</span>      Current user info
-  <span style="color:#7ee787;">sudo hire me</span>  Let's talk
-  <span style="color:#7ee787;">clear</span>       Clear the terminal
-  <span style="color:#7ee787;">exit</span>        Close the terminal`,
+  <span style="color:#ef4444;">help</span>        Show this help message
+  <span style="color:#ef4444;">about</span>       Who am I
+  <span style="color:#ef4444;">skills</span>      What I work with
+  <span style="color:#ef4444;">projects</span>    View my projects
+  <span style="color:#ef4444;">writeups</span>    Security writeups
+  <span style="color:#ef4444;">certs</span>       Certifications
+  <span style="color:#ef4444;">contact</span>     How to reach me
+  <span style="color:#ef4444;">whoami</span>      Current user info
+  <span style="color:#ef4444;">sudo hire me</span>  Let's talk
+  <span style="color:#ef4444;">clear</span>       Clear the terminal
+  <span style="color:#ef4444;">exit</span>        Close the terminal`,
 
-    about: () => `<span style="color:#7ee787;">Jatin Singh Tomar</span>
-<span style="color:#8b949e;">Security Researcher | Exploit Developer | BSc (Hons) Ethical Hacking, Coventry University</span>
+    about: () => `<span style="color:#ef4444;">Jatin Singh Tomar</span>
+<span style="color:#9ca3af;">Security Researcher | Exploit Developer | BSc (Hons) Ethical Hacking, Coventry University</span>
 
 I'm a cybersecurity researcher from Kathmandu, Nepal, specializing in
 binary exploitation, reverse engineering, and Active Directory security.
@@ -65,71 +65,71 @@ binary exploitation, reverse engineering, and Active Directory security.
 I build open-source security tools and write about what I learn.
 Currently finishing my degree at Coventry University (Class of 2026).`,
 
-    skills: () => `<span style="color:#7ee787;">Technical Skills:</span>
+    skills: () => `<span style="color:#ef4444;">Technical Skills:</span>
 
-<span style="color:#7ee787;">Binary Exploitation</span>  Buffer overflows, ROP, heap exploitation, format strings
-<span style="color:#7ee787;">Reverse Engineering</span>  Ghidra, x86/x64 assembly, malware analysis
-<span style="color:#7ee787;">Active Directory</span>     BloodHound, Rubeus, Kerberoasting, DCSync
-<span style="color:#7ee787;">Web Security</span>         OWASP Top 10, Burp Suite, SQL injection, XSS
-<span style="color:#7ee787;">Languages</span>            Python, C, x86 Assembly, PowerShell
-<span style="color:#7ee787;">Tools</span>                Nmap, Metasploit, Wireshark, GDB, Burp Suite`,
+<span style="color:#ef4444;">Binary Exploitation</span>  Buffer overflows, ROP, heap exploitation, format strings
+<span style="color:#ef4444;">Reverse Engineering</span>  Ghidra, x86/x64 assembly, malware analysis
+<span style="color:#ef4444;">Active Directory</span>     BloodHound, Rubeus, Kerberoasting, DCSync
+<span style="color:#ef4444;">Web Security</span>         OWASP Top 10, Burp Suite, SQL injection, XSS
+<span style="color:#ef4444;">Languages</span>            Python, C, x86 Assembly, PowerShell
+<span style="color:#ef4444;">Tools</span>                Nmap, Metasploit, Wireshark, GDB, Burp Suite`,
 
-    projects: () => `<span style="color:#7ee787;">Featured Projects:</span>
+    projects: () => `<span style="color:#ef4444;">Featured Projects:</span>
 
-  <span style="color:#7ee787;">pwnlibc</span>       CTF-focused libc database for exploit development
-  <span style="color:#7ee787;">HexSnare</span>      Windows honeypot that detects reverse shells
-  <span style="color:#7ee787;">csrf-proc</span>     Proc filesystem-based CSRF testing tool
-  <span style="color:#7ee787;">ghidra_autorun</span> Automated Ghidra scripting and analysis
-  <span style="color:#7ee787;">CrackTheCode</span>  Browser-based code-breaking game
-  <span style="color:#7ee787;">h1cli</span>         HackerOne CLI for bug bounty management
+  <span style="color:#ef4444;">pwnlibc</span>       CTF-focused libc database for exploit development
+  <span style="color:#ef4444;">HexSnare</span>      Windows honeypot that detects reverse shells
+  <span style="color:#ef4444;">csrf-proc</span>     Proc filesystem-based CSRF testing tool
+  <span style="color:#ef4444;">ghidra_autorun</span> Automated Ghidra scripting and analysis
+  <span style="color:#ef4444;">CrackTheCode</span>  Browser-based code-breaking game
+  <span style="color:#ef4444;">h1cli</span>         HackerOne CLI for bug bounty management
 
-<span style="color:#8b949e;">Visit </span><span style="color:#7ee787;">/projects</span><span style="color:#8b949e;"> for full details.</span>`,
+<span style="color:#9ca3af;">Visit </span><span style="color:#ef4444;">/projects</span><span style="color:#9ca3af;"> for full details.</span>`,
 
-    writeups: () => `<span style="color:#7ee787;">Writeups:</span>
+    writeups: () => `<span style="color:#ef4444;">Writeups:</span>
 
-  <span style="color:#7ee787;">pwnlibc-deep-dive</span>      Exploiting libc vulnerabilities
-  <span style="color:#7ee787;">ghidra-open-automation</span>  Automating binary analysis
-  <span style="color:#7ee787;">ad-attack-automation</span>    AD attack automation techniques
-  <span style="color:#7ee787;">heap-exploitation-guide</span> Heap exploitation from scratch
-  <span style="color:#7ee787;">owasp-2025-ai-vulns</span>    AI-generated code vulnerabilities
+  <span style="color:#ef4444;">pwnlibc-deep-dive</span>      Exploiting libc vulnerabilities
+  <span style="color:#ef4444;">ghidra-open-automation</span>  Automating binary analysis
+  <span style="color:#ef4444;">ad-attack-automation</span>    AD attack automation techniques
+  <span style="color:#ef4444;">heap-exploitation-guide</span> Heap exploitation from scratch
+  <span style="color:#ef4444;">owasp-2025-ai-vulns</span>    AI-generated code vulnerabilities
 
-<span style="color:#8b949e;">Visit </span><span style="color:#7ee787;">/writeups</span><span style="color:#8b949e;"> for full details.</span>`,
+<span style="color:#9ca3af;">Visit </span><span style="color:#ef4444;">/writeups</span><span style="color:#9ca3af;"> for full details.</span>`,
 
-    certs: () => `<span style="color:#7ee787;">Certifications:</span>
+    certs: () => `<span style="color:#ef4444;">Certifications:</span>
 
-  <span style="color:#7ee787;">CRTO</span>   Certified Red Team Operator    - Zero-Point Security
-  <span style="color:#7ee787;">CPTS</span>   Certified Penetration Testing Specialist - Hack The Box
-  <span style="color:#7ee787;">eWPTXv3</span> Web Application Penetration Tester eXtreme - eLearnSecurity
-  <span style="color:#7ee787;">CRTA</span>   Certified Red Team Analyst      - Cyber Warfare Labs
-  <span style="color:#7ee787;">ACP</span>    Certified Penetration Tester     - Cyberrad`,
+  <span style="color:#ef4444;">CRTO</span>   Certified Red Team Operator    - Zero-Point Security
+  <span style="color:#ef4444;">CPTS</span>   Certified Penetration Testing Specialist - Hack The Box
+  <span style="color:#ef4444;">eWPTXv3</span> Web Application Penetration Tester eXtreme - eLearnSecurity
+  <span style="color:#ef4444;">CRTA</span>   Certified Red Team Analyst      - Cyber Warfare Labs
+  <span style="color:#ef4444;">ACP</span>    Certified Penetration Tester     - Cyberrad`,
 
-    contact: () => `<span style="color:#7ee787;">Contact:</span>
+    contact: () => `<span style="color:#ef4444;">Contact:</span>
 
-  <span style="color:#8b949e;">GitHub</span>   <span style="color:#7ee787;">github.com/0xCyb3rgh0st</span>
-  <span style="color:#8b949e;">Twitter</span>  <span style="color:#7ee787;">x.com/0xCyb3rgh0st</span>
-  <span style="color:#8b949e;">LinkedIn</span> <span style="color:#7ee787;">linkedin.com/in/jatin-singh-np</span>
-  <span style="color:#8b949e;">Medium</span>   <span style="color:#7ee787;">medium.com/@cyberghostnp</span>
-  <span style="color:#8b949e;">Email</span>    <span style="color:#7ee787;">info@jatinsingh.com.np</span>
+  <span style="color:#9ca3af;">GitHub</span>   <span style="color:#ef4444;">github.com/0xCyb3rgh0st</span>
+  <span style="color:#9ca3af;">Twitter</span>  <span style="color:#ef4444;">x.com/0xCyb3rgh0st</span>
+  <span style="color:#9ca3af;">LinkedIn</span> <span style="color:#ef4444;">linkedin.com/in/jatin-singh-np</span>
+  <span style="color:#9ca3af;">Medium</span>   <span style="color:#ef4444;">medium.com/@cyberghostnp</span>
+  <span style="color:#9ca3af;">Email</span>    <span style="color:#ef4444;">info@jatinsingh.com.np</span>
 
-<span style="color:#8b949e;">Open to EU/UK opportunities.</span>`,
+<span style="color:#9ca3af;">Open to EU/UK opportunities.</span>`,
 
-    whoami: () => `<span style="color:#7ee787;">jatin</span>
-<span style="color:#8b949e;">Security Researcher</span>
-<span style="color:#8b949e;">Kathmandu, Nepal</span>
-<span style="color:#8b949e;">Coventry University, Class of 2026</span>`,
+    whoami: () => `<span style="color:#ef4444;">jatin</span>
+<span style="color:#9ca3af;">Security Researcher</span>
+<span style="color:#9ca3af;">Kathmandu, Nepal</span>
+<span style="color:#9ca3af;">Coventry University, Class of 2026</span>`,
 
     "sudo hire me": () => `<span style="color:#d29922;">[sudo] password for jatin: ********</span>
 
-<span style="color:#7ee787;">Access granted.</span>
+<span style="color:#ef4444;">Access granted.</span>
 
 <span style="color:#c9d1d9;">Let's talk. I'm open to:</span>
-  <span style="color:#7ee787;">-</span> Security research roles
-  <span style="color:#7ee787;">-</span> Penetration testing positions
-  <span style="color:#7ee787;">-</span> Red team engagements
-  <span style="color:#7ee787;">-</span> Bug bounty collaboration
+  <span style="color:#ef4444;">-</span> Security research roles
+  <span style="color:#ef4444;">-</span> Penetration testing positions
+  <span style="color:#ef4444;">-</span> Red team engagements
+  <span style="color:#ef4444;">-</span> Bug bounty collaboration
 
-<span style="color:#8b949e;">Email: </span><span style="color:#7ee787;">info@jatinsingh.com.np</span>
-<span style="color:#8b949e;">GitHub: </span><span style="color:#7ee787;">github.com/0xCyb3rgh0st</span>`,
+<span style="color:#9ca3af;">Email: </span><span style="color:#ef4444;">info@jatinsingh.com.np</span>
+<span style="color:#9ca3af;">GitHub: </span><span style="color:#ef4444;">github.com/0xCyb3rgh0st</span>`,
 
     clear: () => { output.innerHTML = ''; return null; },
     exit: () => { closeTerminal(); return null; },
@@ -150,14 +150,14 @@ Currently finishing my degree at Coventry University (Class of 2026).`,
     history.push(trimmed);
     historyIdx = history.length;
 
-    print(`<span style="color:#7ee787;">$</span> ${escapeHtml(trimmed)}`);
+    print(`<span style="color:#ef4444;">$</span> ${escapeHtml(trimmed)}`);
 
     const lower = trimmed.toLowerCase();
     if (commands[lower]) {
       print(commands[lower]());
     } else {
       print(`<span style="color:#f85149;">Command not found: ${escapeHtml(trimmed)}</span>
-<span style="color:#8b949e;">Type </span><span style="color:#7ee787;">help</span><span style="color:#8b949e;"> for available commands.</span>`);
+<span style="color:#9ca3af;">Type </span><span style="color:#ef4444;">help</span><span style="color:#9ca3af;"> for available commands.</span>`);
     }
   }
 

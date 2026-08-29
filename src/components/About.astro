@@ -2,36 +2,36 @@
 ---
 <section id="about" style="padding:96px 24px;">
   <div style="max-width:1200px;margin:0 auto;">
-    <p style="font-family:'JetBrains Mono',monospace;color:var(--green);font-size:0.8rem;text-transform:uppercase;letter-spacing:0.15em;margin-bottom:8px;">// about</p>
+    <p style="font-family:'Source Code Pro',monospace;color:var(--red);font-size:0.8rem;text-transform:uppercase;letter-spacing:0.15em;margin-bottom:8px;">// about</p>
     <h2 style="font-size:clamp(1.75rem,4vw,2.5rem);font-weight:700;margin-bottom:48px;">
-      <span style="background:linear-gradient(135deg,var(--green),var(--cyan));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;">Root</span>
+      <span style="background:linear-gradient(135deg,var(--red),var(--orange));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;">Root</span>
       <span style="color:var(--text);"> Access</span>
     </h2>
     <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:32px;">
       <div style="background:var(--bg-secondary);border:1px solid var(--border);border-radius:var(--radius);overflow:hidden;" class="card-hover">
         <div style="background:var(--bg-tertiary);padding:10px 16px;display:flex;align-items:center;gap:6px;border-bottom:1px solid var(--border);">
           <div style="width:10px;height:10px;border-radius:50%;background:var(--red);"></div>
-          <div style="width:10px;height:10px;border-radius:50%;background:var(--yellow);"></div>
-          <div style="width:10px;height:10px;border-radius:50%;background:var(--green);"></div>
-          <span style="margin-left:8px;color:var(--text-muted);font-size:0.75rem;font-family:'JetBrains Mono',monospace;">jatin@research:~</span>
+          <div style="width:10px;height:10px;border-radius:50%;background:#eab308;"></div>
+          <div style="width:10px;height:10px;border-radius:50%;background:#22c55e;"></div>
+          <span style="margin-left:8px;color:var(--text-muted);font-size:0.75rem;font-family:'Source Code Pro',monospace;">jatin@research:~</span>
         </div>
-        <div style="padding:24px;font-family:'JetBrains Mono',monospace;font-size:0.85rem;line-height:1.8;">
-          <p style="color:var(--text);margin-bottom:12px;"><span style="color:var(--green);">&gt;</span> Security Researcher & Exploit Developer</p>
-          <p style="color:var(--text-muted);margin-bottom:12px;"><span style="color:var(--green);">&gt;</span> Exploit development, reverse engineering, and AD security.</p>
-          <p style="color:var(--text-muted);margin-bottom:16px;"><span style="color:var(--green);">&gt;</span> BSc (Hons) Ethical Hacking & Cyber Security, Coventry University (2026)</p>
-          <p style="color:var(--green);">$ echo $MISSION</p>
+        <div style="padding:24px;font-family:'Source Code Pro',monospace;font-size:0.85rem;line-height:1.8;">
+          <p style="color:var(--text);margin-bottom:12px;"><span style="color:var(--red);">&gt;</span> Security Researcher & Exploit Developer</p>
+          <p style="color:var(--text-muted);margin-bottom:12px;"><span style="color:var(--red);">&gt;</span> Exploit development, reverse engineering, and AD security.</p>
+          <p style="color:var(--text-muted);margin-bottom:16px;"><span style="color:var(--red);">&gt;</span> BSc (Hons) Ethical Hacking & Cyber Security, Coventry University (2026)</p>
+          <p style="color:var(--red);">$ echo $MISSION</p>
           <p style="color:var(--cyan);">"Hunt the edge cases. Weaponize the vulnerability. Automate the attack surface."</p>
         </div>
       </div>
       <div style="display:grid;grid-template-columns:1fr 1fr;gap:16px;">
         {[
-          { num: "5", label: "Certifications", color: "var(--green)" },
+          { num: "5", label: "Certifications", color: "var(--red)" },
           { num: "6", label: "Open Source Tools", color: "var(--cyan)" },
           { num: "BSc", label: "Ethical Hacking", color: "var(--purple)" },
-          { num: "VR", label: "Vulnerability Research", color: "var(--yellow)" },
+          { num: "VR", label: "Vulnerability Research", color: "var(--orange)" },
         ].map((stat) => (
           <div style="background:var(--bg-card);border:1px solid var(--border);border-radius:var(--radius);padding:24px;text-align:center;" class="card-hover">
-            <p style={`font-size:1.75rem;font-weight:700;color:${stat.color};font-family:'JetBrains Mono',monospace;`}>{stat.num}</p>
+            <p style={`font-size:1.75rem;font-weight:700;color:${stat.color};font-family:'Source Code Pro',monospace;`}>{stat.num}</p>
             <p style="color:var(--text-muted);font-size:0.85rem;margin-top:4px;">{stat.label}</p>
           </div>
         ))}
@@ -40,7 +40,7 @@
 
     <div style="margin-top:48px;">
       <h3 style="font-size:1.125rem;font-weight:600;color:var(--text);margin-bottom:24px;">
-        <span style="color:var(--green);font-family:'JetBrains Mono',monospace;">//</span> Research Interests
+        <span style="color:var(--red);font-family:'Source Code Pro',monospace;">//</span> Research Interests
       </h3>
       <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(250px,1fr));gap:12px;">
         {[
@@ -52,7 +52,7 @@
           { area: "Cloud Security", focus: "Attack Surface Research", icon: "Cloud Sec" },
         ].map((item) => (
           <div style="background:var(--bg-card);border:1px solid var(--border);border-radius:var(--radius);padding:16px;display:flex;align-items:center;gap:12px;" class="card-hover">
-            <div style="width:44px;height:44px;border-radius:6px;background:var(--bg-tertiary);border:1px solid var(--border);display:flex;align-items:center;justify-content:center;font-family:'JetBrains Mono',monospace;font-weight:600;color:var(--green);font-size:0.55rem;flex-shrink:0;text-align:center;line-height:1.2;">
+            <div style="width:44px;height:44px;border-radius:6px;background:var(--bg-tertiary);border:1px solid var(--border);display:flex;align-items:center;justify-content:center;font-family:'Source Code Pro',monospace;font-weight:600;color:var(--red);font-size:0.55rem;flex-shrink:0;text-align:center;line-height:1.2;">
               {item.icon}
             </div>
             <div>

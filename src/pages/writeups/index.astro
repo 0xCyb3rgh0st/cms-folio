@@ -11,16 +11,16 @@ const writeups = [
   { title: "Heap Exploitation Techniques", desc: "Comprehensive guide to modern heap exploitation including tcache poisoning, house of techniques.", cat: "technique", diff: "insane", date: "2024-05-10", tags: ["Pwn", "Heap", "Linux"], slug: "heap-exploitation-guide" },
 ];
 
-const diffColors: Record<string, string> = { easy: "var(--green)", medium: "var(--yellow)", hard: "var(--red)", insane: "var(--purple)" };
-const catColors: Record<string, string> = { ctf: "var(--cyan)", vulnerability: "var(--red)", technique: "var(--green)", tool: "var(--purple)", lab: "var(--yellow)" };
+const diffColors: Record<string, string> = { easy: "var(--red)", medium: "var(--yellow)", hard: "var(--red)", insane: "var(--purple)" };
+const catColors: Record<string, string> = { ctf: "var(--cyan)", vulnerability: "var(--red)", technique: "var(--red)", tool: "var(--purple)", lab: "var(--yellow)" };
 ---
 <BaseLayout title="Writeups | Jatin Singh">
   <Navigation />
   <main id="main-content" style="padding-top:120px;padding-bottom:64px;">
     <div style="max-width:1200px;margin:0 auto;padding:0 24px;">
-      <p style="font-family:'JetBrains Mono',monospace;color:var(--green);font-size:0.8rem;text-transform:uppercase;letter-spacing:0.15em;margin-bottom:8px;">// writeups</p>
+      <p style="font-family:'Source Code Pro',monospace;color:var(--red);font-size:0.8rem;text-transform:uppercase;letter-spacing:0.15em;margin-bottom:8px;">// writeups</p>
       <h1 style="font-size:clamp(2rem,5vw,3rem);font-weight:700;margin-bottom:4px;">
-        <span style="background:linear-gradient(135deg,var(--green),var(--cyan));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;">Security</span>
+        <span style="background:linear-gradient(135deg,var(--red),var(--cyan));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;">Security</span>
         <span style="color:var(--text);"> Writeups</span>
       </h1>
       <p style="color:var(--text-muted);margin-bottom:48px;max-width:600px;">
@@ -31,19 +31,19 @@ const catColors: Record<string, string> = { ctf: "var(--cyan)", vulnerability: "
         {writeups.map((w) => (
           <a href={`/writeups/${w.slug}`} style="text-decoration:none;display:block;background:var(--bg-card);border:1px solid var(--border);border-radius:var(--radius);padding:24px;transition:all 0.2s ease-in-out;" onmouseover="this.style.borderColor='var(--border-hover)';this.style.transform='translateY(-2px)';this.style.boxShadow='0 8px 24px rgba(0,0,0,0.2)'" onmouseout="this.style.borderColor='var(--border)';this.style.transform='none';this.style.boxShadow='none'">
             <div style="display:flex;gap:6px;margin-bottom:12px;">
-              <span style={`display:inline-flex;padding:3px 10px;font-size:0.7rem;font-family:'JetBrains Mono',monospace;border-radius:6px;background:${catColors[w.cat]}15;color:${catColors[w.cat]};border:1px solid ${catColors[w.cat]}22;text-transform:capitalize;`}>{w.cat}</span>
-              <span style={`display:inline-flex;padding:3px 10px;font-size:0.7rem;font-family:'JetBrains Mono',monospace;border-radius:6px;background:${diffColors[w.diff]}15;color:${diffColors[w.diff]};border:1px solid ${diffColors[w.diff]}22;text-transform:capitalize;`}>{w.diff}</span>
+              <span style={`display:inline-flex;padding:3px 10px;font-size:0.7rem;font-family:'Source Code Pro',monospace;border-radius:6px;background:${catColors[w.cat]}15;color:${catColors[w.cat]};border:1px solid ${catColors[w.cat]}22;text-transform:capitalize;`}>{w.cat}</span>
+              <span style={`display:inline-flex;padding:3px 10px;font-size:0.7rem;font-family:'Source Code Pro',monospace;border-radius:6px;background:${diffColors[w.diff]}15;color:${diffColors[w.diff]};border:1px solid ${diffColors[w.diff]}22;text-transform:capitalize;`}>{w.diff}</span>
             </div>
             <h3 style="font-size:1.05rem;font-weight:600;color:var(--text);margin-bottom:8px;">{w.title}</h3>
             <p style="color:var(--text-muted);font-size:0.875rem;line-height:1.6;margin-bottom:16px;">{w.desc}</p>
             <div style="display:flex;flex-wrap:wrap;gap:6px;margin-bottom:16px;">
               {w.tags.map((t) => (
-                <span style="font-size:0.7rem;font-family:'JetBrains Mono',monospace;color:var(--text-muted);background:var(--bg-tertiary);padding:3px 8px;border-radius:6px;">{t}</span>
+                <span style="font-size:0.7rem;font-family:'Source Code Pro',monospace;color:var(--text-muted);background:var(--bg-tertiary);padding:3px 8px;border-radius:6px;">{t}</span>
               ))}
             </div>
             <div style="display:flex;justify-content:space-between;align-items:center;">
-              <span style="color:var(--text-muted);font-size:0.75rem;font-family:'JetBrains Mono',monospace;">{w.date}</span>
-              <span style="color:var(--green);font-size:0.85rem;font-family:'JetBrains Mono',monospace;" class="arrow-hover">Read more &rarr;</span>
+              <span style="color:var(--text-muted);font-size:0.75rem;font-family:'Source Code Pro',monospace;">{w.date}</span>
+              <span style="color:var(--red);font-size:0.85rem;font-family:'Source Code Pro',monospace;" class="arrow-hover">Read more &rarr;</span>
             </div>
           </a>
         ))}

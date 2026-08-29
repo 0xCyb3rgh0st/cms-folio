@@ -3,21 +3,21 @@ const takes = [
   { opinion: "Ghidra > IDA for 90% of use cases", reason: "Free, open-source, and the decompiler is good enough for most reverse engineering work. IDA is only worth it for the occasional complex binary that Ghidra struggles with." },
   { opinion: "Most CTF writeups are unreadable", reason: "Too many writeups skip the 'why' and jump straight to the exploit. The thought process matters more than the final payload." },
   { opinion: "Python is a terrible choice for exploit dev", reason: "It's great for prototyping but you'll hit a wall the moment you need precise memory control. Learn C or Rust." },
-  { opinion: "Active Directory security is 90% misconfiguration", reason: "Most AD compromises don't involve exotic zero-days. They involve default configs,过度 permissions, and nobody reading the logs." },
+  { opinion: "Active Directory security is 90% misconfiguration", reason: "Most AD compromises don't involve exotic zero-days. They involve default configs, excessive permissions, and nobody reading the logs." },
 ];
 ---
 <section id="hot-takes" style="padding:96px 24px;background:var(--bg-secondary);" aria-labelledby="takes-heading">
   <div style="max-width:1200px;margin:0 auto;">
-    <p style="font-family:'JetBrains Mono',monospace;color:var(--green);font-size:0.8rem;text-transform:uppercase;letter-spacing:0.15em;margin-bottom:8px;">// hot takes</p>
+    <p style="font-family:'Source Code Pro',monospace;color:var(--red);font-size:0.8rem;text-transform:uppercase;letter-spacing:0.15em;margin-bottom:8px;">// hot takes</p>
     <h2 id="takes-heading" style="font-size:clamp(1.75rem,4vw,2.5rem);font-weight:700;margin-bottom:48px;">
-      <span style="color:var(--text);">Unpopular </span><span style="background:linear-gradient(135deg,var(--green),var(--cyan));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;">Opinions</span>
+      <span style="color:var(--text);">Unpopular </span><span style="background:linear-gradient(135deg,var(--red),var(--orange));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;">Opinions</span>
     </h2>
 
     <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(340px,1fr));gap:20px;">
       {takes.map((t, i) => (
         <div style="background:var(--bg-card);border:1px solid var(--border);border-radius:var(--radius);padding:24px;transition:all 0.2s ease-in-out;" onmouseover="this.style.borderColor='var(--border-hover)'" onmouseout="this.style.borderColor='var(--border)'">
-          <div style="font-family:'JetBrains Mono',monospace;font-size:2rem;font-weight:700;color:var(--bg-tertiary);margin-bottom:8px;" aria-hidden="true">0{i + 1}</div>
-          <h3 style="font-size:1.05rem;font-weight:600;color:var(--green);margin-bottom:10px;line-height:1.4;">"{t.opinion}"</h3>
+          <div style="font-family:'Source Code Pro',monospace;font-size:2rem;font-weight:700;color:var(--bg-tertiary);margin-bottom:8px;" aria-hidden="true">0{i + 1}</div>
+          <h3 style="font-size:1.05rem;font-weight:600;color:var(--red);margin-bottom:10px;line-height:1.4;">"{t.opinion}"</h3>
           <p style="color:var(--text-muted);font-size:0.875rem;line-height:1.6;">{t.reason}</p>
         </div>
       ))}

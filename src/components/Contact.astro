@@ -2,26 +2,26 @@
 ---
 <section id="contact" style="padding:96px 24px;">
   <div style="max-width:1200px;margin:0 auto;">
-    <p style="font-family:'JetBrains Mono',monospace;color:var(--green);font-size:0.8rem;text-transform:uppercase;letter-spacing:0.15em;margin-bottom:8px;">// contact</p>
+    <p style="font-family:'Source Code Pro',monospace;color:var(--red);font-size:0.8rem;text-transform:uppercase;letter-spacing:0.15em;margin-bottom:8px;">// contact</p>
     <h2 style="font-size:clamp(1.75rem,4vw,2.5rem);font-weight:700;margin-bottom:48px;">
-      <span style="background:linear-gradient(135deg,var(--green),var(--cyan));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;">Get</span>
+      <span style="background:linear-gradient(135deg,var(--red),var(--orange));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;">Get</span>
       <span style="color:var(--text);"> In Touch</span>
     </h2>
     <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:32px;">
       <div style="background:var(--bg-card);border:1px solid var(--border);border-radius:var(--radius);padding:32px;">
-        <h3 style="font-size:1rem;font-weight:600;color:var(--text);margin-bottom:24px;font-family:'JetBrains Mono',monospace;">
-          <span style="color:var(--green);">$</span> echo "Let's connect"
+        <h3 style="font-size:1rem;font-weight:600;color:var(--text);margin-bottom:24px;font-family:'Source Code Pro',monospace;">
+          <span style="color:var(--red);">$</span> echo "Let's connect"
         </h3>
         <div style="display:flex;flex-direction:column;gap:12px;">
           {[
-            { icon: "GH", label: "GitHub", sub: "@0xCyb3rgh0st", href: "https://github.com/0xCyb3rgh0st", color: "var(--green)" },
+            { icon: "GH", label: "GitHub", sub: "@0xCyb3rgh0st", href: "https://github.com/0xCyb3rgh0st", color: "var(--text)" },
             { icon: "X", label: "X (Twitter)", sub: "@0xCyb3rgh0st", href: "https://x.com/0xCyb3rgh0st", color: "var(--cyan)" },
             { icon: "MD", label: "Medium", sub: "@cyberghostnp", href: "https://medium.com/@cyberghostnp", color: "var(--orange)" },
-            { icon: "EM", label: "Email", sub: "info@jatinsingh.com.np", href: "mailto:info@jatinsingh.com.np", color: "var(--yellow)" },
+            { icon: "EM", label: "Email", sub: "info@jatinsingh.com.np", href: "mailto:info@jatinsingh.com.np", color: "var(--red)" },
             { icon: "LI", label: "LinkedIn", sub: "jatin-singh-np", href: "https://www.linkedin.com/in/jatin-singh-np/", color: "var(--purple)" },
           ].map((link) => (
             <a href={link.href} target="_blank" rel="noopener" style={`display:flex;align-items:center;gap:14px;padding:14px;border-radius:var(--radius);border:1px solid var(--border);text-decoration:none;transition:all 0.2s ease-in-out;`} onmouseover="this.style.borderColor='var(--border-hover)';this.style.background='var(--bg-tertiary)'" onmouseout="this.style.borderColor='var(--border)';this.style.background='transparent'">
-              <div style={`width:40px;height:40px;border-radius:6px;background:var(--bg-tertiary);border:1px solid var(--border);display:flex;align-items:center;justify-content:center;color:${link.color};font-family:'JetBrains Mono',monospace;font-weight:700;font-size:0.7rem;flex-shrink:0;`}>
+              <div style={`width:40px;height:40px;border-radius:6px;background:var(--bg-tertiary);border:1px solid var(--border);display:flex;align-items:center;justify-content:center;color:${link.color};font-family:'Source Code Pro',monospace;font-weight:700;font-size:0.7rem;flex-shrink:0;`}>
                 {link.icon}
               </div>
               <div>
@@ -32,7 +32,7 @@
           ))}
           <div style="padding:14px;border-radius:var(--radius);border:1px solid var(--border);background:var(--bg-tertiary);">
             <p style="font-size:0.85rem;color:var(--text-muted);line-height:1.6;">
-              <span style="color:var(--green);font-weight:600;">Open to relocation within EU</span><br/>
+              <span style="color:var(--red);font-weight:600;">Open to relocation within EU</span><br/>
               <span style="font-size:0.8rem;">Eligible for UK/EU work visas</span>
             </p>
           </div>
@@ -41,18 +41,18 @@
       <div style="background:var(--bg-secondary);border:1px solid var(--border);border-radius:var(--radius);overflow:hidden;">
         <div style="background:var(--bg-tertiary);padding:10px 16px;display:flex;align-items:center;gap:6px;border-bottom:1px solid var(--border);">
           <div style="width:10px;height:10px;border-radius:50%;background:var(--red);"></div>
-          <div style="width:10px;height:10px;border-radius:50%;background:var(--yellow);"></div>
-          <div style="width:10px;height:10px;border-radius:50%;background:var(--green);"></div>
-          <span style="margin-left:8px;color:var(--text-muted);font-size:0.75rem;font-family:'JetBrains Mono',monospace;">philosophy.txt</span>
+          <div style="width:10px;height:10px;border-radius:50%;background:#eab308;"></div>
+          <div style="width:10px;height:10px;border-radius:50%;background:#22c55e;"></div>
+          <span style="margin-left:8px;color:var(--text-muted);font-size:0.75rem;font-family:'Source Code Pro',monospace;">philosophy.txt</span>
         </div>
-        <div style="padding:24px;font-family:'JetBrains Mono',monospace;font-size:0.85rem;line-height:2;">
-          <p style="color:var(--green);">$ cat philosophy.txt</p>
+        <div style="padding:24px;font-family:'Source Code Pro',monospace;font-size:0.85rem;line-height:2;">
+          <p style="color:var(--red);">$ cat philosophy.txt</p>
           <p style="padding-left:16px;color:var(--text-muted);">Automation over repetition.</p>
           <p style="padding-left:16px;color:var(--text-muted);">Research over noise.</p>
           <p style="padding-left:16px;color:var(--text-muted);">Quality over quantity.</p>
           <p style="padding-left:16px;color:var(--text-muted);">Tools over templates.</p>
           <p style="padding-left:16px;color:var(--text-muted);">Knowledge over hype.</p>
-          <p style="margin-top:16px;color:var(--green);">$ echo "Build tools that researchers trust."</p>
+          <p style="margin-top:16px;color:var(--red);">$ echo "Build tools that researchers trust."</p>
           <p style="padding-left:16px;color:var(--cyan);">Build tools that researchers trust.</p>
         </div>
       </div>
