@@ -30,43 +30,47 @@
     </p>
   </div>
   <div style="position:absolute;bottom:32px;left:50%;transform:translateX(-50%);animation:float 2.5s ease-in-out infinite;" aria-hidden="true">
-    <svg width="20" height="20" fill="none" stroke="var(--text-muted)" stroke-width="2"><path d="M4 7l6 6 6-6" /></svg>
+    <svg width="20" height="20" fill="none" stroke="var(--text-muted)" stroke-width="2" aria-hidden="true"><path d="M4 7l6 6 6-6" /></svg>
   </div>
 </section>
 
 <script>
-  const canvas = document.getElementById('matrix-rain') as HTMLCanvasElement;
-  if (canvas) {
-    const ctx = canvas.getContext('2d');
-    if (ctx) {
-      canvas.width = window.innerWidth;
-      canvas.height = window.innerHeight;
-      const chars = '01アイウエオカキクケコサシスセソタチツテトナニヌネノハヒフヘホマミムメモヤユヨラリルレロワヲン';
-      const fontSize = 14;
-      const columns = Math.floor(canvas.width / fontSize);
-      const drops: number[] = Array(columns).fill(1);
-      function draw() {
-        ctx.fillStyle = 'rgba(13, 17, 23, 0.06)';
-        ctx.fillRect(0, 0, canvas.width, canvas.height);
-        ctx.fillStyle = '#7ee787';
-        ctx.font = `${fontSize}px "JetBrains Mono", monospace`;
-        for (let i = 0; i < drops.length; i++) {
-          const text = chars[Math.floor(Math.random() * chars.length)];
-          ctx.globalAlpha = 0.2 + Math.random() * 0.3;
-          ctx.fillText(text, i * fontSize, drops[i] * fontSize);
-          if (drops[i] * fontSize > canvas.height && Math.random() > 0.975) drops[i] = 0;
-          drops[i]++;
+  const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  if (!prefersReducedMotion) {
+    const canvas = document.getElementById('matrix-rain') as HTMLCanvasElement;
+    if (canvas) {
+      const ctx = canvas.getContext('2d');
+      if (ctx) {
+        canvas.width = window.innerWidth;
+        canvas.height = window.innerHeight;
+        const chars = '01アイウエオカキクケコサシスセソタチツテトナニヌネノハヒフヘホマミムメモヤユヨラリルレロワヲン';
+        const fontSize = 14;
+        const columns = Math.floor(canvas.width / fontSize);
+        const drops: number[] = Array(columns).fill(1);
+        function draw() {
+          ctx.fillStyle = 'rgba(13, 17, 23, 0.06)';
+          ctx.fillRect(0, 0, canvas.width, canvas.height);
+          ctx.fillStyle = '#7ee787';
+          ctx.font = `${fontSize}px "JetBrains Mono", monospace`;
+          for (let i = 0; i < drops.length; i++) {
+            const text = chars[Math.floor(Math.random() * chars.length)];
+            ctx.globalAlpha = 0.2 + Math.random() * 0.3;
+            ctx.fillText(text, i * fontSize, drops[i] * fontSize);
+            if (drops[i] * fontSize > canvas.height && Math.random() > 0.975) drops[i] = 0;
+            drops[i]++;
+          }
+          ctx.globalAlpha = 1;
+          requestAnimationFrame(draw);
         }
-        ctx.globalAlpha = 1;
-        requestAnimationFrame(draw);
+        draw();
+        window.addEventListener('resize', () => { canvas.width = window.innerWidth; canvas.height = window.innerHeight; });
       }
-      draw();
-      window.addEventListener('resize', () => { canvas.width = window.innerWidth; canvas.height = window.innerHeight; });
     }
   }
 
   const typeEl = document.getElementById('hero-typing');
-  if (typeEl) {
+  if (typeEl && !prefersReducedMotion) {
     const phrases = ['Security Researcher & Exploit Developer', 'Binary Exploitation', 'Reverse Engineering', 'Building Open Source Tools', 'Bug Bounty Hunter'];
     let phraseIdx = 0;
     let charIdx = 0;
@@ -97,6 +101,8 @@
       setTimeout(type, delay);
     }
     type();
+  } else if (typeEl) {
+    typeEl.textContent = 'Security Researcher & Exploit Developer';
   }
 </script>
 

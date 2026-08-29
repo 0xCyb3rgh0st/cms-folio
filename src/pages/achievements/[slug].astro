@@ -13,7 +13,7 @@ const { title, issuer, color, icon, date, desc, pdfUrl } = Astro.props;
 ---
 <BaseLayout title={`${title} | Achievement`}>
   <Navigation />
-  <main style="padding-top:120px;padding-bottom:64px;min-height:100vh;">
+  <main id="main-content" style="padding-top:120px;padding-bottom:64px;min-height:100vh;">
     <div style="max-width:1000px;margin:0 auto;padding:0 24px;">
       <a href="/" style="display:inline-flex;align-items:center;gap:8px;color:var(--green);font-family:'JetBrains Mono',monospace;font-size:0.85rem;text-decoration:none;margin-bottom:32px;transition:opacity 0.2s;" onmouseover="this.style.opacity='0.7'" onmouseout="this.style.opacity='1'">
         &larr; Back to Portfolio
@@ -36,7 +36,7 @@ const { title, issuer, color, icon, date, desc, pdfUrl } = Astro.props;
           <div style="padding:12px 16px;border-bottom:1px solid var(--border);display:flex;justify-content:space-between;align-items:center;">
             <span style="font-family:'JetBrains Mono',monospace;font-size:0.75rem;color:var(--text-muted);">Official Letter</span>
             <a href={pdfUrl} target="_blank" rel="noopener" style="display:inline-flex;align-items:center;gap:6px;padding:6px 14px;background:var(--green);color:var(--bg-primary);border-radius:6px;font-family:'JetBrains Mono',monospace;font-size:0.75rem;font-weight:600;text-decoration:none;transition:all 0.2s ease-in-out;" onmouseover="this.style.opacity='0.8'" onmouseout="this.style.opacity='1'">
-              <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+              <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
               Download PDF
             </a>
           </div>
