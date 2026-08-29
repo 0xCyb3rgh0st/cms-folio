@@ -10,11 +10,12 @@ const achievements = [
       <span style="background:linear-gradient(135deg,var(--red),var(--orange));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;">Recognition</span>
       <span style="color:var(--text);"> & Awards</span>
     </h2>
-    <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(340px,1fr));gap:20px;">
+    <div class="scroll-stagger" style="display:grid;grid-template-columns:repeat(auto-fill,minmax(340px,1fr));gap:20px;">
       {achievements.map((a) => (
-        <a href={`/achievements/${a.slug}`} style="text-decoration:none;display:block;background:var(--bg-card);border:1px solid var(--border);border-radius:var(--radius);padding:28px;transition:all 0.2s ease-in-out;position:relative;overflow:hidden;" onmouseover="this.style.borderColor='var(--border-hover)';this.style.transform='translateY(-2px)';this.style.boxShadow='0 8px 24px rgba(0,0,0,0.2)'" onmouseout="this.style.borderColor='var(--border)';this.style.transform='none';this.style.boxShadow='none'">
+        <a href={`/achievements/${a.slug}`} class="card-3d" style="text-decoration:none;display:block;background:var(--bg-card);border:1px solid var(--border);border-radius:var(--radius);padding:28px;position:relative;overflow:hidden;">
+          <div class="card-glow-effect"></div>
           <div style="position:absolute;top:0;right:0;width:120px;height:120px;background:radial-gradient(circle,${a.color}08 0%,transparent 70%);pointer-events:none;"></div>
-          <div style="display:flex;align-items:center;gap:14px;margin-bottom:14px;">
+          <div style="display:flex;align-items:center;gap:14px;margin-bottom:14px;position:relative;z-index:1;">
             <div style={`width:48px;height:48px;border-radius:10px;display:flex;align-items:center;justify-content:center;font-family:'Source Code Pro',monospace;font-weight:700;font-size:0.7rem;background:${a.color}15;color:${a.color};border:1px solid ${a.color}22;flex-shrink:0;`}>
               {a.icon}
             </div>
@@ -23,8 +24,8 @@ const achievements = [
               <p style="color:var(--text-muted);font-size:0.8rem;">{a.issuer}</p>
             </div>
           </div>
-          <p style="color:var(--text-muted);font-size:0.875rem;line-height:1.6;margin-bottom:16px;">{a.desc}</p>
-          <div style="display:flex;justify-content:space-between;align-items:center;">
+          <p style="color:var(--text-muted);font-size:0.875rem;line-height:1.6;margin-bottom:16px;position:relative;z-index:1;">{a.desc}</p>
+          <div style="display:flex;justify-content:space-between;align-items:center;position:relative;z-index:1;">
             <span style="font-family:'Source Code Pro',monospace;font-size:0.75rem;color:var(--text-muted);">{a.date}</span>
             <span style="font-size:0.75rem;font-family:'Source Code Pro',monospace;color:var(--red);background:var(--bg-tertiary);padding:5px 12px;border-radius:6px;" class="arrow-hover">View Details &rarr;</span>
           </div>

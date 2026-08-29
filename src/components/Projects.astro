@@ -7,35 +7,36 @@ const projects = [
   { title: "ghidra-open", desc: "One-command launcher for Ghidra. Binary → Automatic Project → Headless Analysis → Launch GUI.", cat: "reverse-engineering", tags: ["Ghidra", "Automation", "Java"], featured: false, slug: "ghidra-open", github: "https://github.com/0xCyb3rgh0st/ghidra_autorun" },
   { title: "CrackTheCode", desc: "Final year project - interactive cryptography and code-breaking challenge platform.", cat: "web", tags: ["Python", "Crypto", "Education"], featured: false, slug: "crackthecode", github: "https://github.com/0xCyb3rgh0st/crackthecode.git" },
 ];
-const catColors: Record<string, string> = { "binary-exploitation": "var(--green)", "reverse-engineering": "var(--cyan)", "web": "var(--yellow)" };
+const catColors: Record<string, string> = { "binary-exploitation": "var(--red)", "reverse-engineering": "var(--cyan)", "web": "var(--orange)" };
 ---
 <section id="projects" style="padding:96px 24px;">
   <div style="max-width:1200px;margin:0 auto;">
-    <p style="font-family:'JetBrains Mono',monospace;color:var(--green);font-size:0.8rem;text-transform:uppercase;letter-spacing:0.15em;margin-bottom:8px;">// projects</p>
+    <p style="font-family:'Source Code Pro',monospace;color:var(--red);font-size:0.8rem;text-transform:uppercase;letter-spacing:0.15em;margin-bottom:8px;">// projects</p>
     <h2 style="font-size:clamp(1.75rem,4vw,2.5rem);font-weight:700;margin-bottom:48px;">
-      <span style="background:linear-gradient(135deg,var(--green),var(--cyan));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;">Flagship</span>
+      <span style="background:linear-gradient(135deg,var(--red),var(--orange));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;">Flagship</span>
       <span style="color:var(--text);"> Projects</span>
     </h2>
-    <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(340px,1fr));gap:20px;">
+    <div class="scroll-stagger" style="display:grid;grid-template-columns:repeat(auto-fill,minmax(340px,1fr));gap:20px;">
       {projects.map((p) => (
-        <div style="background:var(--bg-card);border:1px solid var(--border);border-radius:var(--radius);padding:24px;display:flex;flex-direction:column;" class="card-hover">
+        <div class="card-3d" style="background:var(--bg-card);border:1px solid var(--border);border-radius:var(--radius);padding:24px;display:flex;flex-direction:column;">
+          <div class="card-glow-effect"></div>
           {p.featured && (
-            <div style="display:flex;align-items:center;gap:8px;margin-bottom:12px;">
-              <div style="width:6px;height:6px;border-radius:50%;background:var(--green);box-shadow:0 0 6px var(--green);"></div>
-              <span style="color:var(--green);font-size:0.7rem;font-family:'JetBrains Mono',monospace;letter-spacing:0.05em;">FEATURED</span>
+            <div style="display:flex;align-items:center;gap:8px;margin-bottom:12px;position:relative;z-index:1;">
+              <div style="width:6px;height:6px;border-radius:50%;background:var(--red);box-shadow:0 0 6px var(--red);"></div>
+              <span style="color:var(--red);font-size:0.7rem;font-family:'Source Code Pro',monospace;letter-spacing:0.05em;">FEATURED</span>
             </div>
           )}
-          <span style={`display:inline-flex;padding:3px 8px;font-size:0.7rem;font-family:'JetBrains Mono',monospace;border-radius:6px;background:${catColors[p.cat]}15;color:${catColors[p.cat]};border:1px solid ${catColors[p.cat]}22;width:fit-content;margin-bottom:12px;text-transform:capitalize;`}>
+          <span style={`display:inline-flex;padding:3px 8px;font-size:0.7rem;font-family:'Source Code Pro',monospace;border-radius:6px;background:${catColors[p.cat]}15;color:${catColors[p.cat]};border:1px solid ${catColors[p.cat]}22;width:fit-content;margin-bottom:12px;text-transform:capitalize;position:relative;z-index:1;`}>
             {p.cat.replace("-", " ")}
           </span>
-          <h3 style="font-size:1.125rem;font-weight:600;color:var(--text);margin-bottom:8px;">{p.title}</h3>
-          <p style="color:var(--text-muted);font-size:0.875rem;line-height:1.6;margin-bottom:16px;flex-grow:1;">{p.desc}</p>
-          <div style="display:flex;flex-wrap:wrap;gap:6px;margin-bottom:16px;">
+          <h3 style="font-size:1.125rem;font-weight:600;color:var(--text);margin-bottom:8px;position:relative;z-index:1;">{p.title}</h3>
+          <p style="color:var(--text-muted);font-size:0.875rem;line-height:1.6;margin-bottom:16px;flex-grow:1;position:relative;z-index:1;">{p.desc}</p>
+          <div style="display:flex;flex-wrap:wrap;gap:6px;margin-bottom:16px;position:relative;z-index:1;">
             {p.tags.map((t) => (
-              <span style="font-size:0.7rem;font-family:'JetBrains Mono',monospace;color:var(--text-muted);background:var(--bg-tertiary);padding:3px 8px;border-radius:6px;">{t}</span>
+              <span style="font-size:0.7rem;font-family:'Source Code Pro',monospace;color:var(--text-muted);background:var(--bg-tertiary);padding:3px 8px;border-radius:6px;">{t}</span>
             ))}
           </div>
-          <a href={p.github} target="_blank" rel="noopener" style="display:inline-flex;align-items:center;gap:6px;font-size:0.85rem;color:var(--green);font-family:'JetBrains Mono',monospace;" class="arrow-hover">
+          <a href={p.github} target="_blank" rel="noopener" style="display:inline-flex;align-items:center;gap:6px;font-size:0.85rem;color:var(--red);font-family:'Source Code Pro',monospace;position:relative;z-index:1;" class="arrow-hover">
             <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/></svg>
             View on GitHub
           </a>

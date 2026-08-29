@@ -13,15 +13,16 @@ const certs = [
     <h2 style="font-size:clamp(1.75rem,4vw,2.5rem);font-weight:700;margin-bottom:48px;">
       <span style="color:var(--text);">Verified </span><span style="background:linear-gradient(135deg,var(--red),var(--orange));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;">Credentials</span>
     </h2>
-    <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:16px;">
+    <div class="scroll-stagger" style="display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:16px;">
       {certs.map((c) => (
-        <a href={`/certifications/${c.slug}`} style="text-decoration:none;display:block;background:var(--bg-card);border:1px solid var(--border);border-radius:var(--radius);padding:24px 20px;text-align:center;transition:all 0.2s ease-in-out;" onmouseover="this.style.borderColor='var(--border-hover)';this.style.transform='translateY(-2px)';this.style.boxShadow='0 4px 16px rgba(0,0,0,0.2)'" onmouseout="this.style.borderColor='var(--border)';this.style.transform='none';this.style.boxShadow='none'">
-          <div style={`width:56px;height:56px;border-radius:12px;display:flex;align-items:center;justify-content:center;font-family:'Source Code Pro',monospace;font-weight:700;font-size:0.8rem;background:${c.color}15;color:${c.color};border:1px solid ${c.color}22;margin:0 auto 14px;`}>
+        <a href={`/certifications/${c.slug}`} class="card-3d" style="text-decoration:none;display:block;background:var(--bg-card);border:1px solid var(--border);border-radius:var(--radius);padding:24px 20px;text-align:center;">
+          <div class="card-glow-effect"></div>
+          <div style={`width:56px;height:56px;border-radius:12px;display:flex;align-items:center;justify-content:center;font-family:'Source Code Pro',monospace;font-weight:700;font-size:0.8rem;background:${c.color}15;color:${c.color};border:1px solid ${c.color}22;margin:0 auto 14px;position:relative;z-index:1;`}>
             {c.icon}
           </div>
-          <h3 style="font-weight:600;color:var(--text);font-size:0.95rem;margin-bottom:4px;">{c.title}</h3>
-          <p style="color:var(--text-muted);font-size:0.8rem;margin-bottom:12px;">{c.issuer}</p>
-          <div style="font-size:0.7rem;font-family:'Source Code Pro',monospace;color:var(--red);background:var(--bg-tertiary);padding:5px 10px;border-radius:6px;display:inline-block;">
+          <h3 style="font-weight:600;color:var(--text);font-size:0.95rem;margin-bottom:4px;position:relative;z-index:1;">{c.title}</h3>
+          <p style="color:var(--text-muted);font-size:0.8rem;margin-bottom:12px;position:relative;z-index:1;">{c.issuer}</p>
+          <div style="font-size:0.7rem;font-family:'Source Code Pro',monospace;color:var(--red);background:var(--bg-tertiary);padding:5px 10px;border-radius:6px;display:inline-block;position:relative;z-index:1;">
             View Details &rarr;
           </div>
         </a>

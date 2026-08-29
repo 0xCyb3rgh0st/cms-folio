@@ -21,51 +21,18 @@ import Footer from '../components/Footer.astro';
   <Navigation />
   <Hero />
   <main id="main-content">
-    <About />
-    <Skills />
-    <Projects />
-    <CurrentlyLearning />
-    <Writeups />
-    <HotTakes />
-    <Certifications />
-    <Achievements />
-    <LessonsLearned />
-    <Mentors />
-    <Platforms />
-    <Contact />
+    <div class="scroll-fade-up"><About /></div>
+    <div class="scroll-fade-up"><Skills /></div>
+    <div class="scroll-fade-up"><Projects /></div>
+    <div class="scroll-fade-up"><CurrentlyLearning /></div>
+    <div class="scroll-fade-up"><Writeups /></div>
+    <div class="scroll-fade-up"><HotTakes /></div>
+    <div class="scroll-fade-up"><Certifications /></div>
+    <div class="scroll-fade-up"><Achievements /></div>
+    <div class="scroll-fade-up"><LessonsLearned /></div>
+    <div class="scroll-fade-up"><Mentors /></div>
+    <div class="scroll-fade-up"><Platforms /></div>
+    <div class="scroll-fade-up"><Contact /></div>
   </main>
   <Footer />
 </BaseLayout>
-
-<script>
-  const observerOptions = {
-    threshold: 0.1,
-    rootMargin: '0px 0px -50px 0px'
-  };
-
-  const observer = new IntersectionObserver((entries) => {
-    entries.forEach(entry => {
-      if (entry.isIntersecting) {
-        entry.target.classList.add('animate-in');
-        observer.unobserve(entry.target);
-      }
-    });
-  }, observerOptions);
-
-  document.querySelectorAll('section').forEach(section => {
-    section.classList.add('animate-ready');
-    observer.observe(section);
-  });
-</script>
-
-<style is:global>
-  .animate-ready {
-    opacity: 0;
-    transform: translateY(20px);
-    transition: opacity 0.6s ease, transform 0.6s ease;
-  }
-  .animate-in {
-    opacity: 1;
-    transform: translateY(0);
-  }
-</style>
