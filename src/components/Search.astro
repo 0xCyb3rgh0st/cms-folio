@@ -1,0 +1,306 @@
+---
+---
+<div id="search-overlay" role="dialog" aria-label="Search" aria-hidden="true" style="display:none;position:fixed;inset:0;z-index:10000;">
+  <div id="search-backdrop" style="position:absolute;inset:0;background:rgba(0,0,0,0.7);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);opacity:0;transition:opacity 0.25s ease;"></div>
+  <div style="position:relative;z-index:1;display:flex;justify-content:center;padding-top:min(20vh, 180px);padding-left:24px;padding-right:24px;">
+    <div id="search-container" style="width:100%;max-width:640px;background:var(--bg-secondary);border:1px solid var(--border);border-radius:16px;box-shadow:0 25px 80px rgba(0,0,0,0.6),0 0 40px rgba(239,68,68,0.05);overflow:hidden;transform:scale(0.95) translateY(-10px);opacity:0;transition:all 0.3s cubic-bezier(0.16,1,0.3,1);">
+      
+      <!-- Search Input -->
+      <div style="display:flex;align-items:center;gap:12px;padding:16px 20px;border-bottom:1px solid var(--border);">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="var(--text-muted)" stroke-width="2" stroke-linecap="round" aria-hidden="true" style="flex-shrink:0;"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>
+        <input id="search-input" type="text" placeholder="Search projects, writeups, certs..." autocomplete="off" spellcheck="false" style="flex:1;background:transparent;border:none;color:var(--text);font-family:'Poppins',sans-serif;font-size:1rem;outline:none;" />
+        <kbd style="display:inline-flex;align-items:center;padding:2px 6px;font-family:'Source Code Pro',monospace;font-size:0.7rem;color:var(--text-muted);background:var(--bg-tertiary);border:1px solid var(--border);border-radius:6px;line-height:1.4;">ESC</kbd>
+      </div>
+
+      <!-- Results -->
+      <div id="search-results" style="max-height:400px;overflow-y:auto;padding:8px;">
+        <!-- Default state -->
+        <div id="search-default">
+          <div style="padding:12px 16px 8px;">
+            <p style="font-size:0.7rem;font-family:'Source Code Pro',monospace;color:var(--text-muted);text-transform:uppercase;letter-spacing:0.1em;">Quick Navigation</p>
+          </div>
+          <div id="search-nav-items" style="padding:0 8px;">
+            <button class="search-nav-item" data-href="#about" style="width:100%;display:flex;align-items:center;gap:12px;padding:10px 12px;background:transparent;border:none;border-radius:8px;cursor:pointer;text-align:left;transition:background 0.15s ease;" onmouseover="this.style.background='var(--bg-tertiary)'" onmouseout="this.style.background='transparent'">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="var(--text-muted)" stroke-width="2" aria-hidden="true"><circle cx="12" cy="12" r="10"/><path d="M12 16v-4"/><path d="M12 8h.01"/></svg>
+              <div><p style="color:var(--text);font-size:0.9rem;">About</p><p style="color:var(--text-muted);font-size:0.75rem;">Who I am</p></div>
+              <span style="margin-left:auto;font-size:0.7rem;color:var(--text-muted);">Section</span>
+            </button>
+            <button class="search-nav-item" data-href="#skills" style="width:100%;display:flex;align-items:center;gap:12px;padding:10px 12px;background:transparent;border:none;border-radius:8px;cursor:pointer;text-align:left;transition:background 0.15s ease;" onmouseover="this.style.background='var(--bg-tertiary)'" onmouseout="this.style.background='transparent'">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="var(--text-muted)" stroke-width="2" aria-hidden="true"><path d="M12 2v20M2 12h20"/></svg>
+              <div><p style="color:var(--text);font-size:0.9rem;">Skills</p><p style="color:var(--text-muted);font-size:0.75rem;">Technical arsenal</p></div>
+              <span style="margin-left:auto;font-size:0.7rem;color:var(--text-muted);">Section</span>
+            </button>
+            <button class="search-nav-item" data-href="#projects" style="width:100%;display:flex;align-items:center;gap:12px;padding:10px 12px;background:transparent;border:none;border-radius:8px;cursor:pointer;text-align:left;transition:background 0.15s ease;" onmouseover="this.style.background='var(--bg-tertiary)'" onmouseout="this.style.background='transparent'">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="var(--text-muted)" stroke-width="2" aria-hidden="true"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/></svg>
+              <div><p style="color:var(--text);font-size:0.9rem;">Projects</p><p style="color:var(--text-muted);font-size:0.75rem;">Open source tools</p></div>
+              <span style="margin-left:auto;font-size:0.7rem;color:var(--text-muted);">Section</span>
+            </button>
+            <button class="search-nav-item" data-href="#writeups" style="width:100%;display:flex;align-items:center;gap:12px;padding:10px 12px;background:transparent;border:none;border-radius:8px;cursor:pointer;text-align:left;transition:background 0.15s ease;" onmouseover="this.style.background='var(--bg-tertiary)'" onmouseout="this.style.background='transparent'">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="var(--text-muted)" stroke-width="2" aria-hidden="true"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><path d="M14 2v6h6"/><path d="M16 13H8"/><path d="M16 17H8"/><path d="M10 9H8"/></svg>
+              <div><p style="color:var(--text);font-size:0.9rem;">Writeups</p><p style="color:var(--text-muted);font-size:0.75rem;">Security research</p></div>
+              <span style="margin-left:auto;font-size:0.7rem;color:var(--text-muted);">Section</span>
+            </button>
+            <button class="search-nav-item" data-href="#certifications" style="width:100%;display:flex;align-items:center;gap:12px;padding:10px 12px;background:transparent;border:none;border-radius:8px;cursor:pointer;text-align:left;transition:background 0.15s ease;" onmouseover="this.style.background='var(--bg-tertiary)'" onmouseout="this.style.background='transparent'">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="var(--text-muted)" stroke-width="2" aria-hidden="true"><path d="M12 15l-2 5 2-1 2 1-2-5z"/><circle cx="12" cy="8" r="6"/></svg>
+              <div><p style="color:var(--text);font-size:0.9rem;">Certifications</p><p style="color:var(--text-muted);font-size:0.75rem;">Verified credentials</p></div>
+              <span style="margin-left:auto;font-size:0.7rem;color:var(--text-muted);">Section</span>
+            </button>
+            <button class="search-nav-item" data-href="#contact" style="width:100%;display:flex;align-items:center;gap:12px;padding:10px 12px;background:transparent;border:none;border-radius:8px;cursor:pointer;text-align:left;transition:background 0.15s ease;" onmouseover="this.style.background='var(--bg-tertiary)'" onmouseout="this.style.background='transparent'">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="var(--text-muted)" stroke-width="2" aria-hidden="true"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><path d="M22 6l-10 7L2 6"/></svg>
+              <div><p style="color:var(--text);font-size:0.9rem;">Contact</p><p style="color:var(--text-muted);font-size:0.75rem;">Get in touch</p></div>
+              <span style="margin-left:auto;font-size:0.7rem;color:var(--text-muted);">Section</span>
+            </button>
+          </div>
+        </div>
+
+        <!-- Search results (hidden by default) -->
+        <div id="search-results-list" style="display:none;"></div>
+
+        <!-- No results -->
+        <div id="search-no-results" style="display:none;padding:32px 16px;text-align:center;">
+          <p style="color:var(--text-muted);font-size:0.9rem;">No results found</p>
+          <p style="color:var(--text-muted);font-size:0.8rem;margin-top:4px;">Try a different search term</p>
+        </div>
+      </div>
+
+      <!-- Footer -->
+      <div style="display:flex;align-items:center;justify-content:space-between;padding:10px 20px;border-top:1px solid var(--border);background:var(--bg-tertiary);">
+        <div style="display:flex;align-items:center;gap:12px;">
+          <span style="display:inline-flex;align-items:center;gap:4px;font-size:0.7rem;color:var(--text-muted);font-family:'Source Code Pro',monospace;">
+            <kbd style="padding:1px 5px;background:var(--bg-primary);border:1px solid var(--border);border-radius:4px;font-size:0.65rem;">↑</kbd>
+            <kbd style="padding:1px 5px;background:var(--bg-primary);border:1px solid var(--border);border-radius:4px;font-size:0.65rem;">↓</kbd>
+            navigate
+          </span>
+          <span style="display:inline-flex;align-items:center;gap:4px;font-size:0.7rem;color:var(--text-muted);font-family:'Source Code Pro',monospace;">
+            <kbd style="padding:1px 5px;background:var(--bg-primary);border:1px solid var(--border);border-radius:4px;font-size:0.65rem;">↵</kbd>
+            select
+          </span>
+          <span style="display:inline-flex;align-items:center;gap:4px;font-size:0.7rem;color:var(--text-muted);font-family:'Source Code Pro',monospace;">
+            <kbd style="padding:1px 5px;background:var(--bg-primary);border:1px solid var(--border);border-radius:4px;font-size:0.65rem;">esc</kbd>
+            close
+          </span>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script is:inline>
+(function() {
+  const overlay = document.getElementById('search-overlay');
+  const backdrop = document.getElementById('search-backdrop');
+  const container = document.getElementById('search-container');
+  const input = document.getElementById('search-input');
+  const defaultView = document.getElementById('search-default');
+  const resultsList = document.getElementById('search-results-list');
+  const noResults = document.getElementById('search-no-results');
+  let activeIndex = -1;
+
+  const searchData = [
+    { title: "h1cli", desc: "HackerOne CLI for bug bounty hunters", href: "/projects/h1cli", category: "Project", icon: "tool" },
+    { title: "pwnlibc", desc: "libc identification toolkit for exploit development", href: "/projects/pwnlibc", category: "Project", icon: "tool" },
+    { title: "HexSnare", desc: "Hexadecimal analysis toolkit for binary analysis", href: "/projects/hexsnare", category: "Project", icon: "tool" },
+    { title: "csrf-proc", desc: "CSRF vulnerability detection framework", href: "/projects/csrf-proc", category: "Project", icon: "tool" },
+    { title: "ghidra-open", desc: "One-command Ghidra launcher with auto analysis", href: "/projects/ghidra-open", category: "Project", icon: "tool" },
+    { title: "CrackTheCode", desc: "Cryptography and code-breaking challenge platform", href: "/projects/crackthecode", category: "Project", icon: "tool" },
+    { title: "OWASP AI Vulnerabilities", desc: "AI-generated code vulnerabilities analysis", href: "/writeups/owasp-2025-ai-vulnerabilities", category: "Writeup", icon: "doc" },
+    { title: "pwnlibc Deep Dive", desc: "Building a libc identification tool", href: "/writeups/pwnlibc-deep-dive", category: "Writeup", icon: "doc" },
+    { title: "Ghidra Automation", desc: "Automating Ghidra with ghidra-open", href: "/writeups/ghidra-open-automation", category: "Writeup", icon: "doc" },
+    { title: "AD Attack Automation", desc: "Active Directory attack path automation", href: "/writeups/ad-attack-automation", category: "Writeup", icon: "doc" },
+    { title: "Heap Exploitation", desc: "Modern heap exploitation techniques guide", href: "/writeups/heap-exploitation-guide", category: "Writeup", icon: "doc" },
+    { title: "CRTO", desc: "Certified Red Team Operator - Zero-Point Security", href: "/certifications/crto", category: "Certification", icon: "cert" },
+    { title: "CPTS", desc: "Certified Penetration Testing Specialist - Hack The Box", href: "/certifications/cpts", category: "Certification", icon: "cert" },
+    { title: "eWPTXv3", desc: "Web Application Penetration Tester eXtreme - INE", href: "/certifications/ewptxv3", category: "Certification", icon: "cert" },
+    { title: "CRTA", desc: "Certified Red Team Analyst - Cyber Warfare Labs", href: "/certifications/crta", category: "Certification", icon: "cert" },
+    { title: "ACP", desc: "Certified Penetration Tester - APIsec", href: "/certifications/acp", category: "Certification", icon: "cert" },
+    { title: "NASA VDP", desc: "Vulnerability disclosure recognition from NASA", href: "/achievements/nasa-vdp", category: "Achievement", icon: "trophy" },
+  ];
+
+  const iconSVGs = {
+    tool: '<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"/></svg>',
+    doc: '<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><path d="M14 2v6h6"/></svg>',
+    cert: '<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="8" r="6"/><path d="M15.477 12.89L17 22l-5-3-5 3 1.523-9.11"/></svg>',
+    trophy: '<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9H4.5a2.5 2.5 0 0 1 0-5H6"/><path d="M18 9h1.5a2.5 2.5 0 0 0 0-5H18"/><path d="M4 22h16"/><path d="M10 14.66V17c0 .55-.47.98-.97 1.21C7.85 18.75 7 20.24 7 22"/><path d="M14 14.66V17c0 .55.47.98.97 1.21C16.15 18.75 17 20.24 17 22"/><path d="M18 2H6v7a6 6 0 0 0 12 0V2Z"/></svg>',
+  };
+
+  function openSearch() {
+    overlay.style.display = 'block';
+    overlay.setAttribute('aria-hidden', 'false');
+    requestAnimationFrame(() => {
+      backdrop.style.opacity = '1';
+      container.style.transform = 'scale(1) translateY(0)';
+      container.style.opacity = '1';
+    });
+    input.value = '';
+    showDefault();
+    setTimeout(() => input.focus(), 100);
+    document.body.style.overflow = 'hidden';
+  }
+
+  function closeSearch() {
+    backdrop.style.opacity = '0';
+    container.style.transform = 'scale(0.95) translateY(-10px)';
+    container.style.opacity = '0';
+    setTimeout(() => {
+      overlay.style.display = 'none';
+      overlay.setAttribute('aria-hidden', 'true');
+      document.body.style.overflow = '';
+    }, 250);
+  }
+
+  function showDefault() {
+    defaultView.style.display = 'block';
+    resultsList.style.display = 'none';
+    noResults.style.display = 'none';
+    activeIndex = -1;
+  }
+
+  function showResults(results) {
+    defaultView.style.display = 'none';
+    noResults.style.display = 'none';
+    resultsList.style.display = 'block';
+    activeIndex = -1;
+
+    const grouped = {};
+    results.forEach(r => {
+      if (!grouped[r.category]) grouped[r.category] = [];
+      grouped[r.category].push(r);
+    });
+
+    let html = '';
+    for (const [cat, items] of Object.entries(grouped)) {
+      html += `<div style="padding:12px 16px 6px;"><p style="font-size:0.7rem;font-family:'Source Code Pro',monospace;color:var(--text-muted);text-transform:uppercase;letter-spacing:0.1em;">${cat}</p></div>`;
+      items.forEach((item, i) => {
+        const globalIdx = results.indexOf(item);
+        html += `<button class="search-result-item" data-href="${item.href}" data-idx="${globalIdx}" style="width:100%;display:flex;align-items:center;gap:12px;padding:10px 12px;background:transparent;border:none;border-radius:8px;cursor:pointer;text-align:left;transition:background 0.15s ease;" onmouseover="this.style.background='var(--bg-tertiary)';this.classList.add('active')" onmouseout="this.style.background='transparent';this.classList.remove('active')">
+          <span style="color:var(--text-muted);flex-shrink:0;">${iconSVGs[item.icon] || iconSVGs.doc}</span>
+          <div style="flex:1;min-width:0;">
+            <p style="color:var(--text);font-size:0.9rem;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;">${item.title}</p>
+            <p style="color:var(--text-muted);font-size:0.75rem;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;">${item.desc}</p>
+          </div>
+          <span style="flex-shrink:0;font-size:0.7rem;color:var(--text-muted);font-family:'Source Code Pro',monospace;opacity:0;transition:opacity 0.15s;" class="result-arrow">↵</span>
+        </button>`;
+      });
+    }
+    resultsList.innerHTML = html;
+
+    // Add click handlers
+    resultsList.querySelectorAll('.search-result-item').forEach(btn => {
+      btn.addEventListener('click', () => {
+        window.location.href = btn.dataset.href;
+      });
+    });
+  }
+
+  function showNoResults() {
+    defaultView.style.display = 'none';
+    resultsList.style.display = 'none';
+    noResults.style.display = 'block';
+    activeIndex = -1;
+  }
+
+  function updateActive() {
+    const items = overlay.querySelectorAll('.search-result-item, .search-nav-item');
+    items.forEach((item, i) => {
+      if (i === activeIndex) {
+        item.style.background = 'var(--bg-tertiary)';
+        item.classList.add('active');
+        const arrow = item.querySelector('.result-arrow');
+        if (arrow) arrow.style.opacity = '1';
+        item.scrollIntoView({ block: 'nearest' });
+      } else {
+        item.style.background = 'transparent';
+        item.classList.remove('active');
+        const arrow = item.querySelector('.result-arrow');
+        if (arrow) arrow.style.opacity = '0';
+      }
+    });
+  }
+
+  function getAllItems() {
+    return overlay.querySelectorAll('.search-result-item, .search-nav-item');
+  }
+
+  // Keyboard shortcuts
+  document.addEventListener('keydown', function(e) {
+    if ((e.metaKey || e.ctrlKey) && e.key === 'k') {
+      e.preventDefault();
+      if (overlay.getAttribute('aria-hidden') === 'true') {
+        openSearch();
+      } else {
+        closeSearch();
+      }
+    }
+    if (e.key === 'Escape' && overlay.getAttribute('aria-hidden') === 'false') {
+      closeSearch();
+    }
+  });
+
+  // Search input
+  input.addEventListener('input', function() {
+    const query = input.value.toLowerCase().trim();
+    if (!query) {
+      showDefault();
+      return;
+    }
+    const results = searchData.filter(item =>
+      item.title.toLowerCase().includes(query) ||
+      item.desc.toLowerCase().includes(query) ||
+      item.category.toLowerCase().includes(query)
+    );
+    if (results.length === 0) {
+      showNoResults();
+    } else {
+      showResults(results);
+    }
+  });
+
+  // Arrow key navigation
+  input.addEventListener('keydown', function(e) {
+    const items = getAllItems();
+    if (e.key === 'ArrowDown') {
+      e.preventDefault();
+      activeIndex = Math.min(activeIndex + 1, items.length - 1);
+      updateActive();
+    } else if (e.key === 'ArrowUp') {
+      e.preventDefault();
+      activeIndex = Math.max(activeIndex - 1, 0);
+      updateActive();
+    } else if (e.key === 'Enter' && activeIndex >= 0) {
+      e.preventDefault();
+      items[activeIndex].click();
+    }
+  });
+
+  // Nav item clicks
+  overlay.querySelectorAll('.search-nav-item').forEach(btn => {
+    btn.addEventListener('click', () => {
+      closeSearch();
+      const href = btn.dataset.href;
+      setTimeout(() => {
+        document.querySelector(href)?.scrollIntoView({ behavior: 'smooth' });
+      }, 300);
+    });
+  });
+
+  // Backdrop click
+  backdrop.addEventListener('click', closeSearch);
+
+  // Listen for custom event from nav
+  document.addEventListener('open-search', function() { openSearch(); });
+})();
+</script>
+
+<style>
+  #search-results::-webkit-scrollbar { width: 4px; }
+  #search-results::-webkit-scrollbar-track { background: transparent; }
+  #search-results::-webkit-scrollbar-thumb { background: var(--border); border-radius: 2px; }
+  .search-result-item:focus-visible, .search-nav-item:focus-visible {
+    outline: 2px solid var(--red);
+    outline-offset: -2px;
+  }
+  .search-result-item.active .result-arrow,
+  .search-nav-item.active .result-arrow {
+    opacity: 1;
+  }
+</style>

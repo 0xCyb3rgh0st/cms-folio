@@ -1,5 +1,6 @@
 ---
 import Terminal from '../components/Terminal.astro';
+import Search from '../components/Search.astro';
 
 interface Props {
   title?: string;
@@ -52,6 +53,7 @@ const { title = "Jatin Singh | Cybersecurity Researcher", description = "Cyberse
     </a>
     <slot />
     <Terminal />
+    <Search />
 
     <script src="https://unpkg.com/lenis@1.1.18/dist/lenis.min.js" is:inline></script>
     <script is:inline>
