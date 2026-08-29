@@ -1,0 +1,6 @@
+Contact: mailto:info@jatinsingh.com.np
+Encryption: https://jatinsingh.com.np/.well-known/pgp-key.txt
+Acknowledgments: https://jatinsingh.com.np
+Preferred-Languages: en
+Canonical: https://jatinsingh.com.np/.well-known/security.txt
+Policy: https://jatinsingh.com.np/privacy-policy

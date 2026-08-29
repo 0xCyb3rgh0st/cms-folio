@@ -1,33 +1,48 @@
 ---
 ---
-<footer style="border-top:1px solid var(--border);background:var(--bg-secondary);margin-top:96px;">
+<footer style="border-top:1px solid var(--border);background:var(--bg-secondary);margin-top:96px;" role="contentinfo">
   <div style="max-width:1200px;margin:0 auto;padding:48px 24px;">
     <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:32px;">
       <div>
         <p style="font-family:'JetBrains Mono',monospace;color:var(--green);font-weight:700;font-size:1rem;margin-bottom:12px;">&lt;Jatin/&gt;</p>
-        <p style="color:var(--text-muted);font-size:0.875rem;line-height:1.6;">Cybersecurity researcher breaking things to make them stronger.</p>
+        <p style="color:var(--text-muted);font-size:0.875rem;line-height:1.6;margin-bottom:4px;">Security Researcher & Exploit Developer</p>
+        <p style="color:var(--text-muted);font-size:0.8rem;line-height:1.6;margin-bottom:12px;">BSc (Hons) Ethical Hacking & Cyber Security<br/>Coventry University (2026)</p>
+        <p style="color:var(--text-muted);font-size:0.8rem;">
+          <a href="mailto:info@jatinsingh.com.np" style="color:var(--green);text-decoration:none;transition:opacity 0.2s;" onmouseover="this.style.opacity='0.7'" onmouseout="this.style.opacity='1'">info@jatinsingh.com.np</a>
+        </p>
+        <p style="color:var(--text-muted);font-size:0.8rem;margin-top:4px;">[City, Country]</p>
       </div>
       <div>
         <p style="font-family:'JetBrains Mono',monospace;color:var(--text);font-size:0.85rem;margin-bottom:12px;">Navigation</p>
-        <div style="display:flex;flex-direction:column;gap:8px;">
+        <nav aria-label="Footer navigation" style="display:flex;flex-direction:column;gap:8px;">
           <a href="#about" style="color:var(--text-muted);text-decoration:none;font-size:0.875rem;transition:color 0.2s;" onmouseover="this.style.color='var(--text)'" onmouseout="this.style.color='var(--text-muted)'">About</a>
           <a href="#projects" style="color:var(--text-muted);text-decoration:none;font-size:0.875rem;transition:color 0.2s;" onmouseover="this.style.color='var(--text)'" onmouseout="this.style.color='var(--text-muted)'">Projects</a>
           <a href="#writeups" style="color:var(--text-muted);text-decoration:none;font-size:0.875rem;transition:color 0.2s;" onmouseover="this.style.color='var(--text)'" onmouseout="this.style.color='var(--text-muted)'">Writeups</a>
           <a href="#contact" style="color:var(--text-muted);text-decoration:none;font-size:0.875rem;transition:color 0.2s;" onmouseover="this.style.color='var(--text)'" onmouseout="this.style.color='var(--text-muted)'">Contact</a>
-        </div>
+        </nav>
       </div>
       <div>
         <p style="font-family:'JetBrains Mono',monospace;color:var(--text);font-size:0.85rem;margin-bottom:12px;">Connect</p>
-        <div style="display:flex;flex-direction:column;gap:8px;">
+        <nav aria-label="Social links" style="display:flex;flex-direction:column;gap:8px;">
           <a href="https://github.com/0xCyb3rgh0st" target="_blank" rel="noopener" style="color:var(--text-muted);text-decoration:none;font-size:0.875rem;transition:color 0.2s;" onmouseover="this.style.color='var(--text)'" onmouseout="this.style.color='var(--text-muted)'">GitHub</a>
           <a href="https://x.com/0xCyb3rgh0st" target="_blank" rel="noopener" style="color:var(--text-muted);text-decoration:none;font-size:0.875rem;transition:color 0.2s;" onmouseover="this.style.color='var(--text)'" onmouseout="this.style.color='var(--text-muted)'">X (Twitter)</a>
+          <a href="https://medium.com/@cyberghostnp" target="_blank" rel="noopener" style="color:var(--text-muted);text-decoration:none;font-size:0.875rem;transition:color 0.2s;" onmouseover="this.style.color='var(--text)'" onmouseout="this.style.color='var(--text-muted)'">Medium</a>
           <a href="https://www.linkedin.com/in/jatin-singh-np/" target="_blank" rel="noopener" style="color:var(--text-muted);text-decoration:none;font-size:0.875rem;transition:color 0.2s;" onmouseover="this.style.color='var(--text)'" onmouseout="this.style.color='var(--text-muted)'">LinkedIn</a>
-        </div>
+        </nav>
+      </div>
+      <div>
+        <p style="font-family:'JetBrains Mono',monospace;color:var(--text);font-size:0.85rem;margin-bottom:12px;">Legal</p>
+        <nav aria-label="Legal links" style="display:flex;flex-direction:column;gap:8px;">
+          <a href="/privacy-policy" style="color:var(--text-muted);text-decoration:none;font-size:0.875rem;transition:color 0.2s;" onmouseover="this.style.color='var(--text)'" onmouseout="this.style.color='var(--text-muted)'">Privacy Policy</a>
+          <a href="/terms-of-use" style="color:var(--text-muted);text-decoration:none;font-size:0.875rem;transition:color 0.2s;" onmouseover="this.style.color='var(--text)'" onmouseout="this.style.color='var(--text-muted)'">Terms of Use</a>
+          <a href="/cookie-policy" style="color:var(--text-muted);text-decoration:none;font-size:0.875rem;transition:color 0.2s;" onmouseover="this.style.color='var(--text)'" onmouseout="this.style.color='var(--text-muted)'">Cookie Policy</a>
+          <a href="/.well-known/security.txt" style="color:var(--text-muted);text-decoration:none;font-size:0.875rem;transition:color 0.2s;" onmouseover="this.style.color='var(--text)'" onmouseout="this.style.color='var(--text-muted)'">Security.txt</a>
+        </nav>
       </div>
     </div>
     <div style="border-top:1px solid var(--border);margin-top:32px;padding-top:24px;display:flex;flex-wrap:wrap;justify-content:space-between;align-items:center;gap:16px;">
       <p style="color:var(--text-muted);font-size:0.75rem;font-family:'JetBrains Mono',monospace;">
-        &copy; {new Date().getFullYear()} Jatin Singh. All rights reserved.
+        &copy; 2026 Jatin Singh. All rights reserved.
       </p>
       <p style="color:var(--text-muted);font-size:0.75rem;font-family:'JetBrains Mono',monospace;">
         Built with <span style="color:var(--green);">Astro</span> + <span style="color:var(--cyan);">Cloudflare Pages</span>

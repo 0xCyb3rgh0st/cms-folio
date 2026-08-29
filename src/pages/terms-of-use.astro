@@ -1,0 +1,46 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Navigation from '../components/Navigation.astro';
+import Footer from '../components/Footer.astro';
+---
+<BaseLayout title="Terms of Use | Jatin Singh" description="Terms of use for jatinsingh.com.np">
+  <Navigation />
+  <main id="main-content" style="padding-top:120px;padding-bottom:64px;min-height:100vh;">
+    <article style="max-width:800px;margin:0 auto;padding:0 24px;">
+      <h1 style="font-size:2rem;font-weight:700;color:var(--text);margin-bottom:8px;">Terms of Use</h1>
+      <p style="color:var(--text-muted);font-size:0.85rem;font-family:'JetBrains Mono',monospace;margin-bottom:40px;">Last updated: August 2026</p>
+
+      <section aria-labelledby="acceptance" style="margin-bottom:40px;">
+        <h2 id="acceptance" style="font-size:1.25rem;font-weight:600;color:var(--text);margin-bottom:12px;">Acceptance of Terms</h2>
+        <p style="color:var(--text-muted);line-height:1.7;">By accessing this website, you agree to these Terms of Use. If you do not agree with any part of these terms, please do not use this website.</p>
+      </section>
+
+      <section aria-labelledby="content" style="margin-bottom:40px;">
+        <h2 id="content" style="font-size:1.25rem;font-weight:600;color:var(--text);margin-bottom:12px;">Content</h2>
+        <p style="color:var(--text-muted);line-height:1.7;margin-bottom:16px;">The content on this website, including but not limited to text, code, tools, and writeups, is provided for informational and educational purposes. While every effort is made to ensure accuracy, no warranty is given regarding the completeness or reliability of the content.</p>
+        <p style="color:var(--text-muted);line-height:1.7;">Open-source tools and code examples are provided "as is" without warranty of any kind. Use them at your own risk and always in compliance with applicable laws.</p>
+      </section>
+
+      <section aria-labelledby="intellectual-property" style="margin-bottom:40px;">
+        <h2 id="intellectual-property" style="font-size:1.25rem;font-weight:600;color:var(--text);margin-bottom:12px;">Intellectual Property</h2>
+        <p style="color:var(--text-muted);line-height:1.7;">Original content on this website is owned by Jatin Singh. Open-source projects are licensed under their respective licenses. Third-party content, logos, and trademarks belong to their respective owners.</p>
+      </section>
+
+      <section aria-labelledby="limitation" style="margin-bottom:40px;">
+        <h2 id="limitation" style="font-size:1.25rem;font-weight:600;color:var(--text);margin-bottom:12px;">Limitation of Liability</h2>
+        <p style="color:var(--text-muted);line-height:1.7;">Jatin Singh shall not be held liable for any damages arising from the use of this website or its content, including but not limited to direct, indirect, incidental, or consequential damages.</p>
+      </section>
+
+      <section aria-labelledby="external-links" style="margin-bottom:40px;">
+        <h2 id="external-links" style="font-size:1.25rem;font-weight:600;color:var(--text);margin-bottom:12px;">External Links</h2>
+        <p style="color:var(--text-muted);line-height:1.7;">This website contains links to external sites. These links are provided for convenience only. Jatin Singh has no control over external sites and is not responsible for their content, privacy practices, or availability.</p>
+      </section>
+
+      <section aria-labelledby="contact-terms" style="margin-bottom:40px;">
+        <h2 id="contact-terms" style="font-size:1.25rem;font-weight:600;color:var(--text);margin-bottom:12px;">Contact</h2>
+        <p style="color:var(--text-muted);line-height:1.7;">Questions about these terms? Contact: <a href="mailto:info@jatinsingh.com.np" style="color:var(--green);">info@jatinsingh.com.np</a></p>
+      </section>
+    </article>
+  </main>
+  <Footer />
+</BaseLayout>

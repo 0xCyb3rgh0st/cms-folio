@@ -1,30 +1,30 @@
 ---
 ---
-<nav style="position:fixed;top:0;left:0;right:0;z-index:50;background:rgba(13,17,23,0.85);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);border-bottom:1px solid var(--border);">
+<nav role="navigation" aria-label="Main navigation" style="position:fixed;top:0;left:0;right:0;z-index:50;background:rgba(13,17,23,0.85);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);border-bottom:1px solid var(--border);">
   <div style="max-width:1200px;margin:0 auto;padding:14px 24px;display:flex;align-items:center;justify-content:space-between;">
-    <a href="/" style="font-family:'JetBrains Mono',monospace;color:var(--green);font-weight:700;font-size:1rem;text-decoration:none;">
+    <a href="/" aria-label="Jatin Singh - Home" style="font-family:'JetBrains Mono',monospace;color:var(--green);font-weight:700;font-size:1rem;text-decoration:none;">
       &lt;Jatin/&gt;
     </a>
-    <div class="nav-links" style="display:flex;align-items:center;gap:28px;">
-      <a href="#about" style="color:var(--text-muted);text-decoration:none;font-size:0.85rem;font-family:'JetBrains Mono',monospace;transition:color 0.2s;" onmouseover="this.style.color='var(--text)'" onmouseout="this.style.color='var(--text-muted)'">about</a>
-      <a href="#skills" style="color:var(--text-muted);text-decoration:none;font-size:0.85rem;font-family:'JetBrains Mono',monospace;transition:color 0.2s;" onmouseover="this.style.color='var(--text)'" onmouseout="this.style.color='var(--text-muted)'">skills</a>
-      <a href="#projects" style="color:var(--text-muted);text-decoration:none;font-size:0.85rem;font-family:'JetBrains Mono',monospace;transition:color 0.2s;" onmouseover="this.style.color='var(--text)'" onmouseout="this.style.color='var(--text-muted)'">projects</a>
-      <a href="#writeups" style="color:var(--text-muted);text-decoration:none;font-size:0.85rem;font-family:'JetBrains Mono',monospace;transition:color 0.2s;" onmouseover="this.style.color='var(--text)'" onmouseout="this.style.color='var(--text-muted)'">writeups</a>
-      <a href="#certifications" style="color:var(--text-muted);text-decoration:none;font-size:0.85rem;font-family:'JetBrains Mono',monospace;transition:color 0.2s;" onmouseover="this.style.color='var(--text)'" onmouseout="this.style.color='var(--text-muted)'">certs</a>
-      <a href="#contact" style="color:var(--text-muted);text-decoration:none;font-size:0.85rem;font-family:'JetBrains Mono',monospace;transition:color 0.2s;" onmouseover="this.style.color='var(--text)'" onmouseout="this.style.color='var(--text-muted)'">contact</a>
+    <div class="nav-links" role="menubar" style="display:flex;align-items:center;gap:28px;">
+      <a href="#about" role="menuitem" style="color:var(--text-muted);text-decoration:none;font-size:0.85rem;font-family:'JetBrains Mono',monospace;transition:color 0.2s;" onmouseover="this.style.color='var(--text)'" onmouseout="this.style.color='var(--text-muted)'">about</a>
+      <a href="#skills" role="menuitem" style="color:var(--text-muted);text-decoration:none;font-size:0.85rem;font-family:'JetBrains Mono',monospace;transition:color 0.2s;" onmouseover="this.style.color='var(--text)'" onmouseout="this.style.color='var(--text-muted)'">skills</a>
+      <a href="#projects" role="menuitem" style="color:var(--text-muted);text-decoration:none;font-size:0.85rem;font-family:'JetBrains Mono',monospace;transition:color 0.2s;" onmouseover="this.style.color='var(--text)'" onmouseout="this.style.color='var(--text-muted)'">projects</a>
+      <a href="#writeups" role="menuitem" style="color:var(--text-muted);text-decoration:none;font-size:0.85rem;font-family:'JetBrains Mono',monospace;transition:color 0.2s;" onmouseover="this.style.color='var(--text)'" onmouseout="this.style.color='var(--text-muted)'">writeups</a>
+      <a href="#certifications" role="menuitem" style="color:var(--text-muted);text-decoration:none;font-size:0.85rem;font-family:'JetBrains Mono',monospace;transition:color 0.2s;" onmouseover="this.style.color='var(--text)'" onmouseout="this.style.color='var(--text-muted)'">certs</a>
+      <a href="#contact" role="menuitem" style="color:var(--text-muted);text-decoration:none;font-size:0.85rem;font-family:'JetBrains Mono',monospace;transition:color 0.2s;" onmouseover="this.style.color='var(--text)'" onmouseout="this.style.color='var(--text-muted)'">contact</a>
     </div>
-    <button id="mobile-menu-btn" class="mobile-btn" style="display:none;background:none;border:none;color:var(--text);cursor:pointer;padding:8px;" aria-label="Toggle menu">
-      <svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 6h14M3 10h14M3 14h14" /></svg>
+    <button id="mobile-menu-btn" class="mobile-btn" style="display:none;background:none;border:none;color:var(--text);cursor:pointer;padding:8px;" aria-label="Toggle navigation menu" aria-expanded="false" aria-controls="mobile-menu">
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M3 6h14M3 10h14M3 14h14" /></svg>
     </button>
   </div>
-  <div id="mobile-menu" style="display:none;border-top:1px solid var(--border);background:rgba(13,17,23,0.95);backdrop-filter:blur(12px);padding:16px 24px;">
+  <div id="mobile-menu" role="menu" aria-hidden="true" style="display:none;border-top:1px solid var(--border);background:rgba(13,17,23,0.95);backdrop-filter:blur(12px);padding:16px 24px;">
     <div style="display:flex;flex-direction:column;gap:16px;">
-      <a href="#about" style="color:var(--text-muted);text-decoration:none;font-size:0.875rem;font-family:'JetBrains Mono',monospace;padding:8px 0;">about</a>
-      <a href="#skills" style="color:var(--text-muted);text-decoration:none;font-size:0.875rem;font-family:'JetBrains Mono',monospace;padding:8px 0;">skills</a>
-      <a href="#projects" style="color:var(--text-muted);text-decoration:none;font-size:0.875rem;font-family:'JetBrains Mono',monospace;padding:8px 0;">projects</a>
-      <a href="#writeups" style="color:var(--text-muted);text-decoration:none;font-size:0.875rem;font-family:'JetBrains Mono',monospace;padding:8px 0;">writeups</a>
-      <a href="#certifications" style="color:var(--text-muted);text-decoration:none;font-size:0.875rem;font-family:'JetBrains Mono',monospace;padding:8px 0;">certs</a>
-      <a href="#contact" style="color:var(--text-muted);text-decoration:none;font-size:0.875rem;font-family:'JetBrains Mono',monospace;padding:8px 0;">contact</a>
+      <a href="#about" role="menuitem" style="color:var(--text-muted);text-decoration:none;font-size:0.875rem;font-family:'JetBrains Mono',monospace;padding:8px 0;">about</a>
+      <a href="#skills" role="menuitem" style="color:var(--text-muted);text-decoration:none;font-size:0.875rem;font-family:'JetBrains Mono',monospace;padding:8px 0;">skills</a>
+      <a href="#projects" role="menuitem" style="color:var(--text-muted);text-decoration:none;font-size:0.875rem;font-family:'JetBrains Mono',monospace;padding:8px 0;">projects</a>
+      <a href="#writeups" role="menuitem" style="color:var(--text-muted);text-decoration:none;font-size:0.875rem;font-family:'JetBrains Mono',monospace;padding:8px 0;">writeups</a>
+      <a href="#certifications" role="menuitem" style="color:var(--text-muted);text-decoration:none;font-size:0.875rem;font-family:'JetBrains Mono',monospace;padding:8px 0;">certs</a>
+      <a href="#contact" role="menuitem" style="color:var(--text-muted);text-decoration:none;font-size:0.875rem;font-family:'JetBrains Mono',monospace;padding:8px 0;">contact</a>
     </div>
   </div>
 </nav>
@@ -33,10 +33,17 @@
   const btn = document.getElementById('mobile-menu-btn');
   const menu = document.getElementById('mobile-menu');
   btn?.addEventListener('click', () => {
-    if (menu) menu.style.display = menu.style.display === 'none' ? 'block' : 'none';
+    const isOpen = menu?.style.display === 'block';
+    if (menu) menu.style.display = isOpen ? 'none' : 'block';
+    if (menu) menu.setAttribute('aria-hidden', String(isOpen));
+    btn?.setAttribute('aria-expanded', String(!isOpen));
   });
   document.querySelectorAll('#mobile-menu a').forEach(link => {
-    link.addEventListener('click', () => { if (menu) menu.style.display = 'none'; });
+    link.addEventListener('click', () => {
+      if (menu) menu.style.display = 'none';
+      if (menu) menu.setAttribute('aria-hidden', 'true');
+      btn?.setAttribute('aria-expanded', 'false');
+    });
   });
 </script>
 

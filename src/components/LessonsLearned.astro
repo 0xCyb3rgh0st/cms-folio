@@ -1,0 +1,55 @@
+---
+---
+<section id="lessons" style="padding:96px 24px;" aria-labelledby="lessons-heading">
+  <div style="max-width:1200px;margin:0 auto;">
+    <p style="font-family:'JetBrains Mono',monospace;color:var(--green);font-size:0.8rem;text-transform:uppercase;letter-spacing:0.15em;margin-bottom:8px;">// lessons learned</p>
+    <h2 id="lessons-heading" style="font-size:clamp(1.75rem,4vw,2.5rem);font-weight:700;margin-bottom:48px;">
+      <span style="background:linear-gradient(135deg,var(--green),var(--cyan));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;">Failures</span>
+      <span style="color:var(--text);"> & Growth</span>
+    </h2>
+
+    <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(340px,1fr));gap:20px;">
+      <article style="background:var(--bg-card);border:1px solid var(--border);border-radius:var(--radius);padding:28px;transition:all 0.2s ease-in-out;" onmouseover="this.style.borderColor='var(--border-hover)'" onmouseout="this.style.borderColor='var(--border)'">
+        <div style="display:flex;align-items:center;gap:8px;margin-bottom:12px;">
+          <span style="color:var(--red);font-family:'JetBrains Mono',monospace;font-size:0.7rem;text-transform:uppercase;letter-spacing:0.1em;">failed project</span>
+        </div>
+        <h3 style="font-size:1.1rem;font-weight:600;color:var(--text);margin-bottom:10px;">The Automated Pentest Tool That Wasn't</h3>
+        <p style="color:var(--text-muted);font-size:0.875rem;line-height:1.7;margin-bottom:16px;">Started building a fully automated penetration testing framework. Realized halfway through that automating everything removes the critical thinking that makes pentesting valuable. The tool became a script collection that nobody would use.</p>
+        <div style="background:var(--bg-tertiary);border-radius:6px;padding:12px 16px;">
+          <p style="color:var(--green);font-family:'JetBrains Mono',monospace;font-size:0.8rem;"><span style="color:var(--yellow);">lesson:</span> Automation should augment human judgment, not replace it. Now I build tools that make specific tasks faster, not tools that try to do everything.</p>
+        </div>
+      </article>
+
+      <article style="background:var(--bg-card);border:1px solid var(--border);border-radius:var(--radius);padding:28px;transition:all 0.2s ease-in-out;" onmouseover="this.style.borderColor='var(--border-hover)'" onmouseout="this.style.borderColor='var(--border)'">
+        <div style="display:flex;align-items:center;gap:8px;margin-bottom:12px;">
+          <span style="color:var(--yellow);font-family:'JetBrains Mono',monospace;font-size:0.7rem;text-transform:uppercase;letter-spacing:0.1em;">real talk</span>
+        </div>
+        <h3 style="font-size:1.1rem;font-weight:600;color:var(--text);margin-bottom:10px;">Imposter Syndrome in Security</h3>
+        <p style="color:var(--text-muted);font-size:0.875rem;line-height:1.7;margin-bottom:16px;">Spent months feeling like I didn't belong because I couldn't do kernel exploitation from scratch. Then I realized nobody can. Everyone Googles, everyone copies from their own old code, everyone struggles. The people who look effortless are just better at hiding the struggle.</p>
+        <div style="background:var(--bg-tertiary);border-radius:6px;padding:12px 16px;">
+          <p style="color:var(--green);font-family:'JetBrains Mono',monospace;font-size:0.8rem;"><span style="color:var(--yellow);">lesson:</span> Share the struggles, not just the wins. The security community needs more honesty about how hard this stuff actually is.</p>
+        </div>
+      </article>
+
+      <article style="background:var(--bg-card);border:1px solid var(--border);border-radius:var(--radius);padding:28px;transition:all 0.2s ease-in-out;" onmouseover="this.style.borderColor='var(--border-hover)'" onmouseout="this.style.borderColor='var(--border)'">
+        <div style="background:var(--bg-tertiary);border-radius:var(--radius);overflow:hidden;margin-bottom:20px;">
+          <div style="padding:10px 16px;border-bottom:1px solid var(--border);display:flex;align-items:center;gap:6px;">
+            <div style="width:8px;height:8px;border-radius:50%;background:var(--red);"></div>
+            <div style="width:8px;height:8px;border-radius:50%;background:var(--yellow);"></div>
+            <div style="width:8px;height:8px;border-radius:50%;background:var(--green);"></div>
+            <span style="margin-left:8px;color:var(--text-muted);font-size:0.7rem;font-family:'JetBrains Mono',monospace;">real-commit-log.txt</span>
+          </div>
+          <div style="padding:16px;font-family:'JetBrains Mono',monospace;font-size:0.8rem;line-height:2;">
+            <p style="color:var(--text-muted);"><span style="color:var(--yellow);">fix:</span> why does this segfault on my machine</p>
+            <p style="color:var(--text-muted);"><span style="color:var(--red);">fix:</span> ACTUALLY fix the segfault this time</p>
+            <p style="color:var(--text-muted);"><span style="color:var(--cyan);">feat:</span> it works but i have no idea why</p>
+            <p style="color:var(--text-muted);"><span style="color:var(--green);">docs:</span> added comments so future me understands</p>
+            <p style="color:var(--text-muted);"><span style="color:var(--purple);">refactor:</span> broke everything into smaller pieces</p>
+            <p style="color:var(--text-muted);"><span style="color:var(--yellow);">fix:</span> the smaller pieces don't work together</p>
+          </div>
+        </div>
+        <p style="color:var(--text-muted);font-size:0.875rem;line-height:1.6;">Real commit messages from my repos. The journey from confusion to understanding, one <code style="background:var(--bg-tertiary);padding:2px 6px;border-radius:4px;font-size:0.8em;color:var(--green);">git commit</code> at a time.</p>
+      </article>
+    </div>
+  </div>
+</section>

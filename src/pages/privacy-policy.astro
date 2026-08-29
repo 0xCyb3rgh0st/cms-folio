@@ -1,0 +1,48 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Navigation from '../components/Navigation.astro';
+import Footer from '../components/Footer.astro';
+---
+<BaseLayout title="Privacy Policy | Jatin Singh" description="Privacy Policy for jatinsingh.com.np - No data collection, no cookies, no tracking.">
+  <Navigation />
+  <main id="main-content" style="padding-top:120px;padding-bottom:64px;min-height:100vh;">
+    <article style="max-width:800px;margin:0 auto;padding:0 24px;">
+      <h1 style="font-size:2rem;font-weight:700;color:var(--text);margin-bottom:8px;">Privacy Policy</h1>
+      <p style="color:var(--text-muted);font-size:0.85rem;font-family:'JetBrains Mono',monospace;margin-bottom:40px;">Last updated: August 2026</p>
+
+      <section aria-labelledby="data-collection" style="margin-bottom:40px;">
+        <h2 id="data-collection" style="font-size:1.25rem;font-weight:600;color:var(--text);margin-bottom:12px;">Data Collection</h2>
+        <p style="color:var(--text-muted);line-height:1.7;margin-bottom:16px;">This website does not collect, store, or process any personal data. There are no forms that submit data to a server, no analytics tracking, and no third-party data processing services.</p>
+      </section>
+
+      <section aria-labelledby="cookies" style="margin-bottom:40px;">
+        <h2 id="cookies" style="font-size:1.25rem;font-weight:600;color:var(--text);margin-bottom:12px;">Cookies & Tracking</h2>
+        <p style="color:var(--text-muted);line-height:1.7;margin-bottom:16px;">This website does not use cookies, web beacons, fingerprinting, or any other tracking mechanisms. The only local storage used is for the CMS admin panel authentication token, which is stored exclusively in your browser's localStorage and never transmitted to any server other than the GitHub API when you explicitly use the admin panel.</p>
+      </section>
+
+      <section aria-labelledby="third-party" style="margin-bottom:40px;">
+        <h2 id="third-party" style="font-size:1.25rem;font-weight:600;color:var(--text);margin-bottom:12px;">Third-Party Services</h2>
+        <p style="color:var(--text-muted);line-height:1.7;margin-bottom:16px;">This website is hosted on Cloudflare Pages. Cloudflare may collect basic server logs (IP addresses, user agents) for security and performance purposes. This is handled by Cloudflare's infrastructure and is outside the control of this website.</p>
+        <p style="color:var(--text-muted);line-height:1.7;">External links to GitHub, X (Twitter), LinkedIn, Medium, and certificate verification platforms are provided for convenience. Clicking these links will take you to external websites with their own privacy policies.</p>
+      </section>
+
+      <section aria-labelledby="gdpr-rights" style="margin-bottom:40px;">
+        <h2 id="gdpr-rights" style="font-size:1.25rem;font-weight:600;color:var(--text);margin-bottom:12px;">Your Rights (GDPR)</h2>
+        <p style="color:var(--text-muted);line-height:1.7;margin-bottom:16px;">Under the General Data Protection Regulation (GDPR), you have the following rights:</p>
+        <ul style="color:var(--text-muted);line-height:1.7;padding-left:24px;margin-bottom:16px;">
+          <li style="margin-bottom:8px;"><strong style="color:var(--text);">Right of Access</strong> &mdash; Request a copy of any personal data we hold about you.</li>
+          <li style="margin-bottom:8px;"><strong style="color:var(--text);">Right to Rectification</strong> &mdash; Request correction of inaccurate personal data.</li>
+          <li style="margin-bottom:8px;"><strong style="color:var(--text);">Right to Erasure</strong> &mdash; Request deletion of your personal data.</li>
+          <li style="margin-bottom:8px;"><strong style="color:var(--text);">Right to Data Portability</strong> &mdash; Request your data in a structured, machine-readable format.</li>
+        </ul>
+        <p style="color:var(--text-muted);line-height:1.7;">Since this website does not collect personal data, these rights are not applicable in practice. However, if you have any concerns, you may contact us at <a href="mailto:info@jatinsingh.com.np" style="color:var(--green);">info@jatinsingh.com.np</a>.</p>
+      </section>
+
+      <section aria-labelledby="contact" style="margin-bottom:40px;">
+        <h2 id="contact" style="font-size:1.25rem;font-weight:600;color:var(--text);margin-bottom:12px;">Contact</h2>
+        <p style="color:var(--text-muted);line-height:1.7;">For any privacy-related inquiries, contact: <a href="mailto:info@jatinsingh.com.np" style="color:var(--green);">info@jatinsingh.com.np</a></p>
+      </section>
+    </article>
+  </main>
+  <Footer />
+</BaseLayout>

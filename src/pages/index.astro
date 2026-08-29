@@ -8,6 +8,9 @@ import Projects from '../components/Projects.astro';
 import Writeups from '../components/Writeups.astro';
 import Certifications from '../components/Certifications.astro';
 import Achievements from '../components/Achievements.astro';
+import CurrentlyLearning from '../components/CurrentlyLearning.astro';
+import HotTakes from '../components/HotTakes.astro';
+import LessonsLearned from '../components/LessonsLearned.astro';
 import Contact from '../components/Contact.astro';
 import Footer from '../components/Footer.astro';
 ---
@@ -15,13 +18,18 @@ import Footer from '../components/Footer.astro';
 <BaseLayout>
   <Navigation />
   <Hero />
-  <About />
-  <Skills />
-  <Projects />
-  <Writeups />
-  <Certifications />
-  <Achievements />
-  <Contact />
+  <main id="main-content">
+    <About />
+    <Skills />
+    <Projects />
+    <CurrentlyLearning />
+    <Writeups />
+    <HotTakes />
+    <Certifications />
+    <Achievements />
+    <LessonsLearned />
+    <Contact />
+  </main>
   <Footer />
 </BaseLayout>
 

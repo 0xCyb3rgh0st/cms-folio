@@ -1,0 +1,36 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Navigation from '../components/Navigation.astro';
+import Footer from '../components/Footer.astro';
+---
+<BaseLayout title="Cookie Policy | Jatin Singh" description="Cookie Policy for jatinsingh.com.np - This website uses no cookies.">
+  <Navigation />
+  <main id="main-content" style="padding-top:120px;padding-bottom:64px;min-height:100vh;">
+    <article style="max-width:800px;margin:0 auto;padding:0 24px;">
+      <h1 style="font-size:2rem;font-weight:700;color:var(--text);margin-bottom:8px;">Cookie Policy</h1>
+      <p style="color:var(--text-muted);font-size:0.85rem;font-family:'JetBrains Mono',monospace;margin-bottom:40px;">Last updated: August 2026</p>
+
+      <section aria-labelledby="no-cookies" style="margin-bottom:40px;">
+        <h2 id="no-cookies" style="font-size:1.25rem;font-weight:600;color:var(--text);margin-bottom:12px;">No Cookies Used</h2>
+        <p style="color:var(--text-muted);line-height:1.7;margin-bottom:16px;">This website does not use any cookies. No first-party, third-party, session, persistent, or advertising cookies are set by this website.</p>
+      </section>
+
+      <section aria-labelledby="local-storage" style="margin-bottom:40px;">
+        <h2 id="local-storage" style="font-size:1.25rem;font-weight:600;color:var(--text);margin-bottom:12px;">Local Storage</h2>
+        <p style="color:var(--text-muted);line-height:1.7;margin-bottom:16px;">The CMS admin panel uses browser localStorage to store your GitHub Personal Access Token. This data:</p>
+        <ul style="color:var(--text-muted);line-height:1.7;padding-left:24px;margin-bottom:16px;">
+          <li style="margin-bottom:8px;">Is stored only in your browser</li>
+          <li style="margin-bottom:8px;">Is never transmitted to this website's server</li>
+          <li style="margin-bottom:8px;">Is only sent to the GitHub API when you explicitly use the admin panel</li>
+          <li style="margin-bottom:8px;">Can be cleared at any time by clearing your browser's local storage</li>
+        </ul>
+      </section>
+
+      <section aria-labelledby="server-logs" style="margin-bottom:40px;">
+        <h2 id="server-logs" style="font-size:1.25rem;font-weight:600;color:var(--text);margin-bottom:12px;">Server Logs</h2>
+        <p style="color:var(--text-muted);line-height:1.7;">Cloudflare, our hosting provider, may collect standard server logs including IP addresses and user agents for security and performance monitoring. This is handled by Cloudflare's infrastructure and is not controlled by this website.</p>
+      </section>
+    </article>
+  </main>
+  <Footer />
+</BaseLayout>
