@@ -1,0 +1,57 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200" width="200" height="200">
+  <defs>
+    <radialGradient id="bg" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="#1a1a1a"/>
+      <stop offset="100%" stop-color="#0a0a0a"/>
+    </radialGradient>
+    <linearGradient id="hood" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#2a2a2a"/>
+      <stop offset="100%" stop-color="#111111"/>
+    </linearGradient>
+    <linearGradient id="face" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#e5e7eb"/>
+      <stop offset="100%" stop-color="#9ca3af"/>
+    </linearGradient>
+    <filter id="glow">
+      <feDropShadow dx="0" dy="0" stdDeviation="4" flood-color="#ef4444" flood-opacity="0.6"/>
+    </filter>
+    <clipPath id="circle-clip">
+      <circle cx="100" cy="100" r="96"/>
+    </clipPath>
+  </defs>
+  
+  <!-- Background circle -->
+  <circle cx="100" cy="100" r="98" fill="#0a0a0a" stroke="#ef4444" stroke-width="2" stroke-opacity="0.3"/>
+  <circle cx="100" cy="100" r="96" fill="url(#bg)"/>
+  
+  <g clip-path="url(#circle-clip)">
+    <!-- Hood -->
+    <path d="M100 30 C60 30, 35 65, 35 95 C35 120, 45 145, 55 160 L55 195 C55 198, 70 200, 100 200 C130 200, 145 198, 145 195 L145 160 C155 145, 165 120, 165 95 C165 65, 140 30, 100 30Z" 
+          fill="url(#hood)" stroke="#333" stroke-width="0.5"/>
+    
+    <!-- Hood shadow -->
+    <path d="M100 40 C70 40, 45 68, 45 95 C45 115, 52 135, 60 150 L60 170 C60 175, 75 178, 100 178 C125 178, 140 175, 140 170 L140 150 C148 135, 155 115, 155 95 C155 68, 130 40, 100 40Z" 
+          fill="#0f0f0f" opacity="0.4"/>
+    
+    <!-- Mask -->
+    <ellipse cx="100" cy="90" rx="38" ry="45" fill="url(#face)"/>
+    
+    <!-- Eyes -->
+    <ellipse cx="85" cy="82" rx="10" ry="7" fill="#0a0a0a"/>
+    <ellipse cx="115" cy="82" rx="10" ry="7" fill="#0a0a0a"/>
+    
+    <!-- Eye glow -->
+    <ellipse cx="85" cy="82" rx="6" ry="4" fill="#ef4444" opacity="0.8" filter="url(#glow)"/>
+    <ellipse cx="115" cy="82" rx="6" ry="4" fill="#ef4444" opacity="0.8" filter="url(#glow)"/>
+    
+    <!-- Smile -->
+    <path d="M85 108 Q100 118 115 108" stroke="#0a0a0a" stroke-width="2" fill="none" stroke-linecap="round"/>
+    
+    <!-- Cheek lines -->
+    <line x1="75" y1="100" x2="80" y2="103" stroke="#d1d5db" stroke-width="0.8" opacity="0.4"/>
+    <line x1="125" y1="100" x2="120" y2="103" stroke="#d1d5db" stroke-width="0.8" opacity="0.4"/>
+  </g>
+  
+  <!-- Outer ring -->
+  <circle cx="100" cy="100" r="98" fill="none" stroke="#ef4444" stroke-width="1.5" stroke-opacity="0.2"/>
+</svg>
