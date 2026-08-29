@@ -1,0 +1,329 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Generator: Adobe Illustrator 21.0.0, SVG Export Plug-In . SVG Version: 6.00 Build 0)  -->
+<svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+	 viewBox="0 0 591 591" style="enable-background:new 0 0 591 591;" xml:space="preserve">
+<style type="text/css">
+.st0 {
+    fill: (#SVGID_1_);
+}
+.st1 {
+    fill: url(#SVGID_2_);
+}
+.st2 {
+    fill: black;
+    stroke: #fb2c36;
+    stroke-width: 8;
+    stroke-miterlimit: 10;
+}
+.st3 {
+    fill: none;
+    stroke: #0000ff;
+    stroke-width: 4;
+    stroke-miterlimit: 10;
+    stroke-opacity: 0;
+}
+.st4 {
+    fill: none;
+    stroke: #fb2c36;
+    stroke-width: 4;
+    stroke-miterlimit: 10;
+    stroke-opacity: 0.2;
+}
+.st5 {
+    fill: none;
+    stroke: white;
+    stroke-width: 5;
+    stroke-miterlimit: 10;
+    stroke-opacity: 1;
+}
+.st6 {
+    fill: none;
+    stroke: #fb2c36;
+    stroke-width: 5;
+    stroke-miterlimit: 10;
+    stroke-opacity: 0.2;
+    stroke-dasharray: 11.92, 11.92;
+}
+.st7 {
+    fill: none;
+    stroke: #82181a;
+    stroke-width: 8;
+    stroke-miterlimit: 10;
+    stroke-opacity: 0.2;
+}
+.st8 {
+    fill: none;
+    stroke: #2b00ff;
+    stroke-width: 8;
+    stroke-miterlimit: 10;
+    stroke-opacity: 0;
+}
+.st9 {
+    fill: none;
+    stroke: #1800ff;
+    stroke-width: 8;
+    stroke-miterlimit: 10;
+    stroke-opacity: 0;
+}
+.st10 {
+    fill: none;
+    stroke: #82181a;
+    stroke-width: 8;
+    stroke-miterlimit: 10;
+}
+.st11 {
+    fill: none;
+    stroke: #9f0712;
+    stroke-width: 40;
+    stroke-miterlimit: 10;
+}
+.st12 {
+    fill: none;
+    stroke: #2b00ff;
+    stroke-width: 40;
+    stroke-miterlimit: 10;
+    stroke-opacity: 0;
+}
+.st13 {
+    fill: none;
+    stroke: #fb2c36;
+    stroke-width: 11;
+    stroke-miterlimit: 10;
+}
+.st14 {
+    fill: none;
+    stroke: #1800ff;
+    stroke-width: 11;
+    stroke-miterlimit: 10;
+    stroke-opacity: 0;
+}
+.st15 {
+    fill: #ffffff;
+}
+.st16 {
+    fill: none;
+    stroke: #ffffff;
+    stroke-width: 2;
+    stroke-miterlimit: 10;
+}
+.rotate-step {
+	animation: rotateSteps 26s 0s linear infinite;
+	transform-origin: center;
+}
+
+@keyframes rotateSteps {
+	0%{
+		transform: rotate(0deg)
+	}
+	4%,8%{
+		transform: rotate(calc(calc(360deg / 13) * 1))
+	}
+	12%,16%{
+		transform: rotate(calc(calc(360deg / 13) * 2))
+	}
+	20%,24%{
+		transform: rotate(calc(calc(360deg / 13) * 3))
+	}
+	28%,32%{
+		transform: rotate(calc(calc(360deg / 13) * 4))
+	}
+	36%,40%{
+		transform: rotate(calc(calc(360deg / 13) * 5))
+	}
+	44%,48%{
+		transform: rotate(calc(calc(360deg / 13) * 6))
+	}
+	52%,56%{
+		transform: rotate(calc(calc(360deg / 13) * 7))
+	}
+	60%,64%{
+		transform: rotate(calc(calc(360deg / 13) * 8))
+	}
+	68%,72%{
+		transform: rotate(calc(calc(360deg / 13) * 9))
+	}
+	76%,80%{
+		transform: rotate(calc(calc(360deg / 13) * 10))
+	}
+	84%,88%{
+		transform: rotate(calc(calc(360deg / 13) * 11))
+	}
+	92%,96%{
+		transform: rotate(calc(calc(360deg / 13) * 12))
+	}
+	100%{
+		transform: rotate(calc(calc(360deg / 13) * 13))
+	}
+}
+.rotate-step {
+	animation: rotateSteps 26s 0s ease-in-out infinite;
+	transform-origin: center;
+}
+
+.rotate-step-counter-clockwise {
+	animation: rotateStepsCounterClockwise 26s 0s ease-in-out infinite;
+	transform-origin: center;
+}
+.rotate-counter-clockwise{
+	transform-origin: center;
+	animation: rotateCounterClockwise 10s 0s ease-in-out infinite;
+}
+@keyframes rotateCounterClockwise{
+	0%{
+		transform: rotate(0deg)
+	}
+	100%{
+		transform: rotate(360deg)
+
+	}
+}
+@keyframes rotateStepsCounterClockwise {
+	0%{
+		transform: rotate(0deg)
+	}
+	4%,8%{
+		transform: rotate(calc(calc(-360deg / 13) * 1))
+	}
+	12%,16%{
+		transform: rotate(calc(calc(-360deg / 13) * 2))
+	}
+	20%,24%{
+		transform: rotate(calc(calc(-360deg / 13) * 3))
+	}
+	28%,32%{
+		transform: rotate(calc(calc(-360deg / 13) * 4))
+	}
+	36%,40%{
+		transform: rotate(calc(calc(-360deg / 13) * 5))
+	}
+	44%,48%{
+		transform: rotate(calc(calc(-360deg / 13) * 6))
+	}
+	52%,56%{
+		transform: rotate(calc(calc(-360deg / 13) * 7))
+	}
+	60%,64%{
+		transform: rotate(calc(calc(-360deg / 13) * 8))
+	}
+	68%,72%{
+		transform: rotate(calc(calc(-360deg / 13) * 9))
+	}
+	76%,80%{
+		transform: rotate(calc(calc(-360deg / 13) * 10))
+	}
+	84%,88%{
+		transform: rotate(calc(calc(-360deg / 13) * 11))
+	}
+	92%,96%{
+		transform: rotate(calc(calc(-360deg / 13) * 12))
+	}
+	100%{
+		transform: rotate(calc(calc(-360deg / 13) * 13))
+	}
+}
+.appear{
+	opacity:0;
+	animation: appear 1s linear forwards;
+}
+
+@keyframes appear{
+	to{
+		opacity: 1;
+	}
+}
+</style>
+<g class="appear">
+
+<radialGradient id="SVGID_1_" cx="295.5" cy="296.5" r="255.1" gradientTransform="matrix(1 0 0 -1 0 592)" gradientUnits="userSpaceOnUse">
+	<stop  offset="0" style="stop-color:#FB2C36"/>
+	<stop  offset="0.8752" style="stop-color:#FB2C36;stop-opacity:0.1248"/>
+	<stop  offset="1" style="stop-color:#FB2C36;stop-opacity:0"/>
+</radialGradient>
+<path class="st1" d="M507.5,295.5c0,117.1-94.9,212-212,212s-212-94.9-212-212c0-57.6,23-109.9,60.3-148.1
+	c13.2-13.5,28.2-25.3,44.6-34.9c15.2-8.9,31.7-16,49-21c3.4-1,6.9-1.9,10.3-2.7c15.3-3.5,31.3-5.4,47.7-5.4
+	C412.6,83.5,507.5,178.4,507.5,295.5z"/>
+<path class="st2 appear-grown" d="M507.5,295.5c0,117.1-94.9,212-212,212s-212-94.9-212-212c0-57.6,23-109.9,60.3-148.1
+	c13.2-13.5,28.2-25.3,44.6-34.9c15.2-8.9,31.7-16,49-21c3.4-1,6.9-1.9,10.3-2.7c15.3-3.5,31.3-5.4,47.7-5.4
+	C412.6,83.5,507.5,178.4,507.5,295.5z"/>
+<g class="rotate-step">
+<g class="appear-drawn">
+	<path class="st3" d="M474.1,295.5c0,98.7-80,178.7-178.6,178.7s-178.6-80-178.6-178.7c0-48.6,19.4-92.6,50.8-124.8
+		c11.1-11.4,23.8-21.3,37.5-29.4c12.9-7.5,26.7-13.5,41.4-17.7c2.9-0.8,5.7-1.6,8.8-2.2c12.9-3,26.4-4.5,40.3-4.5
+		C394.1,116.8,474.1,196.8,474.1,295.5z"/>
+	<g>
+		<path class="st4" d="M288.4,474.1c-83.5-3.3-152.3-63.9-168.1-143.6"/>
+		<path class="st4" d="M295.6,116.9c84.7-0.1,155.7,59,174,138.2"/>
+	</g>
+</g>
+</g>
+<g>
+  <mask id="mask-st5">
+	<path class="st5 draw" d="M489,295.5C489,402.4,402.4,489,295.5,489S102,402.4,102,295.5c0-52.6,21-100.3,55.1-135.2
+		c12-12.3,25.7-23,40.7-31.8c13.9-8.2,28.9-14.6,44.8-19.1c3.1-0.9,6.3-1.7,9.4-2.4c14-3.2,28.6-4.9,43.6-4.9
+		C402.4,102,489,188.6,489,295.5z"/>
+		</mask>
+	<g>
+		<path class="st6" d="M489,295.5C489,402.4,402.4,489,295.5,489S102,402.4,102,295.5c0-52.6,21-100.3,55.1-135.2
+			c12-12.3,25.7-23,40.7-31.8c13.9-8.2,28.9-14.6,44.8-19.1c3.1-0.9,6.3-1.7,9.4-2.4c14-3.2,28.6-4.9,43.6-4.9
+			C402.4,102,489,188.6,489,295.5z" mask="url(#mask-st5)"/>
+	</g>
+</g>
+<g class="rotate-counter-clockwise">
+
+<g class="appear-drawn">
+	<g>
+		<path class="st7" d="M37.8,264.5c6.9-58.2,33.1-110.5,72-150.4c16.1-16.5,34.5-30.9,54.5-42.7c18.6-10.9,38.8-19.6,60-25.6
+			c4.2-1.2,8.4-2.3,12.7-3.3c18.8-4.3,38.3-6.6,58.4-6.6C438.8,36,555,152.2,555,295.5c0,1.4,0,2.9,0,4.3"/>
+		<path class="st7" d="M465.8,491.3C420.2,531,360.7,555,295.5,555c-78.8,0-149.3-35.1-196.9-90.5"/>
+	</g>
+	<path class="st8" d="M555,295.5C555,438.8,438.8,555,295.5,555S36,438.8,36,295.5c0-70.6,28.2-134.5,73.9-181.3
+		c16.1-16.5,34.5-30.9,54.5-42.7c18.6-10.9,38.8-19.6,60-25.6c4.2-1.2,8.4-2.3,12.7-3.3c18.8-4.3,38.3-6.6,58.4-6.6
+		C438.8,36,555,152.2,555,295.5z"/>
+</g>
+</g>
+<g class="rotate-step-counter-clockwise">
+
+<g class="appear-drawn">
+	<path class="st9" d="M540.5,295.5c0,135.3-109.7,245-245,245s-245-109.7-245-245c0-66.6,26.6-127,69.7-171.2
+		c15.2-15.6,32.6-29.2,51.5-40.3c17.6-10.3,36.6-18.5,56.7-24.2c3.9-1.1,7.9-2.1,11.9-3.1c17.7-4.1,36.2-6.2,55.2-6.2
+		C430.8,50.5,540.5,160.2,540.5,295.5z"/>
+	<g>
+		<path class="st10" d="M347.6,534.9c-16.8,3.6-34.2,5.6-52.1,5.6c-135.3,0-245-109.7-245-245c0-11.6,0.8-23,2.4-34.1"/>
+		<path class="st10" d="M193.2,72.8c11.3-5.2,23.1-9.6,35.2-13c3.9-1.1,7.9-2.1,11.9-3.1c17.7-4.1,36.2-6.2,55.2-6.2
+			c135.3,0,245,109.7,245,245c0,30.7-5.6,60.1-16,87.2"/>
+	</g>
+</g>
+</g>
+<g class="rotate-step">
+<g class="appear-drawn">
+	<g>
+		<path class="st11" d="M58,435c-24-40.9-37.8-88.6-37.8-139.5c0-62.8,21-120.7,56.4-167.1"/>
+		<path class="st11" d="M533.7,434.3C485.9,516.1,397.2,571,295.7,571c-11.8,0-23.4-0.7-34.7-2.2"/>
+		<path class="st11" d="M292.4,20c1.1,0,2.2,0,3.3,0c115.1,0,213.7,70.5,254.9,170.7"/>
+	</g>
+	<path class="st12" d="M571,295.5C571,447.7,447.7,571,295.5,571S20,447.7,20,295.5c0-74.9,29.9-142.8,78.4-192.5
+		c17.1-17.5,36.6-32.8,57.9-45.3c19.8-11.6,41.2-20.8,63.7-27.2c4.4-1.3,8.9-2.4,13.4-3.5c19.9-4.6,40.7-7,62-7
+		C447.7,20,571,143.3,571,295.5z"/>
+</g>
+</g>
+<g class="rotate-step-counter-clockwise">
+
+<g class="appear-drawn">
+	<g>
+		<path class="st13" d="M57.4,461.1C24.7,414.1,5.5,357,5.5,295.5C5.5,240.1,21,188.3,48,144.3"/>
+		<path class="st13" d="M121.4,527.5c-15-11.3-28.9-24-41.5-37.9"/>
+		<path class="st13" d="M253.5,582.5c-25.7-3.7-50.3-10.8-73.3-20.8"/>
+		<path class="st13" d="M545.9,441.9c-50.3,85.9-143.6,143.6-250.4,143.6c-7.7,0-15.4-0.3-23-0.9"/>
+		<path class="st13" d="M585.1,279.8c0.3,5.2,0.4,10.4,0.4,15.7c0,33.7-5.8,66.1-16.3,96.2"/>
+		<path class="st13" d="M295.5,5.5c110.9,0,207.2,62.2,256,153.7c0.3,0.6,0.6,1.2,1,1.8"/>
+		<path class="st13" d="M230.2,12.9c17.7-4.1,36-6.5,54.8-7.2"/>
+		<path class="st13" d="M149,45.2c20.8-12.2,43.3-21.9,67.1-28.7"/>
+		<path class="st13" d="M53.6,135.5c10.1-15.3,21.7-29.6,34.4-42.6"/>
+	</g>
+	<path class="st14" d="M585.5,295.5c0,160.2-129.8,290-290,290s-290-129.8-290-290C5.5,216.6,37,145.1,88,92.9
+		c18-18.5,38.5-34.5,61-47.7c20.8-12.2,43.3-21.9,67.1-28.7c4.7-1.3,9.4-2.5,14.1-3.6c21-4.8,42.8-7.4,65.3-7.4
+		C455.7,5.5,585.5,135.3,585.5,295.5z"/>
+</g>
+</g>
+</g>
+</svg>
