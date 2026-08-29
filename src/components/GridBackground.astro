@@ -16,7 +16,7 @@
   let targetX = -1000, targetY = -1000;
   let isHovering = false;
   const gridSize = 40;
-  const glowRadius = 350;
+  const glowRadius = 300;
   let glowIntensity = 0;
   let ripples = [];
   let time = 0;
@@ -52,18 +52,18 @@
       glowIntensity += (0 - glowIntensity) * 0.03;
     }
 
-    // Grid lines — brighter near cursor
+    // Grid lines
     for (let x = 0; x <= w; x += gridSize) {
       const distX = Math.abs(x - mouseX);
       const brightX = distX < glowRadius ? (1 - distX / glowRadius) * glowIntensity : 0;
-      ctx.strokeStyle = `rgba(239, 68, 68, ${0.03 + brightX * 0.12})`;
+      ctx.strokeStyle = `rgba(239, 68, 68, ${0.02 + brightX * 0.05})`;
       ctx.lineWidth = 1;
       ctx.beginPath(); ctx.moveTo(x, 0); ctx.lineTo(x, h); ctx.stroke();
     }
     for (let y = 0; y <= h; y += gridSize) {
       const distY = Math.abs(y - mouseY);
       const brightY = distY < glowRadius ? (1 - distY / glowRadius) * glowIntensity : 0;
-      ctx.strokeStyle = `rgba(239, 68, 68, ${0.03 + brightY * 0.12})`;
+      ctx.strokeStyle = `rgba(239, 68, 68, ${0.02 + brightY * 0.05})`;
       ctx.lineWidth = 1;
       ctx.beginPath(); ctx.moveTo(0, y); ctx.lineTo(w, y); ctx.stroke();
     }
@@ -72,41 +72,40 @@
     for (let x = 0; x <= w; x += gridSize * 5) {
       const distX = Math.abs(x - mouseX);
       const brightX = distX < glowRadius ? (1 - distX / glowRadius) * glowIntensity : 0;
-      ctx.strokeStyle = `rgba(239, 68, 68, ${0.05 + brightX * 0.15})`;
+      ctx.strokeStyle = `rgba(239, 68, 68, ${0.03 + brightX * 0.07})`;
       ctx.beginPath(); ctx.moveTo(x, 0); ctx.lineTo(x, h); ctx.stroke();
     }
     for (let y = 0; y <= h; y += gridSize * 5) {
       const distY = Math.abs(y - mouseY);
       const brightY = distY < glowRadius ? (1 - distY / glowRadius) * glowIntensity : 0;
-      ctx.strokeStyle = `rgba(239, 68, 68, ${0.05 + brightY * 0.15})`;
+      ctx.strokeStyle = `rgba(239, 68, 68, ${0.03 + brightY * 0.07})`;
       ctx.beginPath(); ctx.moveTo(0, y); ctx.lineTo(w, y); ctx.stroke();
     }
 
     // Hover glow
     if (glowIntensity > 0.01) {
       const g1 = ctx.createRadialGradient(mouseX, mouseY, 0, mouseX, mouseY, glowRadius);
-      g1.addColorStop(0, `rgba(239, 68, 68, ${0.18 * glowIntensity})`);
-      g1.addColorStop(0.2, `rgba(239, 68, 68, ${0.10 * glowIntensity})`);
-      g1.addColorStop(0.5, `rgba(239, 68, 68, ${0.04 * glowIntensity})`);
+      g1.addColorStop(0, `rgba(239, 68, 68, ${0.08 * glowIntensity})`);
+      g1.addColorStop(0.3, `rgba(239, 68, 68, ${0.04 * glowIntensity})`);
+      g1.addColorStop(0.6, `rgba(239, 68, 68, ${0.015 * glowIntensity})`);
       g1.addColorStop(1, 'rgba(239, 68, 68, 0)');
       ctx.fillStyle = g1;
       ctx.fillRect(mouseX - glowRadius, mouseY - glowRadius, glowRadius * 2, glowRadius * 2);
 
-      const g2 = ctx.createRadialGradient(mouseX, mouseY, 0, mouseX, mouseY, 80);
-      g2.addColorStop(0, `rgba(239, 68, 68, ${0.15 * glowIntensity})`);
+      const g2 = ctx.createRadialGradient(mouseX, mouseY, 0, mouseX, mouseY, 60);
+      g2.addColorStop(0, `rgba(239, 68, 68, ${0.07 * glowIntensity})`);
       g2.addColorStop(1, 'rgba(239, 68, 68, 0)');
       ctx.fillStyle = g2;
-      ctx.fillRect(mouseX - 80, mouseY - 80, 160, 160);
+      ctx.fillRect(mouseX - 60, mouseY - 60, 120, 120);
     }
 
-    // DNA-style connections between dots
+    // DNA connections
     if (glowIntensity > 0.01) {
       const startCol = Math.floor((mouseX - glowRadius) / gridSize);
       const endCol = Math.ceil((mouseX + glowRadius) / gridSize);
       const startRow = Math.floor((mouseY - glowRadius) / gridSize);
       const endRow = Math.ceil((mouseY + glowRadius) / gridSize);
 
-      // Collect visible dots
       const dots = [];
       for (let col = startCol; col <= endCol; col++) {
         for (let row = startRow; row <= endRow; row++) {
@@ -116,130 +115,106 @@
           const dy = iy - mouseY;
           const dist = Math.sqrt(dx * dx + dy * dy);
           if (dist < glowRadius) {
-            const t = 1 - dist / glowRadius;
-            dots.push({ x: ix, y: iy, t, col, row });
+            dots.push({ x: ix, y: iy, t: 1 - dist / glowRadius, col, row });
           }
         }
       }
 
-      // Draw DNA helix connections along rows
+      // Row helixes
       for (let row = startRow; row <= endRow; row++) {
         const rowDots = dots.filter(d => d.row === row).sort((a, b) => a.col - b.col);
         if (rowDots.length < 2) continue;
-
         for (let i = 0; i < rowDots.length - 1; i++) {
           const a = rowDots[i];
           const b = rowDots[i + 1];
           const avgT = (a.t + b.t) / 2;
           if (avgT < 0.05) continue;
-
-          const alpha = avgT * 0.4 * glowIntensity;
-
-          // Top strand
-          const wave1 = Math.sin(time + a.x * 0.02 + a.y * 0.01) * 8 * avgT;
-          const wave2 = Math.sin(time + b.x * 0.02 + b.y * 0.01) * 8 * avgT;
-
+          const alpha = avgT * 0.18 * glowIntensity;
+          const w1 = Math.sin(time + a.x * 0.02 + a.y * 0.01) * 6 * avgT;
+          const w2 = Math.sin(time + b.x * 0.02 + b.y * 0.01) * 6 * avgT;
           ctx.beginPath();
-          ctx.moveTo(a.x, a.y + wave1);
-          ctx.quadraticCurveTo((a.x + b.x) / 2, (a.y + b.y) / 2 - 12 * avgT, b.x, b.y + wave2);
+          ctx.moveTo(a.x, a.y + w1);
+          ctx.quadraticCurveTo((a.x + b.x) / 2, (a.y + b.y) / 2 - 10 * avgT, b.x, b.y + w2);
           ctx.strokeStyle = `rgba(239, 68, 68, ${alpha})`;
-          ctx.lineWidth = 1.5;
-          ctx.stroke();
-
-          // Bottom strand (offset)
-          ctx.beginPath();
-          ctx.moveTo(a.x, a.y - wave1);
-          ctx.quadraticCurveTo((a.x + b.x) / 2, (a.y + b.y) / 2 + 12 * avgT, b.x, b.y - wave2);
-          ctx.strokeStyle = `rgba(239, 68, 68, ${alpha * 0.7})`;
           ctx.lineWidth = 1;
           ctx.stroke();
-
-          // Cross rungs (base pairs)
-          const midX = (a.x + b.x) / 2;
-          const midY = (a.y + b.y) / 2;
-          const midWave = Math.sin(time * 1.5 + midX * 0.03) * 6 * avgT;
           ctx.beginPath();
-          ctx.moveTo(midX, midY - 10 * avgT + midWave);
-          ctx.lineTo(midX, midY + 10 * avgT - midWave);
-          ctx.strokeStyle = `rgba(239, 68, 68, ${alpha * 0.5})`;
-          ctx.lineWidth = 0.8;
+          ctx.moveTo(a.x, a.y - w1);
+          ctx.quadraticCurveTo((a.x + b.x) / 2, (a.y + b.y) / 2 + 10 * avgT, b.x, b.y - w2);
+          ctx.strokeStyle = `rgba(239, 68, 68, ${alpha * 0.6})`;
+          ctx.lineWidth = 0.7;
+          ctx.stroke();
+          const mx = (a.x + b.x) / 2;
+          const my = (a.y + b.y) / 2;
+          const mw = Math.sin(time * 1.5 + mx * 0.03) * 5 * avgT;
+          ctx.beginPath();
+          ctx.moveTo(mx, my - 8 * avgT + mw);
+          ctx.lineTo(mx, my + 8 * avgT - mw);
+          ctx.strokeStyle = `rgba(239, 68, 68, ${alpha * 0.4})`;
+          ctx.lineWidth = 0.6;
           ctx.stroke();
         }
       }
 
-      // Draw DNA helix connections along columns
+      // Column helixes
       for (let col = startCol; col <= endCol; col++) {
         const colDots = dots.filter(d => d.col === col).sort((a, b) => a.row - b.row);
         if (colDots.length < 2) continue;
-
         for (let i = 0; i < colDots.length - 1; i++) {
           const a = colDots[i];
           const b = colDots[i + 1];
           const avgT = (a.t + b.t) / 2;
           if (avgT < 0.05) continue;
-
-          const alpha = avgT * 0.3 * glowIntensity;
-
-          const wave1 = Math.sin(time * 0.8 + a.y * 0.02 + a.x * 0.01) * 6 * avgT;
-          const wave2 = Math.sin(time * 0.8 + b.y * 0.02 + b.x * 0.01) * 6 * avgT;
-
+          const alpha = avgT * 0.12 * glowIntensity;
+          const w1 = Math.sin(time * 0.8 + a.y * 0.02) * 5 * avgT;
+          const w2 = Math.sin(time * 0.8 + b.y * 0.02) * 5 * avgT;
           ctx.beginPath();
-          ctx.moveTo(a.x + wave1, a.y);
-          ctx.quadraticCurveTo((a.x + b.x) / 2 - 10 * avgT, (a.y + b.y) / 2, b.x + wave2, b.y);
+          ctx.moveTo(a.x + w1, a.y);
+          ctx.quadraticCurveTo((a.x + b.x) / 2 - 8 * avgT, (a.y + b.y) / 2, b.x + w2, b.y);
           ctx.strokeStyle = `rgba(239, 68, 68, ${alpha * 0.5})`;
-          ctx.lineWidth = 1;
+          ctx.lineWidth = 0.7;
           ctx.stroke();
-
           ctx.beginPath();
-          ctx.moveTo(a.x - wave1, a.y);
-          ctx.quadraticCurveTo((a.x + b.x) / 2 + 10 * avgT, (a.y + b.y) / 2, b.x - wave2, b.y);
+          ctx.moveTo(a.x - w1, a.y);
+          ctx.quadraticCurveTo((a.x + b.x) / 2 + 8 * avgT, (a.y + b.y) / 2, b.x - w2, b.y);
           ctx.strokeStyle = `rgba(239, 68, 68, ${alpha * 0.35})`;
-          ctx.lineWidth = 0.8;
+          ctx.lineWidth = 0.6;
           ctx.stroke();
         }
       }
 
-      // Draw the dots on top
+      // Dots
       for (const d of dots) {
-        const alpha = d.t * 0.8 * glowIntensity;
-        const size = d.t * 3.5 + 1;
-
-        // Outer glow
+        const alpha = d.t * 0.4 * glowIntensity;
+        const size = d.t * 2.5 + 0.8;
         ctx.beginPath();
-        ctx.arc(d.x, d.y, size + 3, 0, Math.PI * 2);
-        ctx.fillStyle = `rgba(239, 68, 68, ${alpha * 0.2})`;
+        ctx.arc(d.x, d.y, size + 2, 0, Math.PI * 2);
+        ctx.fillStyle = `rgba(239, 68, 68, ${alpha * 0.15})`;
         ctx.fill();
-
-        // Core dot
         ctx.beginPath();
         ctx.arc(d.x, d.y, size, 0, Math.PI * 2);
         ctx.fillStyle = `rgba(239, 68, 68, ${alpha})`;
         ctx.fill();
-
-        // Bright center
         ctx.beginPath();
-        ctx.arc(d.x, d.y, size * 0.4, 0, Math.PI * 2);
-        ctx.fillStyle = `rgba(255, 150, 150, ${alpha * 0.6})`;
+        ctx.arc(d.x, d.y, size * 0.35, 0, Math.PI * 2);
+        ctx.fillStyle = `rgba(255, 150, 150, ${alpha * 0.4})`;
         ctx.fill();
       }
     }
 
-    // Ripple rings
-    if (isHovering && Math.random() > 0.96) {
-      ripples.push({ x: mouseX, y: mouseY, r: 5, alpha: 0.25 });
+    // Ripples
+    if (isHovering && Math.random() > 0.97) {
+      ripples.push({ x: mouseX, y: mouseY, r: 5, alpha: 0.12 });
     }
     for (let i = ripples.length - 1; i >= 0; i--) {
       const rip = ripples[i];
-      rip.r += 2.5;
-      rip.alpha -= 0.003;
-      if (rip.alpha <= 0 || rip.r > glowRadius) {
-        ripples.splice(i, 1);
-        continue;
-      }
+      rip.r += 2;
+      rip.alpha -= 0.002;
+      if (rip.alpha <= 0 || rip.r > glowRadius) { ripples.splice(i, 1); continue; }
       ctx.beginPath();
       ctx.arc(rip.x, rip.y, rip.r, 0, Math.PI * 2);
       ctx.strokeStyle = `rgba(239, 68, 68, ${rip.alpha})`;
-      ctx.lineWidth = 1;
+      ctx.lineWidth = 0.8;
       ctx.stroke();
     }
 
@@ -249,7 +224,7 @@
   if (!prefersReducedMotion) {
     draw();
   } else {
-    ctx.strokeStyle = 'rgba(239, 68, 68, 0.04)';
+    ctx.strokeStyle = 'rgba(239, 68, 68, 0.02)';
     ctx.lineWidth = 1;
     for (let x = 0; x <= w; x += gridSize) {
       ctx.beginPath(); ctx.moveTo(x, 0); ctx.lineTo(x, h); ctx.stroke();
