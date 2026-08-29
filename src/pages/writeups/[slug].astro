@@ -187,38 +187,38 @@ const catColors: Record<string, string> = { ctf: "var(--cyan)", vulnerability: "
   <Navigation />
   <main style="padding-top:120px;padding-bottom:64px;">
     <div style="max-width:800px;margin:0 auto;padding:0 24px;">
-      <a href="/writeups" style="color:var(--green);font-family:'JetBrains Mono',monospace;font-size:0.875rem;text-decoration:none;margin-bottom:24px;display:inline-block;">
+      <a href="/writeups" style="color:var(--green);font-family:'JetBrains Mono',monospace;font-size:0.85rem;text-decoration:none;margin-bottom:24px;display:inline-block;transition:opacity 0.2s;" onmouseover="this.style.opacity='0.7'" onmouseout="this.style.opacity='1'">
         &larr; Back to Writeups
       </a>
 
       <div style="margin-bottom:32px;">
-        <div style="display:flex;gap:8px;margin-bottom:16px;">
-          <span style={`display:inline-flex;padding:4px 12px;font-size:0.75rem;font-family:'JetBrains Mono',monospace;border-radius:4px;background:${catColors[writeup.cat]}15;color:${catColors[writeup.cat]};border:1px solid ${catColors[writeup.cat]}33;text-transform:capitalize;`}>
+        <div style="display:flex;gap:6px;margin-bottom:14px;">
+          <span style={`display:inline-flex;padding:3px 10px;font-size:0.7rem;font-family:'JetBrains Mono',monospace;border-radius:6px;background:${catColors[writeup.cat]}15;color:${catColors[writeup.cat]};border:1px solid ${catColors[writeup.cat]}22;text-transform:capitalize;`}>
             {writeup.cat}
           </span>
-          <span style={`display:inline-flex;padding:4px 12px;font-size:0.75rem;font-family:'JetBrains Mono',monospace;border-radius:4px;background:${diffColors[writeup.diff]}15;color:${diffColors[writeup.diff]};border:1px solid ${diffColors[writeup.diff]}33;text-transform:capitalize;`}>
+          <span style={`display:inline-flex;padding:3px 10px;font-size:0.7rem;font-family:'JetBrains Mono',monospace;border-radius:6px;background:${diffColors[writeup.diff]}15;color:${diffColors[writeup.diff]};border:1px solid ${diffColors[writeup.diff]}22;text-transform:capitalize;`}>
             {writeup.diff}
           </span>
         </div>
-        <h1 style="font-size:2rem;font-weight:800;color:var(--text);margin-bottom:8px;">{writeup.title}</h1>
-        <p style="color:var(--text-muted);font-size:0.875rem;font-family:'JetBrains Mono',monospace;">{writeup.date}</p>
+        <h1 style="font-size:2rem;font-weight:700;color:var(--text);margin-bottom:8px;">{writeup.title}</h1>
+        <p style="color:var(--text-muted);font-size:0.85rem;font-family:'JetBrains Mono',monospace;">{writeup.date}</p>
       </div>
 
-      <div style="display:flex;flex-wrap:wrap;gap:8px;margin-bottom:40px;">
+      <div style="display:flex;flex-wrap:wrap;gap:6px;margin-bottom:40px;">
         {writeup.tags.map((t) => (
-          <span style="display:inline-flex;padding:4px 12px;font-size:0.75rem;font-family:'JetBrains Mono',monospace;border-radius:6px;background:var(--bg-tertiary);color:var(--text-muted);border:1px solid var(--border);">{t}</span>
+          <span style="display:inline-flex;padding:3px 10px;font-size:0.7rem;font-family:'JetBrains Mono',monospace;border-radius:6px;background:var(--bg-tertiary);color:var(--text-muted);">{t}</span>
         ))}
       </div>
 
-      <div style="background:var(--bg-card);border:1px solid var(--border);border-radius:12px;padding:32px;line-height:1.8;color:var(--text-muted);">
-        <Fragment set:html={writeup.content.replace(/\n/g, '<br/>').replace(/## (.*)/g, '<h2 style="font-size:1.5rem;font-weight:700;color:var(--text);margin:24px 0 12px;font-family:JetBrains Mono,monospace;">$1</h2>').replace(/### (.*)/g, '<h3 style="font-size:1.25rem;font-weight:700;color:var(--text);margin:20px 0 8px;font-family:JetBrains Mono,monospace;">$1</h3>').replace(/`([^`]+)`/g, '<code style="background:var(--bg-tertiary);padding:2px 6px;border-radius:4px;font-family:JetBrains Mono,monospace;color:var(--green);">$1</code>').replace(/```(\w+)?\n([\s\S]*?)```/g, '<pre style="background:var(--bg-secondary);border:1px solid var(--border);border-radius:8px;padding:16px;margin:16px 0;overflow-x:auto;font-family:JetBrains Mono,monospace;font-size:0.8rem;color:var(--text-muted);"><code>$2</code></pre>')} />
+      <div style="background:var(--bg-card);border:1px solid var(--border);border-radius:var(--radius);padding:32px;line-height:1.8;color:var(--text-muted);">
+        <Fragment set:html={writeup.content.replace(/\n/g, '<br/>').replace(/## (.*)/g, '<h2 style="font-size:1.25rem;font-weight:600;color:var(--text);margin:24px 0 12px;font-family:JetBrains Mono,monospace;">$1</h2>').replace(/### (.*)/g, '<h3 style="font-size:1.1rem;font-weight:600;color:var(--text);margin:20px 0 8px;font-family:JetBrains Mono,monospace;">$1</h3>').replace(/`([^`]+)`/g, '<code style="background:var(--bg-tertiary);padding:2px 6px;border-radius:4px;font-family:JetBrains Mono,monospace;color:var(--green);font-size:0.85em;">$1</code>').replace(/```(\w+)?\n([\s\S]*?)```/g, '<pre style="background:var(--bg-secondary);border:1px solid var(--border);border-radius:var(--radius);padding:16px;margin:16px 0;overflow-x:auto;font-family:JetBrains Mono,monospace;font-size:0.8rem;color:var(--text-muted);"><code>$2</code></pre>')} />
       </div>
 
-      <div style="display:flex;gap:16px;flex-wrap:wrap;margin-top:32px;">
-        <a href="https://github.com/0xCyb3rgh0st" target="_blank" style="display:inline-flex;align-items:center;gap:8px;padding:12px 24px;background:var(--green);color:var(--bg-primary);font-family:'JetBrains Mono',monospace;font-weight:700;border-radius:8px;text-decoration:none;font-size:0.9rem;">
+      <div style="display:flex;gap:12px;flex-wrap:wrap;margin-top:32px;">
+        <a href="https://github.com/0xCyb3rgh0st" target="_blank" style="display:inline-flex;align-items:center;gap:8px;padding:10px 20px;background:var(--green);color:var(--bg-primary);font-family:'JetBrains Mono',monospace;font-weight:600;border-radius:var(--radius);text-decoration:none;font-size:0.85rem;transition:all 0.2s ease-in-out;" onmouseover="this.style.opacity='0.85'" onmouseout="this.style.opacity='1'">
           View on GitHub
         </a>
-        <a href="/writeups" style="display:inline-flex;align-items:center;gap:8px;padding:12px 24px;border:1px solid var(--border);color:var(--text-muted);font-family:'JetBrains Mono',monospace;border-radius:8px;text-decoration:none;font-size:0.9rem;">
+        <a href="/writeups" style="display:inline-flex;align-items:center;gap:8px;padding:10px 20px;border:1px solid var(--border);color:var(--text-muted);font-family:'JetBrains Mono',monospace;border-radius:var(--radius);text-decoration:none;font-size:0.85rem;transition:all 0.2s ease-in-out;" onmouseover="this.style.borderColor='var(--border-hover)'" onmouseout="this.style.borderColor='var(--border)'">
           All Writeups
         </a>
       </div>

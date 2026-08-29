@@ -7,60 +7,67 @@
   <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
   <style>
     * { margin: 0; padding: 0; box-sizing: border-box; }
-    body { font-family: 'Inter', sans-serif; background: #0a0a0f; color: #e0e0e0; min-height: 100vh; }
+    body { font-family: 'Inter', sans-serif; background: #0d1117; color: #e6edf3; min-height: 100vh; }
     .container { max-width: 900px; margin: 0 auto; padding: 40px 24px; }
-    h1 { font-size: 2rem; font-weight: 800; margin-bottom: 8px; }
-    h1 span { background: linear-gradient(135deg, #00ff41, #00d4ff); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
-    .subtitle { color: #888; margin-bottom: 32px; font-size: 0.9rem; }
+    h1 { font-size: 2rem; font-weight: 700; margin-bottom: 8px; }
+    h1 span { background: linear-gradient(135deg, #7ee787, #79c0ff); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
+    .subtitle { color: #8b949e; margin-bottom: 32px; font-size: 0.9rem; }
     
-    .auth-box { background: #12121a; border: 1px solid #1e1e2e; border-radius: 12px; padding: 24px; margin-bottom: 32px; }
-    .auth-box label { display: block; font-size: 0.8rem; color: #00ff41; font-family: 'JetBrains Mono', monospace; text-transform: uppercase; letter-spacing: 0.1em; margin-bottom: 8px; }
-    .auth-box input { width: 100%; padding: 12px 16px; background: #0a0a0f; border: 1px solid #2a2a3a; border-radius: 8px; color: #e0e0e0; font-family: 'JetBrains Mono', monospace; font-size: 0.9rem; }
-    .auth-box input:focus { outline: none; border-color: #00ff41; }
-    .auth-box .hint { font-size: 0.75rem; color: #666; margin-top: 8px; }
+    .auth-box { background: #161b22; border: 1px solid #30363d; border-radius: var(--radius, 8px); padding: 24px; margin-bottom: 32px; }
+    .auth-box label { display: block; font-size: 0.8rem; color: #7ee787; font-family: 'JetBrains Mono', monospace; text-transform: uppercase; letter-spacing: 0.1em; margin-bottom: 8px; }
+    .auth-box input { width: 100%; padding: 10px 14px; background: #0d1117; border: 1px solid #30363d; border-radius: 6px; color: #e6edf3; font-family: 'JetBrains Mono', monospace; font-size: 0.85rem; }
+    .auth-box input:focus { outline: none; border-color: #7ee787; box-shadow: 0 0 0 2px #7ee78733; }
+    .auth-box .hint { font-size: 0.75rem; color: #8b949e; margin-top: 8px; }
     
-    .tabs { display: flex; gap: 4px; margin-bottom: 24px; border-bottom: 1px solid #1e1e2e; padding-bottom: 4px; }
-    .tab { padding: 10px 20px; background: transparent; border: none; color: #888; font-family: 'JetBrains Mono', monospace; font-size: 0.85rem; cursor: pointer; border-radius: 8px 8px 0 0; transition: all 0.2s; }
-    .tab:hover { color: #e0e0e0; }
-    .tab.active { color: #00ff41; background: #1a1a2e; }
+    .tabs { display: flex; gap: 4px; margin-bottom: 24px; border-bottom: 1px solid #30363d; padding-bottom: 4px; }
+    .tab { padding: 10px 20px; background: transparent; border: none; color: #8b949e; font-family: 'JetBrains Mono', monospace; font-size: 0.85rem; cursor: pointer; border-radius: 6px 6px 0 0; transition: all 0.2s ease-in-out; }
+    .tab:hover { color: #e6edf3; }
+    .tab.active { color: #7ee787; background: #161b22; }
     
     .panel { display: none; }
     .panel.active { display: block; }
     
-    .card { background: #12121a; border: 1px solid #1e1e2e; border-radius: 12px; padding: 24px; margin-bottom: 16px; }
-    .card h3 { font-size: 1.1rem; margin-bottom: 16px; color: #fff; }
+    .card { background: #161b22; border: 1px solid #30363d; border-radius: 8px; padding: 24px; margin-bottom: 16px; }
+    .card h3 { font-size: 1.1rem; margin-bottom: 16px; color: #e6edf3; }
     
     .field { margin-bottom: 16px; }
-    .field label { display: block; font-size: 0.8rem; color: #00ff41; font-family: 'JetBrains Mono', monospace; text-transform: uppercase; letter-spacing: 0.1em; margin-bottom: 6px; }
-    .field input, .field textarea, .field select { width: 100%; padding: 10px 14px; background: #0a0a0f; border: 1px solid #2a2a3a; border-radius: 8px; color: #e0e0e0; font-size: 0.9rem; }
-    .field input:focus, .field textarea:focus { outline: none; border-color: #00ff41; }
+    .field label { display: block; font-size: 0.8rem; color: #7ee787; font-family: 'JetBrains Mono', monospace; text-transform: uppercase; letter-spacing: 0.1em; margin-bottom: 6px; }
+    .field input, .field textarea, .field select { width: 100%; padding: 10px 14px; background: #0d1117; border: 1px solid #30363d; border-radius: 6px; color: #e6edf3; font-size: 0.85rem; }
+    .field input:focus, .field textarea:focus { outline: none; border-color: #7ee787; box-shadow: 0 0 0 2px #7ee78733; }
     .field textarea { font-family: 'JetBrains Mono', monospace; resize: vertical; min-height: 100px; }
+    .field select { cursor: pointer; }
+    .field select option { background: #161b22; }
     
     .row { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
     
-    .btn { padding: 12px 24px; border: none; border-radius: 8px; font-family: 'JetBrains Mono', monospace; font-size: 0.85rem; font-weight: 600; cursor: pointer; transition: all 0.2s; }
-    .btn-primary { background: #00ff41; color: #0a0a0f; }
-    .btn-primary:hover { background: #00cc33; transform: translateY(-1px); }
-    .btn-secondary { background: #1e1e2e; color: #e0e0e0; border: 1px solid #2a2a3a; }
-    .btn-secondary:hover { border-color: #00ff41; }
-    .btn-danger { background: #ff4444; color: #fff; }
-    .btn-danger:hover { background: #cc0000; }
+    .btn { padding: 10px 20px; border: none; border-radius: 6px; font-family: 'JetBrains Mono', monospace; font-size: 0.85rem; font-weight: 600; cursor: pointer; transition: all 0.2s ease-in-out; }
+    .btn-primary { background: #7ee787; color: #0d1117; }
+    .btn-primary:hover { opacity: 0.85; transform: translateY(-1px); }
+    .btn-secondary { background: #21262d; color: #e6edf3; border: 1px solid #30363d; }
+    .btn-secondary:hover { border-color: #7ee787; }
+    .btn-danger { background: #f85149; color: #fff; }
+    .btn-danger:hover { opacity: 0.85; }
     
     .actions { display: flex; gap: 12px; margin-top: 16px; }
     
     .item-list { display: flex; flex-direction: column; gap: 8px; }
-    .item { display: flex; justify-content: space-between; align-items: center; padding: 12px 16px; background: #0a0a0f; border: 1px solid #2a2a3a; border-radius: 8px; cursor: pointer; transition: all 0.2s; }
-    .item:hover { border-color: #00ff41; }
+    .item { display: flex; justify-content: space-between; align-items: center; padding: 12px 16px; background: #0d1117; border: 1px solid #30363d; border-radius: 6px; cursor: pointer; transition: all 0.2s ease-in-out; }
+    .item:hover { border-color: #7ee787; }
     .item .title { font-weight: 600; }
-    .item .meta { font-size: 0.8rem; color: #888; font-family: 'JetBrains Mono', monospace; }
+    .item .meta { font-size: 0.8rem; color: #8b949e; font-family: 'JetBrains Mono', monospace; }
     
-    .status { padding: 8px 16px; border-radius: 8px; font-family: 'JetBrains Mono', monospace; font-size: 0.8rem; margin-bottom: 16px; }
-    .status.success { background: #00ff4115; color: #00ff41; border: 1px solid #00ff4133; }
-    .status.error { background: #ff444415; color: #ff4444; border: 1px solid #ff444433; }
-    .status.info { background: #00d4ff15; color: #00d4ff; border: 1px solid #00d4ff33; }
+    .status { padding: 8px 16px; border-radius: 6px; font-family: 'JetBrains Mono', monospace; font-size: 0.8rem; margin-bottom: 16px; }
+    .status.success { background: #7ee78715; color: #7ee787; border: 1px solid #7ee78722; }
+    .status.error { background: #f8514915; color: #f85149; border: 1px solid #f8514922; }
+    .status.info { background: #79c0ff15; color: #79c0ff; border: 1px solid #79c0ff22; }
     
-    .empty { text-align: center; padding: 40px; color: #666; }
-    .tag { display: inline-block; padding: 2px 8px; background: #1e1e2e; border-radius: 4px; font-size: 0.75rem; font-family: 'JetBrains Mono', monospace; color: #888; margin-right: 4px; }
+    .empty { text-align: center; padding: 40px; color: #8b949e; }
+    .tag { display: inline-block; padding: 2px 8px; background: #21262d; border-radius: 4px; font-size: 0.75rem; font-family: 'JetBrains Mono', monospace; color: #8b949e; margin-right: 4px; }
+
+    @media (max-width: 600px) {
+      .row { grid-template-columns: 1fr; }
+      .container { padding: 24px 16px; }
+    }
   </style>
 </head>
 <body>
@@ -185,7 +192,7 @@
       el.innerHTML = matches.length ? matches.map((m, i) => `
         <div class="item" onclick="editProject(${i})">
           <div><div class="title">${m[1]}</div><div class="meta">${m[3]} | ${m[4].replace('https://github.com/0xCyb3rgh0st/', '')}</div></div>
-          <span style="color:#00ff41;font-size:0.8rem;">Edit</span>
+          <span style="color:#7ee787;font-size:0.8rem;">Edit</span>
         </div>
       `).join('') : '<div class="empty">No projects found</div>';
       window._projectsFile = file;
@@ -268,11 +275,11 @@
       el.innerHTML = '<div class="empty">Loading...</div>';
       const file = await getFile('src/components/Certifications.astro');
       if (!file) return;
-      const matches = [...file.content.matchAll(/\{ title: "([^"]+)", issuer: "([^"]+)", color: "([^"]+)", verify: "([^"]*)"/g)];
+      const matches = [...file.content.matchAll(/\{ title: "([^"]+)", issuer: "([^"]+)", color: "([^"]+)", slug: "([^"]+)"/g)];
       el.innerHTML = matches.length ? matches.map((m, i) => `
         <div class="item" onclick="editCert(${i})">
           <div><div class="title">${m[1]}</div><div class="meta">${m[2]}</div></div>
-          <span style="color:#00ff41;font-size:0.8rem;">Edit</span>
+          <span style="color:#7ee787;font-size:0.8rem;">Edit</span>
         </div>
       `).join('') : '<div class="empty">No certifications found</div>';
       window._certsFile = file;
@@ -289,7 +296,7 @@
             <div class="field"><label>Title</label><input id="c-title" value="${data?.title || ''}" /></div>
             <div class="field"><label>Issuer</label><input id="c-issuer" value="${data?.issuer || ''}" /></div>
           </div>
-          <div class="field"><label>Verification URL</label><input id="c-verify" value="${data?.verify || ''}" /></div>
+          <div class="field"><label>Slug</label><input id="c-slug" value="${data?.slug || ''}" /></div>
           <div class="field"><label>Color</label>
             <select id="c-color">
               <option value="var(--green)" ${data?.color === 'var(--green)' ? 'selected' : ''}>Green</option>
@@ -310,7 +317,7 @@
     
     function editCert(idx) {
       const m = window._certsMatches[idx];
-      showCertForm({ title: m[1], issuer: m[2], color: m[3], verify: m[4], idx });
+      showCertForm({ title: m[1], issuer: m[2], color: m[3], slug: m[4], idx });
     }
     
     async function saveCert() {
@@ -318,9 +325,9 @@
         title: document.getElementById('c-title').value,
         issuer: document.getElementById('c-issuer').value,
         color: document.getElementById('c-color').value,
-        verify: document.getElementById('c-verify').value
+        slug: document.getElementById('c-slug').value
       };
-      const newEntry = `{ title: "${data.title}", issuer: "${data.issuer}", color: "${data.color}", verify: "${data.verify}" }`;
+      const newEntry = `{ title: "${data.title}", issuer: "${data.issuer}", color: "${data.color}", slug: "${data.slug}" }`;
       let content = window._certsFile.content;
       
       if (window._editCertIdx >= 0) {
@@ -341,11 +348,11 @@
       el.innerHTML = '<div class="empty">Loading...</div>';
       const file = await getFile('src/components/Writeups.astro');
       if (!file) return;
-      const matches = [...file.content.matchAll(/\{ title: "([^"]+)", date: "([^"]+)", tag: "([^"]+)", slug: "([^"]+)"/g)];
+      const matches = [...file.content.matchAll(/\{ title: "([^"]+)", desc: "([^"]*)", cat: "([^"]+)", diff: "([^"]+)", date: "([^"]+)", slug: "([^"]+)"/g)];
       el.innerHTML = matches.length ? matches.map((m, i) => `
         <div class="item" onclick="editWriteup(${i})">
-          <div><div class="title">${m[1]}</div><div class="meta">${m[2]} | ${m[3]}</div></div>
-          <span style="color:#00ff41;font-size:0.8rem;">Edit</span>
+          <div><div class="title">${m[1]}</div><div class="meta">${m[5]} | ${m[3]}</div></div>
+          <span style="color:#7ee787;font-size:0.8rem;">Edit</span>
         </div>
       `).join('') : '<div class="empty">No writeups found</div>';
       window._writeupsFile = file;
@@ -364,8 +371,16 @@
           </div>
           <div class="row">
             <div class="field"><label>Date</label><input type="date" id="w-date" value="${data?.date || ''}" /></div>
-            <div class="field"><label>Tag</label><input id="w-tag" value="${data?.tag || ''}" /></div>
+            <div class="field"><label>Category</label>
+              <select id="w-cat">
+                <option value="technique" ${data?.cat === 'technique' ? 'selected' : ''}>Technique</option>
+                <option value="tool" ${data?.cat === 'tool' ? 'selected' : ''}>Tool</option>
+                <option value="ctf" ${data?.cat === 'ctf' ? 'selected' : ''}>CTF</option>
+                <option value="vulnerability" ${data?.cat === 'vulnerability' ? 'selected' : ''}>Vulnerability</option>
+              </select>
+            </div>
           </div>
+          <div class="field"><label>Description</label><textarea id="w-desc">${data?.desc || ''}</textarea></div>
           <div class="actions">
             <button class="btn btn-primary" onclick="saveWriteup()">Save</button>
             <button class="btn btn-secondary" onclick="document.getElementById('edit-form').style.display='none'">Cancel</button>
@@ -377,17 +392,18 @@
     
     function editWriteup(idx) {
       const m = window._writeupsMatches[idx];
-      showWriteupForm({ title: m[1], date: m[2], tag: m[3], slug: m[4], idx });
+      showWriteupForm({ title: m[1], desc: m[2], cat: m[3], diff: m[4], date: m[5], slug: m[6], idx });
     }
     
     async function saveWriteup() {
       const data = {
         title: document.getElementById('w-title').value,
+        desc: document.getElementById('w-desc').value,
+        cat: document.getElementById('w-cat').value,
         date: document.getElementById('w-date').value,
-        tag: document.getElementById('w-tag').value,
         slug: document.getElementById('w-slug').value
       };
-      const newEntry = `{ title: "${data.title}", date: "${data.date}", tag: "${data.tag}", slug: "${data.slug}" }`;
+      const newEntry = `{ title: "${data.title}", desc: "${data.desc}", cat: "${data.cat}", date: "${data.date}", slug: "${data.slug}" }`;
       let content = window._writeupsFile.content;
       
       if (window._editWriteupIdx >= 0) {
