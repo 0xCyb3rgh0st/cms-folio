@@ -2,95 +2,63 @@
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import Navigation from '../../components/Navigation.astro';
 import Footer from '../../components/Footer.astro';
-
-const projects = {
-  h1cli: {
-    title: "h1cli",
-    description: "All-in-one HackerOne CLI for bug bounty hunters. Browse programs, filter by asset type, export recon-ready scopes, track reports and earnings.",
-    cat: "web",
-    tags: ["Python", "Bug Bounty", "HackerOne", "CLI"],
-    whyItMatters: "Bug bounty hunters waste hours manually copying program scopes into recon tools. h1cli eliminates this friction entirely.",
-    impact: "Used by bounty hunters to automate HackerOne program discovery and scope management.",
-    features: ["Browse all HackerOne programs from terminal", "Filter by asset type (Domain, CIDR, URL, iOS, Android)", "Export scope to subfinder/httpx/nuclei-ready format", "Track reports, bounties, and earnings", "Diff mode for new programs since last run", "Filter presets and per-program notes", "Secure token storage via OS keyring", "Multiple output formats: Table, CSV, JSON"],
-    tech: ["Python 3.7+", "requests", "keyring", "HackerOne API v1"],
-    install: "git clone https://github.com/0xCyb3rgh0st/h1cli && pip install requests keyring",
-    usage: "python h1cli.py                          # interactive mode\npython h1cli.py list --bounty --asset DOMAIN  # CLI mode\npython h1cli.py export --bounty --combine targets.txt",
-  },
-  pwnlibc: {
-    title: "pwnlibc",
-    description: "Advanced libc identification toolkit for exploit development.",
-    cat: "binary-exploitation",
-    tags: ["Python", "Exploit Dev", "CLI", "libc"],
-    whyItMatters: "When exploiting buffer overflows on modern Linux, knowing the exact libc version is critical. Wrong offsets = crash. pwnlibc eliminates the guesswork.",
-    impact: "Automates libc identification from leaked addresses, saving exploit developers hours of manual database lookups.",
-    features: ["Fast libc identification from leaked addresses", "Automatic libc download from remote databases", "Symbol lookup and offset calculation", "Python API for integration", "CLI interface for quick usage"],
-    tech: ["Python 3.10+", "requests", "argparse", "rich"],
-    install: "pip install pwnlibc",
-    usage: "pwnlibc identify 0x7f123456\npwnlibc lookup system\npwnlibc download libc6_2.31",
-  },
-  "ghidra-open": {
-    title: "ghidra-open",
-    description: "One-command launcher for Ghidra. Binary → Automatic Project → Headless Analysis → Launch GUI.",
-    cat: "reverse-engineering",
-    tags: ["Ghidra", "Automation", "Java", "Binary"],
-    whyItMatters: "Setting up Ghidra projects manually is tedious. ghidra-open turns a 5-step process into one command.",
-    impact: "Used by reverse engineers to automate Ghidra project setup and headless analysis pipelines.",
-    features: ["One-command Ghidra project creation", "Automatic headless analysis on import", "GUI launches after analysis completes", "Script integration support", "Cross-platform compatibility"],
-    tech: ["Bash", "Java", "Ghidra Scripts", "Python"],
-    install: "git clone https://github.com/0xCyb3rgh0st/ghidra_autorun",
-    usage: "ghidra-open ./target_binary\nghidra-open --headless-only ./binary\nghidra-open --script my_script.py ./binary",
-  },
-};
+import { projects, getBySlug, getRelated, categoryLabel, categoryColor } from '../../data/projects';
 
 export function getStaticPaths() {
-  return [
-    { params: { slug: 'h1cli' } },
-    { params: { slug: 'pwnlibc' } },
-    { params: { slug: 'ghidra-open' } },
-  ];
+  return projects.map((p) => ({ params: { slug: p.slug } }));
 }
 
 const { slug } = Astro.params;
-const project = projects[slug as keyof typeof projects];
-
+const project = getBySlug(slug!);
 if (!project) {
   return Astro.redirect('/projects');
 }
-
-const catColors: Record<string, string> = { "binary-exploitation": "var(--red)", "reverse-engineering": "var(--cyan)", "vulnerability-research": "var(--purple)" };
+const related = getRelated(project, 3);
+const catColor = categoryColor(project.category);
 ---
-<BaseLayout title={`${project.title} | Jatin Singh`}>
+<BaseLayout title={`${project.title} | Jatin Singh`} description={project.description}>
   <Navigation />
   <main id="main-content" style="padding-top:120px;padding-bottom:64px;">
     <div style="max-width:800px;margin:0 auto;padding:0 24px;">
-      <a href="/projects" style="color:var(--red);font-family:'Source Code Pro',monospace;font-size:0.85rem;text-decoration:none;margin-bottom:24px;display:inline-block;transition:opacity 0.2s;" onmouseover="this.style.opacity='0.7'" onmouseout="this.style.opacity='1'">
-        &larr; Back to Projects
-      </a>
+      <!-- Breadcrumb -->
+      <nav aria-label="Breadcrumb" style="font-family:'Source Code Pro',monospace;font-size:0.8rem;color:var(--text-muted);margin-bottom:24px;">
+        <a href="/" style="color:var(--text-muted);text-decoration:none;transition:color 0.2s;" onmouseover="this.style.color='var(--red)'" onmouseout="this.style.color='var(--text-muted)'">Home</a>
+        <span style="margin:0 8px;opacity:0.5;">/</span>
+        <a href="/projects" style="color:var(--text-muted);text-decoration:none;transition:color 0.2s;" onmouseover="this.style.color='var(--red)'" onmouseout="this.style.color='var(--text-muted)'">Projects</a>
+        <span style="margin:0 8px;opacity:0.5;">/</span>
+        <span style="color:var(--red);">{project.title}</span>
+      </nav>
 
       <div style="margin-bottom:32px;">
-        <span style={`display:inline-flex;padding:3px 10px;font-size:0.7rem;font-family:'Source Code Pro',monospace;border-radius:6px;background:${catColors[project.cat]}15;color:${catColors[project.cat]};border:1px solid ${catColors[project.cat]}22;text-transform:capitalize;margin-bottom:16px;`}>
-          {project.cat.replace("-", " ")}
-        </span>
-        <h1 style="font-size:2.25rem;font-weight:700;color:var(--text);margin-bottom:8px;">{project.title}</h1>
-        <p style="font-size:1.05rem;color:var(--text-muted);line-height:1.6;">{project.description}</p>
+        <div style="display:flex;gap:6px;margin-bottom:14px;">
+          <span style={`display:inline-flex;padding:4px 12px;font-size:0.7rem;font-family:'Source Code Pro',monospace;border-radius:6px;background:${catColor}15;color:${catColor};border:1px solid ${catColor}22;text-transform:uppercase;letter-spacing:0.1em;`}>{categoryLabel(project.category)}</span>
+          {project.featured && (
+            <span style="display:inline-flex;align-items:center;gap:6px;padding:4px 12px;font-size:0.7rem;font-family:'Source Code Pro',monospace;border-radius:6px;background:var(--red)15;color:var(--red);border:1px solid var(--red)22;letter-spacing:0.1em;">
+              <span style="width:6px;height:6px;border-radius:50%;background:var(--red);box-shadow:0 0 6px var(--red);"></span>FEATURED
+            </span>
+          )}
+        </div>
+        <h1 style="font-size:clamp(1.8rem,4vw,2.4rem);font-weight:700;color:var(--text);margin-bottom:12px;line-height:1.25;font-family:'Source Code Pro',monospace;">{project.title}</h1>
+        <p style="font-size:1.05rem;color:var(--text-muted);line-height:1.7;">{project.description}</p>
+        <p style="color:var(--text-muted);font-size:0.8rem;font-family:'Source Code Pro',monospace;margin-top:12px;">{project.publishedAt}</p>
       </div>
 
       <div style="display:flex;flex-wrap:wrap;gap:6px;margin-bottom:40px;">
         {project.tags.map((t) => (
-          <span style="display:inline-flex;padding:3px 10px;font-size:0.7rem;font-family:'Source Code Pro',monospace;border-radius:6px;background:var(--bg-tertiary);color:var(--text-muted);">{t}</span>
+          <span style="display:inline-flex;padding:3px 10px;font-size:0.7rem;font-family:'Source Code Pro',monospace;border-radius:6px;background:var(--bg-tertiary);color:var(--text-muted);">#{t}</span>
         ))}
       </div>
 
       {project.whyItMatters && (
-        <section style="margin-bottom:40px;padding:20px;background:var(--bg-secondary);border:1px solid var(--border);border-radius:var(--radius);border-left:3px solid var(--red);">
-          <h2 style="font-size:0.9rem;font-weight:600;color:var(--red);margin-bottom:8px;font-family:'Source Code Pro',monospace;text-transform:uppercase;letter-spacing:0.1em;">Why It Matters</h2>
+        <section style="margin-bottom:40px;padding:24px;background:var(--bg-secondary);border:1px solid var(--border);border-radius:var(--radius);border-left:3px solid var(--red);">
+          <h2 style="font-size:0.9rem;font-weight:600;color:var(--red);margin-bottom:8px;font-family:'Source Code Pro',monospace;text-transform:uppercase;letter-spacing:0.1em;">// why it matters</h2>
           <p style="color:var(--text-muted);line-height:1.7;font-size:0.95rem;">{project.whyItMatters}</p>
         </section>
       )}
 
       {project.impact && (
-        <section style="margin-bottom:40px;padding:20px;background:var(--bg-secondary);border:1px solid var(--border);border-radius:var(--radius);border-left:3px solid var(--cyan);">
-          <h2 style="font-size:0.9rem;font-weight:600;color:var(--cyan);margin-bottom:8px;font-family:'Source Code Pro',monospace;text-transform:uppercase;letter-spacing:0.1em;">Impact</h2>
+        <section style="margin-bottom:40px;padding:24px;background:var(--bg-secondary);border:1px solid var(--border);border-radius:var(--radius);border-left:3px solid var(--cyan);">
+          <h2 style="font-size:0.9rem;font-weight:600;color:var(--cyan);margin-bottom:8px;font-family:'Source Code Pro',monospace;text-transform:uppercase;letter-spacing:0.1em;">// impact</h2>
           <p style="color:var(--text-muted);line-height:1.7;font-size:0.95rem;">{project.impact}</p>
         </section>
       )}
@@ -114,40 +82,67 @@ const catColors: Record<string, string> = { "binary-exploitation": "var(--red)",
           <span style="color:var(--red);">//</span> Tech Stack
         </h2>
         <div style="display:flex;flex-wrap:wrap;gap:8px;">
-          {project.tech.map((t) => (
+          {project.technologies.map((t) => (
             <span style="display:inline-flex;padding:5px 12px;font-size:0.8rem;font-family:'Source Code Pro',monospace;border-radius:6px;background:var(--bg-card);color:var(--text);border:1px solid var(--border);">{t}</span>
           ))}
         </div>
       </section>
 
-      <section style="margin-bottom:40px;">
-        <h2 style="font-size:1.25rem;font-weight:600;color:var(--text);margin-bottom:16px;font-family:'Source Code Pro',monospace;">
-          <span style="color:var(--red);">//</span> Install
-        </h2>
-        <div style="background:var(--bg-secondary);border:1px solid var(--border);border-radius:var(--radius);padding:16px;font-family:'Source Code Pro',monospace;font-size:0.85rem;">
-          <p style="color:var(--red);">$ {project.install}</p>
-        </div>
-      </section>
+      {project.install && (
+        <section style="margin-bottom:40px;">
+          <h2 style="font-size:1.25rem;font-weight:600;color:var(--text);margin-bottom:16px;font-family:'Source Code Pro',monospace;">
+            <span style="color:var(--red);">//</span> Install
+          </h2>
+          <div style="background:var(--bg-secondary);border:1px solid var(--border);border-radius:var(--radius);padding:16px;font-family:'Source Code Pro',monospace;font-size:0.85rem;overflow-x:auto;">
+            <p style="color:var(--red);white-space:pre-wrap;">$ {project.install}</p>
+          </div>
+        </section>
+      )}
 
-      <section style="margin-bottom:40px;">
-        <h2 style="font-size:1.25rem;font-weight:600;color:var(--text);margin-bottom:16px;font-family:'Source Code Pro',monospace;">
-          <span style="color:var(--red);">//</span> Usage
-        </h2>
-        <div style="background:var(--bg-secondary);border:1px solid var(--border);border-radius:var(--radius);padding:16px;font-family:'Source Code Pro',monospace;font-size:0.85rem;line-height:2;">
-          {project.usage.split('\n').map((line) => (
-            <p><span style="color:var(--red);">$</span> <span style="color:var(--cyan);">{line}</span></p>
-          ))}
-        </div>
-      </section>
+      {project.usage && (
+        <section style="margin-bottom:40px;">
+          <h2 style="font-size:1.25rem;font-weight:600;color:var(--text);margin-bottom:16px;font-family:'Source Code Pro',monospace;">
+            <span style="color:var(--red);">//</span> Usage
+          </h2>
+          <div style="background:var(--bg-secondary);border:1px solid var(--border);border-radius:var(--radius);padding:16px;font-family:'Source Code Pro',monospace;font-size:0.85rem;line-height:2;overflow-x:auto;white-space:pre-wrap;">
+            {project.usage.split('\n').map((line) => (
+              <p><span style="color:var(--red);">$</span> <span style="color:var(--cyan);">{line}</span></p>
+            ))}
+          </div>
+        </section>
+      )}
 
       <div style="display:flex;gap:12px;flex-wrap:wrap;">
-        <a href="https://github.com/0xCyb3rgh0st" target="_blank" style="display:inline-flex;align-items:center;gap:8px;padding:10px 20px;background:var(--red);color:#fff;font-family:'Source Code Pro',monospace;font-weight:600;border-radius:var(--radius);text-decoration:none;font-size:0.85rem;transition:all 0.2s ease-in-out;" onmouseover="this.style.opacity='0.85'" onmouseout="this.style.opacity='1'">
+        <a href={project.github} target="_blank" rel="noopener" style="display:inline-flex;align-items:center;gap:8px;padding:10px 20px;background:var(--red);color:#fff;font-family:'Source Code Pro',monospace;font-weight:600;border-radius:var(--radius);text-decoration:none;font-size:0.85rem;transition:all 0.2s ease-in-out;" onmouseover="this.style.opacity='0.85'" onmouseout="this.style.opacity='1'">
           View on GitHub
         </a>
         <a href="/projects" style="display:inline-flex;align-items:center;gap:8px;padding:10px 20px;border:1px solid var(--border);color:var(--text-muted);font-family:'Source Code Pro',monospace;border-radius:var(--radius);text-decoration:none;font-size:0.85rem;transition:all 0.2s ease-in-out;" onmouseover="this.style.borderColor='var(--border-hover)'" onmouseout="this.style.borderColor='var(--border)'">
           All Projects
         </a>
       </div>
+
+      <a href="/projects" style="display:inline-flex;align-items:center;gap:8px;margin-top:40px;color:var(--red);font-family:'Source Code Pro',monospace;font-size:0.85rem;text-decoration:none;transition:opacity 0.2s;" onmouseover="this.style.opacity='0.7'" onmouseout="this.style.opacity='1'">
+        &larr; Back to Projects
+      </a>
+
+      <!-- Related projects -->
+      {related.length > 0 && (
+        <div style="margin-top:64px;">
+          <p style="font-family:'Source Code Pro',monospace;color:var(--red);font-size:0.8rem;text-transform:uppercase;letter-spacing:0.15em;margin-bottom:16px;">// related projects</p>
+          <div class="scroll-stagger" style="display:grid;grid-template-columns:repeat(auto-fill,minmax(240px,1fr));gap:16px;">
+            {related.map((r) => {
+              const rColor = categoryColor(r.category);
+              return (
+                <a href={`/projects/${r.slug}`} style="text-decoration:none;display:block;background:var(--bg-card);border:1px solid var(--border);border-radius:var(--radius);padding:20px;transition:all 0.2s ease-in-out;" onmouseover="this.style.borderColor='var(--border-hover)';this.style.transform='translateY(-2px)'" onmouseout="this.style.borderColor='var(--border)';this.style.transform='none'">
+                  <div style={`display:inline-flex;padding:3px 8px;font-size:0.65rem;font-family:'Source Code Pro',monospace;border-radius:6px;background:${rColor}15;color:${rColor};border:1px solid ${rColor}22;margin-bottom:12px;`}>{categoryLabel(r.category)}</div>
+                  <h3 style="font-size:0.95rem;font-weight:600;color:var(--text);margin-bottom:8px;line-height:1.4;">{r.title}</h3>
+                  <span style="color:var(--text-muted);font-size:0.72rem;font-family:'Source Code Pro',monospace;">{r.publishedAt}</span>
+                </a>
+              );
+            })}
+          </div>
+        </div>
+      )}
     </div>
   </main>
   <Footer />

@@ -2,60 +2,296 @@
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import Navigation from '../../components/Navigation.astro';
 import Footer from '../../components/Footer.astro';
+import { projects, categoryLabel, presentCategories, presentYears } from '../../data/projects';
 
-const projects = [
-  { title: "h1cli", desc: "All-in-one HackerOne CLI for bug bounty hunters. Browse programs, filter by asset type, export recon-ready scopes, track reports and earnings.", cat: "tool", tags: ["Python", "Bug Bounty", "HackerOne", "CLI"], featured: false, slug: "h1cli", github: "https://github.com/0xCyb3rgh0st/h1cli", date: "2025-06-01" },
-  { title: "pwnlibc", desc: "Advanced libc identification toolkit for exploit development. Fast libc identification, automatic download, symbol lookup, Python API, and CLI.", cat: "binary-exploitation", tags: ["Python", "Exploit Dev", "CLI"], featured: true, slug: "pwnlibc", github: "https://github.com/0xCyb3rgh0st/pwnlibc.git", date: "2024-08-01" },
-  { title: "HexSnare", desc: "Hexadecimal analysis and parsing toolkit for binary analysis, CTF challenges, and exploit development.", cat: "binary-exploitation", tags: ["Python", "Binary", "Hex"], featured: true, slug: "hexsnare", github: "https://github.com/0xCyb3rgh0st/HexSnare", date: "2024-07-15" },
-  { title: "csrf-proc", desc: "CSRF vulnerability detection and exploitation framework for web application security testing.", cat: "web", tags: ["Python", "Web", "CSRF"], featured: true, slug: "csrf-proc", github: "https://github.com/0xCyb3rgh0st/csrf-proc.git", date: "2024-06-20" },
-  { title: "ghidra-open", desc: "One-command launcher for Ghidra. Binary → Automatic Project → Headless Analysis → Launch GUI.", cat: "reverse-engineering", tags: ["Ghidra", "Automation", "Java"], featured: false, slug: "ghidra-open", github: "https://github.com/0xCyb3rgh0st/ghidra_autorun", date: "2024-05-10" },
-  { title: "CrackTheCode", desc: "Final year project - interactive cryptography and code-breaking challenge platform.", cat: "web", tags: ["Python", "Crypto", "Education"], featured: false, slug: "crackthecode", github: "https://github.com/0xCyb3rgh0st/crackthecode.git", date: "2024-03-01" },
-];
-
-const catColors: Record<string, string> = { "binary-exploitation": "var(--red)", "reverse-engineering": "var(--cyan)", "vulnerability-research": "var(--purple)", "web": "var(--yellow)" };
+const dataJson = JSON.stringify(projects);
+const cats = presentCategories();
+const years = presentYears();
 ---
 <BaseLayout title="Projects | Jatin Singh">
   <Navigation />
   <main id="main-content" style="padding-top:120px;padding-bottom:64px;">
     <div style="max-width:1200px;margin:0 auto;padding:0 24px;">
       <p style="font-family:'Source Code Pro',monospace;color:var(--red);font-size:0.8rem;text-transform:uppercase;letter-spacing:0.15em;margin-bottom:8px;">// projects</p>
-      <h1 style="font-size:clamp(2rem,5vw,3rem);font-weight:700;margin-bottom:4px;">
-        <span style="background:linear-gradient(135deg,var(--red),var(--cyan));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;">All</span>
-        <span style="color:var(--text);"> Projects</span>
+      <h1 style="font-size:clamp(2rem,5vw,3rem);font-weight:700;margin-bottom:8px;">
+        <span style="color:var(--text);">All </span><span style="background:linear-gradient(135deg,var(--red),var(--orange));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;">Projects</span>
       </h1>
-      <p style="color:var(--text-muted);margin-bottom:48px;max-width:600px;">
+      <p style="color:var(--text-muted);margin-bottom:40px;max-width:640px;">
         Building world-class open-source tools that make vulnerability research easier.
       </p>
 
-      <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(340px,1fr));gap:20px;">
-        {projects.map((p) => (
-          <div style="background:var(--bg-card);border:1px solid var(--border);border-radius:var(--radius);padding:24px;transition:all 0.2s ease-in-out;display:flex;flex-direction:column;" onmouseover="this.style.borderColor='var(--border-hover)';this.style.transform='translateY(-2px)';this.style.boxShadow='0 8px 24px rgba(0,0,0,0.2)'" onmouseout="this.style.borderColor='var(--border)';this.style.transform='none';this.style.boxShadow='none'">
-            {p.featured && (
-              <div style="display:flex;align-items:center;gap:8px;margin-bottom:12px;">
-                <div style="width:6px;height:6px;border-radius:50%;background:var(--red);box-shadow:0 0 8px var(--red);"></div>
-                <span style="color:var(--red);font-size:0.7rem;font-family:'Source Code Pro',monospace;">FEATURED</span>
-              </div>
-            )}
-            <span style={`display:inline-flex;padding:3px 10px;font-size:0.7rem;font-family:'Source Code Pro',monospace;border-radius:6px;background:${catColors[p.cat]}15;color:${catColors[p.cat]};border:1px solid ${catColors[p.cat]}22;width:fit-content;margin-bottom:12px;text-transform:capitalize;`}>
-              {p.cat.replace("-", " ")}
-            </span>
-            <h3 style="font-size:1.15rem;font-weight:600;color:var(--text);margin-bottom:8px;">{p.title}</h3>
-            <p style="color:var(--text-muted);font-size:0.875rem;line-height:1.6;margin-bottom:16px;flex-grow:1;">{p.desc}</p>
-            <div style="display:flex;flex-wrap:wrap;gap:6px;margin-bottom:16px;">
-              {p.tags.map((t) => (
-                <span style="font-size:0.7rem;font-family:'Source Code Pro',monospace;color:var(--text-muted);background:var(--bg-tertiary);padding:3px 8px;border-radius:6px;">{t}</span>
-              ))}
-            </div>
-            <div style="display:flex;justify-content:space-between;align-items:center;">
-              <span style="color:var(--text-muted);font-size:0.75rem;font-family:'Source Code Pro',monospace;">{p.date}</span>
-              <a href={p.github} target="_blank" rel="noopener" style="display:inline-flex;align-items:center;gap:6px;font-size:0.85rem;color:var(--red);font-family:'Source Code Pro',monospace;text-decoration:none;transition:opacity 0.2s;" onmouseover="this.style.opacity='0.7'" onmouseout="this.style.opacity='1'" class="arrow-hover">
-                GitHub &rarr;
-              </a>
-            </div>
-          </div>
+      <div style="display:flex;gap:16px;flex-wrap:wrap;align-items:center;margin-bottom:24px;">
+        <div style="flex:1;min-width:260px;display:flex;align-items:center;gap:12px;background:var(--bg-card);border:1px solid var(--border);border-radius:var(--radius);padding:12px 16px;transition:border-color 0.2s;">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="var(--text-muted)" stroke-width="2" stroke-linecap="round" aria-hidden="true"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>
+          <input id="project-search" type="text" placeholder="Search projects..." autocomplete="off" spellcheck="false" aria-label="Search projects" style="flex:1;background:transparent;border:none;color:var(--text);font-family:'Poppins',sans-serif;font-size:0.9rem;outline:none;" />
+          <button id="project-clear-query" style="display:none;background:none;border:none;color:var(--text-muted);cursor:pointer;font-size:0.8rem;font-family:'Source Code Pro',monospace;" aria-label="Clear search">&times;</button>
+        </div>
+        <div style="display:flex;align-items:center;gap:8px;">
+          <label for="project-sort" style="font-family:'Source Code Pro',monospace;font-size:0.7rem;color:var(--text-muted);text-transform:uppercase;letter-spacing:0.1em;">Sort</label>
+          <select id="project-sort" style="background:var(--bg-card);border:1px solid var(--border);color:var(--text);border-radius:var(--radius);padding:10px 12px;font-family:'Source Code Pro',monospace;font-size:0.8rem;outline:none;cursor:pointer;">
+            <option value="newest">Newest</option>
+            <option value="oldest">Oldest</option>
+            <option value="az">Title A-Z</option>
+            <option value="za">Title Z-A</option>
+          </select>
+        </div>
+      </div>
+
+      <div id="project-cat-filters" style="display:flex;flex-wrap:wrap;gap:8px;margin-bottom:12px;" aria-label="Filter by category">
+        <button class="project-filter-cat active" data-cat="" style="padding:7px 14px;background:var(--red);color:#fff;border:1px solid var(--red);border-radius:999px;font-family:'Source Code Pro',monospace;font-size:0.7rem;text-transform:uppercase;letter-spacing:0.08em;cursor:pointer;transition:all 0.15s ease;">ALL</button>
+        {cats.map((c) => (
+          <button class="project-filter-cat" data-cat={c} style="padding:7px 14px;background:var(--bg-card);color:var(--text-muted);border:1px solid var(--border);border-radius:999px;font-family:'Source Code Pro',monospace;font-size:0.7rem;text-transform:uppercase;letter-spacing:0.08em;cursor:pointer;transition:all 0.15s ease;">{categoryLabel(c)}</button>
         ))}
+      </div>
+
+      <div id="project-year-filters" style="display:flex;flex-wrap:wrap;gap:8px;margin-bottom:32px;" aria-label="Filter by year">
+        <button class="project-filter-year active" data-year="" style="padding:6px 14px;background:var(--bg-card);color:var(--text-muted);border:1px solid var(--border);border-radius:999px;font-family:'Source Code Pro',monospace;font-size:0.7rem;cursor:pointer;transition:all 0.15s ease;">YEAR: ALL</button>
+        {years.map((y) => (
+          <button class="project-filter-year" data-year={y} style="padding:6px 14px;background:var(--bg-card);color:var(--text-muted);border:1px solid var(--border);border-radius:999px;font-family:'Source Code Pro',monospace;font-size:0.7rem;cursor:pointer;transition:all 0.15s ease;">{y}</button>
+        ))}
+      </div>
+
+      <div style="display:flex;align-items:center;justify-content:space-between;gap:12px;margin-bottom:20px;">
+        <p id="project-count" style="color:var(--text-muted);font-family:'Source Code Pro',monospace;font-size:0.8rem;"></p>
+        <a href="/projects" id="project-reset-link" style="display:none;color:var(--text-muted);font-family:'Source Code Pro',monospace;font-size:0.75rem;text-decoration:none;border-bottom:1px solid var(--border);transition:color 0.2s;" onmouseover="this.style.color='var(--red)'" onmouseout="this.style.color='var(--text-muted)'">Reset</a>
+      </div>
+
+      <div id="project-grid" style="display:grid;grid-template-columns:repeat(auto-fit,minmax(460px,1fr));gap:20px;"></div>
+
+      <div id="project-loadmore-wrap" style="text-align:center;margin-top:32px;display:none;">
+        <button id="project-loadmore" style="padding:12px 28px;background:var(--bg-card);border:1px solid var(--border);color:var(--text);font-family:'Source Code Pro',monospace;font-size:0.8rem;border-radius:var(--radius);cursor:pointer;transition:all 0.2s ease-in-out;" onmouseover="this.style.borderColor='var(--red)';this.style.color='var(--red)'" onmouseout="this.style.borderColor='var(--border)';this.style.color='var(--text)'">
+          Load More Projects
+        </button>
+      </div>
+
+      <div id="project-no-results" style="display:none;text-align:center;padding:64px 24px;border:1px dashed var(--border);border-radius:var(--radius);">
+        <p style="color:var(--text-muted);font-size:1rem;margin-bottom:12px;">No projects matched your query.</p>
+        <button id="project-clear-filters" style="padding:10px 22px;background:var(--red);color:#fff;border:none;border-radius:var(--radius);font-family:'Source Code Pro',monospace;font-size:0.8rem;cursor:pointer;font-weight:600;">Clear filters</button>
       </div>
     </div>
   </main>
   <Footer />
+
+  <script type="application/json" id="project-data" set:html={dataJson}></script>
 </BaseLayout>
+
+<script is:inline>
+(function() {
+  const dataEl = document.getElementById('project-data');
+  if (!dataEl) return;
+  const all = JSON.parse(dataEl.textContent || '[]');
+
+  const CAT_COLORS = {
+    "web-security": "var(--cyan)",
+    "binary-exploitation": "var(--red)",
+    "reverse-engineering": "var(--orange)",
+    "ad-windows": "var(--cyan)",
+    "ai-security": "var(--purple)",
+    "bug-bounty": "var(--cyan)",
+    "tools-automation": "var(--red)",
+  };
+
+  const grid = document.getElementById('project-grid');
+  const countEl = document.getElementById('project-count');
+  const noResults = document.getElementById('project-no-results');
+  const loadMoreWrap = document.getElementById('project-loadmore-wrap');
+  const loadMore = document.getElementById('project-loadmore');
+  const searchInput = document.getElementById('project-search');
+  const clearQuery = document.getElementById('project-clear-query');
+  const sortSelect = document.getElementById('project-sort');
+  const clearFilters = document.getElementById('project-clear-filters');
+  const resetLink = document.getElementById('project-reset-link');
+
+  const PAGE_SIZE = 9;
+  let visibleCount = PAGE_SIZE;
+  let query = '';
+  let selectedCats = new Set();
+  let selectedYears = new Set();
+  let sortBy = 'newest';
+
+  function matches(entry) {
+    const haystack = [entry.title, entry.description, entry.category, (entry.tags || []).join(' '), (entry.technologies || []).join(' '), entry.whyItMatters || '', entry.impact || '', (entry.features || []).join(' ')].join(' ').toLowerCase();
+    if (query && !haystack.includes(query)) return false;
+    if (selectedCats.size > 0 && !selectedCats.has(entry.category)) return false;
+    const year = (entry.publishedAt || '').slice(0, 4);
+    if (selectedYears.size > 0 && !selectedYears.has(year)) return false;
+    return true;
+  }
+
+  function sortEntries(list) {
+    const sorted = [...list];
+    if (sortBy === 'newest') sorted.sort((a, b) => (b.publishedAt || '').localeCompare(a.publishedAt || ''));
+    else if (sortBy === 'oldest') sorted.sort((a, b) => (a.publishedAt || '').localeCompare(b.publishedAt || ''));
+    else if (sortBy === 'az') sorted.sort((a, b) => a.title.localeCompare(b.title));
+    else if (sortBy === 'za') sorted.sort((a, b) => b.title.localeCompare(a.title));
+    return sorted;
+  }
+
+  let debounceTimer = null;
+
+  function esc(s) {
+    return String(s).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
+  }
+
+  function catLabel(cat) {
+    const labels = {
+      "web-security": "WEB SECURITY", "binary-exploitation": "BINARY EXPLOITATION",
+      "reverse-engineering": "REVERSE ENGINEERING", "ad-windows": "AD / WINDOWS",
+      "ai-security": "AI SECURITY", "bug-bounty": "BUG BOUNTY", "tools-automation": "TOOLS / AUTOMATION",
+    };
+    return labels[cat] || String(cat).replace(/-/g, ' ');
+  }
+
+  function cardHTML(entry, idx) {
+    const catColor = CAT_COLORS[entry.category] || 'var(--red)';
+    const techs = (entry.technologies || []).map((t) => `<span style="font-size:0.7rem;font-family:'Source Code Pro',monospace;color:var(--text-muted);background:var(--bg-tertiary);padding:3px 8px;border-radius:6px;">${esc(t)}</span>`).join('');
+    const tags = (entry.tags || []).slice(0, 4).map((t) => `<span style="font-size:0.72rem;font-family:'Source Code Pro',monospace;color:var(--red);opacity:0.9;">#${esc(t)}</span>`).join(' ');
+    const feat = entry.featured ? `<span style="display:flex;align-items:center;gap:4px;font-family:'Source Code Pro',monospace;font-size:0.65rem;color:var(--red);letter-spacing:0.08em;margin-left:6px;"><span style="width:6px;height:6px;border-radius:50%;background:var(--red);box-shadow:0 0 6px var(--red);"></span>FEATURED</span>` : '';
+    const githubBtn = entry.github ? `<a href="${esc(entry.github)}" target="_blank" rel="noopener" onclick="event.stopPropagation()" style="display:inline-flex;align-items:center;gap:5px;font-size:0.75rem;color:var(--text-muted);font-family:'Source Code Pro',monospace;text-decoration:none;transition:color 0.2s;" onmouseover="this.style.color='var(--red)'" onmouseout="this.style.color='var(--text-muted)'">
+      <svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/></svg>
+      GitHub</a>` : '';
+    return `<a href="/projects/${esc(entry.slug)}" class="project-card" style="text-decoration:none;display:flex;flex-direction:column;background:var(--bg-card);border:1px solid var(--border);border-radius:var(--radius);padding:24px;transition:all 0.2s ease-in-out;height:100%;" onmouseover="this.style.borderColor='${catColor}';this.style.transform='translateY(-2px)'" onmouseout="this.style.borderColor='var(--border)';this.style.transform='none'">
+      <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:14px;">
+        <span style="font-family:'Source Code Pro',monospace;font-size:0.7rem;color:var(--text-muted);opacity:0.6;letter-spacing:0.1em;">${String(idx + 1).padStart(2, '0')}</span>
+        <span style="display:flex;align-items:center;">
+          <span style="display:inline-flex;padding:3px 10px;font-size:0.7rem;font-family:'Source Code Pro',monospace;border-radius:6px;background:${catColor}15;color:${catColor};border:1px solid ${catColor}22;">${catLabel(entry.category)}</span>
+          ${feat}
+        </span>
+      </div>
+      <h3 style="font-size:1.15rem;font-weight:600;color:var(--text);margin-bottom:8px;line-height:1.4;">${esc(entry.title)}</h3>
+      <p style="color:var(--text-muted);font-size:0.85rem;line-height:1.65;margin-bottom:16px;flex-grow:1;">${esc(entry.description)}</p>
+      ${techs ? `<div style="display:flex;flex-wrap:wrap;gap:6px;margin-bottom:12px;">${techs}</div>` : ''}
+      <div style="display:flex;justify-content:space-between;align-items:center;gap:8px;margin-bottom:14px;">
+        <span style="color:var(--text-muted);font-size:0.72rem;font-family:'Source Code Pro',monospace;">${esc(entry.publishedAt)}</span>
+        <span style="color:var(--text-muted);font-size:0.72rem;font-family:'Source Code Pro',monospace;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;max-width:200px;">${tags}</span>
+      </div>
+      <div style="display:flex;justify-content:space-between;align-items:center;padding-top:14px;border-top:1px solid var(--border);">
+        ${githubBtn}
+        <span style="color:var(--red);font-size:0.85rem;font-family:'Source Code Pro',monospace;">View project &rarr;</span>
+      </div>
+    </a>`;
+  }
+
+  function update() {
+    const filtered = sortEntries(all.filter(matches));
+    countEl.textContent = filtered.length === 1 ? '1 project entry' : `${filtered.length} project entries`;
+    noResults.style.display = filtered.length === 0 ? 'block' : 'none';
+    resetLink.style.display = (query || selectedCats.size > 0 || selectedYears.size > 0) ? 'inline-block' : 'none';
+
+    const shown = filtered.slice(0, visibleCount);
+    grid.innerHTML = shown.map(cardHTML).join('');
+    loadMoreWrap.style.display = filtered.length > visibleCount ? 'block' : 'none';
+
+    countEl.style.display = filtered.length === 0 ? 'none' : '';
+  }
+
+  function resetFilters() {
+    query = '';
+    searchInput.value = '';
+    clearQuery.style.display = 'none';
+    selectedCats = new Set();
+    selectedYears = new Set();
+    sortBy = 'newest';
+    sortSelect.value = 'newest';
+    visibleCount = PAGE_SIZE;
+    document.querySelectorAll('.project-filter-cat').forEach((b) => {
+      const on = b.dataset.cat === '';
+      b.classList.toggle('active', on);
+      b.style.background = on ? 'var(--red)' : 'var(--bg-card)';
+      b.style.color = on ? '#fff' : 'var(--text-muted)';
+      b.style.borderColor = on ? 'var(--red)' : 'var(--border)';
+    });
+    document.querySelectorAll('.project-filter-year').forEach((b) => {
+      const on = b.dataset.year === '';
+      b.classList.toggle('active', on);
+      b.style.background = on ? 'var(--red)' : 'var(--bg-card)';
+      b.style.color = on ? '#fff' : 'var(--text-muted)';
+      b.style.borderColor = on ? 'var(--red)' : 'var(--border)';
+    });
+    update();
+  }
+
+  function applyCatStyles() {
+    document.querySelectorAll('.project-filter-cat').forEach((b) => {
+      const on = b.dataset.cat === '' ? selectedCats.size === 0 : selectedCats.has(b.dataset.cat);
+      b.classList.toggle('active', on);
+      b.style.background = on ? 'var(--red)' : 'var(--bg-card)';
+      b.style.color = on ? '#fff' : 'var(--text-muted)';
+      b.style.borderColor = on ? 'var(--red)' : 'var(--border)';
+    });
+  }
+  function applyYearStyles() {
+    document.querySelectorAll('.project-filter-year').forEach((b) => {
+      const on = b.dataset.year === '' ? selectedYears.size === 0 : selectedYears.has(b.dataset.year);
+      b.classList.toggle('active', on);
+      b.style.background = on ? 'var(--red)' : 'var(--bg-card)';
+      b.style.color = on ? '#fff' : 'var(--text-muted)';
+      b.style.borderColor = on ? 'var(--red)' : 'var(--border)';
+    });
+  }
+
+  searchInput.addEventListener('input', (e) => {
+    clearTimeout(debounceTimer);
+    debounceTimer = setTimeout(() => {
+      query = e.target.value.toLowerCase().trim();
+      clearQuery.style.display = query ? 'block' : 'none';
+      visibleCount = PAGE_SIZE;
+      update();
+    }, 200);
+  });
+
+  clearQuery.addEventListener('click', () => {
+    searchInput.value = '';
+    query = '';
+    clearQuery.style.display = 'none';
+    visibleCount = PAGE_SIZE;
+    update();
+  });
+
+  document.querySelectorAll('.project-filter-cat').forEach((btn) => {
+    btn.addEventListener('click', () => {
+      const cat = btn.dataset.cat;
+      if (cat === '') selectedCats = new Set();
+      else if (selectedCats.has(cat)) selectedCats.delete(cat);
+      else selectedCats.add(cat);
+      visibleCount = PAGE_SIZE;
+      applyCatStyles();
+      update();
+    });
+  });
+
+  document.querySelectorAll('.project-filter-year').forEach((btn) => {
+    btn.addEventListener('click', () => {
+      const year = btn.dataset.year;
+      if (year === '') selectedYears = new Set();
+      else if (selectedYears.has(year)) selectedYears.delete(year);
+      else selectedYears.add(year);
+      visibleCount = PAGE_SIZE;
+      applyYearStyles();
+      update();
+    });
+  });
+
+  sortSelect.addEventListener('change', (e) => {
+    sortBy = e.target.value;
+    visibleCount = PAGE_SIZE;
+    update();
+  });
+
+  loadMore.addEventListener('click', () => {
+    visibleCount += PAGE_SIZE;
+    update();
+  });
+
+  clearFilters.addEventListener('click', resetFilters);
+  resetLink.addEventListener('click', resetFilters);
+
+  update();
+})();
+</script>
+
+<style>
+  @media (max-width: 900px) {
+    #project-grid { grid-template-columns: 1fr !important; }
+  }
+</style>
