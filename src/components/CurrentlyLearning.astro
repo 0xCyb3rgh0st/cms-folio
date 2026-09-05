@@ -1,30 +1,72 @@
 ---
-const researches = [
-  { topic: "Binary Exploitation", desc: "Diving deeper into memory corruption, exploit development, debugging, and understanding binaries from the inside out." },
-  { topic: "AI Pentesting", desc: "Exploring security testing of AI systems, LLM applications, agentic workflows, prompt injection, and weaknesses across AI-integrated applications." },
-  { topic: "AD / Windows Security", desc: "Working through Active Directory and Windows internals, focusing on authentication, privilege boundaries, enterprise attack paths, and understanding how Windows environments actually work." },
+const eras = [
+  {
+    eraId: "2024",
+    label: "// building the fundamentals",
+    headingGradient: "2024",
+    headingPlain: "",
+    subtitle: "Building the foundations of Linux, networking, security tooling, and programming.",
+    minCol: "260px",
+    cards: [
+      { status: "LEARNING", title: "Linux Fundamentals", desc: "Building a foundation in Linux, including the command line, filesystem, permissions, processes, services, users, and system administration basics." },
+      { status: "LEARNING", title: "Pentesting Tools", desc: "Learning the fundamentals of security tools such as Burp Suite, Nmap, Wireshark, and other tools used for reconnaissance, enumeration, and security testing." },
+      { status: "LEARNING", title: "Networking", desc: "Studying TCP/IP, DNS, HTTP, ports, protocols, routing, and how systems communicate across networks." },
+      { status: "BUILDING", title: "Tool Development", desc: "Developing small security and automation tools while improving programming and scripting skills for practical cybersecurity work." },
+    ],
+  },
+  {
+    eraId: "2025",
+    label: "// what i was learning",
+    headingGradient: "2025",
+    headingPlain: "",
+    subtitle: "Moving from fundamentals into practical offensive security.",
+    minCol: "260px",
+    cards: [
+      { status: "LEARNING", title: "Linux Privilege Escalation", desc: "Studying Linux privilege escalation, enumeration, permissions, misconfigurations, and common paths from low-privileged access to root." },
+      { status: "PREPARING", title: "CPTS Preparation", desc: "Preparing for the Certified Penetration Testing Specialist certification through practical labs, enumeration, exploitation, and penetration testing methodology." },
+      { status: "LEARNING", title: "Web Application Security", desc: "Studying OWASP concepts and applying them to web application testing, focusing on authentication, authorization, injection, and common application vulnerabilities." },
+      { status: "PRACTICING", title: "Bug Bounty", desc: "Getting hands-on with vulnerability discovery, validation, responsible disclosure, and developing a more methodical approach to security research." },
+    ],
+  },
+  {
+    eraId: "2026",
+    label: "// currently researching",
+    headingGradient: "September",
+    headingPlain: " 2026",
+    subtitle: "What I'm working on right now. The messy middle, not the polished result.",
+    minCol: "340px",
+    cards: [
+      { status: "RESEARCHING", title: "Binary Exploitation", desc: "Diving deeper into memory corruption, exploit development, debugging, and understanding binaries from the inside out." },
+      { status: "RESEARCHING", title: "AI Pentesting", desc: "Exploring security testing of AI systems, LLM applications, agentic workflows, prompt injection, and weaknesses across AI-integrated applications." },
+      { status: "RESEARCHING", title: "AD / Windows Security", desc: "Working through Active Directory and Windows internals, focusing on authentication, privilege boundaries, enterprise attack paths, and understanding how Windows environments actually work." },
+    ],
+  },
 ];
 ---
-<section id="currently-learning" style="padding:96px 24px;" aria-labelledby="learning-heading">
+<section id="currently-learning" style="padding:96px 24px;" aria-label="Cybersecurity learning timeline">
   <div style="max-width:1200px;margin:0 auto;">
-    <p style="font-family:'Source Code Pro',monospace;color:var(--red);font-size:0.8rem;text-transform:uppercase;letter-spacing:0.15em;margin-bottom:8px;">// currently researching</p>
-    <h2 id="learning-heading" style="font-size:clamp(1.75rem,4vw,2.5rem);font-weight:700;margin-bottom:8px;">
-      <span style="background:linear-gradient(135deg,var(--red),var(--orange));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;">September</span>
-      <span style="color:var(--text);"> 2026</span>
-    </h2>
-    <p style="color:var(--text-muted);margin-bottom:40px;max-width:600px;">What I'm working on right now. The messy middle, not the polished result.</p>
+    {eras.map((era) => (
+      <div id={era.eraId} style={era.eraId !== '2024' ? 'margin-top:96px;' : ''} aria-labelledby={`${era.eraId}-heading`}>
+        <p style="font-family:'Source Code Pro',monospace;color:var(--red);font-size:0.8rem;text-transform:uppercase;letter-spacing:0.15em;margin-bottom:8px;">{era.label}</p>
+        <h2 id={`${era.eraId}-heading`} style="font-size:clamp(1.75rem,4vw,2.5rem);font-weight:700;margin-bottom:8px;">
+          <span style="background:linear-gradient(135deg,var(--red),var(--orange));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;">{era.headingGradient}</span>
+          {era.headingPlain && (<span style="color:var(--text);">{era.headingPlain}</span>)}
+        </h2>
+        <p style="color:var(--text-muted);margin-bottom:40px;max-width:600px;">{era.subtitle}</p>
 
-    <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(340px,1fr));gap:20px;">
-      {researches.map((r) => (
-        <div style="display:flex;flex-direction:column;background:var(--bg-card);border:1px solid var(--border);border-radius:var(--radius);padding:24px;transition:all 0.2s ease-in-out;height:100%;" onmouseover="this.style.borderColor='var(--border-hover)'" onmouseout="this.style.borderColor='var(--border)'">
-          <div style="display:flex;align-items:center;gap:10px;margin-bottom:16px;">
-            <span style="width:8px;height:8px;border-radius:50%;flex-shrink:0;background:var(--red);box-shadow:0 0 8px rgba(239,68,68,0.4);"></span>
-            <span style="font-family:'Source Code Pro',monospace;font-size:0.7rem;text-transform:uppercase;letter-spacing:0.1em;color:var(--text-muted);">RESEARCHING</span>
-          </div>
-          <h3 style="font-size:1.2rem;font-weight:700;color:var(--text);margin-bottom:12px;">{r.topic}</h3>
-          <p style="color:var(--text-muted);font-size:0.875rem;line-height:1.7;">{r.desc}</p>
+        <div style={`display:grid;grid-template-columns:repeat(auto-fill,minmax(${era.minCol},1fr));gap:20px;`}>
+          {era.cards.map((c) => (
+            <div style="display:flex;flex-direction:column;background:var(--bg-card);border:1px solid var(--border);border-radius:var(--radius);padding:24px;transition:all 0.2s ease-in-out;height:100%;" onmouseover="this.style.borderColor='var(--border-hover)'" onmouseout="this.style.borderColor='var(--border)'">
+              <div style="display:flex;align-items:center;gap:10px;margin-bottom:16px;">
+                <span style="width:8px;height:8px;border-radius:50%;flex-shrink:0;background:var(--red);box-shadow:0 0 8px rgba(239,68,68,0.4);"></span>
+                <span style="font-family:'Source Code Pro',monospace;font-size:0.7rem;text-transform:uppercase;letter-spacing:0.1em;color:var(--text-muted);">{c.status}</span>
+              </div>
+              <h3 style="font-size:1.2rem;font-weight:700;color:var(--text);margin-bottom:12px;">{c.title}</h3>
+              <p style="color:var(--text-muted);font-size:0.875rem;line-height:1.7;">{c.desc}</p>
+            </div>
+          ))}
         </div>
-      ))}
-    </div>
+      </div>
+    ))}
   </div>
 </section>
