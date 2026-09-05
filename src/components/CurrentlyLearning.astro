@@ -1,28 +1,28 @@
 ---
-const learnings = [
-  { topic: "Windows Kernel Exploitation", status: "fighting", desc: "Still trying to get a stable kernel read primitive. The pool internals are a nightmare." },
-  { topic: "Firmware RE", status: "exploring", desc: "Extracting and analyzing IoT firmware. Currently learning binwalk and firmwalker workflows." },
-  { topic: "Rust for Tooling", status: "daily", desc: "Rewriting pwnlibc internals in Rust. The borrow checker fights me but the result is worth it." },
+const researches = [
+  { topic: "Binary Exploitation", desc: "Diving deeper into memory corruption, exploit development, debugging, and understanding binaries from the inside out." },
+  { topic: "AI Pentesting", desc: "Exploring security testing of AI systems, LLM applications, agentic workflows, prompt injection, and weaknesses across AI-integrated applications." },
+  { topic: "AD / Windows Security", desc: "Working through Active Directory and Windows internals, focusing on authentication, privilege boundaries, enterprise attack paths, and understanding how Windows environments actually work." },
 ];
 ---
 <section id="currently-learning" style="padding:96px 24px;" aria-labelledby="learning-heading">
   <div style="max-width:1200px;margin:0 auto;">
-    <p style="font-family:'Source Code Pro',monospace;color:var(--red);font-size:0.8rem;text-transform:uppercase;letter-spacing:0.15em;margin-bottom:8px;">// currently learning</p>
+    <p style="font-family:'Source Code Pro',monospace;color:var(--red);font-size:0.8rem;text-transform:uppercase;letter-spacing:0.15em;margin-bottom:8px;">// currently researching</p>
     <h2 id="learning-heading" style="font-size:clamp(1.75rem,4vw,2.5rem);font-weight:700;margin-bottom:8px;">
-      <span style="background:linear-gradient(135deg,var(--red),var(--orange));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;">August</span>
+      <span style="background:linear-gradient(135deg,var(--red),var(--orange));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;">September</span>
       <span style="color:var(--text);"> 2026</span>
     </h2>
     <p style="color:var(--text-muted);margin-bottom:40px;max-width:600px;">What I'm working on right now. The messy middle, not the polished result.</p>
 
     <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(340px,1fr));gap:20px;">
-      {learnings.map((l) => (
-        <div style="background:var(--bg-card);border:1px solid var(--border);border-radius:var(--radius);padding:24px;transition:all 0.2s ease-in-out;" onmouseover="this.style.borderColor='var(--border-hover)'" onmouseout="this.style.borderColor='var(--border)'">
-          <div style="display:flex;align-items:center;gap:10px;margin-bottom:12px;">
-            <span style={`width:8px;height:8px;border-radius:50%;flex-shrink:0;${l.status === 'fighting' ? 'background:var(--red);box-shadow:0 0 8px var(--red);' : l.status === 'exploring' ? 'background:var(--orange);box-shadow:0 0 8px var(--orange);' : 'background:#22c55e;box-shadow:0 0 8px #22c55e;'}`}></span>
-            <span style="font-family:'Source Code Pro',monospace;font-size:0.7rem;text-transform:uppercase;letter-spacing:0.1em;color:var(--text-muted);">{l.status}</span>
+      {researches.map((r) => (
+        <div style="display:flex;flex-direction:column;background:var(--bg-card);border:1px solid var(--border);border-radius:var(--radius);padding:24px;transition:all 0.2s ease-in-out;height:100%;" onmouseover="this.style.borderColor='var(--border-hover)'" onmouseout="this.style.borderColor='var(--border)'">
+          <div style="display:flex;align-items:center;gap:10px;margin-bottom:16px;">
+            <span style="width:8px;height:8px;border-radius:50%;flex-shrink:0;background:var(--red);box-shadow:0 0 8px rgba(239,68,68,0.4);"></span>
+            <span style="font-family:'Source Code Pro',monospace;font-size:0.7rem;text-transform:uppercase;letter-spacing:0.1em;color:var(--text-muted);">RESEARCHING</span>
           </div>
-          <h3 style="font-size:1.05rem;font-weight:600;color:var(--text);margin-bottom:8px;">{l.topic}</h3>
-          <p style="color:var(--text-muted);font-size:0.875rem;line-height:1.6;">{l.desc}</p>
+          <h3 style="font-size:1.2rem;font-weight:700;color:var(--text);margin-bottom:12px;">{r.topic}</h3>
+          <p style="color:var(--text-muted);font-size:0.875rem;line-height:1.7;">{r.desc}</p>
         </div>
       ))}
     </div>
