@@ -8,7 +8,7 @@
       <!-- Search Input -->
       <div style="display:flex;align-items:center;gap:12px;padding:16px 20px;border-bottom:1px solid var(--border);">
         <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="var(--text-muted)" stroke-width="2" stroke-linecap="round" aria-hidden="true" style="flex-shrink:0;"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>
-        <input id="search-input" type="text" placeholder="Search projects, writeups, certs..." autocomplete="off" spellcheck="false" style="flex:1;background:transparent;border:none;color:var(--text);font-family:'Poppins',sans-serif;font-size:1rem;outline:none;" />
+        <input id="search-input" type="text" placeholder="Search projects, research, certs..." autocomplete="off" spellcheck="false" style="flex:1;background:transparent;border:none;color:var(--text);font-family:'Poppins',sans-serif;font-size:1rem;outline:none;" />
         <kbd style="display:inline-flex;align-items:center;padding:2px 6px;font-family:'Source Code Pro',monospace;font-size:0.7rem;color:var(--text-muted);background:var(--bg-tertiary);border:1px solid var(--border);border-radius:6px;line-height:1.4;">ESC</kbd>
       </div>
 
@@ -35,9 +35,9 @@
               <div><p style="color:var(--text);font-size:0.9rem;">Projects</p><p style="color:var(--text-muted);font-size:0.75rem;">Open source tools</p></div>
               <span style="margin-left:auto;font-size:0.7rem;color:var(--text-muted);">Section</span>
             </button>
-            <button class="search-nav-item" data-href="#writeups" style="width:100%;display:flex;align-items:center;gap:12px;padding:10px 12px;background:transparent;border:none;border-radius:8px;cursor:pointer;text-align:left;transition:background 0.15s ease;" onmouseover="this.style.background='var(--bg-tertiary)'" onmouseout="this.style.background='transparent'">
+            <button class="search-nav-item" data-href="#research" style="width:100%;display:flex;align-items:center;gap:12px;padding:10px 12px;background:transparent;border:none;border-radius:8px;cursor:pointer;text-align:left;transition:background 0.15s ease;" onmouseover="this.style.background='var(--bg-tertiary)'" onmouseout="this.style.background='transparent'">
               <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="var(--text-muted)" stroke-width="2" aria-hidden="true"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><path d="M14 2v6h6"/><path d="M16 13H8"/><path d="M16 17H8"/><path d="M10 9H8"/></svg>
-              <div><p style="color:var(--text);font-size:0.9rem;">Writeups</p><p style="color:var(--text-muted);font-size:0.75rem;">Security research</p></div>
+              <div><p style="color:var(--text);font-size:0.9rem;">Research</p><p style="color:var(--text-muted);font-size:0.75rem;">Security research journal</p></div>
               <span style="margin-left:auto;font-size:0.7rem;color:var(--text-muted);">Section</span>
             </button>
             <button class="search-nav-item" data-href="#certifications" style="width:100%;display:flex;align-items:center;gap:12px;padding:10px 12px;background:transparent;border:none;border-radius:8px;cursor:pointer;text-align:left;transition:background 0.15s ease;" onmouseover="this.style.background='var(--bg-tertiary)'" onmouseout="this.style.background='transparent'">
@@ -103,11 +103,11 @@
     { title: "csrf-proc", desc: "CSRF vulnerability detection framework", href: "/projects/csrf-proc", category: "Project", icon: "tool" },
     { title: "ghidra-open", desc: "One-command Ghidra launcher with auto analysis", href: "/projects/ghidra-open", category: "Project", icon: "tool" },
     { title: "CrackTheCode", desc: "Cryptography and code-breaking challenge platform", href: "/projects/crackthecode", category: "Project", icon: "tool" },
-    { title: "OWASP AI Vulnerabilities", desc: "AI-generated code vulnerabilities analysis", href: "/writeups/owasp-2025-ai-vulnerabilities", category: "Writeup", icon: "doc" },
-    { title: "pwnlibc Deep Dive", desc: "Building a libc identification tool", href: "/writeups/pwnlibc-deep-dive", category: "Writeup", icon: "doc" },
-    { title: "Ghidra Automation", desc: "Automating Ghidra with ghidra-open", href: "/writeups/ghidra-open-automation", category: "Writeup", icon: "doc" },
-    { title: "AD Attack Automation", desc: "Active Directory attack path automation", href: "/writeups/ad-attack-automation", category: "Writeup", icon: "doc" },
-    { title: "Heap Exploitation", desc: "Modern heap exploitation techniques guide", href: "/writeups/heap-exploitation-guide", category: "Writeup", icon: "doc" },
+    { title: "OWASP AI Vulnerabilities", desc: "AI-generated code vulnerabilities analysis", href: "/research/owasp-2025-ai-vulnerabilities", category: "Research", icon: "doc" },
+    { title: "pwnlibc Deep Dive", desc: "Building a libc identification tool", href: "/research/pwnlibc-deep-dive", category: "Research", icon: "doc" },
+    { title: "Ghidra Automation", desc: "Automating Ghidra with ghidra-open", href: "/research/ghidra-open-automation", category: "Research", icon: "doc" },
+    { title: "AD Attack Automation", desc: "Active Directory attack path automation", href: "/research/ad-attack-automation", category: "Research", icon: "doc" },
+    { title: "Heap Exploitation", desc: "Modern heap exploitation techniques guide", href: "/research/heap-exploitation-guide", category: "Research", icon: "doc" },
     { title: "CRTO", desc: "Certified Red Team Operator - Zero-Point Security", href: "/certifications/crto", category: "Certification", icon: "cert" },
     { title: "CPTS", desc: "Certified Penetration Testing Specialist - Hack The Box", href: "/certifications/cpts", category: "Certification", icon: "cert" },
     { title: "eWPTXv3", desc: "Web Application Penetration Tester eXtreme - INE", href: "/certifications/ewptxv3", category: "Certification", icon: "cert" },

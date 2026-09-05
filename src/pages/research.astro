@@ -1,0 +1,304 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Navigation from '../components/Navigation.astro';
+import Footer from '../components/Footer.astro';
+import { research, categoryLabel, presentCategories, presentYears, CATEGORY_COLORS, DIFFICULTY_COLORS } from '../data/research';
+
+const dataJson = JSON.stringify(research);
+const cats = presentCategories();
+const years = presentYears();
+---
+<BaseLayout title="Research & Writeups | Jatin Singh">
+  <Navigation />
+  <main id="main-content" style="padding-top:120px;padding-bottom:64px;">
+    <div style="max-width:1200px;margin:0 auto;padding:0 24px;">
+      <p style="font-family:'Source Code Pro',monospace;color:var(--red);font-size:0.8rem;text-transform:uppercase;letter-spacing:0.15em;margin-bottom:8px;">// research journal</p>
+      <h1 style="font-size:clamp(2rem,5vw,3rem);font-weight:700;margin-bottom:8px;">
+        <span style="color:var(--text);">Research & </span><span style="background:linear-gradient(135deg,var(--red),var(--orange));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;">Writeups</span>
+      </h1>
+      <p style="color:var(--text-muted);margin-bottom:40px;max-width:640px;">
+        Notes from breaking things, understanding why they broke, and building better ways to test them.
+      </p>
+
+      <!-- Search + Sort -->
+      <div style="display:flex;gap:16px;flex-wrap:wrap;align-items:center;margin-bottom:24px;">
+        <div style="flex:1;min-width:260px;display:flex;align-items:center;gap:12px;background:var(--bg-card);border:1px solid var(--border);border-radius:var(--radius);padding:12px 16px;transition:border-color 0.2s;">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="var(--text-muted)" stroke-width="2" stroke-linecap="round" aria-hidden="true"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>
+          <input id="research-search" type="text" placeholder="Search research..." autocomplete="off" spellcheck="false" aria-label="Search research" style="flex:1;background:transparent;border:none;color:var(--text);font-family:'Poppins',sans-serif;font-size:0.9rem;outline:none;" />
+          <button id="research-clear-query" style="display:none;background:none;border:none;color:var(--text-muted);cursor:pointer;font-size:0.8rem;font-family:'Source Code Pro',monospace;" aria-label="Clear search">&times;</button>
+        </div>
+        <div style="display:flex;align-items:center;gap:8px;">
+          <label for="research-sort" style="font-family:'Source Code Pro',monospace;font-size:0.7rem;color:var(--text-muted);text-transform:uppercase;letter-spacing:0.1em;">Sort</label>
+          <select id="research-sort" style="background:var(--bg-card);border:1px solid var(--border);color:var(--text);border-radius:var(--radius);padding:10px 12px;font-family:'Source Code Pro',monospace;font-size:0.8rem;outline:none;cursor:pointer;">
+            <option value="newest">Newest</option>
+            <option value="oldest">Oldest</option>
+            <option value="az">Title A-Z</option>
+            <option value="za">Title Z-A</option>
+          </select>
+        </div>
+      </div>
+
+      <!-- Category filters -->
+      <div id="research-cat-filters" style="display:flex;flex-wrap:wrap;gap:8px;margin-bottom:12px;" aria-label="Filter by category">
+        <button class="research-filter-cat active" data-cat="" style="padding:7px 14px;background:var(--red);color:#fff;border:1px solid var(--red);border-radius:999px;font-family:'Source Code Pro',monospace;font-size:0.7rem;text-transform:uppercase;letter-spacing:0.08em;cursor:pointer;transition:all 0.15s ease;">ALL</button>
+        {cats.map((c) => (
+          <button class="research-filter-cat" data-cat={c} style="padding:7px 14px;background:var(--bg-card);color:var(--text-muted);border:1px solid var(--border);border-radius:999px;font-family:'Source Code Pro',monospace;font-size:0.7rem;text-transform:uppercase;letter-spacing:0.08em;cursor:pointer;transition:all 0.15s ease;">{categoryLabel(c)}</button>
+        ))}
+      </div>
+
+      <!-- Year filters -->
+      <div id="research-year-filters" style="display:flex;flex-wrap:wrap;gap:8px;margin-bottom:32px;" aria-label="Filter by year">
+        <button class="research-filter-year active" data-year="" style="padding:6px 14px;background:var(--bg-card);color:var(--text-muted);border:1px solid var(--border);border-radius:999px;font-family:'Source Code Pro',monospace;font-size:0.7rem;cursor:pointer;transition:all 0.15s ease;">YEAR: ALL</button>
+        {years.map((y) => (
+          <button class="research-filter-year" data-year={y} style="padding:6px 14px;background:var(--bg-card);color:var(--text-muted);border:1px solid var(--border);border-radius:999px;font-family:'Source Code Pro',monospace;font-size:0.7rem;cursor:pointer;transition:all 0.15s ease;">{y}</button>
+        ))}
+      </div>
+
+      <!-- Result count -->
+      <div style="display:flex;align-items:center;justify-content:space-between;gap:12px;margin-bottom:20px;">
+        <p id="research-count" style="color:var(--text-muted);font-family:'Source Code Pro',monospace;font-size:0.8rem;"></p>
+        <a href="/research" id="research-reset-link" style="display:none;color:var(--text-muted);font-family:'Source Code Pro',monospace;font-size:0.75rem;text-decoration:none;border-bottom:1px solid var(--border);transition:color 0.2s;" onmouseover="this.style.color='var(--red)'" onmouseout="this.style.color='var(--text-muted)'">Reset</a>
+      </div>
+
+      <!-- Results grid -->
+      <div id="research-grid" style="display:grid;grid-template-columns:repeat(auto-fit,minmax(460px,1fr));gap:20px;"></div>
+
+      <!-- Load more -->
+      <div id="research-loadmore-wrap" style="text-align:center;margin-top:32px;display:none;">
+        <button id="research-loadmore" style="padding:12px 28px;background:var(--bg-card);border:1px solid var(--border);color:var(--text);font-family:'Source Code Pro',monospace;font-size:0.8rem;border-radius:var(--radius);cursor:pointer;transition:all 0.2s ease-in-out;" onmouseover="this.style.borderColor='var(--red)';this.style.color='var(--red)'" onmouseout="this.style.borderColor='var(--border)';this.style.color='var(--text)'">
+          Load More Research
+        </button>
+      </div>
+
+      <!-- No results -->
+      <div id="research-no-results" style="display:none;text-align:center;padding:64px 24px;border:1px dashed var(--border);border-radius:var(--radius);">
+        <p style="color:var(--text-muted);font-size:1rem;margin-bottom:12px;">No research matched your query.</p>
+        <button id="research-clear-filters" style="padding:10px 22px;background:var(--red);color:#fff;border:none;border-radius:var(--radius);font-family:'Source Code Pro',monospace;font-size:0.8rem;cursor:pointer;font-weight:600;">Clear filters</button>
+      </div>
+    </div>
+  </main>
+  <Footer />
+
+  <script type="application/json" id="research-data" set:html={dataJson}></script>
+</BaseLayout>
+
+<script is:inline>
+(function() {
+  const dataEl = document.getElementById('research-data');
+  if (!dataEl) return;
+  const all = JSON.parse(dataEl.textContent || '[]');
+
+  const CAT_COLORS = {
+    "web-security": "var(--cyan)",
+    "binary-exploitation": "var(--red)",
+    "reverse-engineering": "var(--orange)",
+    "ad-windows": "var(--cyan)",
+    "ai-security": "var(--purple)",
+    "bug-bounty": "var(--cyan)",
+    "tools-automation": "var(--red)",
+  };
+  const DIFF_COLORS = { easy: "var(--cyan)", medium: "var(--orange)", hard: "var(--red)", insane: "var(--purple)" };
+
+  const grid = document.getElementById('research-grid');
+  const countEl = document.getElementById('research-count');
+  const noResults = document.getElementById('research-no-results');
+  const loadMoreWrap = document.getElementById('research-loadmore-wrap');
+  const loadMore = document.getElementById('research-loadmore');
+  const searchInput = document.getElementById('research-search');
+  const clearQuery = document.getElementById('research-clear-query');
+  const sortSelect = document.getElementById('research-sort');
+  const clearFilters = document.getElementById('research-clear-filters');
+  const resetLink = document.getElementById('research-reset-link');
+
+  const PAGE_SIZE = 9;
+  let visibleCount = PAGE_SIZE;
+  let query = '';
+  let selectedCats = new Set();
+  let selectedYears = new Set();
+  let sortBy = 'newest';
+
+  function matches(entry) {
+    const haystack = [entry.title, entry.description, entry.category, (entry.tags || []).join(' '), (entry.technologies || []).join(' '), entry.content || ''].join(' ').toLowerCase();
+    if (query && !haystack.includes(query)) return false;
+    if (selectedCats.size > 0 && !selectedCats.has(entry.category)) return false;
+    const year = (entry.publishedAt || '').slice(0, 4);
+    if (selectedYears.size > 0 && !selectedYears.has(year)) return false;
+    return true;
+  }
+
+  function sortEntries(list) {
+    const sorted = [...list];
+    if (sortBy === 'newest') sorted.sort((a, b) => (b.publishedAt || '').localeCompare(a.publishedAt || ''));
+    else if (sortBy === 'oldest') sorted.sort((a, b) => (a.publishedAt || '').localeCompare(b.publishedAt || ''));
+    else if (sortBy === 'az') sorted.sort((a, b) => a.title.localeCompare(b.title));
+    else if (sortBy === 'za') sorted.sort((a, b) => b.title.localeCompare(a.title));
+    return sorted;
+  }
+
+  let debounceTimer = null;
+
+  function esc(s) {
+    return String(s).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
+  }
+
+  function cardHTML(entry, idx) {
+    const catColor = CAT_COLORS[entry.category] || 'var(--red)';
+    const diff = entry.difficulty ? `<span style="display:inline-flex;padding:3px 8px;font-size:0.7rem;font-family:'Source Code Pro',monospace;border-radius:6px;background:${DIFF_COLORS[entry.difficulty] || 'var(--red)'}15;color:${DIFF_COLORS[entry.difficulty] || 'var(--red)'};border:1px solid ${DIFF_COLORS[entry.difficulty] || 'var(--red)'}22;text-transform:capitalize;margin-left:6px;">${esc(entry.difficulty)}</span>` : '';
+    const techs = (entry.technologies || []).map((t) => `<span style="font-size:0.7rem;font-family:'Source Code Pro',monospace;color:var(--text-muted);background:var(--bg-tertiary);padding:3px 8px;border-radius:6px;">${esc(t)}</span>`).join('');
+    const tags = (entry.tags || []).slice(0, 4).map((t) => `<span style="font-size:0.72rem;font-family:'Source Code Pro',monospace;color:var(--red);opacity:0.9;">#${esc(t)}</span>`).join(' ');
+    return `<a href="/research/${esc(entry.slug)}" class="research-card" style="text-decoration:none;display:flex;flex-direction:column;background:var(--bg-card);border:1px solid var(--border);border-radius:var(--radius);padding:24px;transition:all 0.2s ease-in-out;height:100%;" onmouseover="this.style.borderColor='${catColor}';this.style.transform='translateY(-2px)'" onmouseout="this.style.borderColor='var(--border)';this.style.transform='none'">
+      <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:14px;">
+        <span style="font-family:'Source Code Pro',monospace;font-size:0.7rem;color:var(--text-muted);opacity:0.6;letter-spacing:0.1em;">${String(idx + 1).padStart(2, '0')}</span>
+        <span style="display:flex;align-items:center;">
+          <span style="display:inline-flex;padding:3px 10px;font-size:0.7rem;font-family:'Source Code Pro',monospace;border-radius:6px;background:${catColor}15;color:${catColor};border:1px solid ${catColor}22;">${catLabel(entry.category)}</span>
+          ${diff}
+        </span>
+      </div>
+      <h3 style="font-size:1.1rem;font-weight:600;color:var(--text);margin-bottom:8px;line-height:1.4;">${esc(entry.title)}</h3>
+      <p style="color:var(--text-muted);font-size:0.85rem;line-height:1.65;margin-bottom:16px;flex-grow:1;">${esc(entry.description)}</p>
+      ${techs ? `<div style="display:flex;flex-wrap:wrap;gap:6px;margin-bottom:12px;">${techs}</div>` : ''}
+      <div style="display:flex;justify-content:space-between;align-items:center;gap:8px;margin-bottom:14px;">
+        <span style="color:var(--text-muted);font-size:0.72rem;font-family:'Source Code Pro',monospace;">${esc(entry.publishedAt)}</span>
+        <span style="color:var(--text-muted);font-size:0.72rem;font-family:'Source Code Pro',monospace;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;max-width:200px;">${tags}</span>
+      </div>
+      <div style="display:flex;justify-content:space-between;align-items:center;padding-top:14px;border-top:1px solid var(--border);">
+        <span style="color:var(--red);font-size:0.85rem;font-family:'Source Code Pro',monospace;">Read research &rarr;</span>
+      </div>
+    </a>`;
+  }
+
+  function catLabel(cat) {
+    const labels = {
+      "web-security": "WEB SECURITY", "binary-exploitation": "BINARY EXPLOITATION",
+      "reverse-engineering": "REVERSE ENGINEERING", "ad-windows": "AD / WINDOWS",
+      "ai-security": "AI SECURITY", "bug-bounty": "BUG BOUNTY", "tools-automation": "TOOLS / AUTOMATION",
+    };
+    return labels[cat] || String(cat).toUpperCase();
+  }
+
+  function update() {
+    const filtered = sortEntries(all.filter(matches));
+    countEl.textContent = filtered.length === 1 ? '1 research entry' : `${filtered.length} research entries`;
+    noResults.style.display = filtered.length === 0 ? 'block' : 'none';
+    resetLink.style.display = (query || selectedCats.size > 0 || selectedYears.size > 0) ? 'inline-block' : 'none';
+
+    const shown = filtered.slice(0, visibleCount);
+    grid.innerHTML = shown.map(cardHTML).join('');
+    loadMoreWrap.style.display = filtered.length > visibleCount ? 'block' : 'none';
+    loadMore.dataset.total = String(filtered.length);
+
+    if (filtered.length === 0) {
+      countEl.style.display = 'none';
+    } else {
+      countEl.style.display = '';
+    }
+  }
+
+  function resetFilters() {
+    query = '';
+    searchInput.value = '';
+    clearQuery.style.display = 'none';
+    selectedCats = new Set();
+    selectedYears = new Set();
+    sortBy = 'newest';
+    sortSelect.value = 'newest';
+    visibleCount = PAGE_SIZE;
+    document.querySelectorAll('.research-filter-cat').forEach((b) => {
+      b.classList.toggle('active', b.dataset.cat === '');
+      b.style.background = b.dataset.cat === '' ? 'var(--red)' : 'var(--bg-card)';
+      b.style.color = b.dataset.cat === '' ? '#fff' : 'var(--text-muted)';
+      b.style.borderColor = b.dataset.cat === '' ? 'var(--red)' : 'var(--border)';
+    });
+    document.querySelectorAll('.research-filter-year').forEach((b) => {
+      const on = b.dataset.year === '';
+      b.classList.toggle('active', on);
+      b.style.background = on ? 'var(--red)' : 'var(--bg-card)';
+      b.style.color = on ? '#fff' : 'var(--text-muted)';
+      b.style.borderColor = on ? 'var(--red)' : 'var(--border)';
+    });
+    update();
+  }
+
+  searchInput.addEventListener('input', (e) => {
+    clearTimeout(debounceTimer);
+    debounceTimer = setTimeout(() => {
+      query = e.target.value.toLowerCase().trim();
+      clearQuery.style.display = query ? 'block' : 'none';
+      visibleCount = PAGE_SIZE;
+      update();
+    }, 200);
+  });
+
+  clearQuery.addEventListener('click', () => {
+    searchInput.value = '';
+    query = '';
+    clearQuery.style.display = 'none';
+    visibleCount = PAGE_SIZE;
+    update();
+  });
+
+  document.querySelectorAll('.research-filter-cat').forEach((btn) => {
+    btn.addEventListener('click', () => {
+      const cat = btn.dataset.cat;
+      if (cat === '') {
+        selectedCats = new Set();
+      } else {
+        if (selectedCats.has(cat)) selectedCats.delete(cat);
+        else selectedCats.add(cat);
+      }
+      visibleCount = PAGE_SIZE;
+      document.querySelectorAll('.research-filter-cat').forEach((b) => {
+        const on = b.dataset.cat === '' ? selectedCats.size === 0 : selectedCats.has(b.dataset.cat);
+        b.classList.toggle('active', on);
+        b.style.background = on ? 'var(--red)' : 'var(--bg-card)';
+        b.style.color = on ? '#fff' : 'var(--text-muted)';
+        b.style.borderColor = on ? 'var(--red)' : 'var(--border)';
+      });
+      update();
+    });
+  });
+
+  document.querySelectorAll('.research-filter-year').forEach((btn) => {
+    btn.addEventListener('click', () => {
+      const year = btn.dataset.year;
+      if (year === '') {
+        selectedYears = new Set();
+      } else {
+        if (selectedYears.has(year)) selectedYears.delete(year);
+        else selectedYears.add(year);
+      }
+      visibleCount = PAGE_SIZE;
+      document.querySelectorAll('.research-filter-year').forEach((b) => {
+        const on = b.dataset.year === '' ? selectedYears.size === 0 : selectedYears.has(b.dataset.year);
+        b.classList.toggle('active', on);
+        b.style.background = on ? 'var(--red)' : 'var(--bg-card)';
+        b.style.color = on ? '#fff' : 'var(--text-muted)';
+        b.style.borderColor = on ? 'var(--red)' : 'var(--border)';
+      });
+      update();
+    });
+  });
+
+  sortSelect.addEventListener('change', (e) => {
+    sortBy = e.target.value;
+    visibleCount = PAGE_SIZE;
+    update();
+  });
+
+  loadMore.addEventListener('click', () => {
+    visibleCount += PAGE_SIZE;
+    update();
+  });
+
+  clearFilters.addEventListener('click', resetFilters);
+  resetLink.addEventListener('click', resetFilters);
+
+  update();
+})();
+</script>
+
+<style>
+  @media (max-width: 900px) {
+    #research-grid { grid-template-columns: 1fr !important; }
+  }
+</style>

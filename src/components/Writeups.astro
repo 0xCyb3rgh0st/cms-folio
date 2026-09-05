@@ -1,38 +1,39 @@
 ---
-const writeups = [
-  { title: "OWASP Top 10:2025 AI-Generated Code Vulnerabilities", desc: "Gap analysis of OWASP's 2025 AI security risks against real-world LLM outputs. Testing local models for prompt injection, insecure code generation, and supply chain risks.", cat: "vulnerability", diff: "hard", date: "2025-08-15", tags: ["AI Security", "OWASP", "LLM", "Prompt Injection"], slug: "owasp-2025-ai-vulnerabilities" },
-  { title: "pwnlibc: Building a libc identification tool", desc: "Deep dive into how pwnlibc identifies libc versions from leaked addresses and automates exploit development workflow.", cat: "technique", diff: "hard", date: "2024-08-01", tags: ["Python", "Exploit Dev", "libc"], slug: "pwnlibc-deep-dive" },
-  { title: "Ghidra Automation with ghidra-open", desc: "How ghidra-open eliminates repetitive Ghidra setup with one-command project creation and headless analysis.", cat: "tool", diff: "medium", date: "2024-07-15", tags: ["Ghidra", "Automation", "Java"], slug: "ghidra-open-automation" },
-  { title: "AD Attack Path Automation", desc: "Automating Active Directory attack paths from enumeration to domain compromise using BloodHound and Impacket.", cat: "technique", diff: "hard", date: "2024-06-20", tags: ["AD", "BloodHound", "Impacket"], slug: "ad-attack-automation" },
-  { title: "Heap Exploitation Techniques", desc: "Comprehensive guide to modern heap exploitation including tcache poisoning, house of techniques.", cat: "technique", diff: "insane", date: "2024-05-10", tags: ["Pwn", "Heap", "Linux"], slug: "heap-exploitation-guide" },
-];
-const diffColors: Record<string, string> = { easy: "var(--red)", medium: "var(--orange)", hard: "var(--red)", insane: "var(--purple)" };
-const catColors: Record<string, string> = { ctf: "var(--cyan)", vulnerability: "var(--red)", technique: "var(--orange)", tool: "var(--purple)", lab: "var(--orange)" };
+import { getLatest, categoryLabel, CATEGORY_COLORS, DIFFICULTY_COLORS } from '../data/research';
+
+const writeups = getLatest(3);
 ---
-<section id="writeups" style="padding:96px 24px;">
+<section id="research" style="padding:96px 24px;">
   <div style="max-width:1200px;margin:0 auto;">
-    <p style="font-family:'Source Code Pro',monospace;color:var(--red);font-size:0.8rem;text-transform:uppercase;letter-spacing:0.15em;margin-bottom:8px;">// writeups</p>
-    <h2 style="font-size:clamp(1.75rem,4vw,2.5rem);font-weight:700;margin-bottom:48px;">
-      <span style="color:var(--text);">Research </span><span style="background:linear-gradient(135deg,var(--red),var(--orange));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;">Journal</span>
-    </h2>
+    <p style="font-family:'Source Code Pro',monospace;color:var(--red);font-size:0.8rem;text-transform:uppercase;letter-spacing:0.15em;margin-bottom:8px;">// research journal</p>
+    <div style="display:flex;flex-wrap:wrap;align-items:flex-end;justify-content:space-between;gap:16px;margin-bottom:40px;">
+      <div>
+        <h2 style="font-size:clamp(1.75rem,4vw,2.5rem);font-weight:700;">
+          <span style="color:var(--text);">Research </span><span style="background:linear-gradient(135deg,var(--red),var(--orange));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;">Journal</span>
+        </h2>
+      </div>
+      <a href="/research" style="display:inline-flex;align-items:center;gap:8px;color:var(--red);font-family:'Source Code Pro',monospace;font-size:0.85rem;text-decoration:none;padding-bottom:4px;border-bottom:1px solid rgba(239,68,68,0.3);transition:all 0.2s ease-in-out;" onmouseover="this.style.borderColor='var(--red)'" onmouseout="this.style.borderColor='rgba(239,68,68,0.3)'">
+        View all research &rarr;
+      </a>
+    </div>
     <div class="scroll-stagger" style="display:grid;grid-template-columns:repeat(auto-fill,minmax(340px,1fr));gap:20px;">
-      {writeups.map((w) => (
-        <a href={`/writeups/${w.slug}`} class="card-3d" style="text-decoration:none;display:block;background:var(--bg-card);border:1px solid var(--border);border-radius:var(--radius);padding:24px;">
+      {writeups.map((w, i) => (
+        <a href={`/research/${w.slug}`} class="card-3d" style="text-decoration:none;display:block;background:var(--bg-card);border:1px solid var(--border);border-radius:var(--radius);padding:24px;">
           <div class="card-glow-effect"></div>
-          <div style="display:flex;gap:6px;margin-bottom:12px;position:relative;z-index:1;">
-            <span style={`display:inline-flex;padding:3px 8px;font-size:0.7rem;font-family:'Source Code Pro',monospace;border-radius:6px;background:${catColors[w.cat]}15;color:${catColors[w.cat]};border:1px solid ${catColors[w.cat]}22;text-transform:capitalize;`}>{w.cat}</span>
-            <span style={`display:inline-flex;padding:3px 8px;font-size:0.7rem;font-family:'Source Code Pro',monospace;border-radius:6px;background:${diffColors[w.diff]}15;color:${diffColors[w.diff]};border:1px solid ${diffColors[w.diff]}22;text-transform:capitalize;`}>{w.diff}</span>
+          <div style="display:flex;justify-content:space-between;align-items:center;gap:6px;margin-bottom:12px;position:relative;z-index:1;">
+            <span style="font-family:'Source Code Pro',monospace;font-size:0.7rem;color:var(--text-muted);opacity:0.6;letter-spacing:0.1em;">0{i + 1}</span>
+            <span style={`display:inline-flex;padding:3px 8px;font-size:0.7rem;font-family:'Source Code Pro',monospace;border-radius:6px;background:${CATEGORY_COLORS[w.category]}15;color:${CATEGORY_COLORS[w.category]};border:1px solid ${CATEGORY_COLORS[w.category]}22;`}>{categoryLabel(w.category)}</span>
           </div>
           <h3 style="font-size:1.05rem;font-weight:600;color:var(--text);margin-bottom:8px;position:relative;z-index:1;">{w.title}</h3>
-          <p style="color:var(--text-muted);font-size:0.875rem;line-height:1.6;margin-bottom:16px;flex-grow:1;position:relative;z-index:1;">{w.desc}</p>
+          <p style="color:var(--text-muted);font-size:0.875rem;line-height:1.6;margin-bottom:16px;flex-grow:1;position:relative;z-index:1;">{w.description}</p>
           <div style="display:flex;flex-wrap:wrap;gap:6px;margin-bottom:16px;position:relative;z-index:1;">
             {w.tags.map((t) => (
               <span style="font-size:0.7rem;font-family:'Source Code Pro',monospace;color:var(--text-muted);background:var(--bg-tertiary);padding:3px 8px;border-radius:6px;">{t}</span>
             ))}
           </div>
           <div style="display:flex;justify-content:space-between;align-items:center;position:relative;z-index:1;">
-            <span style="color:var(--text-muted);font-size:0.75rem;font-family:'Source Code Pro',monospace;">{w.date}</span>
-            <span style="color:var(--red);font-size:0.85rem;font-family:'Source Code Pro',monospace;" class="arrow-hover">Read more &rarr;</span>
+            <span style="color:var(--text-muted);font-size:0.75rem;font-family:'Source Code Pro',monospace;">{w.publishedAt}</span>
+            <span style="color:var(--red);font-size:0.85rem;font-family:'Source Code Pro',monospace;" class="arrow-hover">Read research &rarr;</span>
           </div>
         </a>
       ))}
